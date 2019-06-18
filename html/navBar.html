@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh">
+<title>转世三国-模拟三国人生</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/w3.css">
+<link rel="stylesheet" href="../css/all.css">
+<link rel="stylesheet" href="../css/my-style.css">
+<link rel="icon" href="../img/logo.png"/>	  
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    
+<!-- 大屏幕菜单栏 -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="navBar_small_show()" title="展开菜单"><i class="fa fa-bars"></i></a>
+
+    <image src="../img/logo.png" href="index.html" style="height: 45px" class="w3-image w3-button w3-hide-small w3-left" alt="网站logo"></image>
+    
+    <div class="w3-dropdown-hover">
+      <button class="w3-padding-large w3-button" title="家园">家园 <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="#" class="w3-bar-item w3-button">工作</a>
+        <a href="#" class="w3-bar-item w3-button">训练</a>
+        <a href="#" class="w3-bar-item w3-button">产业</a>
+        
+      </div>
+    </div>  
+
+    <div class="w3-dropdown-hover">
+      <button class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="#" class="w3-bar-item w3-button">物资买卖</a>
+        <a href="#" class="w3-bar-item w3-button">装备买卖</a>
+      </div>
+    </div> 
+
+    <div class="w3-dropdown-hover">
+      <button class="w3-padding-large w3-button" title="国家">国家 <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="#" class="w3-bar-item w3-button">不知道1</a>
+        <a href="#" class="w3-bar-item w3-button">不知道2</a>
+        <a href="#" class="w3-bar-item w3-button">不知道3</a>
+      </div>
+    </div>  
+
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="更多">更多 <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="#" class="w3-bar-item w3-button">不知道1</a>
+        <a href="#" class="w3-bar-item w3-button">不知道2</a>
+        <a href="#" class="w3-bar-item w3-button">不知道3</a>
+      </div>
+    </div>  
+
+
+  <!--点击头像-账户设置-->
+    <image src="../img/logo.png" onclick="document.getElementById('profile').style.display='block'" style="height: 45px" class="w3-image w3-button w3-green w3-hide-small w3-right" alt="用户头像"></image>
+    <div id="profile" class="w3-modal">
+      <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+        <div class="w3-center">
+          <span onclick="document.getElementById('profile').style.display='none'" style="color:black;" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">x</span><br>
+          <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"><br>
+        </div>
+        <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+          <button onclick="window.location.href='login.html'" type="button" class="w3-button w3-red">登出</button>
+          <span class="w3-right w3-padding w3-hide-small"><a href="#">重置密码?</a></span>
+        </div>
+      </div>
+    </div> <!-- end of 点击头像-账户设置 -->
+    
+  </div>
+</div>  <!-- end of 大屏幕菜单栏 -->
+
+<!-- 小屏幕下拉列表 -->
+<div id="navBar_small" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top w3-animate-opacity" style="margin-top:46px">
+  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">不知道1</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">不知道2</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">不知道3</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">不知道4</a>
+</div>
+
+<!--显示隐藏小屏幕下拉列表-->
+<script>
+// 小屏幕的navBar 展开或隐藏
+function navBar_small_show() {
+  var x = document.getElementById("navBar_small");
+    
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+  
+function navBar_small_close() {
+  var x = document.getElementById("navBar_small");
+    
+  if (x.className.indexOf("w3-show") != -1) {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+  
+</script>
+
