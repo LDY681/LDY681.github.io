@@ -7,154 +7,144 @@
 <link rel="stylesheet" href="../css/w3.css">
 <link rel="stylesheet" href="../css/all.css">
 <link rel="stylesheet" href="../css/my-style.css">
-<link rel="icon" href="../img/logo.png"/>	  
+<link rel="icon" href="../img/logo.png"/>
 <script src="../js/navSideBar.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <style>
-@media screen and (max-width: 455px) {
+  @media screen and (max-width: 455px) {
     .h3 {
-        font-size:16px;
+      font-size: 16px;
     }
-}
+  }
 </style>
 
 <body style="background:#e6e6e6;color:black;">
 
 <!--这是侧边栏本体-->
-<div class="w3-sidebar w3-light-grey w3-card-4 w3-animate-left" style="width:196px" id="mySidebar">
+<div class="w3-sidebar w3-light-grey w3-card-4 w3-animate-left" style="width:196px; display:none;" id="mySidebar">
   <div class="w3-bar w3-dark-grey">
-  <span class="w3-bar-item w3-padding-16">转世三国</span>
-  <button onclick="w3_close()"
-  class="w3-bar-item w3-button w3-right w3-padding-16" title="close Sidebar">&times;</button>
+    <span class="w3-bar-item w3-padding-16">转世三国</span>
+    <button onclick="w3_close()"
+            class="w3-bar-item w3-button w3-right w3-padding-16" title="关闭侧边栏">&times;
+    </button>
   </div>
   <div class="w3-bar-block">
-  <a class="w3-bar-item w3-button w3-green" href="javascript:void(0)">主页</a>
-  <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
-  <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
-  <div class="w3-dropdown-hover">
-    <a class="w3-button" href="javascript:void(0)">快来玩! <i class="fa fa-caret-down"></i></a>
-    <div class="w3-dropdown-content w3-bar-block w3-card-4">
-      <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
-      <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
-      <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
+    <a class="w3-bar-item w3-button w3-green" href="javascript:void(0)">主页</a>
+    <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
+    <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
+    <div class="w3-dropdown-hover">
+      <a class="w3-button" href="javascript:void(0)">快来玩! <i class="fa fa-caret-down"></i></a>
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
+        <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
+        <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
+      </div>
     </div>
-  </div>
-  <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
+    <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
   </div>
 </div>
 
 <!--侧边栏右边区域-->
-<div id="main" style="margin-left:180px">
-<div class="w3-container w3-display-container">
-	
-<!--点击展开侧边栏的按钮-->
-  <span title="展开侧边栏" style="display:none; height: 46px;" id="openNav" class="w3-button w3-green w3-transparent w3-display-topleft w3-xlarge" onclick="w3_open()">&#9776;</span>
-	
-<!--导航栏-->
-<div id="topNav" class="w3-top" style="margin-left: 0px;">
-  <div class="w3-bar w3-black w3-card">
-		
-<!--小屏幕下点击展开菜单的按钮-->
-    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" style="margin-right: 50px;" href="javascript:void(0)" onclick="navBar_small_show()" title="展开菜单"><i class="fa fa-bars"></i></a>
+<div id="main" style="margin-left:38px">
+  <div class="w3-container w3-display-container">
 
-<!--大屏幕导航栏的左侧内容-->
-		<a href="./index.html"><image src="../img/logo.png" title="回到主页" style="height: 45px" class="w3-image w3-button w3-hide-small w3-left" alt="网站logo"></image></a>
-    
-    <div class="w3-dropdown-hover">
-      <button class="w3-padding-large w3-button" title="家园">家园 <i class="fa fa-caret-down"></i></button>     
-      <div class="w3-dropdown-content w3-bar-block w3-card-4">
-        <a href="#" class="w3-bar-item w3-button">工作</a>
-        <a href="#" class="w3-bar-item w3-button">训练</a>
-        <a href="#" class="w3-bar-item w3-button">产业</a>   
-      </div>
-    </div>  
+    <!--点击展开侧边栏的按钮-->
+    <span title="展开侧边栏" style="display:block; position:fixed; height: 46px;" id="openNav"
+          class="w3-button w3-green w3-transparent w3-display-topleft w3-xlarge" onclick="w3_open()">&#9776;</span>
 
-    <div class="w3-dropdown-hover">
-      <button class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>     
-      <div class="w3-dropdown-content w3-bar-block w3-card-4">
-        <a href="#" class="w3-bar-item w3-button">物资买卖</a>
-        <a href="#" class="w3-bar-item w3-button">装备买卖</a>
-      </div>
-    </div> 
+    <!--导航栏-->
+    <div id="topNav" class="w3-top" style="margin-left: 0px;">
+      <div class="w3-bar w3-black w3-card">
 
-    <div class="w3-dropdown-hover">
-      <button class="w3-padding-large w3-button" title="国家">国家 <i class="fa fa-caret-down"></i></button>     
-      <div class="w3-dropdown-content w3-bar-block w3-card-4">
-        <a href="#" class="w3-bar-item w3-button">魏国</a>
-        <a href="#" class="w3-bar-item w3-button">蜀国</a>
-        <a href="#" class="w3-bar-item w3-button">吴国</a>
-      </div>
-    </div>  
+        <!--小屏幕下点击展开菜单的按钮-->
+        <div class="w3-bar-item w3-dropdown-hover w3-green w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
+           style="margin-right: 50px;" href="#" title="展开菜单"><i
+          class="fa fa-bars"></i>
 
-    <div class="w3-dropdown-hover w3-hide-small">
-      <button class="w3-padding-large w3-button" title="更多">更多 <i class="fa fa-caret-down"></i></button>     
-      <div class="w3-dropdown-content w3-bar-block w3-card-4">
-        <a href="#" class="w3-bar-item w3-button">天命之子</a>
-        <a href="#" class="w3-bar-item w3-button">科举选拔</a>
-        <a href="#" class="w3-bar-item w3-button">国家管理</a>
-      </div>
-    </div>  
+          <div class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0">
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">绑定手机</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">修改邮箱</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">修改密码</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">登出</a>
+          </div>
 
-<!--大屏幕导航栏右侧的账户设置-->
-    <image src="../img/logo.png" onclick="document.getElementById('profile').style.display='block'" style="height: 45px; margin-right: 50px;" class="w3-image w3-button w3-green w3-hide-small w3-right" alt="用户头像"></image>
-    <div id="profile" class="w3-modal">
-      <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-        <div class="w3-center">
-          <span onclick="document.getElementById('profile').style.display='none'" style="color:black;" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">x</span><br>
-          <img src="../img/logo.png" alt="账号" style="width:30%" class="w3-circle w3-margin-top"><br>
+
+
+          </div>
+
+        <!--大屏幕导航栏的 左侧内容-->
+        <a href="./index.html">
+          <image src="../img/logo.png" title="回到主页" style="height: 46px"
+                 class="w3-button w3-hide-small w3-left" alt="网站logo"></image>
+        </a>
+
+        <div class="w3-dropdown-hover">
+          <button class="w3-padding-large w3-button" title="家园">家园 <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4">
+            <a href="#" class="w3-bar-item w3-padding-large w3-button">工作</a>
+            <a href="#" class="w3-bar-item w3-padding-large w3-button">训练</a>
+            <a href="#" class="w3-bar-item w3-padding-large w3-button">产业</a>
+          </div>
         </div>
-        <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-          <button onclick="window.location.href='login.html'" type="button" class="w3-button w3-red">登出</button>
-          <span class="w3-right w3-padding w3-hide-small"><a href="#">重置密码?</a></span>
+
+        <div class="w3-dropdown-hover">
+          <button class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4">
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">物资买卖</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">装备买卖</a>
+          </div>
         </div>
+
+        <div class="w3-dropdown-hover">
+          <button class="w3-padding-large w3-button" title="国家">国家 <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4">
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">魏国</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">蜀国</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">吴国</a>
+          </div>
+        </div>
+
+        <div class="w3-dropdown-hover w3-hide-small">
+          <button class="w3-padding-large w3-button" title="更多">更多 <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4">
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">天命之子</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">科举选拔</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">国家管理</a>
+          </div>
+        </div>
+
+        <!--大屏幕导航栏右侧的账户设置-->
+        <image src="../img/logo.png" onclick="document.getElementById('profile').style.display='block'"
+               style="height: 46px; margin-right: 50px;" class="w3-image w3-button w3-green w3-hide-small w3-right"
+               alt="用户头像" ></image>
+        <div id="profile" class="w3-modal">
+          <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+            <div class="w3-center">
+              <span onclick="document.getElementById('profile').style.display='none'" style="color:black;"
+                    class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">x</span><br>
+              <img src="../img/logo.png" alt="账号" style="width:30%" class="w3-circle w3-margin-top"><br>
+            </div>
+            <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+              <button onclick="window.location.href='login.html'" type="button" class="w3-button w3-red">登出</button>
+              <span class="w3-right w3-padding w3-hide-small"><a href="#">重置密码?</a></span>
+            </div>
+          </div>
+        </div> <!-- end of 大屏幕导航栏右侧的账户设置 -->
       </div>
-    </div> <!-- end of 大屏幕导航栏右侧的账户设置 -->    
+    </div>  <!-- end of 导航浪 -->
+
+    <!-- 小屏幕下拉列表具体内容-->
+    <div id="navBar_small" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top w3-animate-opacity"
+         style="margin-top:46px">
+      <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">绑定手机</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">修改邮箱</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">修改密码</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">登出</a>
+    </div>
+
   </div>
-</div>  <!-- end of 导航浪 -->
-
-<!-- 小屏幕下拉列表具体内容-->
-<div id="navBar_small" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top w3-animate-opacity" style="margin-top:46px">
-  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">绑定手机</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">修改邮箱</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">修改密码</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">登出</a>
-</div>
-
-<!--	这里正文内容-->
-	
-
-	<div class="w3-light-grey w3-padding-32 w3-center" style="margin-top: 80px;">
-  	<h1 class="w3-jumbo">Daily Ping</h1>
-	</div>
-
-	<div class="w3-row-padding w3-margin-top">
-		<div class="w3-third w3-justify">
-			<h2>Empty Notebook Found</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		</div>
-		<div class="w3-third w3-justify">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		 </div>
-		<div class="w3-third w3-justify">
-			<h2>Very New News!</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		</div>
-	</div>
-
-	
-<!-- end of 这里是正文内容-->
-	
-	
-</div>
 </div> <!--end of 侧边栏右边区域-->
-    
+
 </body>
 </html> 
