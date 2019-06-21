@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-
 <html lang="zh">
+
+<head>
 <title>转世三国-模拟三国人生</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,17 +10,10 @@
 <link rel="stylesheet" href="../css/my-style.css">
 <link rel="icon" href="../img/logo.png"/>
 <script src="../js/navSideBar.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="../js/jquery-3.4.1.min.js"></script>
+</head>
 
-<style>
-  @media screen and (max-width: 455px) {
-    .h3 {
-      font-size: 16px;
-    }
-  }
-</style>
-
-<body style="background:#e6e6e6;color:black;">
+<body onload="countdown()">
 
 <!--这是侧边栏本体-->
 <div class="w3-sidebar w3-light-grey w3-card-4 w3-animate-left" style="width:196px; display:none;" id="mySidebar">
@@ -30,18 +24,21 @@
     </button>
   </div>
   <div class="w3-bar-block">
-    <a class="w3-bar-item w3-button w3-green" href="javascript:void(0)">主页</a>
-    <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
-    <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
+    <a class="w3-bar-item w3-padding-large w3-button w3-green" href="#">主页</a>
+    <a class="w3-bar-item w3-padding-large w3-button" href="#">快来玩!</a>
+    <a class="w3-bar-item w3-padding-large w3-button" href="#">快来玩!</a>
     <div class="w3-dropdown-hover">
-      <a class="w3-button" href="javascript:void(0)">快来玩! <i class="fa fa-caret-down"></i></a>
+      <a class="w3-padding-large w3-button" href="#">快来玩!<i class="fa fa-caret-down"></i></a>
       <div class="w3-dropdown-content w3-bar-block w3-card-4">
-        <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
-        <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
-        <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
+        <a class="w3-bar-item w3-padding-large w3-button" href="#">快来玩!</a>
+        <a class="w3-bar-item w3-padding-large w3-button" href="#">快来玩!</a>
+        <a class="w3-bar-item w3-padding-large w3-button" href="#">快来玩!</a>
       </div>
     </div>
-    <a class="w3-bar-item w3-button" href="javascript:void(0)">快来玩!</a>
+    <a class="w3-bar-item w3-padding-large w3-button" href="#">快来玩!</a>
+    <br> <br> <br> <br> <br>
+    <p class="w3-large w3-center w3-text-red">充值活动:</p>
+    <a class="w3-bar-item w3-button w3-center w3-text-red w3-hover-yellow w3-hover-text-black" href="index.html">点我快来买吧!</a>
   </div>
 </div>
 
@@ -54,13 +51,13 @@
           class="w3-button w3-green w3-transparent w3-display-topleft w3-xlarge" onclick="w3_open()">&#9776;</span>
 
     <!--导航栏-->
-    <div id="topNav" class="w3-top" style="margin-left: 0px;">
+    <div id="topNav" class="w3-top" style="margin-left: 0;">
       <div class="w3-bar w3-black w3-card">
 
         <!--小屏幕下点击展开菜单的按钮-->
-        <div class="w3-bar-item w3-dropdown-hover w3-green w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
-           style="margin-right: 50px;" href="#" title="展开菜单"><i
-          class="fa fa-bars"></i>
+        <div
+          class="w3-bar-item w3-dropdown-hover w3-green w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
+          style="margin-right: 50px;" href="#" title="展开菜单"><i class="fa fa-bars"></i>
 
           <div class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0">
             <a href="#" class="w3-bar-item w3-button w3-padding-large">绑定手机</a>
@@ -68,17 +65,15 @@
             <a href="#" class="w3-bar-item w3-button w3-padding-large">修改密码</a>
             <a href="#" class="w3-bar-item w3-button w3-padding-large">登出</a>
           </div>
+        </div>
 
-
-
-          </div>
-
-        <!--大屏幕导航栏的 左侧内容-->
+        <!--大屏幕导航栏左侧网站logo-->
         <a href="./index.html">
-          <image src="../img/logo.png" title="回到主页" style="height: 46px"
-                 class="w3-button w3-hide-small w3-left" alt="网站logo"></image>
+          <img src="../img/logo.png" title="回到主页" style="height: 46px"
+                 class="w3-button w3-hide-small w3-left" alt="网站logo"/>
         </a>
 
+        <!--大屏幕导航栏导航栏目-->
         <div class="w3-dropdown-hover">
           <button class="w3-padding-large w3-button" title="家园">家园 <i class="fa fa-caret-down"></i></button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4">
@@ -113,11 +108,12 @@
             <a href="#" class="w3-bar-item w3-button w3-padding-large">国家管理</a>
           </div>
         </div>
+        <!--end of 大屏幕导航栏导航栏目-->
 
         <!--大屏幕导航栏右侧的账户设置-->
-        <image src="../img/logo.png" onclick="document.getElementById('profile').style.display='block'"
+        <img src="../img/logo.png" onclick="document.getElementById('profile').style.display='block'"
                style="height: 46px; margin-right: 50px;" class="w3-image w3-button w3-green w3-hide-small w3-right"
-               alt="用户头像" ></image>
+               alt="用户头像"/>
         <div id="profile" class="w3-modal">
           <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
             <div class="w3-center">
@@ -131,17 +127,9 @@
             </div>
           </div>
         </div> <!-- end of 大屏幕导航栏右侧的账户设置 -->
-      </div>
-    </div>  <!-- end of 导航浪 -->
 
-    <!-- 小屏幕下拉列表具体内容-->
-    <div id="navBar_small" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top w3-animate-opacity"
-         style="margin-top:46px">
-      <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">绑定手机</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">修改邮箱</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">修改密码</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">登出</a>
-    </div>
+      </div>
+    </div>  <!-- end of 导航栏-->
 
   </div>
 </div> <!--end of 侧边栏右边区域-->
