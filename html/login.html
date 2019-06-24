@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh">
-
 <head>
 <title>转世三国-模拟三国人生</title>
 <meta charset="UTF-8">
@@ -10,26 +9,16 @@
 <link rel="stylesheet" href="../css/my-style.css">
 <link rel="icon" href="../img/logo.png"/>
 <script src = "../js/countDown.js"> </script>
-
-<style>
-  img[usemap] {
-    border: none;
-    height: auto;
-    max-width: 100%;
-    width: auto;
-  }
-</style>
 </head>
 
 <body onload="countDown()">
 
-<!--登录和注册-->
-<div class="w3-row w3-light-grey w3-round-xxlarge">
+<!--登录,注册,活动倒计时栏-->
+<div class="w3-row w3-round-xxlarge">
 
 <!--  不同界面下不同大小的登陆注册按钮-->
-  <span class="w3-hide-small w3-hide-medium w3-light-grey w3-xlarge w3-text-red w3-center w3-display-topmiddle">距离上线还有: <span id="counter"></span></span>
+  <span class="w3-hide-small w3-hide-medium w3-padding w3-round-xxlarge  w3-light-gray w3-xlarge w3-text-red w3-center w3-display-topmiddle">距离上线还有: <span id="counter"></span></span>
 
-<!--  <span class=" w3-hide-large w3-light-grey w3-text-red w3-center w3-display-topmiddle" id="counter"></span>-->
   <button onclick="document.getElementById('login').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-xxlarge w3-green w3-large w3-right w3-hide-medium w3-hide-small">
     点击图标进行登录
   </button>
@@ -47,6 +36,62 @@
     点击图标进行注册
   </button>
 </div>
+
+<!--游戏介绍框-->
+<div class="w3-auto w3-section w3-light-gray w3-center w3-round-xxlarge">
+  <!--国家特色(带image map)-->
+  <div>
+    <div class="w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">国家特色(点击地图查看)<br>介绍国家特色兵种,资源blah,blah</div>
+    <div class="w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">国家特色(点击地图查看)</div>
+    <img class= "w3-section" alt="三国地图" src="../img/map-brief.png" width="1049" height="742" usemap="#sanguo">
+    <map name="sanguo">
+      <area alt="" class="shuguo" title="蜀国" coords="99,738,97,723,86,709,74,702,81,685,98,686,105,670,112,663,123,668,135,675,152,673,167,674,182,668,185,647,202,633,214,613,217,567,208,549,195,522,221,494,229,461,246,412,234,393,258,348,239,315,249,266,222,254,173,270,191,216,209,214,159,186,112,138,90,124,74,62,107,41,139,30,163,26,192,22,215,57,217,99,194,117,202,136,220,142,251,125,261,150,277,154,287,189,306,185,326,205,336,240,348,242,362,278,390,277,414,288,430,321,486,321,508,357,523,394,546,407,576,406,591,401,609,424,609,446,616,465,626,481,624,505,600,523,582,528,581,556,586,591,609,610,623,636,610,663,602,695,589,719,552,723,531,712,512,735,465,707,427,730,382,723,369,729,339,741" shape="poly">
+      <area alt="" class="weiguo" title="魏国" coords="1045,42,1024,49,984,64,930,92,907,79,936,48,930,23,896,23,858,36,830,63,793,84,775,107,735,121,733,150,756,175,774,180,794,198,822,201,861,198,897,175,931,197,890,215,854,244,838,278,835,290,809,287,797,294,776,284,772,314,741,320,718,308,701,308,690,319,694,357,684,391,662,408,671,449,675,478,655,464,647,485,631,489,605,460,603,415,585,398,559,411,516,396,498,350,480,323,426,319,403,286,378,276,357,278,350,240,357,209,370,193,391,193,398,166,378,146,367,132,387,116,385,89,397,78,403,95,430,117,459,122,479,122,500,139,493,182,507,215,536,204,531,174,526,140,523,118,540,104,539,85,558,74,574,72,572,57,595,42,616,23,637,16,661,11,691,32,717,25,733,20,750,32,804,3,908,0,1048,3" shape="poly">
+      <area alt="" class="wuguo" title="吴国" coords="860,741,889,724,925,696,950,678,943,666,916,665,949,640,942,633,962,622,967,597,997,556,1022,549,1026,526,1031,496,1037,480,1013,464,1001,417,963,418,939,404,982,398,942,366,924,349,879,311,836,295,795,295,775,286,771,315,744,324,704,309,692,320,679,402,667,406,676,477,659,468,647,487,629,488,616,489,617,506,597,524,583,529,588,589,618,626,612,654,597,700,588,719,571,713,549,726,533,713,517,732,466,711,429,731,383,722,378,731,355,730,342,739" shape="poly">
+    </map>
+  </div>
+  <!-- 特殊势力:黄巾-->
+  <div>
+    <div class="w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">特殊势力:黄巾</div>
+    <div class="w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">特殊势力:黄巾</div>
+    <section class="w3-panel">
+      <p class="w3-xxlarge">黄巾军，是中国东汉末年钜鹿人张角所领导的大规模农民起义军队，于甲子年184年产生起义，此黄巾之乱规模为中国历史上最大的农民起义之一，由于起义军头裹黄巾，故作黄巾军，引发的起义不到一年就被东汉王朝所镇压，历史上都把黄巾起义作为三国时代的开端。</p>
+    </section>
+  </div>
+
+  <!-- 其他特色-->
+  <div>
+    <div class="w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">其他特色</div>
+    <div class="w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">其他特色</div>
+    <section class="w3-panel">
+      <p class="w3-xxlarge">我TM也不知道写什么呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀</p>
+    </section>
+  </div>
+</div>
+
+
+<!--image map js 脚本-->
+<script src="../js/rwdImageMaps.jquery.min.js"></script>
+<script src="../js/rwdImageMaps.min.js"></script>
+<script>
+    $(document).ready(function(e) {
+        $('img[usemap]').rwdImageMaps();
+
+        $(".shuguo").on("click", function(e){
+            e.preventDefault();
+            document.getElementById('shuIntro').style.display='block';
+        });
+        $(".weiguo").on("click", function(e){
+            e.preventDefault();
+            document.getElementById('weiIntro').style.display='block';
+        });
+        $(".wuguo").on("click", function(e){
+            e.preventDefault();
+            document.getElementById('wuIntro').style.display='block';
+        });
+
+    });
+</script>
 
 <!--	登录modal-->
 <div id="login" class="w3-modal">
@@ -108,50 +153,13 @@
       </button>
       <span class="w3-right w3-padding"><a target="_blank"
                                            href="//shang.qq.com/wpa/qunwpa?idkey=3c4de04285c30fbbde0219589d984e461621f84cb937880221456d12aae39ebf"><img
-        border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="转世三国官方交流群" title="转世三国官方交流群"></a></a></span>
+        border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="转世三国官方交流群" title="转世三国官方交流群"></a></span>
     </div>
 
 
   </div>
 </div>
-
-<!--  image map本体-->
-<div class="w3-panel w3-center w3-auto">
-  <div class="w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge">国家特色(点击地图查看)</div>
-  <div class="w3-block w3-green w3-padding-large w3-large w3-hide-large">国家特色(点击地图查看)</div>
-
-  <img alt="三国地图" src="../img/map-brief.png" width="1049" height="742" usemap="#sanguo">
-  <map name="sanguo">
-    <area alt="" class="shuguo" title="蜀国" coords="99,738,97,723,86,709,74,702,81,685,98,686,105,670,112,663,123,668,135,675,152,673,167,674,182,668,185,647,202,633,214,613,217,567,208,549,195,522,221,494,229,461,246,412,234,393,258,348,239,315,249,266,222,254,173,270,191,216,209,214,159,186,112,138,90,124,74,62,107,41,139,30,163,26,192,22,215,57,217,99,194,117,202,136,220,142,251,125,261,150,277,154,287,189,306,185,326,205,336,240,348,242,362,278,390,277,414,288,430,321,486,321,508,357,523,394,546,407,576,406,591,401,609,424,609,446,616,465,626,481,624,505,600,523,582,528,581,556,586,591,609,610,623,636,610,663,602,695,589,719,552,723,531,712,512,735,465,707,427,730,382,723,369,729,339,741" shape="poly">
-    <area alt="" class="weiguo" title="魏国" coords="1045,42,1024,49,984,64,930,92,907,79,936,48,930,23,896,23,858,36,830,63,793,84,775,107,735,121,733,150,756,175,774,180,794,198,822,201,861,198,897,175,931,197,890,215,854,244,838,278,835,290,809,287,797,294,776,284,772,314,741,320,718,308,701,308,690,319,694,357,684,391,662,408,671,449,675,478,655,464,647,485,631,489,605,460,603,415,585,398,559,411,516,396,498,350,480,323,426,319,403,286,378,276,357,278,350,240,357,209,370,193,391,193,398,166,378,146,367,132,387,116,385,89,397,78,403,95,430,117,459,122,479,122,500,139,493,182,507,215,536,204,531,174,526,140,523,118,540,104,539,85,558,74,574,72,572,57,595,42,616,23,637,16,661,11,691,32,717,25,733,20,750,32,804,3,908,0,1048,3" shape="poly">
-    <area alt="" class="wuguo" title="吴国" coords="860,741,889,724,925,696,950,678,943,666,916,665,949,640,942,633,962,622,967,597,997,556,1022,549,1026,526,1031,496,1037,480,1013,464,1001,417,963,418,939,404,982,398,942,366,924,349,879,311,836,295,795,295,775,286,771,315,744,324,704,309,692,320,679,402,667,406,676,477,659,468,647,487,629,488,616,489,617,506,597,524,583,529,588,589,618,626,612,654,597,700,588,719,571,713,549,726,533,713,517,732,466,711,429,731,383,722,378,731,355,730,342,739" shape="poly">
-  </map>
-</div>
-
-<!--image map js-->
-<script src="../js/rwdImageMaps.jquery.min.js"></script>
-<script src="../js/rwdImageMaps.min.js"></script>
-<script>
-    $(document).ready(function(e) {
-        $('img[usemap]').rwdImageMaps();
-
-        $(".shuguo").on("click", function(e){
-            e.preventDefault();
-            document.getElementById('shuIntro').style.display='block';
-        });
-        $(".weiguo").on("click", function(e){
-            e.preventDefault();
-            document.getElementById('weiIntro').style.display='block';
-        });
-        $(".wuguo").on("click", function(e){
-            e.preventDefault();
-            document.getElementById('wuIntro').style.display='block';
-        });
-
-    });
-</script>
-
-<!--	蜀国介绍modal-->
+<!--image map	蜀国介绍modal-->
 <div id="shuIntro" class="w3-modal">
   <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
@@ -172,7 +180,7 @@
 
   </div>
 </div>
-<!--	魏国介绍modal-->
+<!--image map	魏国介绍modal-->
 <div id="weiIntro" class="w3-modal">
   <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
@@ -195,7 +203,7 @@
 
   </div>
 </div>
-<!-- 吴国介绍modal-->
+<!--image map 吴国介绍modal-->
 <div id="wuIntro" class="w3-modal">
   <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
@@ -216,5 +224,9 @@
 
   </div>
 </div>
+
+
+
+
 </body>
 </html>

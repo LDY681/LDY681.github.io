@@ -1,4 +1,12 @@
+/*背景图片*/
 body {
     background: url(../img/background.jpeg) no-repeat 0 0 fixed;
     background-size: cover;
+}
+/*image map responsiveness*/
+img[usemap] {
+    border: none;
+    height: auto;
+    max-width: 100%;
+    width: auto;
 }
