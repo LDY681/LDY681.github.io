@@ -13,7 +13,7 @@
 <script src="../js/jquery-3.4.1.min.js"></script>
 </head>
 
-<body onload="countDown()">
+<body>
 
 <!--这是侧边栏本体-->
 <div class="w3-sidebar w3-light-grey w3-card-4 w3-animate-left" style="width:196px; display:none;" id="mySidebar">
@@ -24,32 +24,35 @@
     </button>
   </div>
   <div class="w3-bar-block">
-    <a class="w3-bar-item w3-padding-large w3-button w3-green" href="#">主页</a>
-    <a class="w3-bar-item w3-padding-large w3-button" href="#">快来玩!</a>
-    <a class="w3-bar-item w3-padding-large w3-button" href="#">快来玩!</a>
+    <a class="w3-bar-item w3-padding-large w3-button w3-green" href="index.html">主页</a>
+    <a class="w3-bar-item w3-padding-large w3-button" href="#">最新活动!</a>
     <div class="w3-dropdown-hover">
-      <a class="w3-padding-large w3-button" href="#">快来玩!<i class="fa fa-caret-down"></i></a>
+      <a class="w3-padding-large w3-button" href="#">最新活动2!<i class="fa fa-caret-down"></i></a>
       <div class="w3-dropdown-content w3-bar-block w3-card-4">
-        <a class="w3-bar-item w3-padding-large w3-button" href="#">快来玩!</a>
-        <a class="w3-bar-item w3-padding-large w3-button" href="#">快来玩!</a>
-        <a class="w3-bar-item w3-padding-large w3-button" href="#">快来玩!</a>
+        <a class="w3-bar-item w3-padding-large w3-button" href="#">最新活动3!</a>
+        <a class="w3-bar-item w3-padding-large w3-button" href="#">最新活动4!</a>
+        <a class="w3-bar-item w3-padding-large w3-button" href="#">最新活动5!</a>
       </div>
     </div>
-    <a class="w3-bar-item w3-padding-large w3-button" href="#">快来玩!</a>
-    <br> <br> <br> <br> <br>
+    <br> <br> <br>
     <p class="w3-large w3-center w3-text-red">限时活动:</p>
     <a class="w3-bar-item w3-yellow w3-button w3-center w3-text-red w3-hover-light-green w3-hover-text-black" href="login.html">开服注册送宝马!</a>
+    <br> <br> <br>
+    <p class="w3-center w3-text-red">您还未验证手机号:</p>
+    <p class="w3-center w3-text-red">为防止小号破坏生态,捐赠合同战斗投票等功能需通过手机验证后才能使用</p>
+    <a class="w3-bar-item w3-yellow w3-button w3-center w3-text-red w3-hover-light-green w3-hover-text-black" href="verifyPhone.html">点我立即验证!</a>
+
+
   </div>
 </div>
 
+<!--点击展开侧边栏的按钮-->
+<span title="展开侧边栏" style="display:block; position:fixed;" id="openNav"
+      class="w3-button w3-green w3-transparent w3-display-topleft w3-xlarge" onclick="w3_open()">&#9776;</span>
+
 <!--侧边栏右边区域-->
-<div id="main" style="margin-left:38px">
-  <div class="w3-container w3-display-container">
-
-    <!--点击展开侧边栏的按钮-->
-    <span title="展开侧边栏" style="display:block; position:fixed; height: 46px;" id="openNav"
-          class="w3-button w3-green w3-transparent w3-display-topleft w3-xlarge" onclick="w3_open()">&#9776;</span>
-
+<div id="main" style="margin-left:54px">
+  <div class="w3-block">
     <!--导航栏-->
     <div id="topNav" class="w3-top" style="margin-left: 0;">
       <div class="w3-bar w3-black w3-card">
@@ -63,7 +66,7 @@
             <a href="#" class="w3-bar-item w3-button w3-padding-large">绑定手机</a>
             <a href="#" class="w3-bar-item w3-button w3-padding-large">修改邮箱</a>
             <a href="#" class="w3-bar-item w3-button w3-padding-large">修改密码</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">登出</a>
+            <a href="login.html" class="w3-bar-item w3-button w3-padding-large">登出</a>
           </div>
         </div>
 
@@ -89,7 +92,7 @@
             <a href="#" class="w3-bar-item w3-button">邀请朋友</a>
             <a href="#" class="w3-bar-item w3-button">军团</a>
             <a href="#" class="w3-bar-item w3-button">会员账户</a>
-            <a href="href="#"" class="w3-bar-item w3-button">购买黄金</a>
+            <a href="href="#" class="w3-bar-item w3-button">购买黄金</a>
           </div>
         </div>
 
@@ -119,7 +122,7 @@
           </div>
         </div>
 
-        <div class="w3-dropdown-hover">
+        <div class="w3-dropdown-hover w3-hide-small">
           <button id="news" class="w3-padding-large w3-button" title="新闻">新闻 <i class="fa fa-caret-down"></i></button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-blue">
             <a href="#" class="w3-bar-item w3-button w3-padding-large">头条新闻</a>
@@ -148,10 +151,10 @@
             <a href="#" class="w3-bar-item w3-button w3-padding-large">议会选举</a>
             <a href="#" class="w3-bar-item w3-button w3-padding-large">总统选举</a>
             <a href="#" class="w3-bar-item w3-button w3-padding-large">移民</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">地图</a>
+            <a href="map.html" class="w3-bar-item w3-button w3-padding-large">地图</a>
           </div>
 
-          <span class="w3-right w3-padding"><a target="_blank"
+          <span class="w3-right w3-padding w3-hide-small w3-hide-medium"><a target="_blank"
                                                href="//shang.qq.com/wpa/qunwpa?idkey=3c4de04285c30fbbde0219589d984e461621f84cb937880221456d12aae39ebf"><img
             border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="转世三国官方交流群" title="转世三国官方交流群"></a></span>
         </div>

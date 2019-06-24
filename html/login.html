@@ -9,9 +9,10 @@
 <link rel="stylesheet" href="../css/my-style.css">
 <link rel="icon" href="../img/logo.png"/>
 <script src = "../js/countDown.js"> </script>
+<script src="../js/accordions.js"></script>
 </head>
 
-<body onload="countDown()">
+<body onload="countDown('Jan 1, 2025 24:00:00')">
 
 <!--登录,注册,活动倒计时栏-->
 <div class="w3-row w3-round-xxlarge">
@@ -38,11 +39,11 @@
 </div>
 
 <!--游戏介绍框-->
-<div class="w3-auto w3-section w3-light-gray w3-center w3-round-xxlarge">
+<div class="w3-auto w3-section w3-light-gray w3-center w3-round-xxlarge w3-card-4">
   <!--国家特色(带image map)-->
-  <div>
-    <div class="w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">国家特色(点击地图查看)<br>介绍国家特色兵种,资源blah,blah</div>
-    <div class="w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">国家特色(点击地图查看)</div>
+    <button onclick="accordionOn('map');accordionOff('yellowTurban');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">国家特色(点击地图查看)</button>
+    <button onclick="accordionOn('map');accordionOff('yellowTurban');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">国家特色(点击地图查看)</button>
+  <div id="map" class="w3-show w3-animate-left">
     <img class= "w3-section" alt="三国地图" src="../img/map-brief.png" width="1049" height="742" usemap="#sanguo">
     <map name="sanguo">
       <area alt="" class="shuguo" title="蜀国" coords="99,738,97,723,86,709,74,702,81,685,98,686,105,670,112,663,123,668,135,675,152,673,167,674,182,668,185,647,202,633,214,613,217,567,208,549,195,522,221,494,229,461,246,412,234,393,258,348,239,315,249,266,222,254,173,270,191,216,209,214,159,186,112,138,90,124,74,62,107,41,139,30,163,26,192,22,215,57,217,99,194,117,202,136,220,142,251,125,261,150,277,154,287,189,306,185,326,205,336,240,348,242,362,278,390,277,414,288,430,321,486,321,508,357,523,394,546,407,576,406,591,401,609,424,609,446,616,465,626,481,624,505,600,523,582,528,581,556,586,591,609,610,623,636,610,663,602,695,589,719,552,723,531,712,512,735,465,707,427,730,382,723,369,729,339,741" shape="poly">
@@ -50,23 +51,21 @@
       <area alt="" class="wuguo" title="吴国" coords="860,741,889,724,925,696,950,678,943,666,916,665,949,640,942,633,962,622,967,597,997,556,1022,549,1026,526,1031,496,1037,480,1013,464,1001,417,963,418,939,404,982,398,942,366,924,349,879,311,836,295,795,295,775,286,771,315,744,324,704,309,692,320,679,402,667,406,676,477,659,468,647,487,629,488,616,489,617,506,597,524,583,529,588,589,618,626,612,654,597,700,588,719,571,713,549,726,533,713,517,732,466,711,429,731,383,722,378,731,355,730,342,739" shape="poly">
     </map>
   </div>
+
   <!-- 特殊势力:黄巾-->
-  <div>
-    <div class="w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">特殊势力:黄巾</div>
-    <div class="w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">特殊势力:黄巾</div>
-    <section class="w3-panel">
-      <p class="w3-xxlarge">黄巾军，是中国东汉末年钜鹿人张角所领导的大规模农民起义军队，于甲子年184年产生起义，此黄巾之乱规模为中国历史上最大的农民起义之一，由于起义军头裹黄巾，故作黄巾军，引发的起义不到一年就被东汉王朝所镇压，历史上都把黄巾起义作为三国时代的开端。</p>
+    <button onclick="accordionOn('yellowTurban');accordionOff('map');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">特殊势力:黄巾(点我展开)</button>
+    <button onclick="accordionOn('yellowTurban');accordionOff('map');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">特殊势力:黄巾(点我展开)</button>
+    <section id="yellowTurban" class="w3-panel w3-hide w3-animate-left">
+      <p class="w3-xlarge">黄巾军，是中国东汉末年钜鹿人张角所领导的大规模农民起义军队，于甲子年184年产生起义，此黄巾之乱规模为中国历史上最大的农民起义之一，由于起义军头裹黄巾，故作黄巾军，引发的起义不到一年就被东汉王朝所镇压，历史上都把黄巾起义作为三国时代的开端。</p>
     </section>
-  </div>
 
   <!-- 其他特色-->
-  <div>
-    <div class="w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">其他特色</div>
-    <div class="w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">其他特色</div>
-    <section class="w3-panel">
-      <p class="w3-xxlarge">我TM也不知道写什么呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀</p>
+    <button onclick="accordionOn('other');accordionOff('yellowTurban');accordionOff('map');" class="w3-card-4 w3-block w3-margin-bottom w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">其他特色(点我展开)</button>
+    <button onclick="accordionOn('other');accordionOff('yellowTurban');accordionOff('map');" class="w3-card-4 w3-block w3-margin-bottom w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">其他特色(点我展开)</button>
+    <section id="other" class="w3-panel w3-hide w3-animate-left">
+      <p class="w3-xlarge">我TM也不知道写什么呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀</p>
     </section>
-  </div>
+
 </div>
 
 

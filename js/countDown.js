@@ -1,6 +1,7 @@
-function countDown(){
+// 用法:countDown(倒计时截止时间)
+function countDown(date){
 // Set the date we're counting down to
-var countDownDate = new Date("Jan 1, 2025 24:00:00").getTime();
+var countDownDate = new Date(date).getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
