@@ -279,7 +279,7 @@
             // L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3><a  href='"+ list[$j][5] + "'  target=_blank><img style='width:150px;overflow:hidden;float:right;padding:5;'  src=" + list[$j][3] + " /></a>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"更多信息"+"</a></div>");
             L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
         }
-        for ($j=41;41<$j<=60;$j++)
+        for ($j=41;40<$j<=60;$j++)
         {
             // L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3><a  href='"+ list[$j][5] + "'  target=_blank><img style='width:150px;overflow:hidden;float:right;padding:5;'  src=" + list[$j][3] + " /></a>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"更多信息"+"</a></div>");
             L.marker([list[$j][2][0],list[$j][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
@@ -288,7 +288,7 @@
         function getMap(picid) {
             $j=picid-1;
             // L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3><a  href='"+ list[$j][5] + "'  target=_blank><img style='width:150px;overflow:hidden;float:right;padding:5;'  src=" + list[$j][3] + " /></a>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "'  target=_blank>" +"更多信息"+"</a></div>").openPopup();
-            L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a href='"+ list[$j][5] + "'  target=_blank>" +"进入战场"+"</a></div>").openPopup();
+            L.marker([list[$j][2][0],list[$j][2][1]]).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a href='"+ list[$j][5] + "'  target=_blank>" +"进入战场"+"</a></div>").openPopup();
 
         }
 
