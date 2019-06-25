@@ -145,11 +145,6 @@
         var Gaodimga = L.tileLayer.chinaProvider('GaoDe.Satellite.Annotion', {maxZoom: 18,minZoom: 5});
         var Gaodimage = L.layerGroup([Gaodimgem, Gaodimga]);
 
-        var baseLayers = {
-            "常规图": Gaode,
-            "卫星图": Gaodimage
-        };
-
         var map = L.map("mapLayer", {
             center: [35.74874, 116.05408],
             zoom: 5,
@@ -158,13 +153,6 @@
         });
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://zssanguo.com">转世三国</a>'}).addTo(map);
-
-        L.control.layers(baseLayers, null).addTo(map);
-        L.control.zoom({
-            zoomInTitle: '放大',
-            zoomOutTitle: '缩小'
-        }).addTo(map);
-
 
         // 和平状态蜀国城池图标
         var shuCityIcon = L.icon({
@@ -186,14 +174,12 @@
         var wuCityIcon = L.icon({
             iconUrl: 'https://zssanguo.com/img/wuCityIcon.png',
             iconSize:     [48,48],    // size of the icon
-            // iconAnchor:   [30,30], // point of the icon which will correspond to marker's location
             popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
         });
 
         var warCityIcon = L.icon({
             iconUrl: 'https://zssanguo.com/img/warCityIcon.png',
             iconSize:     [48,48],    // size of the icon
-            // iconAnchor:   [30,27], // point of the icon which will correspond to marker's location
             popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
         });
 
@@ -266,6 +252,7 @@
             [60,'交趾',[21.01273, 105.82855],'','<p>所属州郡：交州─龙编</p><p>现在地址：还剑郡河内市 东</p>','https://zssanguo.com'],
         ];
 
+        // 因为mapID是从1开始的,list index是从0开始的,所以记得要减一
         for ($j=0;$j<=24;$j++)
         {
             L.marker([list[$j][2][0],list[$j][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
@@ -279,8 +266,8 @@
             L.marker([list[$j][2][0],list[$j][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
         }
 
-        function getMap(picID) {
-            $j=picID-1;
+        function getMap(cityID) {
+            $j=cityID-1;
 
             if ($j > 39){
                 L.marker([list[$j][2][0],list[$j][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a href='"+ list[$j][5] + "'  target=_blank>" +"进入战场"+"</a></div>").openPopup();
