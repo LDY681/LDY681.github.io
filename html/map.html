@@ -19,8 +19,8 @@
     #mapMenu a{font-size:15px;}
     .Popupinfo p{text-indent:0}
     .Popupinfo p,.Popupinfo h3{margin:0;padding:0;}
-    .Popupinfo a:link,.Popupinfo a:visited {color:#333;text-decoration:none}
-    .Popupinfo a:hover,.Popupinfo a:active {color:#333;text-decoration:underline}
+    .Popupinfo a:link,.Popupinfo a:visited {font-size:15px;color:red;text-decoration:none}
+    .Popupinfo a:hover,.Popupinfo a:active {font-size:15px;color:darkorange;text-decoration:underline}
   </style>
 </head>
 
@@ -40,182 +40,97 @@
 
 <!-- mapMenu 左侧地点栏-->
   <ul class="w3-col w3-hide-small w3-hide-medium w3-light-gray w3-card-4" style="width:250px;margin-top:80px;list-style-type:none;border-radius: 50px 0 0 50px;" id="mapMenu">
-          <li onclick="getMap(1);"><a href="#">1.洛阳  司隶─河南尹</a></li>
-          <li onclick="getMap(2);"><a href="#">2.许昌  豫州─颖川郡</a></li>
-          <li onclick="getMap(3);"><a href="#">3.建业  扬州─丹阳郡</a></li>
-          <li onclick="getMap(4);"><a href="#">4.成都  益州─蜀郡─州治</a></li>
-          <li onclick="getMap(5);"><a href="#">5.长安  雍州─京兆尹─州治</a></li>
-          <li onclick="getMap(6);"><a href="#">6.北平  幽州—右北平郡</a></li>
-          <li onclick="getMap(7);"><a href="#">7.涿县  幽州─范阳郡</a></li>
-          <li onclick="getMap(8);"><a href="#">8.真定  冀州─常山郡</a></li>
-          <li onclick="getMap(9);"><a href="#">9.邺  冀州─魏郡</a></li>
-          <li onclick="getMap(10);"><a href="#">10.平原  冀州─平原郡</a></li>
-          <li onclick="getMap(11);"><a href="#">11.南皮  冀州─渤海郡</a></li>
-          <li onclick="getMap(12);"><a href="#">12.弘农  司隶─弘农郡</a></li>
-          <li onclick="getMap(13);"><a href="#">13.子午谷  雍州─京兆尹</a></li>
-          <li onclick="getMap(14);"><a href="#">14.陈仓  雍州─扶风郡</a></li>
-          <li onclick="getMap(15);"><a href="#">15.街亭  雍州─天水郡</a></li>
-          <li onclick="getMap(16);"><a href="#">16.武威─姑臧  凉州─武威郡</a></li>
-          <li onclick="getMap(17);"><a href="#">17.濮阳  兖州─东郡</a></li>
-          <li onclick="getMap(18);"><a href="#">18.白马  兖州─东郡</a></li>
-          <li onclick="getMap(19);"><a href="#">19.乌巢  兖州─陈留国</a></li>
-          <li onclick="getMap(20);"><a href="#">20.官渡  兖州─陈留国</a></li>
-          <li onclick="getMap(21);"><a href="#">21.陈留  兖州─陈留国</a></li>
-          <li onclick="getMap(22);"><a href="#">22.下邳  徐州─州治</a></li>
-          <li onclick="getMap(23);"><a href="#">23.淮阴  徐州─广陵郡</a></li>
-          <li onclick="getMap(24);"><a href="#">24.睢阳  豫州─梁国</a></li>
-          <li onclick="getMap(25);"><a href="#">25.汝南  豫州─汝南郡─州治</a></li>
-          <li onclick="getMap(26);"><a href="#">26.寿春  扬州─州治</a></li>
-          <li onclick="getMap(27);"><a href="#">27.新野  荆州─南阳郡</a></li>
-          <li onclick="getMap(28);"><a href="#">28.皖城  扬州─庐江郡─州治</a></li>
-          <li onclick="getMap(29);"><a href="#">29.柴桑  荆州─江夏郡</a></li>
-          <li onclick="getMap(30);"><a href="#">30.襄阳  荆州─襄阳郡</a></li>
-          <li onclick="getMap(31);"><a href="#">31.夷陵  荆州─新城县</a></li>
-          <li onclick="getMap(32);"><a href="#">32.江陵  荆州─南郡</a></li>
-          <li onclick="getMap(33);"><a href="#">33.公安  荆州─南郡</a></li>
-          <li onclick="getMap(34);"><a href="#">34.上庸  益州─上庸郡</a></li>
-          <li onclick="getMap(35);"><a href="#">35.永安  益州─巴东郡</a></li>
-          <li onclick="getMap(36);"><a href="#">36.南郑  益州─汉中郡</a></li>
-          <li onclick="getMap(37);"><a href="#">37.梓潼  益州─梓潼郡</a></li>
-          <li onclick="getMap(38);"><a href="#">38.涪城  益州─梓橦郡</a></li>
-          <li onclick="getMap(39);"><a href="#">39.雒县  益州─广汉郡</a></li>
-          <li onclick="getMap(40);"><a href="#">40.合肥  扬州─淮南郡</a></li>
-          <li onclick="getMap(41);"><a href="#">41.带方  幽州─带方郡</a></li>
-          <li onclick="getMap(42);"><a href="#">42.朝鲜  幽州─乐浪郡</a></li>
-          <li onclick="getMap(43);"><a href="#">43.高句丽  幽州─玄菟郡</a></li>
-          <li onclick="getMap(44);"><a href="#">44.襄平  幽州─辽东郡</a></li>
-          <li onclick="getMap(45);"><a href="#">45.昌黎  幽州─昌黎郡</a></li>
-          <li onclick="getMap(46);"><a href="#">46.阳乐  幽州─辽西郡</a></li>
-          <li onclick="getMap(47);"><a href="#">47.土垠  幽州─右北平郡</a></li>
-          <li onclick="getMap(48);"><a href="#">48.蓟  幽州─燕国蓟县</a></li>
-          <li onclick="getMap(49);"><a href="#">49.渔阳  幽州─渔阳郡</a></li>
-          <li onclick="getMap(50);"><a href="#">50.居庸  幽州─上古郡</a></li>
-          <li onclick="getMap(51);"><a href="#">51.代县  幽州─代郡</a></li>
-          <li onclick="getMap(52);"><a href="#">52.雁门  并州─雁门郡</a></li>
-          <li onclick="getMap(53);"><a href="#">53.九原  并州─新兴郡</a></li>
-          <li onclick="getMap(54);"><a href="#">54.晋阳  并州─太原郡─州治</a></li>
-          <li onclick="getMap(55);"><a href="#">55.离石  并州─西河郡</a></li>
-          <li onclick="getMap(56);"><a href="#">56.居延  凉州─西海郡</a></li>
-          <li onclick="getMap(57);"><a href="#">57.昌邑  兖州─山阳郡</a></li>
-          <li onclick="getMap(58);"><a href="#">58.彭城  徐州─彭城国</a></li>
-          <li onclick="getMap(59);"><a href="#">59.沛县  豫州─沛国</a></li>
-          <li onclick="getMap(60);"><a href="#">60.毗陵  扬州─毗陵典农校尉</a></li>
-          <li onclick="getMap(61);"><a href="#">61.建安  扬州─建安郡</a></li>
-          <li onclick="getMap(62);"><a href="#">62.南昌  扬州─豫章郡</a></li>
-          <li onclick="getMap(63);"><a href="#">63.江夏  荆州─江夏郡</a></li>
-          <li onclick="getMap(64);"><a href="#">64.番禺  交州─南海郡</a></li>
-          <li onclick="getMap(65);"><a href="#">65.交趾郡  交州─龙编</a></li>
-          <li onclick="getMap(66);"><a href="#">66.朱吾  交州─日南郡</a></li>
-          <li onclick="getMap(67);"><a href="#">67.武阳  益州─腱为郡</a></li>
-          <li onclick="getMap(68);"><a href="#">68.涪陵  益州─涪陵郡</a></li>
-          <li onclick="getMap(69);"><a href="#">69.沾县  并州─乐平郡</a></li>
-          <li onclick="getMap(70);"><a href="#">70.怀  司隶─河内郡</a></li>
-          <li onclick="getMap(71);"><a href="#">71.阳武  司隶─河南尹</a></li>
-          <li onclick="getMap(72);"><a href="#">72.平阳  司隶─平阳郡</a></li>
-          <li onclick="getMap(73);"><a href="#">73.安邑  司隶─河东郡</a></li>
-          <li onclick="getMap(74);"><a href="#">74.汜水关  </a></li>
-          <li onclick="getMap(75);"><a href="#">75.函谷关  </a></li>
-          <li onclick="getMap(76);"><a href="#">76.散关  </a></li>
-          <li onclick="getMap(77);"><a href="#">77.潼关  </a></li>
-          <li onclick="getMap(78);"><a href="#">78.武关  </a></li>
-          <li onclick="getMap(79);"><a href="#">79.阳平关  </a></li>
-          <li onclick="getMap(80);"><a href="#">80.葭萌关  </a></li>
-          <li onclick="getMap(81);"><a href="#">81.剑阁  </a></li>
-          <li onclick="getMap(82);"><a href="#">82.绵竹关  </a></li>
-          <li onclick="getMap(83);"><a href="#">83.壶关  并州─上党郡</a></li>
-          <li onclick="getMap(84);"><a href="#">84.临晋  雍州─冯翊郡</a></li>
-          <li onclick="getMap(85);"><a href="#">85.禄福  凉州─酒泉郡</a></li>
-          <li onclick="getMap(86);"><a href="#">86.敦煌  凉州─敦煌郡</a></li>
-          <li onclick="getMap(87);"><a href="#">87.海头  西域长史府─州治</a></li>
-          <li onclick="getMap(88);"><a href="#">88.高昌  西域长史府─戊己校尉</a></li>
-          <li onclick="getMap(89);"><a href="#">89.奉高  兖州─泰山郡</a></li>
-          <li onclick="getMap(90);"><a href="#">90.无盐  兖州─东平国</a></li>
-          <li onclick="getMap(91);"><a href="#">91.郡丘  兖州─州治</a></li>
-          <li onclick="getMap(92);"><a href="#">92.延津  兖州─陈留国</a></li>
-          <li onclick="getMap(93);"><a href="#">93.定陶、卢县  兖州─济阳郡、济北国</a></li>
-          <li onclick="getMap(94);"><a href="#">94.任城  兖州─任城郡</a></li>
-          <li onclick="getMap(95);"><a href="#">95.东平陵  青州─济南国</a></li>
-          <li onclick="getMap(96);"><a href="#">96.高苑  青州─乐安郡</a></li>
-          <li onclick="getMap(97);"><a href="#">97.临淄  青州─州治</a></li>
-          <li onclick="getMap(98);"><a href="#">98.平寿  青州─北海国</a></li>
-          <li onclick="getMap(99);"><a href="#">99.黄县  青州─东莱郡</a></li>
-          <li onclick="getMap(100);"><a href="#">100.东武  青州─城阳郡</a></li>
-          <li onclick="getMap(101);"><a href="#">101.开阳  徐州─琅琊国</a></li>
-          <li onclick="getMap(102);"><a href="#">102.郯县  徐州─东海国</a></li>
-          <li onclick="getMap(103);"><a href="#">103.阳翟  豫州─颖川郡</a></li>
-          <li onclick="getMap(104);"><a href="#">104.陈县  豫州─陈郡</a></li>
-          <li onclick="getMap(105);"><a href="#">105.安城  豫州─汝南郡─州治</a></li>
-          <li onclick="getMap(106);"><a href="#">106.谯县  豫州─谯郡</a></li>
-          <li onclick="getMap(107);"><a href="#">107.安风  豫州─安丰郡</a></li>
-          <li onclick="getMap(108);"><a href="#">108.宛县  豫州─南阳郡</a></li>
-          <li onclick="getMap(109);"><a href="#">109.弋阳  豫州─弋阳郡</a></li>
-          <li onclick="getMap(110);"><a href="#">110.鲁县  豫州─鲁郡</a></li>
-          <li onclick="getMap(111);"><a href="#">111.六安  扬州─卢江郡</a></li>
-          <li onclick="getMap(112);"><a href="#">112.吴县  扬州─吴郡</a></li>
-          <li onclick="getMap(113);"><a href="#">113.山阴  扬州─会稽郡</a></li>
-          <li onclick="getMap(114);"><a href="#">114.始新  扬州─新都郡</a></li>
-          <li onclick="getMap(115);"><a href="#">115.章安  扬州─临海郡</a></li>
-          <li onclick="getMap(116);"><a href="#">116.南城  扬州─临川郡</a></li>
-          <li onclick="getMap(117);"><a href="#">117.高昌  扬州─卢陵郡</a></li>
-          <li onclick="getMap(118);"><a href="#">118.鄱阳  扬州─鄱阳郡</a></li>
-          <li onclick="getMap(119);"><a href="#">119.皖县  扬州─庐江郡</a></li>
-          <li onclick="getMap(120);"><a href="#">120.蕲春  扬州─蕲春郡</a></li>
-          <li onclick="getMap(121);"><a href="#">121.夷道  荆州─宜都郡</a></li>
-          <li onclick="getMap(122);"><a href="#">122.临湘  荆州─长沙郡</a></li>
-          <li onclick="getMap(123);"><a href="#">123.临浣  荆州─武陵郡</a></li>
-          <li onclick="getMap(124);"><a href="#">124.郴县  荆州─桂阳郡</a></li>
-          <li onclick="getMap(125);"><a href="#">125.泉陵  荆州─零陵郡</a></li>
-          <li onclick="getMap(126);"><a href="#">126.湘东  荆州─湘东郡</a></li>
-          <li onclick="getMap(127);"><a href="#">127.临贺  荆州─临贺郡</a></li>
-          <li onclick="getMap(128);"><a href="#">128.湘南  荆州─衡阳郡</a></li>
-          <li onclick="getMap(129);"><a href="#">129.巫县  荆州─建平郡</a></li>
-          <li onclick="getMap(130);"><a href="#">130.恩平  交州─高凉郡</a></li>
-          <li onclick="getMap(131);"><a href="#">131.广信  交州─苍梧郡</a></li>
-          <li onclick="getMap(132);"><a href="#">132.布山  交州─郁林郡</a></li>
-          <li onclick="getMap(133);"><a href="#">133.合浦  交州─合浦郡</a></li>
-          <li onclick="getMap(134);"><a href="#">134.徐闻  交州─朱崖郡</a></li>
-          <li onclick="getMap(135);"><a href="#">135.胥浦  交州─九真郡</a></li>
-          <li onclick="getMap(136);"><a href="#">136.下办  益州─武都郡</a></li>
-          <li onclick="getMap(137);"><a href="#">137.阴平  益州─阴平郡</a></li>
-          <li onclick="getMap(138);"><a href="#">138.谠口  益州─褒中县</a></li>
-          <li onclick="getMap(139);"><a href="#">139.褒中  益州─褒中县</a></li>
-          <li onclick="getMap(140);"><a href="#">140.阆中  益州─巴西郡</a></li>
-          <li onclick="getMap(141);"><a href="#">141.锦虎  益州─汶山郡</a></li>
-          <li onclick="getMap(142);"><a href="#">142.汉嘉  益州─汉嘉郡</a></li>
-          <li onclick="getMap(143);"><a href="#">143.江州  益州─巴郡</a></li>
-          <li onclick="getMap(144);"><a href="#">144.江阳  益州─江阳郡</a></li>
-          <li onclick="getMap(145);"><a href="#">145.邛都  益州─越隽郡</a></li>
-          <li onclick="getMap(146);"><a href="#">146.朱提  益州─朱提郡</a></li>
-          <li onclick="getMap(147);"><a href="#">147.且兰  益州─徉柯郡</a></li>
-          <li onclick="getMap(148);"><a href="#">148.味县  益州─建宁郡</a></li>
-          <li onclick="getMap(149);"><a href="#">149.云南  益州─云南郡</a></li>
-          <li onclick="getMap(150);"><a href="#">150.雲南  益州─云南郡</a></li>
-          <li onclick="getMap(151);"><a href="#">151.永昌  益州─永昌郡</a></li>
-          <li onclick="getMap(152);"><a href="#">152.宛温  益州─兴古郡</a></li>
-          <li onclick="getMap(153);"><a href="#">153.信都  冀州─安平郡─州治</a></li>
-          <li onclick="getMap(154);"><a href="#">154.房子  冀州─赵国</a></li>
-          <li onclick="getMap(155);"><a href="#">155.廮陶  冀州─巨鹿郡</a></li>
-          <li onclick="getMap(156);"><a href="#">156.曲梁  冀州─广平郡</a></li>
-          <li onclick="getMap(157);"><a href="#">157.黎阳  冀州─魏郡</a></li>
-          <li onclick="getMap(158);"><a href="#">158.馆陶  冀州─阳平郡</a></li>
-          <li onclick="getMap(159);"><a href="#">159.清河  冀州─清河郡</a></li>
-          <li onclick="getMap(160);"><a href="#">160.庆次  冀州─乐陵国</a></li>
-          <li onclick="getMap(161);"><a href="#">161.乐成  冀州─河间郡</a></li>
-          <li onclick="getMap(162);"><a href="#">162.卢奴  冀州─中山郡</a></li>
-          <li onclick="getMap(163);"><a href="#">163.耀县  雍州─北地郡</a></li>
-          <li onclick="getMap(164);"><a href="#">164.杜陵  雍州─京兆尹</a></li>
-          <li onclick="getMap(165);"><a href="#">165.槐里  雍州─扶风郡</a></li>
-          <li onclick="getMap(166);"><a href="#">166.骆口  雍州─扶风郡</a></li>
-          <li onclick="getMap(167);"><a href="#">167.漆县  雍州─新平郡</a></li>
-          <li onclick="getMap(168);"><a href="#">168.临泾  雍州─安定郡</a></li>
-          <li onclick="getMap(169);"><a href="#">169.郿县  雍州─扶风郡</a></li>
-          <li onclick="getMap(170);"><a href="#">170.临渭  雍州─广魏郡</a></li>
-          <li onclick="getMap(171);"><a href="#">171.冀县  雍州─天水郡</a></li>
-          <li onclick="getMap(172);"><a href="#">172.襄武  雍州─陇西郡</a></li>
-          <li onclick="getMap(173);"><a href="#">173.榆中  凉州─金城郡</a></li>
-          <li onclick="getMap(174);"><a href="#">174.西都  凉州─西平郡</a></li>
-          <li onclick="getMap(175);"><a href="#">175.角乐得  凉州─张掖郡</a></li>
-        </ul>
+    <li class="w3-xxlarge">魏国</li>
+    <li class="w3-xlarge">河北</li>
+    <li class="w3-large">冀州</li>
+    <li onclick="getMap(1);"><a href="#">襄平  幽州─辽东郡</a></li>
+    <li onclick="getMap(2);"><a href="#">北平  幽州—右北平郡</a></li>
+    <li onclick="getMap(3);"><a href="#">蓟  幽州─燕国蓟县</a></li>
+    <li onclick="getMap(4);"><a href="#">南皮  冀州─渤海郡</a></li>
+    <li onclick="getMap(5);"><a href="#">中山  冀州─中山郡</a></li>
+    <li onclick="getMap(6);"><a href="#">钜鹿  冀州─巨鹿郡</a></li>
+    <li onclick="getMap(7);"><a href="#">甘陵  冀州─清河郡</a></li>
+    <li onclick="getMap(8);"><a href="#">邺  冀州─魏郡</a></li>
+    <li class="w3-large">并州</li>
+    <li onclick="getMap(9);"><a href="#">晋阳  并州─太原郡</a></li>
+    <li onclick="getMap(10);"><a href="#">上党  并州─上党郡</a></li>
+    <li class="w3-large">青州</li>
+    <li onclick="getMap(11);"><a href="#">平原  青州─平原郡</a></li>
+    <li onclick="getMap(12);"><a href="#">北海  青州─北海国</a></li>
+
+    <li class="w3-xlarge">中原</li>
+    <li class="w3-large">徐州</li>
+    <li onclick="getMap(13);"><a href="#">琅琊  徐州─琅琊国</a></li>
+    <li onclick="getMap(14);"><a href="#">下邳  徐州─州治</a></li>
+    <li onclick="getMap(15);"><a href="#">广陵  徐州─广陵郡</a></li>
+    <li class="w3-large">兖州</li>
+    <li onclick="getMap(16);"><a href="#">济北 兖州─济阳郡</a></li>
+    <li onclick="getMap(17);"><a href="#">濮阳  兖州─东郡</a></li>
+    <li onclick="getMap(18);"><a href="#">陈留  兖州─陈留国</a></li>
+    <li class="w3-large">豫州</li>
+    <li onclick="getMap(19);"><a href="#">小沛  豫州─沛国</a></li>
+    <li onclick="getMap(20);"><a href="#">谯  豫州─谯郡</a></li>
+    <li onclick="getMap(21);"><a href="#">许昌  豫州─颖川郡</a></li>
+    <li onclick="getMap(22);"><a href="#">汝南  豫州─汝南郡</a></li>
+    <li class="w3-large">司隶</li>
+    <li onclick="getMap(23);"><a href="#">河内  司隶─河内郡</a></li>
+    <li onclick="getMap(24);"><a href="#">洛阳  司隶─河南尹</a></li>
+    <li onclick="getMap(25);"><a href="#">弘农  司隶─弘农郡</a></li>
+
+
+    <li class="w3-xxlarge">蜀国</li>
+    <li class="w3-xlarge">西北</li>
+    <li class="w3-large">雍州</li>
+    <li onclick="getMap(26);"><a href="#">长安  雍州─京兆尹</a></li>
+    <li onclick="getMap(27);"><a href="#">安定  雍州─安定郡</a></li>
+    <li onclick="getMap(28);"><a href="#">天水  雍州─天水郡</a></li>
+    <li class="w3-large">凉州</li>
+    <li onclick="getMap(29);"><a href="#">武威  凉州─武威郡</a></li>
+    <li onclick="getMap(30);"><a href="#">金城  凉州─金城郡</a></li>
+
+    <li class="w3-xlarge">巴蜀</li>
+    <li class="w3-large">益州</li>
+    <li onclick="getMap(31);"><a href="#">武都  益州─武都郡</a></li>
+    <li onclick="getMap(32);"><a href="#">汉中  益州─汉中郡</a></li>
+    <li onclick="getMap(33);"><a href="#">永安  益州─巴东郡</a></li>
+    <li onclick="getMap(34);"><a href="#">梓潼  益州─梓潼郡</a></li>
+    <li onclick="getMap(35);"><a href="#">成都  益州─蜀郡</a></li>
+    <li onclick="getMap(36);"><a href="#">江州  益州─巴郡</a></li>
+    <li onclick="getMap(37);"><a href="#">牂牁  益州─牂牁郡</a></li>
+    <li onclick="getMap(38);"><a href="#">越巂  益州─越巂郡</a></li>
+    <li onclick="getMap(39);"><a href="#">建宁  益州─建宁郡</a></li>
+    <li onclick="getMap(40);"><a href="#">永昌  益州─永昌郡</a></li>
+
+
+    <li class="w3-xxlarge">吴国</li>
+    <li class="w3-xlarge">荆楚</li>
+    <li class="w3-large">荆州</li>
+    <li onclick="getMap(41);"><a href="#">宛  豫州─南阳郡</a></li>
+    <li onclick="getMap(42);"><a href="#">新野  荆州─南阳郡</a></li>
+    <li onclick="getMap(43);"><a href="#">襄阳  荆州─襄阳郡</a></li>
+    <li onclick="getMap(44);"><a href="#">江夏  荆州─江夏郡</a></li>
+    <li onclick="getMap(45);"><a href="#">上庸  益州─上庸郡</a></li>
+    <li onclick="getMap(46);"><a href="#">江陵  荆州─南郡</a></li>
+    <li onclick="getMap(47);"><a href="#">长沙  荆州─长沙郡</a></li>
+    <li onclick="getMap(48);"><a href="#">武陵  荆州─武陵郡</a></li>
+    <li onclick="getMap(49);"><a href="#">桂阳  荆州─桂阳郡</a></li>
+    <li onclick="getMap(50);"><a href="#">零陵  荆州─零陵郡</a></li>
+
+    <li class="w3-xlarge">吴越</li>
+    <li class="w3-large">扬州</li>
+    <li onclick="getMap(51);"><a href="#">寿春  扬州─州治</a></li>
+    <li onclick="getMap(52);"><a href="#">庐江  扬州─庐江郡</a></li>
+    <li onclick="getMap(53);"><a href="#">建业  扬州─丹阳郡</a></li>
+    <li onclick="getMap(54);"><a href="#">吴  扬州─吴郡</a></li>
+    <li onclick="getMap(55);"><a href="#">会稽  扬州─会稽郡</a></li>
+    <li onclick="getMap(56);"><a href="#">豫章  扬州─豫章郡</a></li>
+    <li onclick="getMap(57);"><a href="#">建安  扬州─建安郡</a></li>
+    <li class="w3-large">交州</li>
+    <li onclick="getMap(58);"><a href="#">南海  交州─南海郡</a></li>
+    <li onclick="getMap(59);"><a href="#">合浦  交州─合浦郡</a></li>
+    <li onclick="getMap(60);"><a href="#">交趾  交州─龙编</a></li>
+
+  </ul>
 
   <div class="w3-rest w3-card-4" style="margin-top:80px;border-radius: 0 50px 50px 0;">
     <!--内容开始-->
@@ -251,214 +166,129 @@
         }).addTo(map);
 
 
-        // 城池图标
-        var greenIcon = L.icon({
-            iconUrl: 'https://zssanguo.com/img/logo.png',
-            iconSize:     [30,27],    // size of the icon
-            iconAnchor:   [30,27], // point of the icon which will correspond to marker's location
+        // 和平状态蜀国城池图标
+        var shuCityIcon = L.icon({
+            iconUrl: 'https://zssanguo.com/img/shuCityIcon.png',
+            iconSize:     [48,48],    // size of the icon
+            // iconAnchor:   [30,30], // point of the icon which will correspond to marker's location
             popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
         });
 
+        // 和平状态魏国城池图标
+        var weiCityIcon = L.icon({
+            iconUrl: 'https://zssanguo.com/img/weiCityIcon.png',
+            iconSize:     [48,48],    // size of the icon
+            // iconAnchor:   [30,30], // point of the icon which will correspond to marker's location
+            popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
+        });
 
+        // 和平状态吴国城池图标
+        var wuCityIcon = L.icon({
+            iconUrl: 'https://zssanguo.com/img/wuCityIcon.png',
+            iconSize:     [48,48],    // size of the icon
+            // iconAnchor:   [30,30], // point of the icon which will correspond to marker's location
+            popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
+        });
 
-        //  L.marker([31.52587, 106.83655], {icon: greenIcon}).addTo(map);
+        var warCityIcon = L.icon({
+            iconUrl: 'https://zssanguo.com/img/warCityIcon.png',
+            iconSize:     [48,48],    // size of the icon
+            // iconAnchor:   [30,27], // point of the icon which will correspond to marker's location
+            popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
+        });
 
-        /*默认：[1,2] */
+        // 编号,城市名称,坐标,图片地址,描述内容,点击链接
         var list = [
-            // 编号,城市名称,坐标,图片地址,描述内容,点击链接
-            [1,'洛阳',[34.6366, 112.46292],'http://www.sdmz.net/d/map/sg/sggcc/1.jpg','<p>所属州郡：司隶─河南尹</p><p>现在地址：河南省洛阳市</p>','http://www.sdmz.net'],
-            [2,'许昌',[34.03104, 113.82797],'http://www.sdmz.net/d/map/sg/sggcc/2.jpg','<p>所属州郡：豫州─颖川郡</p><p>现在地址：河南省许昌市</p>','http://www.sdmz.net'],
-            [3,'建业',[31.99876, 118.79517],'http://www.sdmz.net/d/map/sg/sggcc/3.jpg','<p>所属州郡：扬州─丹阳郡</p><p>现在地址：江苏省南京市</p>','http://www.sdmz.net'],
-            [4,'成都',[30.57645, 104.07349],'http://www.sdmz.net/d/map/sg/sggcc/4.jpg','<p>所属州郡：益州─蜀郡─州治</p><p>现在地址：四川省成都市</p>','http://www.sdmz.net'],
-            [5,'长安',[34.34996, 108.94009],'http://www.sdmz.net/d/map/sg/sggcc/5.jpg','<p>所属州郡：雍州─京兆尹─州治</p><p>现在地址：陕西省西安市 西北</p>','http://www.sdmz.net'],
-            [6,'北平',[41.24271, 119.41589],'http://www.sdmz.net/d/map/sg/sggcc/6.jpg','<p>所属州郡：幽州─右北平郡</p><p>现在地址：辽宁省朝阳市凌源市</p>','http://www.sdmz.net'],
-            [7,'涿县',[39.49132, 115.98267],'http://www.sdmz.net/d/map/sg/sggcc/7.jpg','<p>所属州郡：幽州─范阳郡</p><p>现在地址：河北省保定市涿州市</p>','http://www.sdmz.net'],
-            [8,'真定',[38.08917, 114.51324],'http://www.sdmz.net/d/map/sg/sggcc/8.jpg','<p>所属州郡：冀州─常山郡</p><p>现在地址：河北省石家庄市 北</p>','http://www.sdmz.net'],
-            [9,'邺',[36.59348, 114.49402],'http://www.sdmz.net/d/map/sg/sggcc/9.jpg','<p>所属州郡：冀州─魏郡</p><p>现在地址：河北省邯郸县临漳县 西南</p>','http://www.sdmz.net'],
-            [10,'平原',[37.18439, 116.44135],'http://www.sdmz.net/d/map/sg/sggcc/10.jpg','<p>	所属州郡：冀州─平原郡</p><p>现在地址：山东省德州市平原县 南</p>','http://www.sdmz.net'],
-            [11,'南皮',[38.05674, 116.70502],'http://www.sdmz.net/d/map/sg/sggcc/11.jpg','<p>	所属州郡：冀州─渤海郡</p><p>现在地址：河北省沧州市南皮县 北</p>','http://www.sdmz.net'],
-            [12,'弘农',[34.52466, 110.89874],'http://www.sdmz.net/d/map/sg/sggcc/12.jpg','<p>	所属州郡：司隶─弘农郡</p><p>现在地址：河南省三门峡市灵宝市 北</p>','http://www.sdmz.net'],
-            [13,'子午谷',[34.0666, 108.83778],'http://www.sdmz.net/d/map/sg/sggcc/13.jpg','<p>所属州郡：雍州─京兆尹</p><p>现在地址：长安区子午镇</p>','http://www.sdmz.net'],
-            [14,'陈仓',[34.36639, 107.23721],'http://www.sdmz.net/d/map/sg/sggcc/14.jpg','<p>	所属州郡：雍州─扶风郡</p><p>现在地址：陕西省宝鸡市金台区代家湾村 西南</p>','http://www.sdmz.net'],
-            [15,'街亭',[34.8634, 105.66101],'http://www.sdmz.net/d/map/sg/sggcc/15.jpg','<p>所属州郡：雍州─天水郡</p><p>现在地址：甘肃省天水市秦安县 东 陇城镇</p>','http://www.sdmz.net'],
-            [16,'武威─姑臧',[37.93662, 102.62466],'http://www.sdmz.net/d/map/sg/sggcc/16.jpg','<p>所属州郡：凉州─武威郡</p><p>现在地址：甘肃省武威市，姑臧 为匈奴用语。</p>','http://www.sdmz.net'],
-            [17,'濮阳',[35.69299, 115.02686],'http://www.sdmz.net/d/map/sg/sggcc/17.jpg','<p>	所属州郡：兖州─东郡</p><p>现在地址：河南省濮阳市 南</p>','http://www.sdmz.net'],
-            [18,'白马',[35.59479, 114.52698],'http://www.sdmz.net/d/map/sg/sggcc/18.jpg','','http://www.sdmz.net'],
-            [19,'乌巢',[35.05473, 114.36218],'http://www.sdmz.net/d/map/sg/sggcc/19.jpg','<p>	所属州郡：兖州─陈留国</p><p>现在地址：河南省新乡县封丘县 西，官渡之战─袁绍屯粮之处</p>','http://www.sdmz.net'],
-            [20,'官渡',[34.73823, 114.08752],'http://www.sdmz.net/d/map/sg/sggcc/20.jpg','<p>	所属州郡：兖州─陈留国</p><p>现在地址：河南省郑州市中牟县官渡镇</p>','http://www.sdmz.net'],
-            [21,'陈留',[34.67388, 114.53522],'http://www.sdmz.net/d/map/sg/sggcc/21.jpg','<p>	所属州郡：兖州─陈留国</p><p>现在地址：河南省开封县陈留镇 东南</p>','http://www.sdmz.net'],
-            [22,'下邳',[33.94336, 118.02612],'http://www.sdmz.net/d/map/sg/sggcc/22.jpg','<p>	所属州郡：徐州─州治</p><p>现在地址：江苏省徐州睢宁县 南</p>','http://www.sdmz.net'],
-            [23,'淮阴',[33.53224, 119.03687],'http://www.sdmz.net/d/map/sg/sggcc/23.jpg','<p>	所属州郡：徐州─广陵郡</p><p>	现在地址：江苏省淮安市 西南</p>','http://www.sdmz.net'],
-            [24,'睢阳',[34.44769, 115.65445],'http://www.sdmz.net/d/map/sg/sggcc/24.jpg','<p>	所属州郡：豫州─梁国</p><p>现在地址：河南省商丘市 南</p>','http://www.sdmz.net'],
-            [25,'汝南',[33.27658, 114.26605],'http://www.sdmz.net/d/map/sg/sggcc/25.jpg','<p>	所属州郡：豫州─汝南郡─州治</p><p>现在地址：河南省驻马店市上蔡县</p>','http://www.sdmz.net'],
-            [26,'寿春',[32.58038, 116.79291],'http://www.sdmz.net/d/map/sg/sggcc/26.jpg','<p>	所属州郡：扬州─州治</p><p>现在地址：安徽省裕安区寿县</p>','http://www.sdmz.net'],
-            [27,'新野',[32.53176, 112.36679],'http://www.sdmz.net/d/map/sg/sggcc/27.jpg','<p>	所属州郡：荆州─南阳郡</p><p>现在地址：河南省南阳市新野县</p>','http://www.sdmz.net'],
-            [28,'皖城',[30.73593, 116.83685],'http://www.sdmz.net/d/map/sg/sggcc/28.jpg','<p>	所属州郡：扬州─庐江郡─州治</p><p>现在地址：安徽省安庆市怀宁县</p>','http://www.sdmz.net'],
-            [29,'柴桑',[29.70833, 116.0211],'http://www.sdmz.net/d/map/sg/sggcc/29.jpg','<p>所属州郡：荆州─江夏郡</p><p>现在地址：江西省九江市</p>','http://www.sdmz.net'],
-            [30,'襄阳',[32.05464, 112.13882],'http://www.sdmz.net/d/map/sg/sggcc/30.jpg','<p>	所属州郡：荆州─襄阳郡</p><p>现在地址：湖北省襄阳市</p>','http://www.sdmz.net'],
-            [31,'夷陵',[30.77016, 111.32446],'http://www.sdmz.net/d/map/sg/sggcc/31.jpg','<p>	所属州郡：荆州─新城县</p><p>现在地址：湖北省宜昌市夷陵区</p>','http://www.sdmz.net'],
-            [32,'江陵',[30.36103, 112.18964],'http://www.sdmz.net/d/map/sg/sggcc/32.jpg','<p>	所属州郡：荆州─南郡</p><p>现在地址：湖北省荆州区，即『南郡』</p>','http://www.sdmz.net'],
-            [33,'公安',[30.0584, 112.22672],'http://www.sdmz.net/d/map/sg/sggcc/33.jpg','<p>所属州郡：荆州─南郡</p><p>现在地址：湖北省荆州区公安县</p>','http://www.sdmz.net'],
-            [34,'上庸',[32.23836, 110.2533],'http://www.sdmz.net/d/map/sg/sggcc/34.jpg','<p>所属州郡：益州─上庸郡</p><p>现在地址：湖北省十堰市竹山县 西北，襄樊战后，孟达降魏，改『新城郡』</p>','http://www.sdmz.net'],
-            [35,'永安',[31.0191, 109.47464],'http://www.sdmz.net/d/map/sg/sggcc/35.jpg','<p>所属州郡：益州─巴东郡</p><p>现在地址：重庆市奉节县</p>','http://www.sdmz.net'],
-            [36,'南郑',[33.07773, 107.02881],'http://www.sdmz.net/d/map/sg/sggcc/36.jpg','<p>	所属州郡：益州─汉中郡</p><p>现在地址：陕西省汉中市</p>','http://www.sdmz.net'],
-            [37,'梓潼',[31.64403, 105.18311],'http://www.sdmz.net/d/map/sg/sggcc/37.jpg','<p>	所属州郡：益州─梓潼郡</p><p>现在地址：四川省绵阳市梓潼县</p>','http://www.sdmz.net'],
-            [38,'涪城',[31.46381, 104.74365],'http://www.sdmz.net/d/map/sg/sggcc/38.jpg','<p>	所属州郡：益州─梓橦郡</p><p>现在地址：四川省绵阳市</p>','http://www.sdmz.net'],
-            [39,'雒县',[30.98938, 104.28772],'http://www.sdmz.net/d/map/sg/sggcc/39.jpg','<p>	所属州郡：益州─广汉郡</p><p>现在地址：四川省德阳市广汉市 北</p>','http://www.sdmz.net'],
-            [40,'合肥',[31.82156, 117.22961],'http://www.sdmz.net/d/map/sg/sggcc/40.jpg','<p>	所属州郡：扬州─淮南郡</p><p>现在地址：安徽省合肥 西北</p>','http://www.sdmz.net'],
-            [41,'带方',[38.51809, 125.75226],'http://www.sdmz.net/d/map/sg/sggcc/41.jpg','<p>	所属州郡：幽州─带方郡</p><p>现在地址：朝鲜沙里院市</p>','http://www.sdmz.net'],
-            [42,'朝鲜',[39.02559, 125.76324],'http://www.sdmz.net/d/map/sg/sggcc/42.jpg','<p>	所属州郡：幽州─乐浪郡</p><p>现在地址：北韩平壤直辖市 南</p>','http://www.sdmz.net'],
-            [43,'高句丽',[41.82864, 123.43689],'http://www.sdmz.net/d/map/sg/sggcc/43.jpg','<p>所属州郡：幽州─玄菟郡</p><p>现在地址：辽宁省沈阳市 东</p>','http://www.sdmz.net'],
-            [44,'襄平',[41.26955, 123.17596],'http://www.sdmz.net/d/map/sg/sggcc/44.jpg','<p>	所属州郡：幽州─辽东郡</p><p>现在地址：辽宁省辽阳市</p>','http://www.sdmz.net'],
-            [45,'昌黎',[41.5497, 121.24512],'http://www.sdmz.net/d/map/sg/sggcc/45.jpg','<p>所属州郡：幽州─昌黎郡</p><p>现在地址：辽宁省锦州市义县</p>','http://www.sdmz.net'],
-            [46,'阳乐',[39.89077, 118.89404],'http://www.sdmz.net/d/map/sg/sggcc/46.jpg','<p>	所属州郡：幽州─辽西郡</p><p>现在地址：河北省秦皇岛市卢龙县 东</p>','http://www.sdmz.net'],
-            [47,'土垠',[39.83807, 118.18542],'http://www.sdmz.net/d/map/sg/sggcc/47.jpg','<p>	所属州郡：幽州─右北平郡</p><p>现在地址：河北省唐山市丰润区 东</p>','http://www.sdmz.net'],
-            [48,'蓟',[40.04864, 117.39716],'http://www.sdmz.net/d/map/sg/sggcc/48.jpg','<p>所属州郡：幽州─燕国蓟县</p><p>现在地址：天津蓟县，一说今『北京市』 西南</p>','http://www.sdmz.net'],
-            [49,'渔阳',[40.38421, 116.8396],'http://www.sdmz.net/d/map/sg/sggcc/49.jpg','<p>所属州郡：幽州─渔阳郡</p><p>现在地址：北京密云县 西南</p>','http://www.sdmz.net'],
-            [50,'居庸',[40.42604, 115.52673],'http://www.sdmz.net/d/map/sg/sggcc/50.jpg','<p>	所属州郡：幽州─上古郡</p><p>现在地址：河北省张家口市怀来县 东</p>','http://www.sdmz.net'],
-            [51,'代县',[39.85072, 114.59839],'http://www.sdmz.net/d/map/sg/sggcc/51.jpg','<p>	所属州郡：幽州─代郡</p><p>现在地址：河北省张家口市蔚县 东北</p>','http://www.sdmz.net'],
-            [52,'雁门',[39.06611, 112.97791],'http://www.sdmz.net/d/map/sg/sggcc/52.jpg','<p>	所属州郡：并州─雁门郡</p><p>现在地址：山西省忻州市代县 西南</p>','http://www.sdmz.net'],
-            [53,'九原',[38.43638, 112.74719],'http://www.sdmz.net/d/map/sg/sggcc/53.jpg','<p>	所属州郡：并州─新兴郡</p><p>现在地址：山西省忻州市</p>','http://www.sdmz.net'],
-            [54,'晋阳',[37.90737, 112.56317],'http://www.sdmz.net/d/map/sg/sggcc/54.jpg','<p>	所属州郡：并州─太原郡─州治</p><p>现在地址：山西省太原市</p>','http://www.sdmz.net'],
-            [55,'离石',[37.52715, 111.13495],'http://www.sdmz.net/d/map/sg/sggcc/55.jpg','<p>	所属州郡：并州─西河郡</p><p>现在地址：山西省吕梁市</p>','http://www.sdmz.net'],
-            [56,'居延',[41.97174, 101.06186],'http://www.sdmz.net/d/map/sg/sggcc/56.jpg','<p>所属州郡：凉州─西海郡</p><p>现在地址：内蒙古自治区阿拉善右旗额济纳旗 东南</p>','http://www.sdmz.net'],
-            [57,'昌邑',[35.08058, 116.33011],'http://www.sdmz.net/d/map/sg/sggcc/57.jpg','<p>	所属州郡：兖州─山阳郡</p><p>现在地址：山东省济宁市金乡县 西北</p>','http://www.sdmz.net'],
-            [58,'彭城',[34.23451, 117.16919],'http://www.sdmz.net/d/map/sg/sggcc/58.jpg','<p>	所属州郡：徐州─彭城国</p><p>现在地址：江苏省徐州</p>','http://www.sdmz.net'],
-            [59,'沛县',[34.7371, 116.95633],'http://www.sdmz.net/d/map/sg/sggcc/59.jpg','<p>所属州郡：豫州─沛国</p><p>现在地址：江苏省徐州沛县，即『小沛』</p>','http://www.sdmz.net'],
-            [60,'毗陵',[31.67208, 119.94873],'http://www.sdmz.net/d/map/sg/sggcc/60.jpg','<p>	所属州郡：扬州─毗陵典农校尉</p><p>	现在地址：江苏省常州市</p>','http://www.sdmz.net'],
-            [61,'建安',[27.02457, 118.30593],'http://www.sdmz.net/d/map/sg/sggcc/61.jpg','<p>	所属州郡：扬州─建安郡</p><p>现在地址：福建省南平市建瓯市 南</p>','http://www.sdmz.net'],
-            [62,'南昌',[28.70022, 115.85083],'http://www.sdmz.net/d/map/sg/sggcc/62.jpg','<p>	所属州郡：扬州─豫章郡</p><p>现在地址：江西省南昌县</p>','http://www.sdmz.net'],
-            [63,'江夏',[31.02411, 113.75381],'http://www.sdmz.net/d/map/sg/sggcc/63.jpg','<p>	所属州郡：荆州─江夏郡</p><p>现在地址：湖北省孝感市云梦县</p>','http://www.sdmz.net'],
-            [64,'番禺',[22.93848, 113.38852],'http://www.sdmz.net/d/map/sg/sggcc/64.jpg','<p>	所属州郡：交州─南海郡</p><p>现在地址：广东省广州市番禺区</p>','http://www.sdmz.net'],
-            [65,'交趾郡',[21.01273, 105.82855],'http://www.sdmz.net/d/map/sg/sggcc/65.jpg','<p>所属州郡：交州─龙编</p><p>现在地址：还剑郡河内市 东</p>','http://www.sdmz.net'],
-            [66,'朱吾',[17.52096, 106.57288],'http://www.sdmz.net/d/map/sg/sggcc/66.jpg','<p>	所属州郡：交州─日南郡</p><p>现在地址：同海市</p>','http://www.sdmz.net'],
-            [67,'武阳',[30.20449, 103.87299],'http://www.sdmz.net/d/map/sg/sggcc/67.jpg','<p>	所属州郡：益州─腱为郡</p><p>现在地址：四川省眉山市彭山县 东</p>','http://www.sdmz.net'],
-            [68,'涪陵',[29.30317, 108.18237],'http://www.sdmz.net/d/map/sg/sggcc/68.jpg','<p>	所属州郡：益州─涪陵郡</p><p>现在地址：重庆市彭水苗族土家族自治县</p>','http://www.sdmz.net'],
-            [69,'沾县',[37.61641, 113.703],'http://www.sdmz.net/d/map/sg/sggcc/69.jpg','<p>所属州郡：并州─乐平郡</p><p>现在地址：山西省晋中市昔阳县 西南</p>','http://www.sdmz.net'],
-            [70,'怀',[35.10418, 113.41873],'http://www.sdmz.net/d/map/sg/sggcc/70.jpg','<p>所属州郡：司隶─河内郡</p><p>现在地址：河南省焦作市武陟县 西南</p>','http://www.sdmz.net'],
-            [71,'阳武',[35.06373, 113.97354],'http://www.sdmz.net/d/map/sg/sggcc/71.jpg','<p>	所属州郡：司隶─河南尹</p><p>现在地址：河南省新乡县原阳县 东南</p>','http://www.sdmz.net'],
-            [72,'平阳',[36.10238, 111.52771],'http://www.sdmz.net/d/map/sg/sggcc/72.jpg','<p>	所属州郡：司隶─平阳郡</p><p>现在地址：山西省临汾市 西</p>','http://www.sdmz.net'],
-            [73,'安邑',[35.14911, 111.22696],'http://www.sdmz.net/d/map/sg/sggcc/73.jpg','<p>	所属州郡：司隶─河东郡</p><p>现在地址：山西省运城市夏县 北</p>','http://www.sdmz.net'],
-            [74,'汜水关  ',[34.84649, 113.22098],'http://www.sdmz.net/d/map/sg/sggcc/74.jpg','<p>所属州郡：</p><p>现在地址：河南省郑州市荥阳市汜水镇，『汜水关』即『虎牢关』</p>','http://www.sdmz.net'],
-            [75,'函谷关  ',[34.63773, 110.93307],'http://www.sdmz.net/d/map/sg/sggcc/75.jpg','<p>所属州郡：</p><p>现在地址：河南省三门峡市灵宝市 东北方</p>','http://www.sdmz.net'],
-            [76,'散关',[34.27424, 107.02091],'http://www.sdmz.net/d/map/sg/sggcc/76.jpg','<p>所属州郡：</p><p>现在地址：宝鸡市南郊秦岭北麓，即『大散关』</p>','http://www.sdmz.net'],
-            [77,'潼关',[34.66258, 110.31097],'http://www.sdmz.net/d/map/sg/sggcc/77.jpg','<p>	所属州郡：</p><p>现在地址：陕西省渭南市潼关县 北</p>','http://www.sdmz.net'],
-            [78,'武关',[33.70264, 110.32608],'http://www.sdmz.net/d/map/sg/sggcc/78.jpg','<p>	所属州郡：</p><p>现在地址：陕西省商洛市丹凤县</p>','http://www.sdmz.net'],
-            [79,'阳平关  ',[33.16285, 106.67175],'http://www.sdmz.net/d/map/sg/sggcc/79.jpg','<p>所属州郡：</p><p>现在地址：陕西省汉中市勉县莲水村</p>','http://www.sdmz.net'],
-            [80,'葭萌关  ',[32.33124, 105.97137],'http://www.sdmz.net/d/map/sg/sggcc/80.jpg','<p>所属州郡：</p><p>现在地址：四川省广元市元坝区</p>','http://www.sdmz.net'],
-            [81,'剑阁',[32.30571, 105.52368],'http://www.sdmz.net/d/map/sg/sggcc/81.jpg','<p>所属州郡：</p><p>现在地址：四川省广元市剑阁县，即『剑门关』</p>','http://www.sdmz.net'],
-            [82,'绵竹关  ',[31.35364, 104.22455],'http://www.sdmz.net/d/map/sg/sggcc/82.jpg','<p>所属州郡：</p><p>现在地址：四川省德阳市绵竹市</p>','http://www.sdmz.net'],
-            [83,'壶关',[36.22544, 113.1015],'http://www.sdmz.net/d/map/sg/sggcc/83.jpg','<p>所属州郡：并州─上党郡</p><p>现在地址：山西省长治市壶关县</p>','http://www.sdmz.net'],
-            [84,'临晋',[34.81042, 109.94156],'http://www.sdmz.net/d/map/sg/sggcc/84.jpg','<p>所属州郡：雍州─冯翊郡</p><p>现在地址：陕西省渭南市大荔县</p>','http://www.sdmz.net'],
-            [85,'禄福',[39.73887, 98.49655],'http://www.sdmz.net/d/map/sg/sggcc/85.jpg','<p>所属州郡：凉州─酒泉郡</p><p>现在地址：甘肃省酒泉市</p>','http://www.sdmz.net'],
-            [86,'敦煌',[40.18727, 94.70764],'http://www.sdmz.net/d/map/sg/sggcc/86.jpg','<p>所属州郡：凉州─敦煌郡</p><p>现在地址：甘肃省酒泉市敦煌市 西</p>','http://www.sdmz.net'],
-            [87,'海头',[40.58058, 91.10962],'http://www.sdmz.net/d/map/sg/sggcc/87.jpg','<p>所属州郡：西域长史府─州治</p><p>现在地址：巴音郭楞蒙古自治州若羌县罗布泊 西北</p>','http://www.sdmz.net'],
-            [88,'高昌',[42.94034, 89.18701],'http://www.sdmz.net/d/map/sg/sggcc/88.jpg','<p>所属州郡：西域长史府─戊己校尉</p><p>现在地址：新疆维吾尔自治区吐鲁番地区 东</p>','http://www.sdmz.net'],
-            [89,'奉高',[36.25978, 117.08542],'http://www.sdmz.net/d/map/sg/sggcc/89.jpg','<p>	所属州郡：兖州─泰山郡</p><p>现在地址：山东省泰安市 东</p>','http://www.sdmz.net'],
-            [90,'无盐',[35.94799, 116.47568],'http://www.sdmz.net/d/map/sg/sggcc/90.jpg','<p>	所属州郡：兖州─东平国</p><p>现在地址：山东省泰安市东平县 东</p>','http://www.sdmz.net'],
-            [91,'郡丘',[35.59479, 115.95795],'http://www.sdmz.net/d/map/sg/sggcc/91.jpg','<p>	所属州郡：兖州─州治</p><p>现在地址：山东省菏泽市郓城县 西北</p>','http://www.sdmz.net'],
-            [92,'延津',[35.15248, 114.20563],'http://www.sdmz.net/d/map/sg/sggcc/92.jpg','<p>	所属州郡：兖州─陈留国</p><p>现在地址：河南省新乡县延津县</p>','http://www.sdmz.net'],
-            [93,'定陶、卢县',[35.18279, 115.46631],'http://www.sdmz.net/d/map/sg/sggcc/93.jpg','<p>所属州郡：兖州─济阳郡、济北国</p><p>现在地址：山东省菏泽市定陶县 西北</p>','http://www.sdmz.net'],
-            [94,'任城',[35.42039, 116.59378],'http://www.sdmz.net/d/map/sg/sggcc/94.jpg','<p>	所属州郡：兖州─任城郡</p><p>现在地址：山东省济宁市 东南</p>','http://www.sdmz.net'],
-            [95,'东平陵',[36.68714, 117.53036],'http://www.sdmz.net/d/map/sg/sggcc/95.jpg','<p>所属州郡：青州─济南国</p><p>现在地址：山东省济南市章丘市 西北</p>','http://www.sdmz.net'],
-            [96,'高苑',[36.87303, 117.75833],'http://www.sdmz.net/d/map/sg/sggcc/96.jpg','<p>	所属州郡：青州─乐安郡</p><p>现在地址：山东省滨州市邹平县 东</p>','http://www.sdmz.net'],
-            [97,'临淄',[36.83787, 118.32413],'http://www.sdmz.net/d/map/sg/sggcc/97.jpg','<p>	所属州郡：青州─州治</p><p>现在地址：山东省淄博市临淄区</p>','http://www.sdmz.net'],
-            [98,'平寿',[36.72788, 119.20029],'http://www.sdmz.net/d/map/sg/sggcc/98.jpg','<p>	所属州郡：青州─北海国</p><p>现在地址：山东省潍坊市 南</p>','http://www.sdmz.net'],
-            [99,'黄县',[37.65175, 120.47676],'http://www.sdmz.net/d/map/sg/sggcc/99.jpg','<p>所属州郡：青州─东莱郡</p><p>现在地址：山东省烟台市龙口市 东</p>','http://www.sdmz.net'],
-            [100,'东武',[36.00912, 119.42688],'http://www.sdmz.net/d/map/sg/sggcc/100.jpg','<p>所属州郡：青州─城阳郡</p><p>现在地址：山东省潍坊市诸城市</p>','http://www.sdmz.net'],
+            // 魏国城池
+            [1,'襄平',[41.26955, 123.17596],'','<p>	所属州郡：幽州─辽东郡</p><p>现在地址：辽宁省辽阳市</p>','https://zssanguo.com'],
+            [2,'北平',[41.24271, 119.41589],'','<p>所属州郡：幽州─右北平郡</p><p>现在地址：辽宁省朝阳市凌源市</p>','https://zssanguo.com'],
+            [3,'蓟',[40.04864, 117.39716],'','<p>所属州郡：幽州─燕国蓟县</p><p>现在地址：天津蓟县，一说今『北京市』 西南</p>','https://zssanguo.com'],
+            [4,'南皮',[38.05674, 116.70502],'','<p>	所属州郡：冀州─渤海郡</p><p>现在地址：河北省沧州市南皮县 北</p>','https://zssanguo.com'],
+            [5,'中山',[38.51594, 115.00488],'','<p>所属州郡：冀州─中山郡</p><p>现在地址：河北省保定市定州市</p>','https://zssanguo.com'],
+            [6,'钜鹿',[37.63381, 114.93073],'','<p>所属州郡：冀州─巨鹿郡</p><p>现在地址：河北省邢台市宁晋县 西南</p>','https://zssanguo.com'],
+            [7,'甘陵',[36.84666, 115.71075],'','<p>所属州郡：冀州─清河郡</p><p>现在地址：山东省聊城市临清市 北</p>','https://zssanguo.com'],
+            [8,'邺',[36.59348, 114.49402],'','<p>所属州郡：冀州─魏郡</p><p>现在地址：河北省邯郸县临漳县 西南</p>','https://zssanguo.com'],
+            [9,'晋阳',[37.90737, 112.56317],'','<p>	所属州郡：并州─太原郡─州治</p><p>现在地址：山西省太原市</p>','https://zssanguo.com'],
+            [10,'上党',[36.22544, 113.1015],'','<p>所属州郡：并州─上党郡</p><p>现在地址：山西省长治市壶关县</p>','https://zssanguo.com'],
+            [11,'平原',[37.18439, 116.44135],'','<p>	所属州郡：冀州─平原郡</p><p>现在地址：山东省德州市平原县 南</p>','https://zssanguo.com'],
+            [12,'北海',[36.72788, 119.20029],'','<p>	所属州郡：青州─北海国</p><p>现在地址：山东省潍坊市 南</p>','https://zssanguo.com'],
+            [13,'琅琊',[35.06148, 118.32275],'','<p>所属州郡：徐州─琅琊国</p><p>现在地址：山东省临沂市 北</p>','https://zssanguo.com'],
+            [14,'下邳',[33.94336, 118.02612],'','<p>	所属州郡：徐州─州治</p><p>现在地址：江苏省徐州睢宁县 南</p>','https://zssanguo.com'],
+            [15,'广陵',[33.53224, 119.03687],'','<p>	所属州郡：徐州─广陵郡</p><p>	现在地址：江苏省淮安市 西南</p>','https://zssanguo.com'],
+            [16,'济北',[35.18279, 115.46631],'','<p>所属州郡：兖州─济北国</p><p>现在地址：山东省菏泽市定陶县 西北</p>','https://zssanguo.com'],
+            [17,'濮阳',[35.69299, 115.02686],'','<p>	所属州郡：兖州─东郡</p><p>现在地址：河南省濮阳市 南</p>','https://zssanguo.com'],
+            [18,'陈留',[34.67388, 114.53522],'','<p>	所属州郡：兖州─陈留国</p><p>现在地址：河南省开封县陈留镇 东南</p>','https://zssanguo.com'],
+            [19,'小沛',[34.7371, 116.95633],'','<p>所属州郡：豫州─沛国</p><p>现在地址：江苏省徐州沛县，即『小沛』</p>','https://zssanguo.com'],
+            [20,'谯',[33.85217, 115.77942],'','<p>所属州郡：豫州─谯郡</p><p>现在地址：安徽省亳州市</p>','https://zssanguo.com'],
+            [21,'许昌',[34.03104, 113.82797],'','<p>所属州郡：豫州─颖川郡</p><p>现在地址：河南省许昌市</p>','https://zssanguo.com'],
+            [22,'汝南',[33.27658, 114.26605],'','<p>	所属州郡：豫州─汝南郡─州治</p><p>现在地址：河南省驻马店市上蔡县</p>','https://zssanguo.com'],
+            [23,'河内',[35.10418, 113.41873],'','<p>所属州郡：司隶─河内郡</p><p>现在地址：河南省焦作市武陟县 西南</p>','https://zssanguo.com'],
+            [24,'洛阳',[34.6366, 112.46292],'','<p>所属州郡：司隶─河南尹</p><p>现在地址：河南省洛阳市</p>','https://zssanguo.com'],
+            [25,'弘农',[34.52466, 110.89874],'','<p>	所属州郡：司隶─弘农郡</p><p>现在地址：河南省三门峡市灵宝市 北</p>','https://zssanguo.com'],
 
+            // 蜀国城池
+            [26,'长安',[34.34996, 108.94009],'','<p>所属州郡：雍州─京兆尹─州治</p><p>现在地址：陕西省西安市 西北</p>','https://zssanguo.com'],
+            [27,'安定',[35.33641, 107.36389],'','<p>所属州郡：雍州─安定郡</p><p>现在地址：甘肃省平凉市泾川县 北，即『安定』</p>','https://zssanguo.com'],
+            [28,'天水',[34.8634, 105.66101],'','<p>所属州郡：雍州─天水郡</p><p>现在地址：甘肃省天水市秦安县 东 陇城镇</p>','https://zssanguo.com'],
+            [29,'武威',[37.93662, 102.62466],'','<p>所属州郡：凉州─武威郡</p><p>现在地址：甘肃省武威市，姑臧 为匈奴用语。</p>','https://zssanguo.com'],
+            [30,'金城',[36.0491, 103.83179],'','<p>所属州郡：凉州─金城郡</p><p>现在地址：甘肃省兰州市 东</p>','https://zssanguo.com'],
+            [31,'武都',[33.74261, 105.76263],'','<p>所属州郡：益州─武都郡</p><p>现在地址：甘肃省陇南市成县 西北</p>','https://zssanguo.com'],
+            [32,'汉中',[33.07773, 107.02881],'','<p>	所属州郡：益州─汉中郡</p><p>现在地址：陕西省汉中市</p>','https://zssanguo.com'],
+            [33,'永安',[31.0191, 109.47464],'','<p>所属州郡：益州─巴东郡</p><p>现在地址：重庆市奉节县</p>','https://zssanguo.com'],
+            [34,'梓潼',[31.64403, 105.18311],'','<p>	所属州郡：益州─梓潼郡</p><p>现在地址：四川省绵阳市梓潼县</p>','https://zssanguo.com'],
+            [35,'成都',[30.57645, 104.07349],'','<p>所属州郡：益州─蜀郡─州治</p><p>现在地址：四川省成都市</p>','https://zssanguo.com'],
+            [36,'江州',[29.54957, 106.55365],'','<p>所属州郡：益州─巴郡</p><p>现在地址：重庆市 江北</p>','https://zssanguo.com'],
+            [37,'牂牁',[26.26633, 107.52869],'','<p>所属州郡：益州─徉柯郡</p><p>现在地址：贵州省黔南布依族苗族自治州都匀市 北</p>','https://zssanguo.com'],
+            [38,'越巂',[27.87975, 102.26761],'','<p>所属州郡：益州─越隽郡</p><p>现在地址：四川省凉山彝族自治州西昌市 东，『卭』读音穹</p>','https://zssanguo.com'],
+            [39,'建宁',[25.48543, 103.79883],'','<p>所属州郡：益州─建宁郡</p><p>现在地址：云南省曲靖市</p>','https://zssanguo.com'],
+            [40,'永昌',[25.10923, 99.16122],'','<p>所属州郡：益州─永昌郡</p><p>现在地址：云南省保山市 东北</p>','https://zssanguo.com'],
 
-            [101,'开阳',[35.06148, 118.32275],'http://www.sdmz.net/d/map/sg/sggcc/101.jpg','<p>所属州郡：徐州─琅琊国</p><p>现在地址：山东省临沂市 北</p>','http://www.sdmz.net'],
-            [102,'郯县',[34.60608, 118.39966],'http://www.sdmz.net/d/map/sg/sggcc/102.jpg','<p>所属州郡：徐州─东海国</p><p>现在地址：山东省临沂市郯城县 北</p>','http://www.sdmz.net'],
-            [103,'阳翟',[34.13454, 113.5025],'http://www.sdmz.net/d/map/sg/sggcc/103.jpg','<p>所属州郡：豫州─颖川郡</p><p>现在地址：河南省许昌市禹州市</p>','http://www.sdmz.net'],
-            [104,'陈县',[33.73348, 114.86481],'http://www.sdmz.net/d/map/sg/sggcc/104.jpg','<p>所属州郡：豫州─陈郡</p><p>现在地址：河南省周口市淮阳县</p>','http://www.sdmz.net'],
-            [105,'安城',[32.98793, 114.35944],'http://www.sdmz.net/d/map/sg/sggcc/105.jpg','<p>所属州郡：豫州─汝南郡─州治</p><p>现在地址：河南省驻马店市汝南县 东南</p>','http://www.sdmz.net'],
-            [106,'谯县',[33.85217, 115.77942],'http://www.sdmz.net/d/map/sg/sggcc/106.jpg','<p>所属州郡：豫州─谯郡</p><p>现在地址：安徽省亳州市</p>','http://www.sdmz.net'],
-            [107,'安风',[32.34516, 116.29028],'http://www.sdmz.net/d/map/sg/sggcc/107.jpg','<p>所属州郡：豫州─安丰郡</p><p>现在地址：安徽省裕安区霍邱县 南</p>','http://www.sdmz.net'],
-            [108,'宛县',[32.98102, 112.54395],'http://www.sdmz.net/d/map/sg/sggcc/108.jpg','<p>所属州郡：豫州─南阳郡</p><p>现在地址：河南省南阳市</p>','http://www.sdmz.net'],
-            [109,'弋阳',[32.13376, 115.06531],'http://www.sdmz.net/d/map/sg/sggcc/109.jpg','<p>所属州郡：豫州─弋阳郡</p><p>现在地址：河南省信阳市潢川县 西</p>','http://www.sdmz.net'],
-            [110,'鲁县',[35.56798, 117.00439],'http://www.sdmz.net/d/map/sg/sggcc/110.jpg','<p>所属州郡：豫州─鲁郡</p><p>现在地址：山东省济宁市曲阜市</p>','http://www.sdmz.net'],
-            [111,'六安',[31.73518, 116.51001],'http://www.sdmz.net/d/map/sg/sggcc/111.jpg','<p>所属州郡：扬州─卢江郡</p><p>现在地址：安徽省裕安区 北</p>','http://www.sdmz.net'],
-            [112,'吴县',[31.29967, 120.62164],'http://www.sdmz.net/d/map/sg/sggcc/112.jpg','<p>所属州郡：扬州─吴郡</p><p>现在地址：江苏省苏州</p>','http://www.sdmz.net'],
-            [113,'山阴',[29.99895, 120.58182],'http://www.sdmz.net/d/map/sg/sggcc/113.jpg','<p>所属州郡：扬州─会稽郡</p><p>现在地址：浙江省绍兴市</p>','http://www.sdmz.net'],
-            [114,'始新',[29.61048, 119.05678],'http://www.sdmz.net/d/map/sg/sggcc/114.jpg','<p>所属州郡：扬州─新都郡</p><p>现在地址：浙江省杭州市淳安县 西北</p>','http://www.sdmz.net'],
-            [115,'章安',[28.65806, 121.43875],'http://www.sdmz.net/d/map/sg/sggcc/115.jpg','<p>所属州郡：扬州─临海郡</p><p>现在地址：浙江省台州市 北</p>','http://www.sdmz.net'],
-            [116,'南城',[27.56672, 116.62537],'http://www.sdmz.net/d/map/sg/sggcc/116.jpg','<p>所属州郡：扬州─临川郡</p><p>现在地址：江西省抚州市南城县 东南</p>','http://www.sdmz.net'],
-            [117,'高昌',[27.09336, 114.99115],'http://www.sdmz.net/d/map/sg/sggcc/117.jpg','<p>所属州郡：扬州─卢陵郡</p><p>现在地址：江西省吉安市吉安县 西南</p>','http://www.sdmz.net'],
-            [118,'鄱阳',[29.01294, 116.69403],'http://www.sdmz.net/d/map/sg/sggcc/118.jpg','<p>所属州郡：扬州─鄱阳郡</p><p>现在地址：江西省上饶县鄱阳县</p>','http://www.sdmz.net'],
-            [119,'皖县',[30.619, 116.56219],'http://www.sdmz.net/d/map/sg/sggcc/119.jpg','<p>	所属州郡：扬州─庐江郡</p><p>现在地址：安徽省安庆市潜山县，与 淮宁 相近，确实地点有待查证。</p>','http://www.sdmz.net'],
-            [120,'蕲春',[30.21636, 115.44983],'http://www.sdmz.net/d/map/sg/sggcc/120.jpg','<p>所属州郡：扬州─蕲春郡</p><p>现在地址：湖北省黄冈市蕲春县</p>','http://www.sdmz.net'],
-            [121,'夷道',[30.37288, 111.42059],'http://www.sdmz.net/d/map/sg/sggcc/121.jpg','<p>所属州郡：荆州─宜都郡</p><p>现在地址：湖北省宜昌市宜都市</p>','http://www.sdmz.net'],
-            [122,'临湘',[29.4683, 113.45581],'http://www.sdmz.net/d/map/sg/sggcc/122.jpg','<p>所属州郡：荆州─长沙郡</p><p>现在地址：湖南省岳阳县临湘市</p>','http://www.sdmz.net'],
-            [123,'临浣',[29.02976, 111.6925],'http://www.sdmz.net/d/map/sg/sggcc/123.jpg','<p>所属州郡：荆州─武陵郡</p><p>现在地址：湖南省常德市</p>','http://www.sdmz.net'],
-            [124,'郴县',[25.743, 112.73895],'http://www.sdmz.net/d/map/sg/sggcc/124.jpg','<p>	所属州郡：荆州─桂阳郡</p><p>现在地址：湖南省郴州市桂阳县</p>','http://www.sdmz.net'],
-            [125,'泉陵',[26.22445, 111.63208],'http://www.sdmz.net/d/map/sg/sggcc/125.jpg','<p>所属州郡：荆州─零陵郡</p><p>现在地址：湖南省永州市零陵区</p>','http://www.sdmz.net'],
-            [126,'湘东',[26.88288, 112.60712],'http://www.sdmz.net/d/map/sg/sggcc/126.jpg','<p>所属州郡：荆州─湘东郡</p><p>现在地址：湖南省衡阳市 东</p>','http://www.sdmz.net'],
-            [127,'临贺',[24.39463, 111.55792],'http://www.sdmz.net/d/map/sg/sggcc/127.jpg','<p>所属州郡：荆州─临贺郡</p><p>现在地址：广西壮族自治区贺州市 东南</p>','http://www.sdmz.net'],
-            [128,'湘南',[27.81479, 112.94495],'http://www.sdmz.net/d/map/sg/sggcc/128.jpg','<p>所属州郡：荆州─衡阳郡</p><p>现在地址：湖南省湘潭市 西南</p>','http://www.sdmz.net'],
-            [129,'巫县',[31.08469, 109.88113],'http://www.sdmz.net/d/map/sg/sggcc/129.jpg','<p>所属州郡：荆州─建平郡</p><p>现在地址：重庆市巫山县 北</p>','http://www.sdmz.net'],
-            [130,'恩平',[22.19249, 112.30774],'http://www.sdmz.net/d/map/sg/sggcc/130.jpg','<p>所属州郡：交州─高凉郡</p><p>现在地址：广东省江门市恩平市 北</p>','http://www.sdmz.net'],
-            [131,'广信',[23.45569, 111.29974],'http://www.sdmz.net/d/map/sg/sggcc/131.jpg','<p>所属州郡：交州─苍梧郡</p><p>现在地址：广西壮族自治区梧州市</p>','http://www.sdmz.net'],
-            [132,'布山',[23.38764, 110.08301],'http://www.sdmz.net/d/map/sg/sggcc/132.jpg','<p>所属州郡：交州─郁林郡</p><p>现在地址：广西壮族自治区贵港市桂平市 西南</p>','http://www.sdmz.net'],
-            [133,'合浦',[21.68295, 109.23157],'http://www.sdmz.net/d/map/sg/sggcc/133.jpg','<p>所属州郡：交州─合浦郡</p><p>现在地址：广西壮族自治区北海市合浦县 东北</p>','http://www.sdmz.net'],
-            [134,'徐闻',[20.33175, 110.16266],'http://www.sdmz.net/d/map/sg/sggcc/134.jpg','<p>所属州郡：交州─朱崖郡</p><p>现在地址：广东省湛江市徐闻县 南</p>','http://www.sdmz.net'],
-            [135,'胥浦',[19.81839, 105.80383],'http://www.sdmz.net/d/map/sg/sggcc/135.jpg','<p>所属州郡：交州─九真郡</p><p>现在地址：清化市 西北</p>','http://www.sdmz.net'],
-            [136,'下办',[33.74261, 105.76263],'http://www.sdmz.net/d/map/sg/sggcc/136.jpg','<p>所属州郡：益州─武都郡</p><p>现在地址：甘肃省陇南市成县 西北</p>','http://www.sdmz.net'],
-            [137,'阴平',[32.93954, 104.69147],'http://www.sdmz.net/d/map/sg/sggcc/137.jpg','<p>所属州郡：益州─阴平郡</p><p>现在地址：甘肃省陇南市文县 西北</p>','http://www.sdmz.net'],
-            [138,'谠口',[33.27601, 107.85141],'http://www.sdmz.net/d/map/sg/sggcc/138.jpg','<p>所属州郡：益州─褒中县</p><p>现在地址：陕西省汉中市洋县</p>','http://www.sdmz.net'],
-            [139,'褒中',[33.07543, 107.02606],'http://www.sdmz.net/d/map/sg/sggcc/139.jpg','<p>所属州郡：益州─褒中县</p><p>现在地址：陕西省汉中市汉台区褒城镇，其北即为『褒谷』</p>','http://www.sdmz.net'],
-            [140,'阆中',[31.55747, 105.98236],'http://www.sdmz.net/d/map/sg/sggcc/140.jpg','<p>所属州郡：益州─巴西郡</p><p>现在地址：四川省南充市阆中市</p>','http://www.sdmz.net'],
-            [141,'锦虎',[31.45678, 103.55713],'http://www.sdmz.net/d/map/sg/sggcc/141.jpg','<p>所属州郡：益州─汶山郡</p><p>现在地址：四川省阿坝县汶川县 西南</p>','http://www.sdmz.net'],
-            [142,'汉嘉',[29.96445, 102.99133],'http://www.sdmz.net/d/map/sg/sggcc/142.jpg','<p>所属州郡：益州─汉嘉郡</p><p>现在地址：四川省雅安市 东北</p>','http://www.sdmz.net'],
-            [143,'江州',[29.54957, 106.55365],'http://www.sdmz.net/d/map/sg/sggcc/143.jpg','<p>所属州郡：益州─巴郡</p><p>现在地址：重庆市 江北</p>','http://www.sdmz.net'],
-            [144,'江阳',[28.86151, 105.44678],'http://www.sdmz.net/d/map/sg/sggcc/144.jpg','<p>所属州郡：益州─江阳郡</p><p>现在地址：四川省泸州市</p>','http://www.sdmz.net'],
-            [145,'邛都',[27.87975, 102.26761],'http://www.sdmz.net/d/map/sg/sggcc/145.jpg','<p>所属州郡：益州─越隽郡</p><p>现在地址：四川省凉山彝族自治州西昌市 东，『卭』读音穹</p>','http://www.sdmz.net'],
-            [146,'朱提',[27.31565, 103.72742],'http://www.sdmz.net/d/map/sg/sggcc/146.jpg','<p>所属州郡：益州─朱提郡</p><p>现在地址：云南省昭通市</p>','http://www.sdmz.net'],
-            [147,'且兰',[26.26633, 107.52869],'http://www.sdmz.net/d/map/sg/sggcc/147.jpg','<p>所属州郡：益州─徉柯郡</p><p>现在地址：贵州省黔南布依族苗族自治州都匀市 北</p>','http://www.sdmz.net'],
-            [148,'味县',[25.48543, 103.79883],'http://www.sdmz.net/d/map/sg/sggcc/148.jpg','<p>所属州郡：益州─建宁郡</p><p>现在地址：云南省曲靖市</p>','http://www.sdmz.net'],
-            [149,'云南',[25.48791, 101.25],'http://www.sdmz.net/d/map/sg/sggcc/149.jpg','<p>所属州郡：益州─云南郡</p><p>现在地址：云南省楚雄市姚安县 北，此处为郡治所在</p>','http://www.sdmz.net'],
-            [150,'雲南',[24.88394, 102.83203],'http://www.sdmz.net/d/map/sg/sggcc/150.jpg','<p>所属州郡：益州─云南郡</p><p>现在地址：云南省昆明市</p>','http://www.sdmz.net'],
-            [151,'永昌',[25.10923, 99.16122],'http://www.sdmz.net/d/map/sg/sggcc/151.jpg','<p>所属州郡：益州─永昌郡</p><p>现在地址：云南省保山市 东北</p>','http://www.sdmz.net'],
-            [152,'宛温',[23.61936, 104.32892],'http://www.sdmz.net/d/map/sg/sggcc/152.jpg','<p>所属州郡：益州─兴古郡</p><p>现在地址：云南省文山市砚山县 北</p>','http://www.sdmz.net'],
-            [153,'信都',[37.55547, 115.56793],'http://www.sdmz.net/d/map/sg/sggcc/153.jpg','<p>所属州郡：冀州─安平郡─州治</p><p>现在地址：河北省衡水市冀州市</p>','http://www.sdmz.net'],
-            [154,'房子',[37.61858, 114.62311],'http://www.sdmz.net/d/map/sg/sggcc/154.jpg','<p>所属州郡：冀州─赵国</p><p>现在地址：河北省石家庄市高邑县 西</p>','http://www.sdmz.net'],
-            [155,'廮陶',[37.63381, 114.93073],'http://www.sdmz.net/d/map/sg/sggcc/155.jpg','<p>所属州郡：冀州─巨鹿郡</p><p>现在地址：河北省邢台市宁晋县 西南，廮( 音同&quot;影&quot; )</p>','http://www.sdmz.net'],
-            [156,'曲梁',[36.92355, 114.87305],'http://www.sdmz.net/d/map/sg/sggcc/156.jpg','<p>所属州郡：冀州─广平郡</p><p>现在地址：河北省邯郸县鸡泽县 东南</p>','http://www.sdmz.net'],
-            [157,'黎阳',[35.67069, 114.55994],'http://www.sdmz.net/d/map/sg/sggcc/157.jpg','<p>所属州郡：冀州─魏郡</p><p>现在地址：河南省鹤壁市浚县 东北</p>','http://www.sdmz.net'],
-            [158,'馆陶',[36.54054, 115.30701],'http://www.sdmz.net/d/map/sg/sggcc/158.jpg','<p>所属州郡：冀州─阳平郡</p><p>现在地址：河北省邯郸县馆陶县</p>','http://www.sdmz.net'],
-            [159,'清河',[36.84666, 115.71075],'http://www.sdmz.net/d/map/sg/sggcc/159.jpg','<p>所属州郡：冀州─清河郡</p><p>现在地址：山东省聊城市临清市 北</p>','http://www.sdmz.net'],
-            [160,'庆次',[37.49665, 117.5647],'http://www.sdmz.net/d/map/sg/sggcc/160.jpg','<p>所属州郡：冀州─乐陵国</p><p>现在地址：山东省滨州市惠民县 东北</p>','http://www.sdmz.net'],
-            [161,'乐成',[38.19934, 116.12549],'http://www.sdmz.net/d/map/sg/sggcc/161.jpg','<p>所属州郡：冀州─河间郡</p><p>现在地址：河北省沧州市献县 东南</p>','http://www.sdmz.net'],
-            [162,'卢奴',[38.51594, 115.00488],'http://www.sdmz.net/d/map/sg/sggcc/162.jpg','<p>所属州郡：冀州─中山郡</p><p>现在地址：河北省保定市定州市</p>','http://www.sdmz.net'],
-            [163,'耀县',[34.9017, 108.98438],'http://www.sdmz.net/d/map/sg/sggcc/163.jpg','<p>所属州郡：雍州─北地郡</p><p>现在地址：陕西省铜川市耀州区</p>','http://www.sdmz.net'],
-            [164,'杜陵',[34.155, 109.01459],'http://www.sdmz.net/d/map/sg/sggcc/164.jpg','<p>所属州郡：雍州─京兆尹</p><p>现在地址：陕西省西安市长安区杜陵乡</p>','http://www.sdmz.net'],
-            [165,'槐里',[34.3321, 108.70697],'http://www.sdmz.net/d/map/sg/sggcc/165.jpg','<p>所属州郡：雍州─扶风郡</p><p>现在地址：陕西省咸阳市 西南</p>','http://www.sdmz.net'],
-            [166,'骆口',[34.15841, 108.21259],'http://www.sdmz.net/d/map/sg/sggcc/166.jpg','<p>所属州郡：雍州─扶风郡</p><p>现在地址：陕西省西安市周至县 南</p>','http://www.sdmz.net'],
-            [167,'漆县',[35.04574, 108.08762],'http://www.sdmz.net/d/map/sg/sggcc/167.jpg','<p>所属州郡：雍州─新平郡</p><p>现在地址：陕西省咸阳市彬县</p>','http://www.sdmz.net'],
-            [168,'临泾',[35.33641, 107.36389],'http://www.sdmz.net/d/map/sg/sggcc/168.jpg','<p>所属州郡：雍州─安定郡</p><p>现在地址：甘肃省平凉市泾川县 北，即『安定』</p>','http://www.sdmz.net'],
-            [169,'郿县',[34.27651, 107.74155],'http://www.sdmz.net/d/map/sg/sggcc/169.jpg','<p>所属州郡：雍州─扶风郡</p><p>现在地址：陕西省宝鸡市眉县</p>','http://www.sdmz.net'],
-            [170,'临渭',[34.75741, 106.13892],'http://www.sdmz.net/d/map/sg/sggcc/170.jpg','<p>所属州郡：雍州─广魏郡</p><p>现在地址：甘肃省天水市清水县</p>','http://www.sdmz.net'],
-            [171,'冀县',[34.56538, 105.73242],'http://www.sdmz.net/d/map/sg/sggcc/171.jpg','<p>所属州郡：雍州─天水郡</p><p>现在地址：甘肃省天水市 西北</p>','http://www.sdmz.net'],
-            [172,'襄武',[35.01088, 104.63654],'http://www.sdmz.net/d/map/sg/sggcc/172.jpg','<p>所属州郡：雍州─陇西郡</p><p>现在地址：甘肃省定西市陇西县 南</p>','http://www.sdmz.net'],
-            [173,'榆中',[36.0491, 103.83179],'http://www.sdmz.net/d/map/sg/sggcc/173.jpg','<p>所属州郡：凉州─金城郡</p><p>现在地址：甘肃省兰州市 东</p>','http://www.sdmz.net'],
-            [174,'西都',[36.59789, 101.78284],'http://www.sdmz.net/d/map/sg/sggcc/174.jpg','<p>所属州郡：凉州─西平郡</p><p>现在地址：青海省西宁市</p>','http://www.sdmz.net'],
-            [175,'角乐得',[38.80547, 100.45898],'http://www.sdmz.net/d/map/sg/sggcc/175.jpg','<p>所属州郡：凉州─张掖郡</p><p>现在地址：甘肃省张掖市 西北</p>','http://www.sdmz.net']
-
+            //吴国城池
+            [41,'宛',[32.98102, 112.54395],'','<p>所属州郡：豫州─南阳郡</p><p>现在地址：河南省南阳市</p>','https://zssanguo.com'],
+            [42,'新野',[32.53176, 112.36679],'','<p>	所属州郡：荆州─南阳郡</p><p>现在地址：河南省南阳市新野县</p>','https://zssanguo.com'],
+            [43,'襄阳',[32.05464, 112.13882],'','<p>	所属州郡：荆州─襄阳郡</p><p>现在地址：湖北省襄阳市</p>','https://zssanguo.com'],
+            [44,'江夏',[31.02411, 113.75381],'','<p>	所属州郡：荆州─江夏郡</p><p>现在地址：湖北省孝感市云梦县</p>','https://zssanguo.com'],
+            [45,'上庸',[32.23836, 110.2533],'','<p>所属州郡：益州─上庸郡</p><p>现在地址：湖北省十堰市竹山县 西北，襄樊战后，孟达降魏，改『新城郡』</p>','https://zssanguo.com'],
+            [46,'江陵',[30.36103, 112.18964],'','<p>	所属州郡：荆州─南郡</p><p>现在地址：湖北省荆州区，即『南郡』</p>','https://zssanguo.com'],
+            [47,'长沙',[29.4683, 113.45581],'','<p>所属州郡：荆州─长沙郡</p><p>现在地址：湖南省岳阳县临湘市</p>','https://zssanguo.com'],
+            [48,'临浣',[29.02976, 111.6925],'','<p>所属州郡：荆州─武陵郡</p><p>现在地址：湖南省常德市</p>','https://zssanguo.com'],
+            [49,'武陵',[25.743, 112.73895],'','<p>	所属州郡：荆州─桂阳郡</p><p>现在地址：湖南省郴州市桂阳县</p>','https://zssanguo.com'],
+            [50,'零陵',[26.22445, 111.63208],'','<p>所属州郡：荆州─零陵郡</p><p>现在地址：湖南省永州市零陵区</p>','https://zssanguo.com'],
+            [51,'寿春',[32.58038, 116.79291],'','<p>	所属州郡：扬州─州治</p><p>现在地址：安徽省裕安区寿县</p>','https://zssanguo.com'],
+            [52,'庐江',[30.73593, 116.83685],'','<p>	所属州郡：扬州─庐江郡─州治</p><p>现在地址：安徽省安庆市怀宁县</p>','https://zssanguo.com'],
+            [53,'建业',[31.99876, 118.79517],'','<p>所属州郡：扬州─丹阳郡</p><p>现在地址：江苏省南京市</p>','https://zssanguo.com'],
+            [54,'吴',[31.29967, 120.62164],'','<p>所属州郡：扬州─吴郡</p><p>现在地址：江苏省苏州</p>','https://zssanguo.com'],
+            [55,'会稽',[29.99895, 120.58182],'','<p>所属州郡：扬州─会稽郡</p><p>现在地址：浙江省绍兴市</p>','https://zssanguo.com'],
+            [56,'豫章',[28.70022, 115.85083],'','<p>	所属州郡：扬州─豫章郡</p><p>现在地址：江西省南昌县</p>','https://zssanguo.com'],
+            [57,'建安',[27.02457, 118.30593],'','<p>	所属州郡：扬州─建安郡</p><p>现在地址：福建省南平市建瓯市 南</p>','https://zssanguo.com'],
+            [58,'南海',[22.93848, 113.38852],'','<p>	所属州郡：交州─南海郡</p><p>现在地址：广东省广州市番禺区</p>','https://zssanguo.com'],
+            [59,'合浦',[21.68295, 109.23157],'','<p>所属州郡：交州─合浦郡</p><p>现在地址：广西壮族自治区北海市合浦县 东北</p>','https://zssanguo.com'],
+            [60,'交趾',[21.01273, 105.82855],'','<p>所属州郡：交州─龙编</p><p>现在地址：还剑郡河内市 东</p>','https://zssanguo.com'],
         ];
 
 
 
 
-        for ($j=0;$j<list.length;$j++)
+        for ($j=0;$j<=25;$j++)
         {
-            // L.marker([list[$j][2][0],list[$j][2][1]],{icon: greenIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3><a  href='"+ list[$j][5] + "'  target=_blank><img style='width:150px;overflow:hidden;float:right;padding:5;'  src=" + list[$j][3] + " /></a>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"更多信息"+"</a></div>");
-            L.marker([list[$j][2][0],list[$j][2][1]],{icon: greenIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
-
+            // L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3><a  href='"+ list[$j][5] + "'  target=_blank><img style='width:150px;overflow:hidden;float:right;padding:5;'  src=" + list[$j][3] + " /></a>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"更多信息"+"</a></div>");
+            L.marker([list[$j][2][0],list[$j][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
         }
+        for ($j=26;25<$j<=40;$j++)
+        {
+            // L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3><a  href='"+ list[$j][5] + "'  target=_blank><img style='width:150px;overflow:hidden;float:right;padding:5;'  src=" + list[$j][3] + " /></a>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"更多信息"+"</a></div>");
+            L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
+        }
+        for ($j=41;41<$j<=60;$j++)
+        {
+            // L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3><a  href='"+ list[$j][5] + "'  target=_blank><img style='width:150px;overflow:hidden;float:right;padding:5;'  src=" + list[$j][3] + " /></a>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"更多信息"+"</a></div>");
+            L.marker([list[$j][2][0],list[$j][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
+        }
+
         function getMap(picid) {
             $j=picid-1;
-            // L.marker([list[$j][2][0],list[$j][2][1]],{icon: greenIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3><a  href='"+ list[$j][5] + "'  target=_blank><img style='width:150px;overflow:hidden;float:right;padding:5;'  src=" + list[$j][3] + " /></a>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "'  target=_blank>" +"更多信息"+"</a></div>").openPopup();
-            L.marker([list[$j][2][0],list[$j][2][1]],{icon: greenIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "'  target=_blank>" +"更多信息"+"</a></div>").openPopup();
+            // L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3><a  href='"+ list[$j][5] + "'  target=_blank><img style='width:150px;overflow:hidden;float:right;padding:5;'  src=" + list[$j][3] + " /></a>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "'  target=_blank>" +"更多信息"+"</a></div>").openPopup();
+            L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a href='"+ list[$j][5] + "'  target=_blank>" +"进入战场"+"</a></div>").openPopup();
 
         }
 
