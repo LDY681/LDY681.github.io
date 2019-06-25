@@ -17,10 +17,10 @@
     #mapLayer {height:800px;}
     #mapMenu {height:800px; overflow-y:scroll;}
     #mapMenu a{font-size:15px;}
-    .Popupinfo p{text-indent:0}
-    .Popupinfo p,.Popupinfo h3{margin:0;padding:0;}
-    .Popupinfo a:link,.Popupinfo a:visited {font-size:15px;color:red;text-decoration:none}
-    .Popupinfo a:hover,.Popupinfo a:active {font-size:15px;color:darkorange;text-decoration:underline}
+    .popupInfo p{text-indent:0}
+    .popupInfo p,.popupInfo h3{margin:0;padding:0;}
+    .popupInfo a:link,.popupInfo a:visited {font-size:15px;color:red;text-decoration:none}
+    .popupInfo a:hover,.popupInfo a:active {font-size:15px;color:darkorange;text-decoration:underline}
   </style>
 </head>
 
@@ -148,7 +148,7 @@
         var baseLayers = {
             "常规图": Gaode,
             "卫星图": Gaodimage
-        }
+        };
 
         var map = L.map("mapLayer", {
             center: [35.74874, 116.05408],
@@ -251,7 +251,7 @@
             [45,'上庸',[32.23836, 110.2533],'','<p>所属州郡：益州─上庸郡</p><p>现在地址：湖北省十堰市竹山县 西北，襄樊战后，孟达降魏，改『新城郡』</p>','https://zssanguo.com'],
             [46,'江陵',[30.36103, 112.18964],'','<p>	所属州郡：荆州─南郡</p><p>现在地址：湖北省荆州区，即『南郡』</p>','https://zssanguo.com'],
             [47,'长沙',[29.4683, 113.45581],'','<p>所属州郡：荆州─长沙郡</p><p>现在地址：湖南省岳阳县临湘市</p>','https://zssanguo.com'],
-            [48,'临浣',[29.02976, 111.6925],'','<p>所属州郡：荆州─武陵郡</p><p>现在地址：湖南省常德市</p>','https://zssanguo.com'],
+            [48,'武陵',[29.02976, 111.6925],'','<p>所属州郡：荆州─武陵郡</p><p>现在地址：湖南省常德市</p>','https://zssanguo.com'],
             [49,'武陵',[25.743, 112.73895],'','<p>	所属州郡：荆州─桂阳郡</p><p>现在地址：湖南省郴州市桂阳县</p>','https://zssanguo.com'],
             [50,'零陵',[26.22445, 111.63208],'','<p>所属州郡：荆州─零陵郡</p><p>现在地址：湖南省永州市零陵区</p>','https://zssanguo.com'],
             [51,'寿春',[32.58038, 116.79291],'','<p>	所属州郡：扬州─州治</p><p>现在地址：安徽省裕安区寿县</p>','https://zssanguo.com'],
@@ -266,30 +266,29 @@
             [60,'交趾',[21.01273, 105.82855],'','<p>所属州郡：交州─龙编</p><p>现在地址：还剑郡河内市 东</p>','https://zssanguo.com'],
         ];
 
-
-
-
-        for ($j=0;$j<=25;$j++)
+        for ($j=0;$j<=24;$j++)
         {
-            // L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3><a  href='"+ list[$j][5] + "'  target=_blank><img style='width:150px;overflow:hidden;float:right;padding:5;'  src=" + list[$j][3] + " /></a>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"更多信息"+"</a></div>");
-            L.marker([list[$j][2][0],list[$j][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
+            L.marker([list[$j][2][0],list[$j][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
         }
-        for ($j=26;25<$j<=40;$j++)
+        for ($j=25;$j<=40;$j++)
         {
-            // L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3><a  href='"+ list[$j][5] + "'  target=_blank><img style='width:150px;overflow:hidden;float:right;padding:5;'  src=" + list[$j][3] + " /></a>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"更多信息"+"</a></div>");
-            L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
+            L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
         }
-        for ($j=41;40<$j<=60;$j++)
+        for ($j=40;$j<=60;$j++)
         {
-            // L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3><a  href='"+ list[$j][5] + "'  target=_blank><img style='width:150px;overflow:hidden;float:right;padding:5;'  src=" + list[$j][3] + " /></a>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"更多信息"+"</a></div>");
-            L.marker([list[$j][2][0],list[$j][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
+            L.marker([list[$j][2][0],list[$j][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
         }
 
-        function getMap(picid) {
-            $j=picid-1;
-            // L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3><a  href='"+ list[$j][5] + "'  target=_blank><img style='width:150px;overflow:hidden;float:right;padding:5;'  src=" + list[$j][3] + " /></a>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "'  target=_blank>" +"更多信息"+"</a></div>").openPopup();
-            L.marker([list[$j][2][0],list[$j][2][1]]).addTo(map).bindPopup("<div class='Popupinfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a href='"+ list[$j][5] + "'  target=_blank>" +"进入战场"+"</a></div>").openPopup();
+        function getMap(picID) {
+            $j=picID-1;
 
+            if ($j > 39){
+                L.marker([list[$j][2][0],list[$j][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a href='"+ list[$j][5] + "'  target=_blank>" +"进入战场"+"</a></div>").openPopup();
+            }else if ($j > 24){
+                L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a href='"+ list[$j][5] + "'  target=_blank>" +"进入战场"+"</a></div>").openPopup();
+            }else{
+                L.marker([list[$j][2][0],list[$j][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a href='"+ list[$j][5] + "'  target=_blank>" +"进入战场"+"</a></div>").openPopup();
+            }
         }
 
 
