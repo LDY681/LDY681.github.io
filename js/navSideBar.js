@@ -10,6 +10,9 @@ function w3_open() {
     // 调整正文内容
     var custom = document.getElementById("customContent");
     if (custom) {
+        if (custom.className.indexOf("w3-animate-left") === -1) {
+            custom.className += " w3-animate-left";
+        }
         custom.style.marginLeft = "196px";
     }
 
@@ -25,6 +28,9 @@ function w3_close() {
     //调整正文内容
     var custom = document.getElementById("customContent");
     if (custom) {
+        if (custom.className.indexOf("w3-animate-left") !== -1) {
+            custom.className = custom.className.replace(" w3-animate-left", "");
+        }
         custom.style.marginLeft = "0";
     }
 

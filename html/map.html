@@ -10,16 +10,13 @@
   <link rel="icon" href="../img/logo.png"/>
   <script src="../js/jquery-3.4.1.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel='stylesheet' href='http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css' type='text/css' media='all'/>
-  <link rel='stylesheet' href='http://apps.bdimg.com/libs/fontawesome/4.4.0/css/font-awesome.min.css' type='text/css' media='all'/>
-  <link rel='stylesheet' href='http://www.sdmz.net/skin/v2/css/common.css' type='text/css' media='all'/>
-  <link  href="http://www.sdmz.net/skin/v2/leaflet/leaflet.css" rel="stylesheet" />
-  <script src="http://www.sdmz.net/skin/v2/leaflet/leaflet.js"></script>
-  <script src="http://www.sdmz.net/skin/v2/leaflet/leaflet.ChineseTmsProviders.js"></script>
+  <link  href="../css/leaflet.css" rel="stylesheet" />
+  <script src="../js/leaflet.js"></script>
+  <script src="../js/leaflet.ChineseTmsProviders.js"></script>
   <style type="text/css">
-    #mappan {height:800px;}
-    #result {float:left;height:842px;overflow-y:scroll;}
-    #result a{font-size:12px;}
+    #mapLayer {height:800px;}
+    #mapMenu {height:800px; overflow-y:scroll;}
+    #mapMenu a{font-size:15px;}
     .Popupinfo p{text-indent:0}
     .Popupinfo p,.Popupinfo h3{margin:0;padding:0;}
     .Popupinfo a:link,.Popupinfo a:visited {color:#333;text-decoration:none}
@@ -27,10 +24,9 @@
   </style>
 </head>
 
-<body class="single p_indent" onLoad="mapInit()">
+<body class="single p_indent">
 <!--加载navSideBar-->
 <script>
-    // jquery load 不会自动更新load的内容
     $(function () {
         $("#nav-placeholder").load("navSideBar.html");
     });
@@ -40,197 +36,194 @@
 <div style="position: relative" id="nav-placeholder"></div>
 
 <!-- 地图内容-->
-<div id="customContent" style="margin-left:0;" class="w3-row-padding">
+<div id="customContent" style="margin-left:0;" class="w3-row">
 
-<section class="container container-page" style="margin-top:80px;">
-  <div class="pageside">
-    <div class="pagemenus">
-      <ul class="pagemenu" id="result">
-        <li onclick="getMap(1);"><a href="#">1.洛阳  司隶─河南尹</a></li>
-        <li onclick="getMap(2);"><a href="#">2.许昌  豫州─颖川郡</a></li>
-        <li onclick="getMap(3);"><a href="#">3.建业  扬州─丹阳郡</a></li>
-        <li onclick="getMap(4);"><a href="#">4.成都  益州─蜀郡─州治</a></li>
-        <li onclick="getMap(5);"><a href="#">5.长安  雍州─京兆尹─州治</a></li>
-        <li onclick="getMap(6);"><a href="#">6.北平  幽州—右北平郡</a></li>
-        <li onclick="getMap(7);"><a href="#">7.涿县  幽州─范阳郡</a></li>
-        <li onclick="getMap(8);"><a href="#">8.真定  冀州─常山郡</a></li>
-        <li onclick="getMap(9);"><a href="#">9.邺  冀州─魏郡</a></li>
-        <li onclick="getMap(10);"><a href="#">10.平原  冀州─平原郡</a></li>
-        <li onclick="getMap(11);"><a href="#">11.南皮  冀州─渤海郡</a></li>
-        <li onclick="getMap(12);"><a href="#">12.弘农  司隶─弘农郡</a></li>
-        <li onclick="getMap(13);"><a href="#">13.子午谷  雍州─京兆尹</a></li>
-        <li onclick="getMap(14);"><a href="#">14.陈仓  雍州─扶风郡</a></li>
-        <li onclick="getMap(15);"><a href="#">15.街亭  雍州─天水郡</a></li>
-        <li onclick="getMap(16);"><a href="#">16.武威─姑臧  凉州─武威郡</a></li>
-        <li onclick="getMap(17);"><a href="#">17.濮阳  兖州─东郡</a></li>
-        <li onclick="getMap(18);"><a href="#">18.白马  兖州─东郡</a></li>
-        <li onclick="getMap(19);"><a href="#">19.乌巢  兖州─陈留国</a></li>
-        <li onclick="getMap(20);"><a href="#">20.官渡  兖州─陈留国</a></li>
-        <li onclick="getMap(21);"><a href="#">21.陈留  兖州─陈留国</a></li>
-        <li onclick="getMap(22);"><a href="#">22.下邳  徐州─州治</a></li>
-        <li onclick="getMap(23);"><a href="#">23.淮阴  徐州─广陵郡</a></li>
-        <li onclick="getMap(24);"><a href="#">24.睢阳  豫州─梁国</a></li>
-        <li onclick="getMap(25);"><a href="#">25.汝南  豫州─汝南郡─州治</a></li>
-        <li onclick="getMap(26);"><a href="#">26.寿春  扬州─州治</a></li>
-        <li onclick="getMap(27);"><a href="#">27.新野  荆州─南阳郡</a></li>
-        <li onclick="getMap(28);"><a href="#">28.皖城  扬州─庐江郡─州治</a></li>
-        <li onclick="getMap(29);"><a href="#">29.柴桑  荆州─江夏郡</a></li>
-        <li onclick="getMap(30);"><a href="#">30.襄阳  荆州─襄阳郡</a></li>
-        <li onclick="getMap(31);"><a href="#">31.夷陵  荆州─新城县</a></li>
-        <li onclick="getMap(32);"><a href="#">32.江陵  荆州─南郡</a></li>
-        <li onclick="getMap(33);"><a href="#">33.公安  荆州─南郡</a></li>
-        <li onclick="getMap(34);"><a href="#">34.上庸  益州─上庸郡</a></li>
-        <li onclick="getMap(35);"><a href="#">35.永安  益州─巴东郡</a></li>
-        <li onclick="getMap(36);"><a href="#">36.南郑  益州─汉中郡</a></li>
-        <li onclick="getMap(37);"><a href="#">37.梓潼  益州─梓潼郡</a></li>
-        <li onclick="getMap(38);"><a href="#">38.涪城  益州─梓橦郡</a></li>
-        <li onclick="getMap(39);"><a href="#">39.雒县  益州─广汉郡</a></li>
-        <li onclick="getMap(40);"><a href="#">40.合肥  扬州─淮南郡</a></li>
-        <li onclick="getMap(41);"><a href="#">41.带方  幽州─带方郡</a></li>
-        <li onclick="getMap(42);"><a href="#">42.朝鲜  幽州─乐浪郡</a></li>
-        <li onclick="getMap(43);"><a href="#">43.高句丽  幽州─玄菟郡</a></li>
-        <li onclick="getMap(44);"><a href="#">44.襄平  幽州─辽东郡</a></li>
-        <li onclick="getMap(45);"><a href="#">45.昌黎  幽州─昌黎郡</a></li>
-        <li onclick="getMap(46);"><a href="#">46.阳乐  幽州─辽西郡</a></li>
-        <li onclick="getMap(47);"><a href="#">47.土垠  幽州─右北平郡</a></li>
-        <li onclick="getMap(48);"><a href="#">48.蓟  幽州─燕国蓟县</a></li>
-        <li onclick="getMap(49);"><a href="#">49.渔阳  幽州─渔阳郡</a></li>
-        <li onclick="getMap(50);"><a href="#">50.居庸  幽州─上古郡</a></li>
-        <li onclick="getMap(51);"><a href="#">51.代县  幽州─代郡</a></li>
-        <li onclick="getMap(52);"><a href="#">52.雁门  并州─雁门郡</a></li>
-        <li onclick="getMap(53);"><a href="#">53.九原  并州─新兴郡</a></li>
-        <li onclick="getMap(54);"><a href="#">54.晋阳  并州─太原郡─州治</a></li>
-        <li onclick="getMap(55);"><a href="#">55.离石  并州─西河郡</a></li>
-        <li onclick="getMap(56);"><a href="#">56.居延  凉州─西海郡</a></li>
-        <li onclick="getMap(57);"><a href="#">57.昌邑  兖州─山阳郡</a></li>
-        <li onclick="getMap(58);"><a href="#">58.彭城  徐州─彭城国</a></li>
-        <li onclick="getMap(59);"><a href="#">59.沛县  豫州─沛国</a></li>
-        <li onclick="getMap(60);"><a href="#">60.毗陵  扬州─毗陵典农校尉</a></li>
-        <li onclick="getMap(61);"><a href="#">61.建安  扬州─建安郡</a></li>
-        <li onclick="getMap(62);"><a href="#">62.南昌  扬州─豫章郡</a></li>
-        <li onclick="getMap(63);"><a href="#">63.江夏  荆州─江夏郡</a></li>
-        <li onclick="getMap(64);"><a href="#">64.番禺  交州─南海郡</a></li>
-        <li onclick="getMap(65);"><a href="#">65.交趾郡  交州─龙编</a></li>
-        <li onclick="getMap(66);"><a href="#">66.朱吾  交州─日南郡</a></li>
-        <li onclick="getMap(67);"><a href="#">67.武阳  益州─腱为郡</a></li>
-        <li onclick="getMap(68);"><a href="#">68.涪陵  益州─涪陵郡</a></li>
-        <li onclick="getMap(69);"><a href="#">69.沾县  并州─乐平郡</a></li>
-        <li onclick="getMap(70);"><a href="#">70.怀  司隶─河内郡</a></li>
-        <li onclick="getMap(71);"><a href="#">71.阳武  司隶─河南尹</a></li>
-        <li onclick="getMap(72);"><a href="#">72.平阳  司隶─平阳郡</a></li>
-        <li onclick="getMap(73);"><a href="#">73.安邑  司隶─河东郡</a></li>
-        <li onclick="getMap(74);"><a href="#">74.汜水关  </a></li>
-        <li onclick="getMap(75);"><a href="#">75.函谷关  </a></li>
-        <li onclick="getMap(76);"><a href="#">76.散关  </a></li>
-        <li onclick="getMap(77);"><a href="#">77.潼关  </a></li>
-        <li onclick="getMap(78);"><a href="#">78.武关  </a></li>
-        <li onclick="getMap(79);"><a href="#">79.阳平关  </a></li>
-        <li onclick="getMap(80);"><a href="#">80.葭萌关  </a></li>
-        <li onclick="getMap(81);"><a href="#">81.剑阁  </a></li>
-        <li onclick="getMap(82);"><a href="#">82.绵竹关  </a></li>
-        <li onclick="getMap(83);"><a href="#">83.壶关  并州─上党郡</a></li>
-        <li onclick="getMap(84);"><a href="#">84.临晋  雍州─冯翊郡</a></li>
-        <li onclick="getMap(85);"><a href="#">85.禄福  凉州─酒泉郡</a></li>
-        <li onclick="getMap(86);"><a href="#">86.敦煌  凉州─敦煌郡</a></li>
-        <li onclick="getMap(87);"><a href="#">87.海头  西域长史府─州治</a></li>
-        <li onclick="getMap(88);"><a href="#">88.高昌  西域长史府─戊己校尉</a></li>
-        <li onclick="getMap(89);"><a href="#">89.奉高  兖州─泰山郡</a></li>
-        <li onclick="getMap(90);"><a href="#">90.无盐  兖州─东平国</a></li>
-        <li onclick="getMap(91);"><a href="#">91.郡丘  兖州─州治</a></li>
-        <li onclick="getMap(92);"><a href="#">92.延津  兖州─陈留国</a></li>
-        <li onclick="getMap(93);"><a href="#">93.定陶、卢县  兖州─济阳郡、济北国</a></li>
-        <li onclick="getMap(94);"><a href="#">94.任城  兖州─任城郡</a></li>
-        <li onclick="getMap(95);"><a href="#">95.东平陵  青州─济南国</a></li>
-        <li onclick="getMap(96);"><a href="#">96.高苑  青州─乐安郡</a></li>
-        <li onclick="getMap(97);"><a href="#">97.临淄  青州─州治</a></li>
-        <li onclick="getMap(98);"><a href="#">98.平寿  青州─北海国</a></li>
-        <li onclick="getMap(99);"><a href="#">99.黄县  青州─东莱郡</a></li>
-        <li onclick="getMap(100);"><a href="#">100.东武  青州─城阳郡</a></li>
-        <li onclick="getMap(101);"><a href="#">101.开阳  徐州─琅琊国</a></li>
-        <li onclick="getMap(102);"><a href="#">102.郯县  徐州─东海国</a></li>
-        <li onclick="getMap(103);"><a href="#">103.阳翟  豫州─颖川郡</a></li>
-        <li onclick="getMap(104);"><a href="#">104.陈县  豫州─陈郡</a></li>
-        <li onclick="getMap(105);"><a href="#">105.安城  豫州─汝南郡─州治</a></li>
-        <li onclick="getMap(106);"><a href="#">106.谯县  豫州─谯郡</a></li>
-        <li onclick="getMap(107);"><a href="#">107.安风  豫州─安丰郡</a></li>
-        <li onclick="getMap(108);"><a href="#">108.宛县  豫州─南阳郡</a></li>
-        <li onclick="getMap(109);"><a href="#">109.弋阳  豫州─弋阳郡</a></li>
-        <li onclick="getMap(110);"><a href="#">110.鲁县  豫州─鲁郡</a></li>
-        <li onclick="getMap(111);"><a href="#">111.六安  扬州─卢江郡</a></li>
-        <li onclick="getMap(112);"><a href="#">112.吴县  扬州─吴郡</a></li>
-        <li onclick="getMap(113);"><a href="#">113.山阴  扬州─会稽郡</a></li>
-        <li onclick="getMap(114);"><a href="#">114.始新  扬州─新都郡</a></li>
-        <li onclick="getMap(115);"><a href="#">115.章安  扬州─临海郡</a></li>
-        <li onclick="getMap(116);"><a href="#">116.南城  扬州─临川郡</a></li>
-        <li onclick="getMap(117);"><a href="#">117.高昌  扬州─卢陵郡</a></li>
-        <li onclick="getMap(118);"><a href="#">118.鄱阳  扬州─鄱阳郡</a></li>
-        <li onclick="getMap(119);"><a href="#">119.皖县  扬州─庐江郡</a></li>
-        <li onclick="getMap(120);"><a href="#">120.蕲春  扬州─蕲春郡</a></li>
-        <li onclick="getMap(121);"><a href="#">121.夷道  荆州─宜都郡</a></li>
-        <li onclick="getMap(122);"><a href="#">122.临湘  荆州─长沙郡</a></li>
-        <li onclick="getMap(123);"><a href="#">123.临浣  荆州─武陵郡</a></li>
-        <li onclick="getMap(124);"><a href="#">124.郴县  荆州─桂阳郡</a></li>
-        <li onclick="getMap(125);"><a href="#">125.泉陵  荆州─零陵郡</a></li>
-        <li onclick="getMap(126);"><a href="#">126.湘东  荆州─湘东郡</a></li>
-        <li onclick="getMap(127);"><a href="#">127.临贺  荆州─临贺郡</a></li>
-        <li onclick="getMap(128);"><a href="#">128.湘南  荆州─衡阳郡</a></li>
-        <li onclick="getMap(129);"><a href="#">129.巫县  荆州─建平郡</a></li>
-        <li onclick="getMap(130);"><a href="#">130.恩平  交州─高凉郡</a></li>
-        <li onclick="getMap(131);"><a href="#">131.广信  交州─苍梧郡</a></li>
-        <li onclick="getMap(132);"><a href="#">132.布山  交州─郁林郡</a></li>
-        <li onclick="getMap(133);"><a href="#">133.合浦  交州─合浦郡</a></li>
-        <li onclick="getMap(134);"><a href="#">134.徐闻  交州─朱崖郡</a></li>
-        <li onclick="getMap(135);"><a href="#">135.胥浦  交州─九真郡</a></li>
-        <li onclick="getMap(136);"><a href="#">136.下办  益州─武都郡</a></li>
-        <li onclick="getMap(137);"><a href="#">137.阴平  益州─阴平郡</a></li>
-        <li onclick="getMap(138);"><a href="#">138.谠口  益州─褒中县</a></li>
-        <li onclick="getMap(139);"><a href="#">139.褒中  益州─褒中县</a></li>
-        <li onclick="getMap(140);"><a href="#">140.阆中  益州─巴西郡</a></li>
-        <li onclick="getMap(141);"><a href="#">141.锦虎  益州─汶山郡</a></li>
-        <li onclick="getMap(142);"><a href="#">142.汉嘉  益州─汉嘉郡</a></li>
-        <li onclick="getMap(143);"><a href="#">143.江州  益州─巴郡</a></li>
-        <li onclick="getMap(144);"><a href="#">144.江阳  益州─江阳郡</a></li>
-        <li onclick="getMap(145);"><a href="#">145.邛都  益州─越隽郡</a></li>
-        <li onclick="getMap(146);"><a href="#">146.朱提  益州─朱提郡</a></li>
-        <li onclick="getMap(147);"><a href="#">147.且兰  益州─徉柯郡</a></li>
-        <li onclick="getMap(148);"><a href="#">148.味县  益州─建宁郡</a></li>
-        <li onclick="getMap(149);"><a href="#">149.云南  益州─云南郡</a></li>
-        <li onclick="getMap(150);"><a href="#">150.雲南  益州─云南郡</a></li>
-        <li onclick="getMap(151);"><a href="#">151.永昌  益州─永昌郡</a></li>
-        <li onclick="getMap(152);"><a href="#">152.宛温  益州─兴古郡</a></li>
-        <li onclick="getMap(153);"><a href="#">153.信都  冀州─安平郡─州治</a></li>
-        <li onclick="getMap(154);"><a href="#">154.房子  冀州─赵国</a></li>
-        <li onclick="getMap(155);"><a href="#">155.廮陶  冀州─巨鹿郡</a></li>
-        <li onclick="getMap(156);"><a href="#">156.曲梁  冀州─广平郡</a></li>
-        <li onclick="getMap(157);"><a href="#">157.黎阳  冀州─魏郡</a></li>
-        <li onclick="getMap(158);"><a href="#">158.馆陶  冀州─阳平郡</a></li>
-        <li onclick="getMap(159);"><a href="#">159.清河  冀州─清河郡</a></li>
-        <li onclick="getMap(160);"><a href="#">160.庆次  冀州─乐陵国</a></li>
-        <li onclick="getMap(161);"><a href="#">161.乐成  冀州─河间郡</a></li>
-        <li onclick="getMap(162);"><a href="#">162.卢奴  冀州─中山郡</a></li>
-        <li onclick="getMap(163);"><a href="#">163.耀县  雍州─北地郡</a></li>
-        <li onclick="getMap(164);"><a href="#">164.杜陵  雍州─京兆尹</a></li>
-        <li onclick="getMap(165);"><a href="#">165.槐里  雍州─扶风郡</a></li>
-        <li onclick="getMap(166);"><a href="#">166.骆口  雍州─扶风郡</a></li>
-        <li onclick="getMap(167);"><a href="#">167.漆县  雍州─新平郡</a></li>
-        <li onclick="getMap(168);"><a href="#">168.临泾  雍州─安定郡</a></li>
-        <li onclick="getMap(169);"><a href="#">169.郿县  雍州─扶风郡</a></li>
-        <li onclick="getMap(170);"><a href="#">170.临渭  雍州─广魏郡</a></li>
-        <li onclick="getMap(171);"><a href="#">171.冀县  雍州─天水郡</a></li>
-        <li onclick="getMap(172);"><a href="#">172.襄武  雍州─陇西郡</a></li>
-        <li onclick="getMap(173);"><a href="#">173.榆中  凉州─金城郡</a></li>
-        <li onclick="getMap(174);"><a href="#">174.西都  凉州─西平郡</a></li>
-        <li onclick="getMap(175);"><a href="#">175.角乐得  凉州─张掖郡</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="content">
+<!-- mapMenu 左侧地点栏-->
+  <ul class="w3-col w3-hide-small w3-hide-medium w3-light-gray w3-card-4" style="width:250px;margin-top:80px;list-style-type:none;border-radius: 50px 0 0 50px;" id="mapMenu">
+          <li onclick="getMap(1);"><a href="#">1.洛阳  司隶─河南尹</a></li>
+          <li onclick="getMap(2);"><a href="#">2.许昌  豫州─颖川郡</a></li>
+          <li onclick="getMap(3);"><a href="#">3.建业  扬州─丹阳郡</a></li>
+          <li onclick="getMap(4);"><a href="#">4.成都  益州─蜀郡─州治</a></li>
+          <li onclick="getMap(5);"><a href="#">5.长安  雍州─京兆尹─州治</a></li>
+          <li onclick="getMap(6);"><a href="#">6.北平  幽州—右北平郡</a></li>
+          <li onclick="getMap(7);"><a href="#">7.涿县  幽州─范阳郡</a></li>
+          <li onclick="getMap(8);"><a href="#">8.真定  冀州─常山郡</a></li>
+          <li onclick="getMap(9);"><a href="#">9.邺  冀州─魏郡</a></li>
+          <li onclick="getMap(10);"><a href="#">10.平原  冀州─平原郡</a></li>
+          <li onclick="getMap(11);"><a href="#">11.南皮  冀州─渤海郡</a></li>
+          <li onclick="getMap(12);"><a href="#">12.弘农  司隶─弘农郡</a></li>
+          <li onclick="getMap(13);"><a href="#">13.子午谷  雍州─京兆尹</a></li>
+          <li onclick="getMap(14);"><a href="#">14.陈仓  雍州─扶风郡</a></li>
+          <li onclick="getMap(15);"><a href="#">15.街亭  雍州─天水郡</a></li>
+          <li onclick="getMap(16);"><a href="#">16.武威─姑臧  凉州─武威郡</a></li>
+          <li onclick="getMap(17);"><a href="#">17.濮阳  兖州─东郡</a></li>
+          <li onclick="getMap(18);"><a href="#">18.白马  兖州─东郡</a></li>
+          <li onclick="getMap(19);"><a href="#">19.乌巢  兖州─陈留国</a></li>
+          <li onclick="getMap(20);"><a href="#">20.官渡  兖州─陈留国</a></li>
+          <li onclick="getMap(21);"><a href="#">21.陈留  兖州─陈留国</a></li>
+          <li onclick="getMap(22);"><a href="#">22.下邳  徐州─州治</a></li>
+          <li onclick="getMap(23);"><a href="#">23.淮阴  徐州─广陵郡</a></li>
+          <li onclick="getMap(24);"><a href="#">24.睢阳  豫州─梁国</a></li>
+          <li onclick="getMap(25);"><a href="#">25.汝南  豫州─汝南郡─州治</a></li>
+          <li onclick="getMap(26);"><a href="#">26.寿春  扬州─州治</a></li>
+          <li onclick="getMap(27);"><a href="#">27.新野  荆州─南阳郡</a></li>
+          <li onclick="getMap(28);"><a href="#">28.皖城  扬州─庐江郡─州治</a></li>
+          <li onclick="getMap(29);"><a href="#">29.柴桑  荆州─江夏郡</a></li>
+          <li onclick="getMap(30);"><a href="#">30.襄阳  荆州─襄阳郡</a></li>
+          <li onclick="getMap(31);"><a href="#">31.夷陵  荆州─新城县</a></li>
+          <li onclick="getMap(32);"><a href="#">32.江陵  荆州─南郡</a></li>
+          <li onclick="getMap(33);"><a href="#">33.公安  荆州─南郡</a></li>
+          <li onclick="getMap(34);"><a href="#">34.上庸  益州─上庸郡</a></li>
+          <li onclick="getMap(35);"><a href="#">35.永安  益州─巴东郡</a></li>
+          <li onclick="getMap(36);"><a href="#">36.南郑  益州─汉中郡</a></li>
+          <li onclick="getMap(37);"><a href="#">37.梓潼  益州─梓潼郡</a></li>
+          <li onclick="getMap(38);"><a href="#">38.涪城  益州─梓橦郡</a></li>
+          <li onclick="getMap(39);"><a href="#">39.雒县  益州─广汉郡</a></li>
+          <li onclick="getMap(40);"><a href="#">40.合肥  扬州─淮南郡</a></li>
+          <li onclick="getMap(41);"><a href="#">41.带方  幽州─带方郡</a></li>
+          <li onclick="getMap(42);"><a href="#">42.朝鲜  幽州─乐浪郡</a></li>
+          <li onclick="getMap(43);"><a href="#">43.高句丽  幽州─玄菟郡</a></li>
+          <li onclick="getMap(44);"><a href="#">44.襄平  幽州─辽东郡</a></li>
+          <li onclick="getMap(45);"><a href="#">45.昌黎  幽州─昌黎郡</a></li>
+          <li onclick="getMap(46);"><a href="#">46.阳乐  幽州─辽西郡</a></li>
+          <li onclick="getMap(47);"><a href="#">47.土垠  幽州─右北平郡</a></li>
+          <li onclick="getMap(48);"><a href="#">48.蓟  幽州─燕国蓟县</a></li>
+          <li onclick="getMap(49);"><a href="#">49.渔阳  幽州─渔阳郡</a></li>
+          <li onclick="getMap(50);"><a href="#">50.居庸  幽州─上古郡</a></li>
+          <li onclick="getMap(51);"><a href="#">51.代县  幽州─代郡</a></li>
+          <li onclick="getMap(52);"><a href="#">52.雁门  并州─雁门郡</a></li>
+          <li onclick="getMap(53);"><a href="#">53.九原  并州─新兴郡</a></li>
+          <li onclick="getMap(54);"><a href="#">54.晋阳  并州─太原郡─州治</a></li>
+          <li onclick="getMap(55);"><a href="#">55.离石  并州─西河郡</a></li>
+          <li onclick="getMap(56);"><a href="#">56.居延  凉州─西海郡</a></li>
+          <li onclick="getMap(57);"><a href="#">57.昌邑  兖州─山阳郡</a></li>
+          <li onclick="getMap(58);"><a href="#">58.彭城  徐州─彭城国</a></li>
+          <li onclick="getMap(59);"><a href="#">59.沛县  豫州─沛国</a></li>
+          <li onclick="getMap(60);"><a href="#">60.毗陵  扬州─毗陵典农校尉</a></li>
+          <li onclick="getMap(61);"><a href="#">61.建安  扬州─建安郡</a></li>
+          <li onclick="getMap(62);"><a href="#">62.南昌  扬州─豫章郡</a></li>
+          <li onclick="getMap(63);"><a href="#">63.江夏  荆州─江夏郡</a></li>
+          <li onclick="getMap(64);"><a href="#">64.番禺  交州─南海郡</a></li>
+          <li onclick="getMap(65);"><a href="#">65.交趾郡  交州─龙编</a></li>
+          <li onclick="getMap(66);"><a href="#">66.朱吾  交州─日南郡</a></li>
+          <li onclick="getMap(67);"><a href="#">67.武阳  益州─腱为郡</a></li>
+          <li onclick="getMap(68);"><a href="#">68.涪陵  益州─涪陵郡</a></li>
+          <li onclick="getMap(69);"><a href="#">69.沾县  并州─乐平郡</a></li>
+          <li onclick="getMap(70);"><a href="#">70.怀  司隶─河内郡</a></li>
+          <li onclick="getMap(71);"><a href="#">71.阳武  司隶─河南尹</a></li>
+          <li onclick="getMap(72);"><a href="#">72.平阳  司隶─平阳郡</a></li>
+          <li onclick="getMap(73);"><a href="#">73.安邑  司隶─河东郡</a></li>
+          <li onclick="getMap(74);"><a href="#">74.汜水关  </a></li>
+          <li onclick="getMap(75);"><a href="#">75.函谷关  </a></li>
+          <li onclick="getMap(76);"><a href="#">76.散关  </a></li>
+          <li onclick="getMap(77);"><a href="#">77.潼关  </a></li>
+          <li onclick="getMap(78);"><a href="#">78.武关  </a></li>
+          <li onclick="getMap(79);"><a href="#">79.阳平关  </a></li>
+          <li onclick="getMap(80);"><a href="#">80.葭萌关  </a></li>
+          <li onclick="getMap(81);"><a href="#">81.剑阁  </a></li>
+          <li onclick="getMap(82);"><a href="#">82.绵竹关  </a></li>
+          <li onclick="getMap(83);"><a href="#">83.壶关  并州─上党郡</a></li>
+          <li onclick="getMap(84);"><a href="#">84.临晋  雍州─冯翊郡</a></li>
+          <li onclick="getMap(85);"><a href="#">85.禄福  凉州─酒泉郡</a></li>
+          <li onclick="getMap(86);"><a href="#">86.敦煌  凉州─敦煌郡</a></li>
+          <li onclick="getMap(87);"><a href="#">87.海头  西域长史府─州治</a></li>
+          <li onclick="getMap(88);"><a href="#">88.高昌  西域长史府─戊己校尉</a></li>
+          <li onclick="getMap(89);"><a href="#">89.奉高  兖州─泰山郡</a></li>
+          <li onclick="getMap(90);"><a href="#">90.无盐  兖州─东平国</a></li>
+          <li onclick="getMap(91);"><a href="#">91.郡丘  兖州─州治</a></li>
+          <li onclick="getMap(92);"><a href="#">92.延津  兖州─陈留国</a></li>
+          <li onclick="getMap(93);"><a href="#">93.定陶、卢县  兖州─济阳郡、济北国</a></li>
+          <li onclick="getMap(94);"><a href="#">94.任城  兖州─任城郡</a></li>
+          <li onclick="getMap(95);"><a href="#">95.东平陵  青州─济南国</a></li>
+          <li onclick="getMap(96);"><a href="#">96.高苑  青州─乐安郡</a></li>
+          <li onclick="getMap(97);"><a href="#">97.临淄  青州─州治</a></li>
+          <li onclick="getMap(98);"><a href="#">98.平寿  青州─北海国</a></li>
+          <li onclick="getMap(99);"><a href="#">99.黄县  青州─东莱郡</a></li>
+          <li onclick="getMap(100);"><a href="#">100.东武  青州─城阳郡</a></li>
+          <li onclick="getMap(101);"><a href="#">101.开阳  徐州─琅琊国</a></li>
+          <li onclick="getMap(102);"><a href="#">102.郯县  徐州─东海国</a></li>
+          <li onclick="getMap(103);"><a href="#">103.阳翟  豫州─颖川郡</a></li>
+          <li onclick="getMap(104);"><a href="#">104.陈县  豫州─陈郡</a></li>
+          <li onclick="getMap(105);"><a href="#">105.安城  豫州─汝南郡─州治</a></li>
+          <li onclick="getMap(106);"><a href="#">106.谯县  豫州─谯郡</a></li>
+          <li onclick="getMap(107);"><a href="#">107.安风  豫州─安丰郡</a></li>
+          <li onclick="getMap(108);"><a href="#">108.宛县  豫州─南阳郡</a></li>
+          <li onclick="getMap(109);"><a href="#">109.弋阳  豫州─弋阳郡</a></li>
+          <li onclick="getMap(110);"><a href="#">110.鲁县  豫州─鲁郡</a></li>
+          <li onclick="getMap(111);"><a href="#">111.六安  扬州─卢江郡</a></li>
+          <li onclick="getMap(112);"><a href="#">112.吴县  扬州─吴郡</a></li>
+          <li onclick="getMap(113);"><a href="#">113.山阴  扬州─会稽郡</a></li>
+          <li onclick="getMap(114);"><a href="#">114.始新  扬州─新都郡</a></li>
+          <li onclick="getMap(115);"><a href="#">115.章安  扬州─临海郡</a></li>
+          <li onclick="getMap(116);"><a href="#">116.南城  扬州─临川郡</a></li>
+          <li onclick="getMap(117);"><a href="#">117.高昌  扬州─卢陵郡</a></li>
+          <li onclick="getMap(118);"><a href="#">118.鄱阳  扬州─鄱阳郡</a></li>
+          <li onclick="getMap(119);"><a href="#">119.皖县  扬州─庐江郡</a></li>
+          <li onclick="getMap(120);"><a href="#">120.蕲春  扬州─蕲春郡</a></li>
+          <li onclick="getMap(121);"><a href="#">121.夷道  荆州─宜都郡</a></li>
+          <li onclick="getMap(122);"><a href="#">122.临湘  荆州─长沙郡</a></li>
+          <li onclick="getMap(123);"><a href="#">123.临浣  荆州─武陵郡</a></li>
+          <li onclick="getMap(124);"><a href="#">124.郴县  荆州─桂阳郡</a></li>
+          <li onclick="getMap(125);"><a href="#">125.泉陵  荆州─零陵郡</a></li>
+          <li onclick="getMap(126);"><a href="#">126.湘东  荆州─湘东郡</a></li>
+          <li onclick="getMap(127);"><a href="#">127.临贺  荆州─临贺郡</a></li>
+          <li onclick="getMap(128);"><a href="#">128.湘南  荆州─衡阳郡</a></li>
+          <li onclick="getMap(129);"><a href="#">129.巫县  荆州─建平郡</a></li>
+          <li onclick="getMap(130);"><a href="#">130.恩平  交州─高凉郡</a></li>
+          <li onclick="getMap(131);"><a href="#">131.广信  交州─苍梧郡</a></li>
+          <li onclick="getMap(132);"><a href="#">132.布山  交州─郁林郡</a></li>
+          <li onclick="getMap(133);"><a href="#">133.合浦  交州─合浦郡</a></li>
+          <li onclick="getMap(134);"><a href="#">134.徐闻  交州─朱崖郡</a></li>
+          <li onclick="getMap(135);"><a href="#">135.胥浦  交州─九真郡</a></li>
+          <li onclick="getMap(136);"><a href="#">136.下办  益州─武都郡</a></li>
+          <li onclick="getMap(137);"><a href="#">137.阴平  益州─阴平郡</a></li>
+          <li onclick="getMap(138);"><a href="#">138.谠口  益州─褒中县</a></li>
+          <li onclick="getMap(139);"><a href="#">139.褒中  益州─褒中县</a></li>
+          <li onclick="getMap(140);"><a href="#">140.阆中  益州─巴西郡</a></li>
+          <li onclick="getMap(141);"><a href="#">141.锦虎  益州─汶山郡</a></li>
+          <li onclick="getMap(142);"><a href="#">142.汉嘉  益州─汉嘉郡</a></li>
+          <li onclick="getMap(143);"><a href="#">143.江州  益州─巴郡</a></li>
+          <li onclick="getMap(144);"><a href="#">144.江阳  益州─江阳郡</a></li>
+          <li onclick="getMap(145);"><a href="#">145.邛都  益州─越隽郡</a></li>
+          <li onclick="getMap(146);"><a href="#">146.朱提  益州─朱提郡</a></li>
+          <li onclick="getMap(147);"><a href="#">147.且兰  益州─徉柯郡</a></li>
+          <li onclick="getMap(148);"><a href="#">148.味县  益州─建宁郡</a></li>
+          <li onclick="getMap(149);"><a href="#">149.云南  益州─云南郡</a></li>
+          <li onclick="getMap(150);"><a href="#">150.雲南  益州─云南郡</a></li>
+          <li onclick="getMap(151);"><a href="#">151.永昌  益州─永昌郡</a></li>
+          <li onclick="getMap(152);"><a href="#">152.宛温  益州─兴古郡</a></li>
+          <li onclick="getMap(153);"><a href="#">153.信都  冀州─安平郡─州治</a></li>
+          <li onclick="getMap(154);"><a href="#">154.房子  冀州─赵国</a></li>
+          <li onclick="getMap(155);"><a href="#">155.廮陶  冀州─巨鹿郡</a></li>
+          <li onclick="getMap(156);"><a href="#">156.曲梁  冀州─广平郡</a></li>
+          <li onclick="getMap(157);"><a href="#">157.黎阳  冀州─魏郡</a></li>
+          <li onclick="getMap(158);"><a href="#">158.馆陶  冀州─阳平郡</a></li>
+          <li onclick="getMap(159);"><a href="#">159.清河  冀州─清河郡</a></li>
+          <li onclick="getMap(160);"><a href="#">160.庆次  冀州─乐陵国</a></li>
+          <li onclick="getMap(161);"><a href="#">161.乐成  冀州─河间郡</a></li>
+          <li onclick="getMap(162);"><a href="#">162.卢奴  冀州─中山郡</a></li>
+          <li onclick="getMap(163);"><a href="#">163.耀县  雍州─北地郡</a></li>
+          <li onclick="getMap(164);"><a href="#">164.杜陵  雍州─京兆尹</a></li>
+          <li onclick="getMap(165);"><a href="#">165.槐里  雍州─扶风郡</a></li>
+          <li onclick="getMap(166);"><a href="#">166.骆口  雍州─扶风郡</a></li>
+          <li onclick="getMap(167);"><a href="#">167.漆县  雍州─新平郡</a></li>
+          <li onclick="getMap(168);"><a href="#">168.临泾  雍州─安定郡</a></li>
+          <li onclick="getMap(169);"><a href="#">169.郿县  雍州─扶风郡</a></li>
+          <li onclick="getMap(170);"><a href="#">170.临渭  雍州─广魏郡</a></li>
+          <li onclick="getMap(171);"><a href="#">171.冀县  雍州─天水郡</a></li>
+          <li onclick="getMap(172);"><a href="#">172.襄武  雍州─陇西郡</a></li>
+          <li onclick="getMap(173);"><a href="#">173.榆中  凉州─金城郡</a></li>
+          <li onclick="getMap(174);"><a href="#">174.西都  凉州─西平郡</a></li>
+          <li onclick="getMap(175);"><a href="#">175.角乐得  凉州─张掖郡</a></li>
+        </ul>
+
+  <div class="w3-rest w3-card-4" style="margin-top:80px;border-radius: 0 50px 50px 0;">
     <!--内容开始-->
     <article class="article-content">
-      <div id="mappan" class="w3-round-xxlarge"></div>
+      <div id="mapLayer"></div>
     </article>
 
-    <script language="javascript">
+    <script>
         /*** 高德地图*/
         var Gaode = L.tileLayer.chinaProvider('GaoDe.Normal.Map', {maxZoom: 18,minZoom: 5});
         var Gaodimgem = L.tileLayer.chinaProvider('GaoDe.Satellite.Map', {maxZoom: 18,minZoom: 5});
@@ -242,9 +235,7 @@
             "卫星图": Gaodimage
         }
 
-
-
-        var map = L.map("mappan", {
+        var map = L.map("mapLayer", {
             center: [35.74874, 116.05408],
             zoom: 5,
             layers: [Gaode],
@@ -260,10 +251,9 @@
         }).addTo(map);
 
 
-        // 使用用户自己的图标
-
+        // 城池图标
         var greenIcon = L.icon({
-            iconUrl: 'http://www.sdmz.net/d/map/sg/chengchi.png',
+            iconUrl: 'https://zssanguo.com/img/logo.png',
             iconSize:     [30,27],    // size of the icon
             iconAnchor:   [30,27], // point of the icon which will correspond to marker's location
             popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
@@ -281,7 +271,7 @@
             [3,'建业',[31.99876, 118.79517],'http://www.sdmz.net/d/map/sg/sggcc/3.jpg','<p>所属州郡：扬州─丹阳郡</p><p>现在地址：江苏省南京市</p>','http://www.sdmz.net'],
             [4,'成都',[30.57645, 104.07349],'http://www.sdmz.net/d/map/sg/sggcc/4.jpg','<p>所属州郡：益州─蜀郡─州治</p><p>现在地址：四川省成都市</p>','http://www.sdmz.net'],
             [5,'长安',[34.34996, 108.94009],'http://www.sdmz.net/d/map/sg/sggcc/5.jpg','<p>所属州郡：雍州─京兆尹─州治</p><p>现在地址：陕西省西安市 西北</p>','http://www.sdmz.net'],
-            [6,'北平',[41.24271, 119.41589],'http://www.sdmz.net/d/map/sg/sggcc/6.jpg','<p>所属州郡：幽州&mdash;右北平郡</p><p>现在地址：辽宁省朝阳市凌源市</p>','http://www.sdmz.net'],
+            [6,'北平',[41.24271, 119.41589],'http://www.sdmz.net/d/map/sg/sggcc/6.jpg','<p>所属州郡：幽州─右北平郡</p><p>现在地址：辽宁省朝阳市凌源市</p>','http://www.sdmz.net'],
             [7,'涿县',[39.49132, 115.98267],'http://www.sdmz.net/d/map/sg/sggcc/7.jpg','<p>所属州郡：幽州─范阳郡</p><p>现在地址：河北省保定市涿州市</p>','http://www.sdmz.net'],
             [8,'真定',[38.08917, 114.51324],'http://www.sdmz.net/d/map/sg/sggcc/8.jpg','<p>所属州郡：冀州─常山郡</p><p>现在地址：河北省石家庄市 北</p>','http://www.sdmz.net'],
             [9,'邺',[36.59348, 114.49402],'http://www.sdmz.net/d/map/sg/sggcc/9.jpg','<p>所属州郡：冀州─魏郡</p><p>现在地址：河北省邯郸县临漳县 西南</p>','http://www.sdmz.net'],
@@ -483,13 +473,8 @@
         if(top != self){
             window.top.location.replace(self.location);
         }
-
-
-
     </script>
-    <!--内容结束--></div>
-</section>
-
+</div>
 </div>
 
 </body>
