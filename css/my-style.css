@@ -1,25 +1,43 @@
-/*背景图片*/
 body {
+    /*背景图片*/
     background: url(../img/background.jpeg) no-repeat 0 0 fixed;
     background-size: cover;
 }
-/*image map responsiveness*/
-img[usemap] {
-    border: none;
-    height: auto;
-    max-width: 100%;
-    width: auto;
-}
-
-/*rightPanel里userMenu和customContent的样式*/
-@media (max-width:992px){
-    #userMenu {width:200px;}
-    #sidePanelSearchBox {width:100px;}
-}
+/*大屏幕*/
 @media (min-width:992px){
     #userMenu {width:300px;}
+    #rightPanel {
+        margin-left: 336px;
+    }
+    #mapContainer {border-radius: 0 50px 50px 0;}
 }
-/*个性化hr*/
+/*中小屏幕*/
+@media (max-width:992px){
+    /*rightPanel里userMenu和customContent的样式*/
+    #userMenu {width:200px;}
+    #sidePanelSearchBox {width:100px;}
+    #rightPanel {
+        margin-left: 236px;
+    }
+    #mapContainer {border-radius: 50px;}
+}
+/*小屏幕*/
+@media (max-width:600px){
+    #rightPanel {
+        margin-left: 16px;
+    }
+}
+
+/*地图mapMenu,mapLayer和popupInfo的样式*/
+#mapLayer {height:800px;}
+#mapMenu {height:800px; overflow-y:scroll;}
+#mapMenu a{font-size:15px;}
+.popupInfo p{text-indent:0}
+.popupInfo p,.popupInfo h3{margin:0;padding:0;}
+.popupInfo a:link,.popupInfo a:visited {font-size:15px;color:red;text-decoration:none}
+.popupInfo a:hover,.popupInfo a:active {font-size:15px;color:darkorange;text-decoration:underline}
+
+/*个性化horizontal rule*/
 .myHorizontalRule{
     overflow: visible; /* For IE */
     padding: 0;
@@ -36,5 +54,24 @@ img[usemap] {
     font-size: 1.5em;
     padding: 0 0.25em;
     background: #f1f1f1;
+}
+
+/*不带scrollbar的scrollbar(￣▽￣)""*/
+.coolScroll {
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+}
+.coolScroll::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+
+/*image map responsiveness*/
+img[usemap] {
+    border: none;
+    height: auto;
+    max-width: 100%;
+    width: auto;
 }
 
