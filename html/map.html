@@ -21,6 +21,14 @@
     .popupInfo p,.popupInfo h3{margin:0;padding:0;}
     .popupInfo a:link,.popupInfo a:visited {font-size:15px;color:red;text-decoration:none}
     .popupInfo a:hover,.popupInfo a:active {font-size:15px;color:darkorange;text-decoration:underline}
+
+    @media (min-width:992px){
+      #mapContainer {border-radius: 0 50px 50px 0;}
+    }
+    @media (max-width:992px){
+      #mapContainer {border-radius: 50px;}
+    }
+
   </style>
 </head>
 
@@ -133,7 +141,7 @@
 
   </ul>
 
-  <div class="w3-rest w3-card-4" style="margin-top:80px;border-radius: 0 50px 50px 0;">
+  <div id="mapContainer" class="w3-rest w3-card-4" style="margin-top:80px">
     <!--内容开始-->
     <article class="article-content">
       <div id="mapLayer"></div>
