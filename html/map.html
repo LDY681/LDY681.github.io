@@ -13,6 +13,7 @@
   <link  href="../css/leaflet.css" rel="stylesheet" />
   <script src="../js/leaflet.js"></script>
   <script src="../js/leaflet.ChineseTmsProviders.js"></script>
+
   <style type="text/css">
     #mapLayer {height:800px;}
     #mapMenu {height:800px; overflow-y:scroll;}
@@ -28,7 +29,6 @@
     @media (max-width:992px){
       #mapContainer {border-radius: 50px;}
     }
-
   </style>
 </head>
 
@@ -47,7 +47,7 @@
 <div id="customContent" style="margin-left:0;" class="w3-row">
 
 <!-- mapMenu 左侧地点栏-->
-  <ul class="w3-col w3-hide-small w3-hide-medium w3-light-gray w3-card-4" style="width:250px;margin-top:80px;list-style-type:none;border-radius: 50px 0 0 50px;" id="mapMenu">
+  <ul class="w3-col w3-light-gray w3-card-4 w3-hide-small w3-hide-medium" style="width:250px;margin-top:80px;list-style-type:none;border-radius: 50px 0 0 50px;" id="mapMenu">
     <li class="w3-xxlarge">魏国</li>
     <li class="w3-xlarge">河北</li>
     <li class="w3-large">幽州</li>
@@ -143,9 +143,7 @@
 
   <div id="mapContainer" class="w3-rest w3-card-4" style="margin-top:80px">
     <!--内容开始-->
-    <article class="article-content">
-      <div id="mapLayer"></div>
-    </article>
+    <div id="mapLayer"></div>
 
     <script>
         /*** 高德地图*/
@@ -300,7 +298,7 @@
             window.top.location.replace(self.location);
         }
     </script>
-</div>
+  </div>
 </div>
 
 </body>

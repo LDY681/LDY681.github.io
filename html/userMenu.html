@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<title>转世三国-模拟三国人生</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/w3.css">
+<link rel="stylesheet" href="../css/all.css">
+<link rel="stylesheet" href="../css/my-style.css">
+<link rel="icon" href="../img/logo.png"/>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/countDown.js"></script>
+
+
+  <!--      时间显示-->
+  <div class="w3-panel w3-large">
+    <b id="counter"></b>
+    <i class="far fa-lightbulb w3-yellow w3-hover-light-green w3-dropdown-hover">
+      <div class="w3-dropdown-content w3-card-4" style="width:250px">
+        <div class="w3-container">
+          <img src="../img/seasons.jfif " alt="一年四季" style="width:100%">
+          <p>在转世三国中，现实时间被缩短。10天为一月，30天为一季，120天为一年。<br><br>
+            在不同季节里，地理环境会带来不同的影响。</p>
+        </div>
+      </div>
+      <sup>?</sup></i><br>
+    <div id="currTime"></div>
+  </div><br>
+
+  <!--      搜索框-->
+  <form action="search.html" method="get">
+    <label for="sidePanelSearchBox"></label><input class="w3-margin-left w3-threequarter w3-round-xxlarge" id ="sidePanelSearchBox" style="" name="search" placeholder="  搜索一下">
+    <button class="w3-rest w3-round-xxlarge" id="sidePanelSearchButton" type="submit"><i class="fas fa-search"></i></button>
+  </form><br>
+
+  <!--      今日任务-->
+  <div class="myHorizontalRule"></div>
+  <div id=dailyTaskSection">
+    <p style="font-weight:bold;">今日任务：</p>
+    <button class="w3-xlarge w3-button w3-light-green" style="display: inline-block;" id="taskButtonWork"><a title="工作" href="train.html"><i class="fas fa-tractor"></i></a></button>
+    <button class="w3-xlarge w3-button w3-light-green" style="display: inline-block;" id="taskButtonTrain"><a title="训练" href="train.html"><i class="fas fa-dumbbell"></i></a></button>
+    <button class="w3-xlarge w3-button w3-light-green" style="display: inline-block;" id="taskButtonFight"><a title="战斗" href="battle.html"><i class="fas fa-campground"></i></a></button>
+  </div><br>
+
+  <!--      快捷菜单-->
+  <div id=shortcutSection">
+    <p style="font-weight:bold;">快捷菜单：</p>
+    <button class="w3-large w3-button w3-light-green" style="display: inline-block;" id="taskButtonMU"><a title="军团" href="mu.html"><i class="fas fa-user-shield"></i></a></button>
+    <button class="w3-large w3-button w3-light-green" style="display: inline-block;" id="taskButtonParty"><a title="党派" href="party.html"><i class="fas fa-users"></i></a></button>
+    <button class="w3-large w3-button w3-light-green" style="display: inline-block;" id="taskButtonFlight"><a title="飞行" href="flight.html"><i class="fas fa-helicopter"></i></a></button>
+    <br class="w3-hide-large"/><br class="w3-hide-large"/>
+    <button class="w3-large w3-button w3-light-green" style="display: inline-block;" id="taskButtonAchive"><a title="成就" href="achivement.html"><i class="fas fa-medal"></i></a></button>
+    <button class="w3-large w3-button w3-light-green" style="display: inline-block;" id="taskButtonProfile"><a title="编辑个人资料" href="profile.html"><i class="fas fa-address-card"></i></a></button>
+  </div><br>
+
+  <!--      账号信息-->
+  <div class="myHorizontalRule"></div>
+  <div>
+    <img src="../img/logo.png" alt="账号头像"><br>
+    <a class="profile-link" href="profile.html" id="userName">账户名称</a>
+
+    <div id="levelMission">
+      <span style="font-weight:bold;">等级：</span> <span>40</span>
+    </div>
+    <div id="currRankText" class="sidebar-labeled-information">
+      <span style="font-weight:bold;">官阶：</span>
+      <span>大将军</span>
+    </div>
+  </div><!--end of 账号信息-->
+
+  <!--          process bar账号信息-->
+  <div>
+    <div class="w3-margin w3-grey w3-round-xlarge">
+      <div class="w3-container w3-blue w3-round-xlarge" style="height:24px;width:66%"></div>
+    </div>
+    <p style="font-weight: bold;">经验:6666/10000</p>
+    <div class="w3-margin w3-grey w3-round-xlarge">
+      <div class="w3-container w3-red w3-round-xlarge" style="height:24px;width:33%"></div>
+    </div>
+    <p style="font-weight: bold;">官阶:3333/10000</p>
+    <div class="w3-margin w3-grey w3-round-xlarge">
+      <div class="w3-container w3-green w3-round-xlarge" style="height:24px;width:50%"></div>
+    </div>
+    <p style="font-weight: bold;">体力:50/100</p>
+  </div><!--end of progress bar账号信息-->
+
+  <div class="myHorizontalRule"></div>
+  <p style="font-weight:bold;">我的物资：</p>
+
