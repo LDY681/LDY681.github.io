@@ -1,6 +1,7 @@
 body {
     /*背景图片*/
-    background: url(../img/background.jpeg) no-repeat 0 0 fixed;
+    background-image: url(../img/background.jpeg);
+    background: no-repeat 0 0 fixed;
     background-size: cover;
 }
 /*大屏幕*/

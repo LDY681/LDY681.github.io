@@ -6,4 +6,5 @@ function loader() {
 function showPage() {
     document.getElementById("loader").style.display = "none";
     document.getElementById("afterLoading").style.display = "block";
+    document.body.style.backgroundImage = 'url("../img/background.jpeg")';
 }
