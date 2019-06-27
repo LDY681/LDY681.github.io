@@ -7,59 +7,67 @@
 <link rel="stylesheet" href="../css/w3.css">
 <link rel="stylesheet" href="../css/all.css">
 <link rel="stylesheet" href="../css/my-style.css">
+<link rel="stylesheet" href="../css/loading.css">
 <link rel="icon" href="../img/logo.png"/>
 <script src = "../js/countDown.js"> </script>
 <script src="../js/accordions.js"></script>
+<script src="../js/loader.js"></script>
 </head>
 
-<body onload="countDown('Jan 1, 2025 24:00:00')">
+<body onload="countDown('Jan 1, 2025 24:00:00');loader();">
 
-<!--登录,注册,活动倒计时栏-->
-<div class="w3-row w3-round-xxlarge">
-
-<!--  不同界面下不同大小的登陆注册按钮-->
-  <span class="w3-hide-small w3-hide-medium w3-padding w3-round-xxlarge  w3-light-gray w3-xlarge w3-text-red w3-center w3-display-topmiddle">距离上线还有: <span id="counter"></span></span>
-
-  <button onclick="document.getElementById('login').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-xxlarge w3-green w3-large w3-right w3-hide-medium w3-hide-small">
-    点击图标进行登录
-  </button>
-  <button onclick="document.getElementById('register').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-xxlarge w3-green w3-left w3-hide-medium w3-hide-small">
-    点击图标进行注册
-  </button>
-  <button onclick="document.getElementById('login').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-xlarge w3-hide-large w3-hide-small w3-green w3-right">点击图标进行登录
-  </button>
-  <button onclick="document.getElementById('register').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-xlarge w3-hide-large w3-hide-small w3-green w3-left">
-    点击图标进行注册
-  </button>
-  <button onclick="document.getElementById('login').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-large w3-hide-large w3-hide-medium w3-green w3-right">点击图标进行登录
-  </button>
-  <button onclick="document.getElementById('register').style.display='block'" class="w3-button w3-round-xxlarge w3-large w3-hide-large w3-hide-medium w3-green w3-left">
-    点击图标进行注册
-  </button>
+<div id="loader" style="z-index:1;" class="w3-display-middle w3-light-gray">
+  <img style="width:100%" src="../img/logo.png" class="ld ld-jump" alt="加载中"/><br  >
+  <h1>加载中O(∩_∩)O</h1>
 </div>
 
-<!--游戏介绍框-->
-<div class="w3-auto w3-section w3-light-gray w3-center w3-round-xxlarge w3-card-4">
-  <!--国家特色(带image map)-->
-    <button onclick="accordionOn('map');accordionOff('yellowTurban');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">国家特色(点击地图查看)</button>
-    <button onclick="accordionOn('map');accordionOff('yellowTurban');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">国家特色(点击地图查看)</button>
-  <div id="map" class="w3-show w3-animate-left">
-    <img class= "w3-section" alt="三国地图" src="../img/map-brief.png" width="1049" height="742" usemap="#sanguo">
-    <map name="sanguo">
-      <area alt="" class="shuguo" title="蜀国" coords="99,738,97,723,86,709,74,702,81,685,98,686,105,670,112,663,123,668,135,675,152,673,167,674,182,668,185,647,202,633,214,613,217,567,208,549,195,522,221,494,229,461,246,412,234,393,258,348,239,315,249,266,222,254,173,270,191,216,209,214,159,186,112,138,90,124,74,62,107,41,139,30,163,26,192,22,215,57,217,99,194,117,202,136,220,142,251,125,261,150,277,154,287,189,306,185,326,205,336,240,348,242,362,278,390,277,414,288,430,321,486,321,508,357,523,394,546,407,576,406,591,401,609,424,609,446,616,465,626,481,624,505,600,523,582,528,581,556,586,591,609,610,623,636,610,663,602,695,589,719,552,723,531,712,512,735,465,707,427,730,382,723,369,729,339,741" shape="poly">
-      <area alt="" class="weiguo" title="魏国" coords="1045,42,1024,49,984,64,930,92,907,79,936,48,930,23,896,23,858,36,830,63,793,84,775,107,735,121,733,150,756,175,774,180,794,198,822,201,861,198,897,175,931,197,890,215,854,244,838,278,835,290,809,287,797,294,776,284,772,314,741,320,718,308,701,308,690,319,694,357,684,391,662,408,671,449,675,478,655,464,647,485,631,489,605,460,603,415,585,398,559,411,516,396,498,350,480,323,426,319,403,286,378,276,357,278,350,240,357,209,370,193,391,193,398,166,378,146,367,132,387,116,385,89,397,78,403,95,430,117,459,122,479,122,500,139,493,182,507,215,536,204,531,174,526,140,523,118,540,104,539,85,558,74,574,72,572,57,595,42,616,23,637,16,661,11,691,32,717,25,733,20,750,32,804,3,908,0,1048,3" shape="poly">
-      <area alt="" class="wuguo" title="吴国" coords="860,741,889,724,925,696,950,678,943,666,916,665,949,640,942,633,962,622,967,597,997,556,1022,549,1026,526,1031,496,1037,480,1013,464,1001,417,963,418,939,404,982,398,942,366,924,349,879,311,836,295,795,295,775,286,771,315,744,324,704,309,692,320,679,402,667,406,676,477,659,468,647,487,629,488,616,489,617,506,597,524,583,529,588,589,618,626,612,654,597,700,588,719,571,713,549,726,533,713,517,732,466,711,429,731,383,722,378,731,355,730,342,739" shape="poly">
-    </map>
+<div style="display:none;" id="afterLoading" class="w3-animate-bottom">
+  <!--登录,注册,活动倒计时栏-->
+  <div class="w3-row w3-round-xxlarge">
+
+    <!--  不同界面下不同大小的登陆注册按钮-->
+    <span class="w3-hide-small w3-hide-medium w3-padding w3-round-xxlarge  w3-light-gray w3-xlarge w3-text-red w3-center w3-display-topmiddle">距离上线还有: <span id="counter"></span></span>
+
+    <button onclick="document.getElementById('login').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-xxlarge w3-green w3-large w3-right w3-hide-medium w3-hide-small">
+      点击图标进行登录
+    </button>
+    <button onclick="document.getElementById('register').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-xxlarge w3-green w3-left w3-hide-medium w3-hide-small">
+      点击图标进行注册
+    </button>
+    <button onclick="document.getElementById('login').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-xlarge w3-hide-large w3-hide-small w3-green w3-right">点击图标进行登录
+    </button>
+    <button onclick="document.getElementById('register').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-xlarge w3-hide-large w3-hide-small w3-green w3-left">
+      点击图标进行注册
+    </button>
+    <button onclick="document.getElementById('login').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-large w3-hide-large w3-hide-medium w3-green w3-right">点击图标进行登录
+    </button>
+    <button onclick="document.getElementById('register').style.display='block'" class="w3-button w3-round-xxlarge w3-large w3-hide-large w3-hide-medium w3-green w3-left">
+      点击图标进行注册
+    </button>
   </div>
 
-  <!-- 特殊势力:黄巾-->
+  <!--游戏介绍框-->
+  <div class="w3-auto w3-section w3-light-gray w3-center w3-round-xxlarge w3-card-4">
+    <!--国家特色(带image map)-->
+    <button onclick="accordionOn('map');accordionOff('yellowTurban');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">国家特色(点击地图查看)</button>
+    <button onclick="accordionOn('map');accordionOff('yellowTurban');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">国家特色(点击地图查看)</button>
+    <div id="map" class="w3-show w3-animate-left">
+      <img class= "w3-section" alt="三国地图" src="../img/map-brief.png" width="1049" height="742" usemap="#sanguo">
+      <map name="sanguo">
+        <area alt="" class="shuguo" title="蜀国" coords="99,738,97,723,86,709,74,702,81,685,98,686,105,670,112,663,123,668,135,675,152,673,167,674,182,668,185,647,202,633,214,613,217,567,208,549,195,522,221,494,229,461,246,412,234,393,258,348,239,315,249,266,222,254,173,270,191,216,209,214,159,186,112,138,90,124,74,62,107,41,139,30,163,26,192,22,215,57,217,99,194,117,202,136,220,142,251,125,261,150,277,154,287,189,306,185,326,205,336,240,348,242,362,278,390,277,414,288,430,321,486,321,508,357,523,394,546,407,576,406,591,401,609,424,609,446,616,465,626,481,624,505,600,523,582,528,581,556,586,591,609,610,623,636,610,663,602,695,589,719,552,723,531,712,512,735,465,707,427,730,382,723,369,729,339,741" shape="poly">
+        <area alt="" class="weiguo" title="魏国" coords="1045,42,1024,49,984,64,930,92,907,79,936,48,930,23,896,23,858,36,830,63,793,84,775,107,735,121,733,150,756,175,774,180,794,198,822,201,861,198,897,175,931,197,890,215,854,244,838,278,835,290,809,287,797,294,776,284,772,314,741,320,718,308,701,308,690,319,694,357,684,391,662,408,671,449,675,478,655,464,647,485,631,489,605,460,603,415,585,398,559,411,516,396,498,350,480,323,426,319,403,286,378,276,357,278,350,240,357,209,370,193,391,193,398,166,378,146,367,132,387,116,385,89,397,78,403,95,430,117,459,122,479,122,500,139,493,182,507,215,536,204,531,174,526,140,523,118,540,104,539,85,558,74,574,72,572,57,595,42,616,23,637,16,661,11,691,32,717,25,733,20,750,32,804,3,908,0,1048,3" shape="poly">
+        <area alt="" class="wuguo" title="吴国" coords="860,741,889,724,925,696,950,678,943,666,916,665,949,640,942,633,962,622,967,597,997,556,1022,549,1026,526,1031,496,1037,480,1013,464,1001,417,963,418,939,404,982,398,942,366,924,349,879,311,836,295,795,295,775,286,771,315,744,324,704,309,692,320,679,402,667,406,676,477,659,468,647,487,629,488,616,489,617,506,597,524,583,529,588,589,618,626,612,654,597,700,588,719,571,713,549,726,533,713,517,732,466,711,429,731,383,722,378,731,355,730,342,739" shape="poly">
+      </map>
+    </div>
+
+    <!-- 特殊势力:黄巾-->
     <button onclick="accordionOn('yellowTurban');accordionOff('map');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">特殊势力:黄巾(点我展开)</button>
     <button onclick="accordionOn('yellowTurban');accordionOff('map');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">特殊势力:黄巾(点我展开)</button>
     <section id="yellowTurban" class="w3-panel w3-hide w3-animate-left">
       <p class="w3-xlarge">在本游戏中，玩家可以选择加入黄巾军。黄巾军初始状态下没有城池。因游戏机制（城池越多产量越高，城池越少战力越高），黄巾军是最适合好战玩家的势力。</p>
     </section>
 
-  <!-- 其他特色-->
+    <!-- 其他特色-->
     <button onclick="accordionOn('other');accordionOff('yellowTurban');accordionOff('map');" class="w3-card-4 w3-block w3-margin-bottom w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">游戏机制(点我展开)</button>
     <button onclick="accordionOn('other');accordionOff('yellowTurban');accordionOff('map');" class="w3-card-4 w3-block w3-margin-bottom w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">游戏机制(点我展开)</button>
     <section id="other" class="w3-panel w3-hide w3-animate-left">
@@ -80,8 +88,132 @@
         每2个小时刷新一次打卡(工作训练恢复体力),一天可以打卡4次</p>
     </section>
 
-</div>
+  </div>
 
+  <!--	登录modal-->
+  <div id="login" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('login').style.display='none'"
+              class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span><br>
+        <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+      </div>
+
+      <form class="w3-container" action="index.html">
+        <div class="w3-section">
+          <label><b>账号：</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入账号" name="usrname" required>
+          <label><b>密码：</b></label>
+          <input class="w3-input w3-border" type="text" placeholder="请输入密码" name="psw" required>
+          <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">登录</button>
+        </div>
+      </form>
+
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <button onclick="document.getElementById('login').style.display='none'" type="button" class="w3-button w3-red">
+          取消
+        </button>
+        <span class="w3-right w3-padding"><a href="#">忘记密码?</a></span>
+      </div>
+
+    </div>
+  </div>
+
+  <!--  注册modal-->
+  <div id="register" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('register').style.display='none'"
+              class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span>
+        <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+      </div>
+
+      <form class="w3-container" action="index.html">
+        <div class="w3-section">
+          <label><b>账号：</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入账号" name="usrname" required>
+          <label><b>密码：</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入密码" name="psw" required>
+          <label><b>邮箱：</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入邮箱" name="psw" required>
+          <label><b>师父(选填)：</b></label> <a href="index.html" target="_blank">需要大佬带?点我寻找!</a>
+          <input class="w3-input w3-border" type="text" placeholder="额外赠送新手礼包!" name="psw">
+          <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">注册</button>
+        </div>
+      </form>
+
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <button onclick="document.getElementById('register').style.display='none'" type="button"
+                class="w3-button w3-red">取消
+        </button>
+        <span class="w3-right w3-padding"><a target="_blank"
+                                             href="//shang.qq.com/wpa/qunwpa?idkey=3c4de04285c30fbbde0219589d984e461621f84cb937880221456d12aae39ebf"><img
+          border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="转世三国官方交流群" title="转世三国官方交流群"></a></span>
+      </div>
+
+
+    </div>
+  </div>
+  <!--image map	蜀国介绍modal-->
+  <div id="shuIntro" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('shuIntro').style.display='none'"
+              class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span><br>
+        <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"><br>
+        <p class="w3-panel">蜀国坐拥西北雍州，凉州；巴蜀益州。拥有初始城池16座，玩家可通过战争开疆扩土。<br><a href="map.html">点击查看当前疆域</a></p>
+      </div>
+
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <button onclick="document.getElementById('shuIntro').style.display='none'" type="button" class="w3-button w3-red">
+          取消
+        </button>
+      </div>
+
+    </div>
+  </div>
+  <!--image map	魏国介绍modal-->
+  <div id="weiIntro" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('weiIntro').style.display='none'"
+              class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span><br>
+        <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"><br>
+        <p class="w3-panel">魏国坐拥河北幽州，冀州，并州，青州；中原徐州，兖州，豫州，司隶。拥有初始城池26座，玩家可通过战争开疆扩土。<br><a href="map.html">点击查看当前疆域</a></p>
+      </div>
+
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <button onclick="document.getElementById('weiIntro').style.display='none'" type="button" class="w3-button w3-red">
+          取消
+        </button>
+      </div>
+
+    </div>
+  </div>
+  <!--image map 吴国介绍modal-->
+  <div id="wuIntro" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('wuIntro').style.display='none'"
+              class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span><br>
+        <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"><br>
+        <p class="w3-panel">吴国坐拥荆楚荆州；吴越扬州，交州。拥有初始城池18座，玩家可通过战争开疆扩土。<br><a href="map.html">点击查看当前疆域</a></p>
+      </div>
+
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <button onclick="document.getElementById('wuIntro').style.display='none'" type="button" class="w3-button w3-red">
+          取消
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <!--image map js 脚本-->
 <script src="../js/rwdImageMaps.jquery.min.js"></script>
@@ -105,130 +237,5 @@
 
     });
 </script>
-
-<!--	登录modal-->
-<div id="login" class="w3-modal">
-  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-
-    <div class="w3-center"><br>
-      <span onclick="document.getElementById('login').style.display='none'"
-            class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span><br>
-      <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
-    </div>
-
-    <form class="w3-container" action="index.html">
-      <div class="w3-section">
-        <label><b>账号：</b></label>
-        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入账号" name="usrname" required>
-        <label><b>密码：</b></label>
-        <input class="w3-input w3-border" type="text" placeholder="请输入密码" name="psw" required>
-        <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">登录</button>
-      </div>
-    </form>
-
-    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-      <button onclick="document.getElementById('login').style.display='none'" type="button" class="w3-button w3-red">
-        取消
-      </button>
-      <span class="w3-right w3-padding"><a href="#">忘记密码?</a></span>
-    </div>
-
-  </div>
-</div>
-
-<!--  注册modal-->
-<div id="register" class="w3-modal">
-  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-
-    <div class="w3-center"><br>
-      <span onclick="document.getElementById('register').style.display='none'"
-            class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span>
-      <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
-    </div>
-
-    <form class="w3-container" action="index.html">
-      <div class="w3-section">
-        <label><b>账号：</b></label>
-        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入账号" name="usrname" required>
-        <label><b>密码：</b></label>
-        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入密码" name="psw" required>
-        <label><b>邮箱：</b></label>
-        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入邮箱" name="psw" required>
-        <label><b>师父(选填)：</b></label> <a href="index.html" target="_blank">需要大佬带?点我寻找!</a>
-        <input class="w3-input w3-border" type="text" placeholder="额外赠送新手礼包!" name="psw">
-        <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">注册</button>
-      </div>
-    </form>
-
-    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-      <button onclick="document.getElementById('register').style.display='none'" type="button"
-              class="w3-button w3-red">取消
-      </button>
-      <span class="w3-right w3-padding"><a target="_blank"
-                                           href="//shang.qq.com/wpa/qunwpa?idkey=3c4de04285c30fbbde0219589d984e461621f84cb937880221456d12aae39ebf"><img
-        border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="转世三国官方交流群" title="转世三国官方交流群"></a></span>
-    </div>
-
-
-  </div>
-</div>
-<!--image map	蜀国介绍modal-->
-<div id="shuIntro" class="w3-modal">
-  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-
-    <div class="w3-center"><br>
-      <span onclick="document.getElementById('shuIntro').style.display='none'"
-            class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span><br>
-      <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"><br>
-      <p class="w3-panel">蜀国坐拥西北雍州，凉州；巴蜀益州。拥有初始城池16座，玩家可通过战争开疆扩土。<br><a href="map.html">点击查看当前疆域</a></p>
-    </div>
-
-    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-      <button onclick="document.getElementById('shuIntro').style.display='none'" type="button" class="w3-button w3-red">
-        取消
-      </button>
-    </div>
-
-  </div>
-</div>
-<!--image map	魏国介绍modal-->
-<div id="weiIntro" class="w3-modal">
-  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-
-    <div class="w3-center"><br>
-      <span onclick="document.getElementById('weiIntro').style.display='none'"
-            class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span><br>
-      <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"><br>
-      <p class="w3-panel">魏国坐拥河北幽州，冀州，并州，青州；中原徐州，兖州，豫州，司隶。拥有初始城池26座，玩家可通过战争开疆扩土。<br><a href="map.html">点击查看当前疆域</a></p>
-    </div>
-
-    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-      <button onclick="document.getElementById('weiIntro').style.display='none'" type="button" class="w3-button w3-red">
-        取消
-      </button>
-    </div>
-
-  </div>
-</div>
-<!--image map 吴国介绍modal-->
-<div id="wuIntro" class="w3-modal">
-  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-
-    <div class="w3-center"><br>
-      <span onclick="document.getElementById('wuIntro').style.display='none'"
-            class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span><br>
-      <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"><br>
-      <p class="w3-panel">吴国坐拥荆楚荆州；吴越扬州，交州。拥有初始城池18座，玩家可通过战争开疆扩土。<br><a href="map.html">点击查看当前疆域</a></p>
-    </div>
-
-    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-      <button onclick="document.getElementById('wuIntro').style.display='none'" type="button" class="w3-button w3-red">
-        取消
-      </button>
-    </div>
-
-  </div>
-</div>
-
 </body>
 </html>
