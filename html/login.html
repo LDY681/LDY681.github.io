@@ -9,20 +9,42 @@
 <link rel="stylesheet" href="../css/my-style.css">
 <link rel="stylesheet" href="../css/loading.css">
 <link rel="icon" href="../img/logo.png"/>
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/jquery.rwdImageMaps.js"></script>
+<script src="../js/jquery.rwdImageMaps.min.js"></script>
 <script src = "../js/countDown.js"> </script>
 <script src="../js/accordions.js"></script>
 <script src="../js/loader.js"></script>
+  <!--image map js 脚本-->
+<script>
+  $(document).ready(function(e) {
+    $('img[usemap]').rwdImageMaps();
+
+    $(".shuguo").on("click", function(e){
+      e.preventDefault();
+      document.getElementById('shuIntro').style.display='block';
+    });
+    $(".weiguo").on("click", function(e){
+      e.preventDefault();
+      document.getElementById('weiIntro').style.display='block';
+    });
+    $(".wuguo").on("click", function(e){
+      e.preventDefault();
+      document.getElementById('wuIntro').style.display='block';
+    });
+  });
+</script>
 </head>
 </html>
 
 <body onload="countDown('Jan 1, 2025 24:00:00');loader();">
 
-<div id="loader" style="z-index:1;" class="w3-display-middle w3-light-gray w3-round-xxlarge">
+<div id="loader" style="z-index:1;display:block;" class="w3-display-middle w3-light-gray w3-round-xxlarge">
   <img style="width:100%" src="../img/logo.png" class="ld ld-jump" alt="加载中"/><br  >
-  <h1>加载中O(∩_∩)O</h1>
+  <h1>加载中,很快哦O(∩_∩)O</h1>
 </div>
 
-<div style="display:none;" id="afterLoading" class="w3-animate-bottom">
+<div style="display:block;" id="afterLoading" class="w3-animate-bottom">
   <!--登录,注册,活动倒计时栏-->
   <div class="w3-row w3-round-xxlarge">
 
@@ -215,28 +237,9 @@
     </div>
   </div>
 </div>
+</div>
 
-<!--image map js 脚本-->
-<script src="../js/rwdImageMaps.jquery.min.js"></script>
-<script src="../js/rwdImageMaps.min.js"></script>
-<script>
-    $(document).ready(function(e) {
-        $('img[usemap]').rwdImageMaps();
 
-        $(".shuguo").on("click", function(e){
-            e.preventDefault();
-            document.getElementById('shuIntro').style.display='block';
-        });
-        $(".weiguo").on("click", function(e){
-            e.preventDefault();
-            document.getElementById('weiIntro').style.display='block';
-        });
-        $(".wuguo").on("click", function(e){
-            e.preventDefault();
-            document.getElementById('wuIntro').style.display='block';
-        });
 
-    });
-</script>
 </body>
 </html>
