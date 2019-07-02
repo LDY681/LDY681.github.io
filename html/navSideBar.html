@@ -11,6 +11,11 @@
 <link rel="icon" href="../img/logo.png"/>
 <script src="../js/navSideBar.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+
+<!-- leancloud -->
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
+<script src="../js/initLeanCloud.js"></script>
+<script src="../js/user.js"></script>
 </head>
 
 <body>
@@ -46,11 +51,11 @@
   </div>
 </div>
 
-<!--点击展开侧边栏的按钮-->
+<!--点击展开左侧边栏的按钮-->
 <span title="展开侧边栏" style="display:block; position:fixed;z-index:1; width: 54px;" id="openNav"
       class="w3-button w3-green w3-transparent w3-display-topleft w3-xlarge" onclick="w3_open()">&#9776;</span>
 
-<!--侧边栏右边区域-->
+<!--左侧边栏的右边区域-->
 <div id="main" style="margin-left:54px">
   <div class="w3-block">
     <!--导航栏-->
@@ -70,13 +75,13 @@
           </div>
         </div>
 
-        <!--大屏幕导航栏左侧网站logo-->
+        <!--大屏幕:导航栏左侧网站logo-->
         <a href="index.html">
           <img src="../img/logo.png" title="回到主页" style="height: 46px"
                  class="w3-button w3-hide-small w3-left" alt="网站logo"/>
         </a>
 
-        <!--大屏幕导航栏导航栏目-->
+        <!--大屏幕:导航栏导航栏目-->
         <div class="w3-dropdown-hover">
           <button id="home" class="w3-padding-large w3-button" title="家园">家园 <i class="fa fa-caret-down"></i></button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-yellow">
@@ -95,7 +100,6 @@
             <a href="href="#" class="w3-bar-item w3-button">购买黄金</a>
           </div>
         </div>
-
         <div class="w3-dropdown-hover">
           <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
@@ -107,7 +111,6 @@
             <a href="#" class="w3-bar-item w3-button">特殊道具</a>
           </div>
         </div>
-
         <div class="w3-dropdown-hover">
           <button id="stats" class="w3-padding-large w3-button" title="统计">统计 <i class="fa fa-caret-down"></i></button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-green">
@@ -121,7 +124,6 @@
             <a href="#" class="w3-bar-item w3-button w3-padding-large">股份公司统计</a>
           </div>
         </div>
-
         <div class="w3-dropdown-hover w3-hide-small">
           <button id="news" class="w3-padding-large w3-button" title="新闻">新闻 <i class="fa fa-caret-down"></i></button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-blue">
@@ -134,7 +136,6 @@
             <a href="#" class="w3-bar-item w3-button w3-padding-large">喊话</a>
           </div>
         </div>
-
         <div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
           <button class="w3-padding-large w3-button" title="军政">军政 <i class="fa fa-caret-down"></i></button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-pink">
@@ -160,22 +161,32 @@
         </div>
         <!--end of 大屏幕导航栏导航栏目-->
 
-        <!--大屏幕导航栏右侧的账户设置-->
-        <img src="../img/logo.png" onclick="document.getElementById('profile').style.display='block'"
+        <!--大屏幕:导航栏右侧的账户设置按钮-->
+        <img id="profileSetting" src="../img/logo.png"
                style="height: 46px; margin-right: 50px;" class="w3-image w3-button w3-green w3-hide-small w3-hide-medium w3-right"
                alt="用户头像"/>
+
+<!--        账户设置modal-->
         <div id="profile" class="w3-modal">
           <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
             <div class="w3-center">
               <span onclick="document.getElementById('profile').style.display='none'" style="color:black;"
                     class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">x</span><br>
+              <p class="w3-text-black" id="currUser"> 当前用户: </p>
               <img src="../img/logo.png" alt="账号" style="width:30%" class="w3-circle w3-margin-top"><br>
+              <button>点击设置用户头像</button>
             </div>
             <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
               <button onclick="window.location.href='login.html'" type="button" class="w3-button w3-red">登出</button>
               <span class="w3-right w3-padding w3-hide-small"><a href="#">重置密码?</a></span>
             </div>
           </div>
+
+<!--          <script>-->
+<!--            var username = AV.User.current();-->
+<!--              $("#currUser").html(username);-->
+<!--          </script>-->
+
         </div> <!-- end of 大屏幕导航栏右侧的账户设置 -->
 
       </div>
@@ -183,126 +194,6 @@
 
   </div>
 </div> <!--end of 侧边栏右边区域-->
-
-<!--正文内容，debug用-->
-<!--<div id="customContent" style="margin-left:0" class="w3-row-padding">-->
-
-<!--  <div class="w3-light-grey w3-padding-32 w3-center" style="margin-top: 80px;">-->
-<!--    <h1 class="w3-jumbo">Daily Ping</h1>-->
-<!--  </div>-->
-
-<!--  <div class="w3-third w3-justify">-->
-<!--    <h2>Empty Notebook Found</h2>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--  </div>-->
-<!--  <div class="w3-third w3-justify">-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--  </div>-->
-<!--  <div class="w3-third w3-justify">-->
-<!--    <h2>Very New News!</h2>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--  </div>-->
-<!--  <div class="w3-third w3-justify">-->
-<!--    <h2>Very New News!</h2>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--  </div>-->
-<!--  <div class="w3-third w3-justify">-->
-<!--    <h2>Very New News!</h2>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--  </div>-->
-<!--  <div class="w3-third w3-justify">-->
-<!--    <h2>Very New News!</h2>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-<!--      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-<!--      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla-->
-<!--      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id-->
-<!--      est laborum.</p>-->
-<!--  </div>-->
 
 <!--</div>-->
 </body>

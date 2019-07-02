@@ -41,3 +41,15 @@ function w3_close() {
     document.getElementById("openNav").style.marginLeft = "0px";
     document.getElementById("topNav").style.marginLeft = "54px";
 }
+
+function populateUserData() {
+
+}
+
+$(function () {
+    $("#profileSetting").on('click', function (e) {
+        e.preventDefault();
+        $("#profile").css("display", "block");
+        populateUserData();
+    });
+});

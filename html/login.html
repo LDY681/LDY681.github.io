@@ -9,13 +9,19 @@
 <link rel="stylesheet" href="../css/my-style.css">
 <link rel="stylesheet" href="../css/loading.css">
 <link rel="icon" href="../img/logo.png"/>
-  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-<script src="../js/jquery.rwdImageMaps.js"></script>
-<script src="../js/jquery.rwdImageMaps.min.js"></script>
-<script src = "../js/countDown.js"> </script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<script src="../js/rwdImageMaps.js"></script>
+<script src="../js/rwdImageMaps.min.js"></script>
+<script src = "../js/counter.js"> </script>
 <script src="../js/accordions.js"></script>
 <script src="../js/loader.js"></script>
-  <!--image map js 脚本-->
+
+  <!-- leancloud -->
+  <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
+  <script src="../js/initLeanCloud.js"></script>
+  <script src="../js/user.js"></script>
+
+<!--image map js 脚本-->
 <script>
   $(document).ready(function(e) {
     $('img[usemap]').rwdImageMaps();
@@ -37,7 +43,7 @@
 </head>
 </html>
 
-<body onload="countDown('Jan 1, 2025 24:00:00');loader();">
+<body onload="counter('Jan 1, 2025 24:00:00');loader();">
 
 <div id="loader" style="z-index:1;display:block;" class="w3-display-middle w3-light-gray w3-round-xxlarge">
   <img style="width:100%" src="../img/logo.png" class="ld ld-jump" alt="加载中"/><br  >
@@ -45,7 +51,7 @@
 </div>
 
 <div style="display:block;" id="afterLoading" class="w3-animate-bottom">
-  <!--登录,注册,活动倒计时栏-->
+  <!--顶部：登录&注册按钮,活动倒计时栏-->
   <div class="w3-row w3-round-xxlarge">
 
     <!--  不同界面下不同大小的登陆注册按钮-->
@@ -124,7 +130,7 @@
   </div>
 
   <!--	登录modal-->
-  <div id="login" class="w3-modal">
+  <div id="login" class="w3-modal loginForm">
     <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
       <div class="w3-center"><br>
@@ -133,12 +139,12 @@
         <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
       </div>
 
-      <form class="w3-container" action="index.html">
+      <form class="w3-container">
         <div class="w3-section">
           <label><b>账号：</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入账号" name="usrname" required>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入账号" name="loginUsername" required>
           <label><b>密码：</b></label>
-          <input class="w3-input w3-border" type="text" placeholder="请输入密码" name="psw" required>
+          <input class="w3-input w3-border" type="text" placeholder="请输入密码" name="loginPassword" required>
           <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">登录</button>
         </div>
       </form>
@@ -163,16 +169,16 @@
         <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
       </div>
 
-      <form class="w3-container" action="index.html">
+      <form class="w3-container signupForm">
         <div class="w3-section">
           <label><b>账号：</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入账号" name="usrname" required>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入账号" id="signinUsername" required autofocus>
           <label><b>密码：</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入密码" name="psw" required>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入密码" id="signinPassword" required>
           <label><b>邮箱：</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入邮箱" name="psw" required>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入邮箱" id="signinEmail" required>
           <label><b>师父(选填)：</b></label> <a href="index.html" target="_blank">需要大佬带?点我寻找!</a>
-          <input class="w3-input w3-border" type="text" placeholder="额外赠送新手礼包!" name="psw">
+          <input class="w3-input w3-border" type="text" placeholder="额外赠送新手礼包!" id="signinInviter">
           <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">注册</button>
         </div>
       </form>
