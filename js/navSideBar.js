@@ -49,7 +49,7 @@ $(function () {
         Bmob.verifySmsCode(smsCode, data).then(function (response) {
             let current = Bmob.User.current();
             console.log("当前用户名为" + current.name);
-            const query = Bmob.Query('_User');
+            let query = Bmob.Query('_User');
             query.get(current.username).then(res => {
                 console.log(res);
                 res.set('mobilePhoneNumber',phoneNumber);
@@ -86,11 +86,10 @@ function w3_open() {
     document.getElementById("openNav").style.display = 'none';
     document.getElementById("topNav").style.marginLeft = "";
 
-    //检查手机号是否验证
-    let username = Bmob.User.current().username;
-    console.log(username);
-    const query = Bmob.Query('_User');
-    query.get(username).then(res => {
+    let current = Bmob.User.current();
+    console.log(current);
+    let query = Bmob.Query('_User');
+    query.get(current.username).then(res => {
         console.log(res);
         // console.log(res.mobilePhoneNumberVerified);
         // if (res.mobilePhoneNumberVerified === false){

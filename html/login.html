@@ -23,8 +23,7 @@
 <!--image map js 脚本-->
 <script>
   counter('Jan 1, 2025 24:00:00');
-  $(document).ready(function(e) {
-    document.getElementById("loader").style.display = "none";
+  $(document).ready(function() {
     $('img[usemap]').rwdImageMaps();
     $(".shuguo").on("click", function(e){
       e.preventDefault();
@@ -39,11 +38,15 @@
       document.getElementById('wuIntro').style.display='block';
     });
   });
+  function fadeout(){
+    document.getElementById("loader").style.display = "none";
+  }
+
 </script>
 </head>
 </html>
 
-<body>
+<body onload="fadeout()">
 
 <div id="loader" style="z-index:1;display:block;" class="w3-display-middle w3-light-gray w3-round-xxlarge">
   <img style="width:100%" src="../img/logo.png" class="ld ld-jump" alt="加载中"/><br  >
