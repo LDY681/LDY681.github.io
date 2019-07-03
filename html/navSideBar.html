@@ -12,11 +12,10 @@
 <script src="../js/navSideBar.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 
-<!-- leancloud -->
-<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
-<script src="../js/initLeanCloud.js"></script>
+<!-- Bmob -->
+<script src="../js/Bmob-1.7.1.min.js"></script>
+<script>Bmob.initialize("ebbede4a8b8aef7cc86ab0863a65c55e", "4eb4c64a95cd4f53ec394e8aed48cb72");</script>
 <script src="../js/user.js"></script>
-</head>
 
 <body>
 
@@ -43,11 +42,33 @@
     <p class="w3-large w3-center w3-text-red">限时活动:</p>
     <a class="w3-bar-item w3-yellow w3-button w3-center w3-text-red w3-hover-light-green w3-hover-text-black" href="login.html">开服注册送宝马!</a>
     <br> <br> <br>
-    <p class="w3-center w3-text-red">您还未验证手机号:</p>
-    <p class="w3-center w3-text-red">为防止小号破坏生态,捐赠合同战斗投票等功能需通过手机验证后才能使用</p>
-    <a class="w3-bar-item w3-yellow w3-button w3-center w3-text-red w3-hover-light-green w3-hover-text-black" href="verifyPhone.html">点我立即验证!</a>
+    <div id="phoneAlert" style="display:none;">
+      <p class="w3-center w3-text-red">您还未验证手机号:</p>
+      <p class="w3-center w3-text-red">为防止小号破坏生态,捐赠合同战斗投票等功能需通过手机验证后才能使用</p>
+      <a class="w3-bar-item w3-yellow w3-button w3-center w3-text-red w3-hover-light-green w3-hover-text-black" id="verifyPhoneButton">点我立即验证!</a>
+    </div>
 
 
+  </div>
+</div>
+
+<!-- 手机验证modal-->
+<div id="verifyPhoneModal" class="w3-modal">
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+    <div class="w3-center">
+      <span onclick="document.getElementById('verifyPhoneModal').style.display='none'" style="color:black;" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">x</span><br><br>
+      <label><b>请输入手机号：</b></label><br>
+      <button id="sendVerification" class="w3-button w3-margin-top w3-green w3-padding w3-round-xxlarge w3-third">获取验证码</button>
+      <form class="w3-form w3-padding-large">
+        <input class="w3-round-xxlarge w3-input w3-border w3-margin-bottom w3-twothird"  type="tel" placeholder="请输入手机号" id="phoneNumber" required><br><br><br>
+        <label><b>请输入验证码：</b></label>
+        <input class="w3-round-xxlarge w3-input w3-border" type="text" placeholder="请输入验证码" id="smsCode" required>
+      </form>
+      <button class="w3-button w3-green w3-padding-large w3-margin w3-round-xxlarge" id="submitPhone">提交验证</button>
+    </div>
+    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+      <button onclick="document.getElementById('verifyPhoneModal').style.display='none'" type="button" class="w3-button w3-red">取消</button>
+    </div>
   </div>
 </div>
 
@@ -181,11 +202,6 @@
               <span class="w3-right w3-padding w3-hide-small"><a href="#">重置密码?</a></span>
             </div>
           </div>
-
-<!--          <script>-->
-<!--            var username = AV.User.current();-->
-<!--              $("#currUser").html(username);-->
-<!--          </script>-->
 
         </div> <!-- end of 大屏幕导航栏右侧的账户设置 -->
 

@@ -82,20 +82,23 @@ function countUp(date){
 //获取当前北京时间
 function getCurrTime(){
 // Update the count down every 1 second
-    var x = setInterval(function() {
-        // Get today's date and time
-        var currDate = new Date();
-        var hours = ('0' + currDate.getHours()).slice(-2);
-        var minutes = ('0' + currDate.getMinutes()).slice(-2);
-        var seconds = ('0' + currDate.getSeconds()).slice(-2) ;
+var x = setInterval(function() {
+    // Get today's date and time
+    var currDate = new Date();
+    var hours = ('0' + currDate.getHours()).slice(-2);
+    var minutes = ('0' + currDate.getMinutes()).slice(-2);
+    var seconds = ('0' + currDate.getSeconds()).slice(-2) ;
 
-        // Output the result in an element with id="demo"
-        document.getElementById("currTime").innerHTML = hours + ":"+ minutes + ":" + seconds;
+    // Output the result in an element with id="currTime"
+    document.getElementById("currTime").innerHTML = hours + ":"+ minutes + ":" + seconds;
 
-        // If the count down is over, write some text
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("currTime").innerHTML = "时间已爆炸";
-        }
-    }, 1000);
+    // Find the distance between now and the count down date
+    var distance = 0;
+
+    // If the count down is over, write some text
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("currTime").innerHTML = "时间已爆炸";
+    }
+}, 1000);
 }
