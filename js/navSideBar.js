@@ -50,7 +50,7 @@ $(function () {
             let current = Bmob.User.current();
             console.log("当前用户名为" + current.name);
             let query = Bmob.Query('_User');
-            query.get(current.username).then(res => {
+            query.get(current.objectId).then(res => {
                 console.log(res);
                 res.set('mobilePhoneNumber',phoneNumber);
                 res.set('mobilePhoneNumberVerified',true);
@@ -89,12 +89,12 @@ function w3_open() {
     let current = Bmob.User.current();
     console.log(current);
     let query = Bmob.Query('_User');
-    query.get(current.username).then(res => {
-        console.log(res);
-        // console.log(res.mobilePhoneNumberVerified);
-        // if (res.mobilePhoneNumberVerified === false){
-        //     $("#phoneAlert").css("display","block");
-        // }
+    query.get(current.objectId).then(res => {
+        console.log("这里了");
+        console.log(res.mobilePhoneNumberVerified);
+        if (res.mobilePhoneNumberVerified == null ){
+            $("#phoneAlert").css("display","block");
+        }
     }).catch(err => {
         console.log(err);
     });

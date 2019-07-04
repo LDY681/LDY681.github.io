@@ -10,15 +10,42 @@ $(function() {
 });
 
 function signUp() {
+    let inviter = $('#signinInviter').val();
     let params = {
         username: $('#signinUsername').val(),
         password: $('#signinPassword').val(),
         email: $('#signinEmail').val(),
-        inviter: $('#signinInviter').val(),
     };
     Bmob.User.register(params).then(res => {
         console.log(res);
-        window.location.href = "../html/index.html";
+
+        // 如果有邀请人
+        if (inviter != null){
+            //下线设置上线
+            let query1 = Bmob.Query('inviter');
+            query1.set("username", $('#signinUsername').val());
+            query1.set("inviter", inviter);
+            query1.save().then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err)
+            });
+            //上线设置下线
+            let query2 = Bmob.Query('inviter');
+            query2.get().then(res => {
+                console.log(res);
+                query2.set("username", $('#signinUsername').val());
+                query2.set("invitee", $('#signinUsername').val());
+            }
+
+            query.save().then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err)
+            })
+
+        }
+        // window.location.href = "../html/index.html";
     }).catch(err => {
         switch (err.code) {
             case 202:
