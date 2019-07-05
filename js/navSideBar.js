@@ -6,12 +6,12 @@
 // openNav是展开侧边栏按钮
 // topNav是顶层菜单栏
 
-$(function () {
+$(function() {
     $("#profileSetting").on('click', function (e) {
         e.preventDefault();
         $("#profile").css("display", "block");
     });
-    $("#verifyPhoneButton").on('click', function (e) {
+    $("#phoneAlert").on('click', function (e) {
         e.preventDefault();
         $("#verifyPhoneModal").css("display", "block");
     });
@@ -23,7 +23,21 @@ $(function () {
             mobilePhoneNumber: phoneNumber.val(), //string
         }
         phoneNumber.attr("disabled", true);
-        Bmob.requestSmsCode(params).then(function (response) {
+
+        AV.Cloud.requestSmsCode({
+            mobilePhoneNumber: phoneNumber.val(),
+            name: '转世三国',
+            op: '手机验证',
+            ttl: 10                     // 验证码有效时间为 10 分钟
+        }).then(function(res) {
+            //调用成功
+            console.log("请求验证码:");
+            console.log(res);
+        }, function(error){
+            alert(JSON.stringify(error));
+        });
+
+/*        Bmob.requestSmsCode(params).then(function (response) {
             console.log(response);
         })
         .catch(function (error) {
@@ -35,7 +49,7 @@ $(function () {
                     alert("发送失败,请重新再试");
             }
             console.log(error);
-        });
+        });*/
 
     });
     $("#submitPhone" ).on('click', function(e) {
@@ -46,7 +60,34 @@ $(function () {
             mobilePhoneNumber: phoneNumber,
         };
         console.log("验证码为 "+ smsCode + " 手机号为 "+ phoneNumber);
-        Bmob.verifySmsCode(smsCode, data).then(function (response) {
+
+        AV.Cloud.verifySmsCode(smsCode, phoneNumber).then(function(){
+            //验证成功
+            console.log("手机验证码验证成功");
+            let current = AV.User.current();
+            var query = new AV.Query('_User');
+            query.get(current.id).then(function (user) {
+                console.log(user);
+                user.set("mobilePhoneVerified", true);
+                user.set("mobilePhoneNumber", phoneNumber);
+                user.save().then(function(){
+
+                },function(error){
+                    alert(JSON.stringify(error));
+                });
+                alert("验证成功!准备刷新页面!");
+                // window.location.reload();
+
+            }, function(err){
+                //验证失败
+                alert(JSON.stringify(err));
+            })
+        }, function(err){
+            //验证失败
+            alert(JSON.stringify(err));
+        });
+
+       /* Bmob.verifySmsCode(smsCode, data).then(function (response) {
             let current = Bmob.User.current();
             console.log("当前用户名为" + current.name);
             let query = Bmob.Query('_User');
@@ -61,11 +102,7 @@ $(function () {
             alert("验证成功!准备刷新页面!");
             window.location.reload();
             console.log(response);
-        })
-        .catch(function (error) {
-            alert(error.error);
-                console.log(error);
-        });
+        }).catch(function (error) {alert(error.error);console.log(error);});*/
     });
 });
 
@@ -86,19 +123,27 @@ function w3_open() {
     document.getElementById("openNav").style.display = 'none';
     document.getElementById("topNav").style.marginLeft = "";
 
-    let current = Bmob.User.current();
+    let current = AV.User.current();
+    console.log("当前用户为:");
     console.log(current);
-    let query = Bmob.Query('_User');
-    query.get(current.objectId).then(res => {
-        console.log("这里了");
-        console.log(res.mobilePhoneNumberVerified);
-        if (res.mobilePhoneNumberVerified == null ){
-            $("#phoneAlert").css("display","block");
-        }
-    }).catch(err => {
-        console.log(err);
-    });
+    var mobileStatus = current.get('mobilePhoneVerified');
+    console.log("手机是否验证");
+    console.log(mobileStatus);
+    if (mobileStatus === false){
+        $("#phoneAlert").css("display","block");
+    }
 
+
+    // var query = new AV.Query('_User');
+    // query.get(current).then(res => {
+    //     console.log("手机号是否验证");
+    //
+    //     if (res.mobilePhoneNumberVerified == null ){
+    //         $("#phoneAlert").css("display","block");
+    //     }
+    // }).catch(err => {
+    //     console.log(err);
+    // });
 }
 
 function w3_close() {
