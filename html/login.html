@@ -9,16 +9,12 @@
 <link rel="stylesheet" href="../css/my-style.css">
 <link rel="stylesheet" href="../css/loading.css">
 <link rel="icon" href="../img/logo.png"/>
+
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 <script src="../js/rwdImageMaps.js"></script>
 <script src="../js/rwdImageMaps.min.js"></script>
 <script src = "../js/counter.js"> </script>
 <script src="../js/accordions.js"></script>
-
-  <!-- Bmob -->
-<!--  <script src="../js/Bmob-1.7.1.min.js"></script>-->
-<!--  <script>Bmob.initialize("ebbede4a8b8aef7cc86ab0863a65c55e", "4eb4c64a95cd4f53ec394e8aed48cb72");</script>-->
-<!--  <script src="../js/user.js"></script>-->
 
 <!--  Leancloud-->
   <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
@@ -43,7 +39,7 @@
       document.getElementById('wuIntro').style.display='block';
     });
   });
-  function fadeout(){
+  function loader(){
     document.getElementById("loader").style.display = "none";
   }
 
@@ -51,7 +47,10 @@
 </head>
 </html>
 
-<body onload="fadeout()">
+<body onload="loader()">
+<div id="loginNotifier" class="popupFadeout w3-display-topmiddle w3-third w3-round-xxlarge w3-yellow w3-card-4" style="z-index: 2; display: none; position: fixed;height: 50px;line-height: 45px;">
+  <p style="color: Green; top: 50px; width: 125px; margin: auto; font-size: 25px;">请先登录！</p>
+</div>
 
 <div id="loader" style="z-index:1;display:block;" class="w3-display-middle w3-light-gray w3-round-xxlarge">
   <img style="width:100%" src="../img/logo.png" class="ld ld-jump" alt="加载中"/><br  >

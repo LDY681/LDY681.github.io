@@ -1,3 +1,4 @@
+//目前由login.html调用
 // 确保调用accordionOn和Off的所有element都有initialize w3-hide 或 w3-show
 // 展开accordion;用法:accordionOn(element id)
 function accordionOn(id) {

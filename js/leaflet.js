@@ -1,3 +1,5 @@
+//支持map的各种功能，map.html调用
+
 /*
  Leaflet, a JavaScript library for mobile-friendly interactive maps. http://leafletjs.com
  (c) 2010-2013, Vladimir Agafonkin

@@ -1,3 +1,5 @@
+//支持image map的responsiveness，由login.html调用
+
 /*
 * rwdImageMaps jQuery plugin v1.6.x
 *

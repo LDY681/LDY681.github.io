@@ -1,3 +1,5 @@
+<!--非固定位置的sideBar-->
+<!--TODO：已落时-->
 <!DOCTYPE html>
 <html lang="zh">
 <title>转世三国-模拟三国人生</title>
@@ -7,26 +9,18 @@
 <link rel="stylesheet" href="../css/all.css">
 <link rel="stylesheet" href="../css/my-style.css">
 <link rel="icon" href="../img/logo.png"/>
-
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 <script src="../js/counter.js"></script>
-<script src="../js/userMenu.js"></script>
-<!--  Leancloud-->
-<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
-<script src="../js/initLeanCloud.js"></script>
-<script src="../js/user.js"></script>
-<!--leancloud要在handleBars.js之前加载， 不然会出错-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
-<!--countUp ->东汉年历，getCurrTime ->北京时间显示 setUpUserData ->userMenu的数据填充-->
-<body onload="countUp('June 1, 2019 00:00:00');getCurrTime();setupUserData();">
+
+<body onload="countUp('June 1, 2019 00:00:00');getCurrTime();">
 
 <!--加载navSideBar和 userMenu-->
 <script>
-  $(function () {
-    $("#nav-placeholder").load("navSideBar.html");
-    $("#userMenu").load("userMenu.html");
-  });
+    $(function () {
+        $("#nav-placeholder").load("navSideBar.html");
+        $("#userMenu").load("userMenu.html");
+    });
 </script>
 
 <div style="position: relative" id="nav-placeholder"></div>
@@ -35,11 +29,10 @@
 <div id="customContent" style="margin-left:0" class="w3-row">
 
   <!--    用户菜单-->
-  <div id="userMenu" class="coolScroll w3-col w3-light-gray w3-card-4 w3-center w3-round-xxlarge w3-margin-left w3-margin-right" style="margin-top: 80px; height: 90vh; position:fixed"></div>
+  <div id="userMenu" class="w3-col w3-light-gray w3-card-4 w3-center w3-hide-small w3-round-xxlarge w3-margin-left w3-margin-right" style="margin-top:80px;"></div>
 
   <!--TODO:右侧定制内容-->
-  <div id="rightPanel" class="w3-rest w3-card-4 w3-round-xxlarge w3-margin-right" style="margin-top:80px;">
-    <img src="../img/404.jpg" alt="404" style="width:100%">
+  <div class="w3-rest w3-card-4 w3-round-xxlarge w3-margin-left w3-margin-right" style="margin-top:80px;">
     <img src="../img/404.jpg" alt="404" style="width:100%">
     <img src="../img/404.jpg" alt="404" style="width:100%">
     <img src="../img/404.jpg" alt="404" style="width:100%">

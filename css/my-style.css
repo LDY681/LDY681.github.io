@@ -4,7 +4,7 @@ body {
     background-size: cover;
 }
 /*大屏幕*/
-@media (min-width:992px){
+@media (min-width:1365px){
     #userMenu {width:300px;}
     #rightPanel {
         margin-left: 336px;
@@ -13,18 +13,22 @@ body {
     #userMenuDropDown {width:250px;}
 }
 /*中小屏幕*/
-@media (max-width:992px){
+@media (max-width:1365px){
     /*rightPanel里userMenu和customContent的样式*/
     #userMenu {width:200px;}
     #sidePanelSearchBox {width:100px;}
     #rightPanel {
         margin-left: 236px;
     }
+    #mapMenu {display: none!important;}
     #mapContainer {border-radius: 50px;}
     #userMenuDropDown {width:150px;}
 }
 /*小屏幕*/
-@media (max-width:600px){
+@media (max-width:1023px){
+    #userMenu {
+        display: none;
+    }
     #rightPanel {
         margin-left: 16px;
     }
@@ -76,4 +80,8 @@ img[usemap] {
     max-width: 100%;
     width: auto;
 }
+
+/*fadeout提醒*/
+.popupFadeout{animation:fading 1.5s forwards; animation-timing-function: ease-in;}@keyframes fading{0%{opacity:1}50%{opacity:1}60%{opacity:0.5}75%{opacity:0.3}90%{opacity:0.1}100%{opacity:0}}
+
 

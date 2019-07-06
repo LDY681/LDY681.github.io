@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh">
-<title>转世三国-模拟三国人生</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../css/w3.css">
-<link rel="stylesheet" href="../css/all.css">
-<link rel="stylesheet" href="../css/my-style.css">
-<link rel="icon" href="../img/logo.png"/>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-<script src="../js/counter.js"></script>
-
-
-  <!--      时间显示-->
+<!--      时间显示-->
   <div class="w3-panel w3-large">
     <span><i class="w3-left far fa-lightbulb w3-yellow w3-hover-light-green w3-dropdown-hover">
       <div id="userMenuDropDown" class="w3-dropdown-content w3-card-4">
@@ -53,82 +40,41 @@
     <button class="w3-large w3-button w3-light-green" style="display: inline-block;" id="taskButtonProfile"><a title="编辑个人资料" href="profile.html"><i class="fas fa-address-card"></i></a></button>
   </div><br>
 
-  <!--      账号信息-->
-  <div class="myHorizontalRule"></div>
-  <div>
-    <img src="../img/logo.png" alt="账号头像"><br>
-    <a class="profile-link" href="profile.html" id="userName">账户名称</a>
 
-    <div id="levelMission">
-      <span style="font-weight:bold;">等级：</span> <span>40</span>
-    </div>
-    <div id="currRankText" class="sidebar-labeled-information">
-      <span style="font-weight:bold;">官阶：</span>
-      <span>大将军</span>
-    </div>
-  </div><!--end of 账号信息-->
+<div class="userMenuDataContainer">
+  <script id="userMenuData" type="text/x-handlebars-template">
+    {{#each userData}}
+    <!-- 账号信息-->
+    <div class="myHorizontalRule"></div>
+    <div>
+      <img src="../img/logo.png" alt="账号头像"><br>
+      <a class="profile-link" href="profile.html" id="userName">{{{username}}}</a>
 
-  <!--          process bar账号信息-->
-  <div>
-    <div class="w3-margin w3-grey w3-round-xlarge">
-      <div class="w3-container w3-blue w3-round-xlarge" style="height:24px;width:66%"></div>
-    </div>
-    <p style="font-weight: bold;">经验:6666/10000</p>
-    <div class="w3-margin w3-grey w3-round-xlarge">
-      <div class="w3-container w3-red w3-round-xlarge" style="height:24px;width:33%"></div>
-    </div>
-    <p style="font-weight: bold;">官阶:3333/10000</p>
-    <div class="w3-margin w3-grey w3-round-xlarge">
-      <div class="w3-container w3-green w3-round-xlarge" style="height:24px;width:50%"></div>
-    </div>
-    <p style="font-weight: bold;">体力:50/100</p>
-  </div><!--end of progress bar账号信息-->
+      <div id="levelMission">
+        <span style="font-weight:bold;">等级：</span> <span>{{{level}}}</span>
+      </div>
+      <div id="currRankText" class="sidebar-labeled-information">
+        <span style="font-weight:bold;">官阶：</span>
+        <span>{{{rank}}}</span>
+      </div>
+    </div><!--end of 账号信息-->
 
-<!--          process bar账号信息-->
-<div>
-  <div class="w3-margin w3-grey w3-round-xlarge">
-    <div class="w3-container w3-blue w3-round-xlarge" style="height:24px;width:66%"></div>
-  </div>
-  <p style="font-weight: bold;">经验:6666/10000</p>
-  <div class="w3-margin w3-grey w3-round-xlarge">
-    <div class="w3-container w3-red w3-round-xlarge" style="height:24px;width:33%"></div>
-  </div>
-  <p style="font-weight: bold;">官阶:3333/10000</p>
-  <div class="w3-margin w3-grey w3-round-xlarge">
-    <div class="w3-container w3-green w3-round-xlarge" style="height:24px;width:50%"></div>
-  </div>
-  <p style="font-weight: bold;">体力:50/100</p>
-</div><!--end of progress bar账号信息-->
-<!--          process bar账号信息-->
-<div>
-  <div class="w3-margin w3-grey w3-round-xlarge">
-    <div class="w3-container w3-blue w3-round-xlarge" style="height:24px;width:66%"></div>
-  </div>
-  <p style="font-weight: bold;">经验:6666/10000</p>
-  <div class="w3-margin w3-grey w3-round-xlarge">
-    <div class="w3-container w3-red w3-round-xlarge" style="height:24px;width:33%"></div>
-  </div>
-  <p style="font-weight: bold;">官阶:3333/10000</p>
-  <div class="w3-margin w3-grey w3-round-xlarge">
-    <div class="w3-container w3-green w3-round-xlarge" style="height:24px;width:50%"></div>
-  </div>
-  <p style="font-weight: bold;">体力:50/100</p>
-</div><!--end of progress bar账号信息-->
-<!--          process bar账号信息-->
-<div>
-  <div class="w3-margin w3-grey w3-round-xlarge">
-    <div class="w3-container w3-blue w3-round-xlarge" style="height:24px;width:66%"></div>
-  </div>
-  <p style="font-weight: bold;">经验:6666/10000</p>
-  <div class="w3-margin w3-grey w3-round-xlarge">
-    <div class="w3-container w3-red w3-round-xlarge" style="height:24px;width:33%"></div>
-  </div>
-  <p style="font-weight: bold;">官阶:3333/10000</p>
-  <div class="w3-margin w3-grey w3-round-xlarge">
-    <div class="w3-container w3-green w3-round-xlarge" style="height:24px;width:50%"></div>
-  </div>
-  <p style="font-weight: bold;">体力:50/100</p>
-</div><!--end of progress bar账号信息-->
-  <div class="myHorizontalRule"></div>
-  <p style="font-weight:bold;">我的物资：</p>
+    <!-- process bar账号信息-->
+    <div>
+      <div class="w3-margin w3-grey w3-round-xlarge">
+        <div class="w3-container w3-blue w3-round-xlarge" style="height:24px;width:66%"></div>
+      </div>
+      <p style="font-weight: bold;">经验:{{{exp}}}</p>
+      <div class="w3-margin w3-grey w3-round-xlarge">
+        <div class="w3-container w3-red w3-round-xlarge" style="height:24px;width:33%"></div>
+      </div>
+      <p style="font-weight: bold;">官阶:{{{rank}}}</p>
+      <div class="w3-margin w3-grey w3-round-xlarge">
+        <div class="w3-container w3-green w3-round-xlarge" style="height:24px;width:50%"></div>
+      </div>
+      <p style="font-weight: bold;">力量{{{str}}}</p>
+    </div><!--end of progress bar账号信息-->
+    {{/each}}
+  </script>
 
+</div>

@@ -1,4 +1,6 @@
-﻿L.TileLayer.ChinaProvider = L.TileLayer.extend({
+﻿//支持map的各种功能，map.html调用
+
+L.TileLayer.ChinaProvider = L.TileLayer.extend({
 
     initialize: function(type, options) { // (type, Object)
         var providers = L.TileLayer.ChinaProvider.providers;
