@@ -16,11 +16,11 @@ body {
 @media (max-width:1365px){
     /*rightPanel里userMenu和customContent的样式*/
     #userMenu {width:200px;}
+    #mapMenu {display: none!important;}
     #sidePanelSearchBox {width:100px;}
     #rightPanel {
         margin-left: 236px;
     }
-    #mapMenu {display: none!important;}
     #mapContainer {border-radius: 50px;}
     #userMenuDropDown {width:150px;}
 }
@@ -84,4 +84,11 @@ img[usemap] {
 /*fadeout提醒*/
 .popupFadeout{animation:fading 1.5s forwards; animation-timing-function: ease-in;}@keyframes fading{0%{opacity:1}50%{opacity:1}60%{opacity:0.5}75%{opacity:0.3}90%{opacity:0.1}100%{opacity:0}}
 
+/*avatar大小设置*/
+.avatar{
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
 

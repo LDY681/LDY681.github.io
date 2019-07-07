@@ -1,4 +1,9 @@
 <body>
+<!--头像设置成功提示-->
+<div id="avatarNotifier" class="popupFadeout w3-display-topmiddle w3-third w3-round-xxlarge w3-yellow w3-card-4" style="z-index: 2; display: none; position: fixed;height: 50px;line-height: 45px;">
+  <p style="color: Green; top: 50px; width: 150px; margin: auto; font-size: 25px;">头像设置成功!</p>
+</div>
+
 <!--这是侧边栏本体-->
 <div class="w3-sidebar w3-light-grey w3-card-4 w3-animate-left" style="width:196px; display:none;" id="mySidebar">
   <div class="w3-bar w3-dark-grey">
@@ -165,44 +170,36 @@
                style="height: 46px; margin-right: 50px;" class="w3-image w3-button w3-green w3-hide-small w3-hide-medium w3-right"
                alt="用户头像"/>
 
-        <!-- 大屏幕导航栏右侧的账户设置-->
+        <!-- 账号设置modal-->
         <div id="profile" class="w3-modal">
           <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
-            <div class="profileDataContainer w3-center">
+            <div class="profileDataContainer w3-center w3-text-black">
               <script id="profileData" type="text/x-handlebars-template">
                 {{#each userData}}
                 <span onclick="document.getElementById('profile').style.display='none'" style="color:black;"
                     class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">x</span><br>
                 <p class="w3-text-black" id="currUser"> 当前用户: {{{username}}}</p>
-                <img src="../img/logo.png" alt="账号" style="width:30%" class="w3-circle w3-margin-top"><br><br><br>
-                <form class="w3-form submitAvatar">
-                  <label for="inputFile">点击设置用户头像</label>
-                  <input type="file" id="inputFile" class="form-control" placeholder="点击设置头像" required>
-                  <button class="w3-button w3-green">提交头像</button>
-                </form>
+                <img src={{{avatarUrl}}} alt="账号" style="width:30%" class="w3-circle w3-margin-top avatar"><br><br>
                 {{/each}}
-
-                <br><br>
+                </script>
+            </div>
+                <form class="w3-form submitAvatar w3-center">
+                  <span>点击设置用户头像:</span><br><br>
+                  <input class="w3-light-gray w3-padding-16 w3-round-large" type="file" id="inputFile" required><br><br>
+                  <button id="setAvatar" class="w3-button w3-green" type="button">提交头像</button>
+                </form><br><br>
                 <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
                   <button onclick="window.location.href='login.html';logOut();" type="button" class="w3-button w3-red w3-left">登出</button>
                   <span class="w3-right w3-padding w3-hide-small"><a href="#">重置密码?</a></span>
                 </div>
-
-              </script>
-
-
-          </div>
-        </div> <!-- end of 大屏幕导航栏右侧的账户设置 -->
-
+        </div> <!--end of账号设置modal-->
       </div>
 
       </div>
     </div>  <!-- end of 导航栏-->
-
   </div>
 </div> <!--end of 侧边栏右边区域-->
 
-<script src="../js/navSideBar.js"></script>
 </body>
 <!--</div>-->

@@ -6,6 +6,43 @@
 // topNav是顶层菜单栏
 
 $(function() {
+    //设置头像
+    //Jquery.onSubmit是给form用的，因为setAvatar是个button,所以应该是button.onClick
+    $("#setAvatar").on('click', function (e) {
+        e.preventDefault();
+        var file = $('#inputFile')[0].files[0];
+        if (file.size > 524288){
+            alert("请选择小于500KB的头像");
+        }else{
+            console.log("通过文件大小检测");
+            //TODO 检测之前是否已经有avatar
+            var name = file.name;
+            var avFile = new AV.File(name, file);
+
+            //声明类型
+            var Avatar = AV.Object.extend('avatar');
+            //新建对象
+            var avatar = new Avatar();
+            // 将用户添加至头像
+            avatar.set("owner", AV.User.current());
+            avatar.set("image", avFile);
+            avatar.save().then(function(avatarObj){
+                console.log("avatar上传成功,返回值:");
+                console.log(avatarObj);
+                //获取user对象，并更新avatar pointer
+                var query = new AV.Query('_User');
+                query.get(AV.User.current().id).then(function (user) {
+                    console.log("get到了,值为:");
+                    console.log(user);
+                    user.set("avatar", avatar);
+                    user.save();
+                });
+                $("#avatarNotifier").show();
+            }, function(error) {
+            alert(JSON.stringify(error));
+        });
+        }
+    });
     $("#profileSetting").on('click', function (e) {
         e.preventDefault();
         $("#profile").css("display", "block");
@@ -125,27 +162,35 @@ var navSideBar = {
 
 function setProfileData(){
     var query = new AV.Query('_User');
+    query.include('avatar');
     query.get(AV.User.current().id).then (function (userData){
         console.log("navSideBar userData信息");
         console.log(userData);
         var username = userData.get("username");
         //TODO: get avatar
+        var avatar = userData.get("avatar").get("image");
+
+        var avatarUrl;
+        if (avatar){
+            avatarUrl = avatar.get("url");
+            console.log(avatarUrl);
+        }else{
+            avatarUrl = "../img/logo.png";
+            console.log(avatarUrl);
+        }
 
         // handlebars navSideBar
         navSideBar.userData.push({
-            username
+            username,
+            avatarUrl
         });
         console.log("navSideBar.userData[0]信息");
         console.log(navSideBar.userData[0]);
         // use handlebars to update html
         var source = $("#profileData").html();
-        console.log("这里了1");
         var template = Handlebars.compile(source);
-        console.log("这里了2");
         var html = template(navSideBar);
-        console.log("这里了3");
         $(".profileDataContainer").html(html);
-        console.log("这里了4");
     }).catch(function(error) {
         alert(JSON.stringify(error));
     });
