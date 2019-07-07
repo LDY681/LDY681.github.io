@@ -119,4 +119,34 @@ function w3_close() {
     document.getElementById("topNav").style.marginLeft = "54px";
 }
 
+var navSideBar = {
+    userData: []
+};
 
+function setProfileData(){
+    var query = new AV.Query('_User');
+    query.get(AV.User.current().id).then (function (userData){
+        console.log("navSideBar userData信息");
+        console.log(userData);
+        var username = userData.get("username");
+        //TODO: get avatar
+
+        // handlebars navSideBar
+        navSideBar.userData.push({
+            username
+        });
+        console.log("navSideBar.userData[0]信息");
+        console.log(navSideBar.userData[0]);
+        // use handlebars to update html
+        var source = $("#profileData").html();
+        console.log("这里了1");
+        var template = Handlebars.compile(source);
+        console.log("这里了2");
+        var html = template(navSideBar);
+        console.log("这里了3");
+        $(".profileDataContainer").html(html);
+        console.log("这里了4");
+    }).catch(function(error) {
+        alert(JSON.stringify(error));
+    });
+}
