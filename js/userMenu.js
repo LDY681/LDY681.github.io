@@ -36,6 +36,10 @@ function setupUserData(){
         });
         console.log("userMenu.userData[0]信息");
         console.log(userMenu.userData[0]);
+
+        //如果是work.html,填充work.html的数据
+        // if (window.location.href.indexOf("work.html") > -1) {
+        // }
         // use handlebars to update html
         var source = $("#userMenuData").html();
         var template = Handlebars.compile(source);

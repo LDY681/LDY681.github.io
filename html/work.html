@@ -27,17 +27,97 @@
   <div id="userMenu" class="coolScroll w3-col w3-light-gray w3-card-4 w3-center w3-round-xxlarge w3-margin-left w3-margin-right" style="margin-top: 80px; height: 90vh; position:fixed"></div>
 
   <!--TODO:右侧定制内容-->
-  <div id="rightPanel" class="w3-rest w3-card-4 w3-round-xxlarge w3-margin-right" style="margin-top:80px;">
-    <img src="../img/404.jpg" alt="404" style="width:100%">
-    <img src="../img/404.jpg" alt="404" style="width:100%">
-    <img src="../img/404.jpg" alt="404" style="width:100%">
-    <img src="../img/404.jpg" alt="404" style="width:100%">
-    <img src="../img/404.jpg" alt="404" style="width:100%">
-    <img src="../img/404.jpg" alt="404" style="width:100%">
-  </div><!--end of 训练界面-->
-</div>
+  <div id="rightPanel" class="w3-rest w3-card-4 w3-round-xxlarge w3-margin-right w3-light-gray" style="margin-top:80px;">
+     <div class="workBox">
+       <br><br><br><br><br>
 
-<!--end of navSideBar-->
+       <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+<!--         TODO: implement产量加成-->
+         <h1>当前产量加成</h1>
+         <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
+         <div class="w3-panel">
+           <table class="w3-table-all w3-card-4">
+             <tr>
+               <td>商品</td>
+               <td>魏国</td>
+               <td>蜀国</td>
+               <td>吴国</td>
+               <td>黄巾</td>
+             </tr>
+             <tr>
+               <td>大米</td>
+               <td>0%</td>
+               <td>0%</td>
+               <td>0%</td>
+               <td>0%</td>
+             </tr>
+             <tr>
+               <td>小麦</td>
+               <td>0%</td>
+               <td>0%</td>
+               <td>0%</td>
+               <td>0%</td>
+             </tr>
+             <tr>
+               <td>兵器</td>
+               <td>0%</td>
+               <td>0%</td>
+               <td>0%</td>
+               <td>0%</td>
+             </tr>
+             <tr>
+               <td>攻城车</td>
+               <td>0%</td>
+               <td>0%</td>
+               <td>0%</td>
+               <td>0%</td>
+             </tr>
+           </table>
+         </div>
+
+         <br><br>
+       </div>
+
+       <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+        <h1>工作</h1>
+<!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
+         <p id="workNotifier" class="w3-large">您今天还未工作!</p>
+         <button class="w3-green w3-padding-large w3-round-xxlarge">您今天还未工作</button>
+         <br><br>
+       </div>
+
+       <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+         <h1 class="w3-center">详情</h1>
+         <div class="w3-panel" style="width: 50%; margin:auto;">
+           <table class="w3-table-all w3-card-4">
+
+             <tr>
+               <td>总工作次数</td>
+               <td>0%</td>
+             </tr>
+             <tr>
+               <td>小麦</td>
+               <td>0%</td>
+             </tr>
+             <tr>
+               <td>兵器</td>
+               <td>0%</td>
+             </tr>
+             <tr>
+               <td>攻城车</td>
+               <td>0%</td>
+             </tr>
+           </table>
+         </div>
+       </div>
+
+     </div>
+
+
+
+
+  </div><!--end of 右侧定制内容-->
+</div><!--end of 正文内容-->
 
 <!--加载navSideBar和 userMenu-->
 <script>

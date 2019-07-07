@@ -91,4 +91,8 @@ img[usemap] {
     height: 150px;
     border-radius: 50%;
 }
+.workBox {
+    background-image: url('http://images.china.cn/attachement/jpg/site1004/20090825/001ec949c2cd0bfd944d1c.jpg');
+    background-size: cover;
+}
 
