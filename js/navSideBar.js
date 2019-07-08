@@ -160,8 +160,6 @@ function setProfileData(){
     var query = new AV.Query('_User');
     query.include('avatar');
     query.get(AV.User.current().id).then (function (userData){
-        console.log("navSideBar userData信息");
-        console.log(userData);
         var username = userData.get("username");
         //TODO: get avatar
         var avatar = userData.get("avatar").get("image");
@@ -184,6 +182,7 @@ function setProfileData(){
         console.log(navSideBar.userData[0]);
         // use handlebars to update html
         $(document).ready(function(){
+            console.log("开始编译navSideBar模板");
             var source = $("#profileData").html();
             var template = Handlebars.compile(source);
             var html = template(navSideBar);
