@@ -91,8 +91,47 @@ img[usemap] {
     height: 150px;
     border-radius: 50%;
 }
+
+.productionBox {
+    background-image: url('https://p0.ssl.qhimgs4.com/t018dbb893bbb5db6d4.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
 .workBox {
     background-image: url('http://images.china.cn/attachement/jpg/site1004/20090825/001ec949c2cd0bfd944d1c.jpg');
     background-size: cover;
+    background-position: center;
 }
+
+.workStatsBox {
+    background-image: url('https://www.worldsteel.org/zh/dam/jcr:8ed7c106-f49e-4631-83e5-9c87a32e2e50/Statistics-section.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.trainEffectBox {
+    background-image: url('https://www.fullon-hotels.com.tw/ym/public/facility/gallery/image144_1300_1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.trainBox {
+    background-image: url('http://image.9game.cn/2016/12/7/15202207.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.trainStatsBox {
+    background-image: url('http://www.paobushijie.com/images/img/jianxiexunlian/interval_training1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+
+.workntrainButton {
+    border-radius: 1px; box-shadow: 0px 0px 0px 20px rgba(0,0,0,0.3); background: #ddd; padding: 8px; margin-left: 50%; transform: translateX(-50%); width: 400px;
+}
+
+
 

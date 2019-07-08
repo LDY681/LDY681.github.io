@@ -22,89 +22,83 @@
   <div id="userMenu" class="coolScroll w3-col w3-light-gray w3-card-4 w3-center w3-round-xxlarge w3-margin-left w3-margin-right" style="margin-top: 80px; height: 90vh; position:fixed"></div>
 
   <!--TODO:右侧定制内容-->
-  <div id="rightPanel" class="w3-rest w3-card-4 w3-round-xxlarge w3-margin-right w3-light-gray" style="margin-top:80px;">
-    <div class="workBox">
-      <br><br><br><br><br>
+  <div id="rightPanel" class="w3-rest w3-card-4 w3-round-xxlarge w3-margin-right w3-light-gray" style="margin-top:80px;"><br><br>
 
-      <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
-        <!--         TODO: implement产量加成-->
-        <h1>当前产量加成</h1>
-        <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
-        <div class="w3-panel">
-          <table class="w3-table-all w3-card-4">
-            <tr>
-              <td>商品</td>
-              <td>魏国</td>
-              <td>蜀国</td>
-              <td>吴国</td>
-              <td>黄巾</td>
-            </tr>
-            <tr>
-              <td>大米</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-            </tr>
-            <tr>
-              <td>小麦</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-            </tr>
-            <tr>
-              <td>兵器</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-            </tr>
-            <tr>
-              <td>攻城车</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-            </tr>
-          </table>
-        </div>
-
-        <br><br>
+    <div class="trainEffectBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+      <!--         TODO: implement产量加成-->
+      <h1 class="w3-text-green"> 训练效果</h1>
+      <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
+      <div class="w3-panel">
+        <table class="w3-table-all w3-card-4">
+          <tr>
+            <td>力量区间</td>
+            <td>增加力量</td>
+            <td>获得经验</td>
+          </tr>
+          <tr>
+            <td>0-1000</td>
+            <td>100</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>1001-1500</td>
+            <td>50</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>1501-2000</td>
+            <td>20</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>2000-3000</td>
+            <td>10</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>3000以上</td>
+            <td>5</td>
+            <td>1</td>
+          </tr>
+        </table>
       </div>
+      <br><br>
+    </div><br><br>
 
-      <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
-        <h1>工作</h1>
-        <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
-        <p id="workNotifier" class="w3-large">您今天还未工作!</p>
-        <button class="w3-green w3-padding-large w3-round-xxlarge">您今天还未工作</button>
-        <br><br>
+    <div class="trainBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+      <h1 class="w3-text-green">训练</h1><br><br>
+      <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
+      <div class="workntrainButton">
+        <p id="workNotifier" class="w3-large">您今天还未训练!</p>
+        <button class="w3-green w3-padding-large w3-round-xxlarge">点我快来训练!</button>
       </div>
+      <br><br>
+    </div><br><br>
 
-      <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
-        <h1 class="w3-center">详情</h1>
-        <div class="w3-panel" style="width: 50%; margin:auto;">
-          <table class="w3-table-all w3-card-4">
-            <tr>
-              <td>总工作次数</td>
-              <td>0 次</td>
-            </tr>
-            <tr>
-              <td>工作技能</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>工作技能增加</td>
-              <td>0%</td>
-            </tr>
-            <tr>
-              <td>获得经验</td>
-              <td>0%</td>
-            </tr>
-          </table>
-        </div>
+    <div class="trainStatsBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+      <h1 class="w3-text-green">详情</h1>
+      <div class="w3-panel" style="width: 50%; margin:auto;">
+        <table class="w3-table-all w3-card-4">
+          <tr>
+            <td>总训练次数</td>
+            <td>0 次</td>
+          </tr>
+          <tr>
+            <td>力量</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>力量增加</td>
+            <td>0%</td>
+          </tr>
+          <tr>
+            <td>获得经验</td>
+            <td>0%</td>
+          </tr>
+        </table>
       </div>
-    </div>
+      <br><br>
+    </div><br><br>
   </div><!--end of 右侧定制内容-->
 
 </div>
