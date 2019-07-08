@@ -41,10 +41,12 @@ function setupUserData(){
         // if (window.location.href.indexOf("work.html") > -1) {
         // }
         // use handlebars to update html
-        var source = $("#userMenuData").html();
-        var template = Handlebars.compile(source);
-        var html = template(userMenu);
-        $(".userMenuDataContainer").html(html);
+        $(document).ready(function() {
+            var source = $("#userMenuData").html();
+            var template = Handlebars.compile(source);
+            var html = template(userMenu);
+            $(".userMenuDataContainer").html(html);
+        });
     }).catch(function(error) {
         alert(JSON.stringify(error));
     });

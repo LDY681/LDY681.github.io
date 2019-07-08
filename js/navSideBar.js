@@ -183,10 +183,12 @@ function setProfileData(){
         console.log("navSideBar.userData[0]信息");
         console.log(navSideBar.userData[0]);
         // use handlebars to update html
-        var source = $("#profileData").html();
-        var template = Handlebars.compile(source);
-        var html = template(navSideBar);
-        $(".profileDataContainer").html(html);
+        $(document).ready(function(){
+            var source = $("#profileData").html();
+            var template = Handlebars.compile(source);
+            var html = template(navSideBar);
+            $(".profileDataContainer").html(html);
+        });
     }).catch(function(error) {
         alert(JSON.stringify(error));
     });
