@@ -182,7 +182,7 @@ function setProfileData(){
         console.log(navSideBar.userData[0]);
         // use handlebars to update html
         $(document).ready(function(){
-            console.log("开始编译navSideBar模板");
+            console.log("开始编译navSideBar");
             var source = $("#profileData").html();
             var template = Handlebars.compile(source);
             var html = template(navSideBar);

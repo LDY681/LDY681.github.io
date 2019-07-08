@@ -42,7 +42,7 @@ function setupUserData(){
         // }
         // use handlebars to update html
         $(document).ready(function() {
-            console.log("开始编译navSideBar模板");
+            console.log("开始编译userMenu");
             var source = $("#userMenuData").html();
             var template = Handlebars.compile(source);
             var html = template(userMenu);
