@@ -167,10 +167,8 @@ function setProfileData(){
         var avatarUrl;
         if (avatar){
             avatarUrl = avatar.get("url");
-            console.log(avatarUrl);
         }else{
             avatarUrl = "../img/logo.png";
-            console.log(avatarUrl);
         }
 
         // handlebars navSideBar
@@ -187,6 +185,7 @@ function setProfileData(){
             var template = Handlebars.compile(source);
             var html = template(navSideBar);
             $(".profileDataContainer").html(html);
+            console.log("完成编译navSideBar");
         });
     }).catch(function(error) {
         alert(JSON.stringify(error));

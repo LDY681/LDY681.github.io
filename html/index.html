@@ -53,13 +53,18 @@
 <script>
   $("#nav-placeholder").load("navSideBar.html", function(){
       console.log("navSideBar加载完毕");
-      $.getScript("../js/navSideBar.js");
-      setProfileData();
+      $.getScript("../js/navSideBar.js", function(){
+          console.log("setProfileData开始运行");
+          setProfileData();
+      });
+
   });
   $("#userMenu").load("userMenu.html", function(){
       console.log("userMenu加载完毕");
-      $.getScript("../js/userMenu.js");
-      setupUserData();
+      $.getScript("../js/userMenu.js", function(){
+          console.log("setupUserData开始运行");
+          setupUserData();
+      });
   });
 </script>
 

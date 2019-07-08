@@ -9,8 +9,6 @@ function setupUserData(){
     var query = new AV.Query('_User');
     query.include('avatar');
     query.get(AV.User.current().id).then (function (userData){
-        console.log("userMenu userData信息");
-        console.log(userData);
         var username = userData.get("username");
         var level = userData.get("level");
         var exp = userData.get("exp");
@@ -47,6 +45,7 @@ function setupUserData(){
             var template = Handlebars.compile(source);
             var html = template(userMenu);
             $(".userMenuDataContainer").html(html);
+            console.log("完成编译userMenu");
         });
     }).catch(function(error) {
         alert(JSON.stringify(error));
