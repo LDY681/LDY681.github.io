@@ -5,110 +5,106 @@
 // openNav是展开侧边栏按钮
 // topNav是顶层菜单栏
 
-$(function() {
-    //设置头像
-    //Jquery.onSubmit是给form用的，因为setAvatar是个button,所以应该是button.onClick
-    $("#setAvatar").on('click', function (e) {
-        e.preventDefault();
-        var file = $('#inputFile')[0].files[0];
-        if (file.size > 524288){
-            alert("请选择小于500KB的头像");
-        }else{
-            console.log("通过文件大小检测");
-            //TODO 检测之前是否已经有avatar
-            var name = file.name;
-            var avFile = new AV.File(name, file);
+//点击导航栏右侧头像
+function showProfile(){
+    document.getElementById("profile").style.display = "block";
+}
+//点击手机验证
+function showPhoneModal(){
+    document.getElementById("verifyPhoneModal").style.display = "block";
+}
+//点击发送验证码
+function sendVerification(){
+    let phoneNumber = $("#phoneNumber");
+    console.log(phoneNumber.val());
+    phoneNumber.attr("disabled", true);
 
-            //声明类型
-            var Avatar = AV.Object.extend('avatar');
-            //新建对象
-            var avatar = new Avatar();
-            // 将用户添加至头像
-            avatar.set("owner", AV.User.current());
-            avatar.set("image", avFile);
-            avatar.save().then(function(avatarObj){
-                console.log("avatar上传成功,返回值:");
-                console.log(avatarObj);
-                //获取user对象，并更新avatar pointer
-                var query = new AV.Query('_User');
-                query.get(AV.User.current().id).then(function (user) {
-                    console.log("get到了,值为:");
-                    console.log(user);
-                    user.set("avatar", avatar);
-                    user.save();
-                });
-                $("#avatarNotifier").show();
-            }, function(error) {
-            alert(JSON.stringify(error));
-        });
-        }
+    AV.Cloud.requestMobilePhoneVerify({
+        mobilePhoneNumber: phoneNumber.val(),
+        name: '转世三国',
+        op: '手机验证',
+        ttl: 10                     // 验证码有效时间为 10 分钟
+    }).then(function(res) {
+        //调用成功
+        console.log("请求验证码:");
+        console.log(res);
+    }, function(error){
+        alert(JSON.stringify(error));
     });
-    $("#profileSetting").on('click', function (e) {
-        e.preventDefault();
-        $("#profile").css("display", "block");
-    });
-    $("#phoneAlert").on('click', function (e) {
-        e.preventDefault();
-        $("#verifyPhoneModal").css("display", "block");
-    });
-    $("#sendVerification").on('click', function (e) {
-        e.preventDefault();
-        let phoneNumber = $("#phoneNumber");
-         console.log(phoneNumber.val());
-        let params = {
-            mobilePhoneNumber: phoneNumber.val(), //string
-        }
-        phoneNumber.attr("disabled", true);
+}
 
-        AV.Cloud.requestMobilePhoneVerify({
-            mobilePhoneNumber: phoneNumber.val(),
-            name: '转世三国',
-            op: '手机验证',
-            ttl: 10                     // 验证码有效时间为 10 分钟
-        }).then(function(res) {
-            //调用成功
-            console.log("请求验证码:");
-            console.log(res);
-        }, function(error){
-            alert(JSON.stringify(error));
-        });
-    });
-    $("#submitPhone" ).on('click', function(e) {
-        e.preventDefault();
-        let smsCode = $("#smsCode").val();
-        let phoneNumber = $("#phoneNumber").val();
-        let data = {
-            mobilePhoneNumber: phoneNumber,
-        };
-        console.log("验证码为 "+ smsCode + " 手机号为 "+ phoneNumber);
+//点击提交验证码
+function submitPhone(){
+    let smsCode = $("#smsCode").val();
+    let phoneNumber = $("#phoneNumber").val();
+    let data = {
+        mobilePhoneNumber: phoneNumber,
+    };
+    console.log("验证码为 "+ smsCode + " 手机号为 "+ phoneNumber);
 
-        AV.Cloud.verifySmsCode(smsCode, phoneNumber).then(function(){
-            //验证成功
-            console.log("手机验证码验证成功");
-            let current = AV.User.current();
-            var query = new AV.Query('_User');
-            query.get(current.id).then(function (user) {
-                console.log(user);
-                user.set("mobilePhoneVerified", true);
-                user.set("mobilePhoneNumber", phoneNumber);
-                user.save().then(function(){
+    AV.Cloud.verifySmsCode(smsCode, phoneNumber).then(function(){
+        //验证成功
+        console.log("手机验证码验证成功");
+        let current = AV.User.current();
+        var query = new AV.Query('_User');
+        query.get(current.id).then(function (user) {
+            console.log(user);
+            user.set("mobilePhoneVerified", true);
+            user.set("mobilePhoneNumber", phoneNumber);
+            user.save().then(function(){
 
-                },function(error){
-                    alert(JSON.stringify(error));
-                });
-                alert("验证成功!准备刷新页面!");
-                // window.location.reload();
+            },function(error){
+                alert(JSON.stringify(error));
+            });
+            alert("验证成功!准备刷新页面!");
+            // window.location.reload();
 
-            }, function(err){
-                //验证失败
-                alert(JSON.stringify(err));
-            })
         }, function(err){
             //验证失败
             alert(JSON.stringify(err));
-        });
+        })
+    }, function(err){
+        //验证失败
+        alert(JSON.stringify(err));
     });
-});
+}
+
+//设置头像
+//Jquery.onSubmit是给form用的，因为setAvatar是个button,所以应该是button.onClick
+function setAvatar(){
+    var file = $('#inputFile')[0].files[0];
+    if (file.size > 524288){
+        alert("请选择小于500KB的头像");
+    }else{
+        console.log("通过文件大小检测");
+        //TODO 检测之前是否已经有avatar
+        var name = file.name;
+        var avFile = new AV.File(name, file);
+
+        //声明类型
+        var Avatar = AV.Object.extend('avatar');
+        //新建对象
+        var avatar = new Avatar();
+        // 将用户添加至头像
+        avatar.set("owner", AV.User.current());
+        avatar.set("image", avFile);
+        avatar.save().then(function(avatarObj){
+            console.log("avatar上传成功,返回值:");
+            console.log(avatarObj);
+            //获取user对象，并更新avatar pointer
+            var query = new AV.Query('_User');
+            query.get(AV.User.current().id).then(function (user) {
+                console.log("get到了,值为:");
+                console.log(user);
+                user.set("avatar", avatar);
+                user.save();
+            });
+            $("#avatarNotifier").show();
+        }, function(error) {
+            alert(JSON.stringify(error));
+        });
+    }
+}
 
 function w3_open() {
     // 调整正文内容
@@ -156,11 +152,11 @@ function w3_close() {
     document.getElementById("topNav").style.marginLeft = "54px";
 }
 
-var navSideBar = {
-    userData: []
-};
-
 function setProfileData(){
+    var navSideBar = {
+        userData: []
+    };
+
     var query = new AV.Query('_User');
     query.include('avatar');
     query.get(AV.User.current().id).then (function (userData){

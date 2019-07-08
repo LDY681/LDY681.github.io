@@ -11,13 +11,10 @@
   <link rel="icon" href="../img/logo.png"/>
   <link href="../css/leaflet.css" rel="stylesheet" />
 
-  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
-  <script src="../js/initLeanCloud.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-
+  <!--加载leaflet地图js-->
   <script src="../js/leaflet.js"></script>
   <script src="../js/leaflet.ChineseTmsProviders.js"></script>
+
 </head>
 
 <body>
@@ -282,16 +279,20 @@
   </div>
 </div>
 
-
-<!--加载navSideBar和 userMenu-->
+<!--加载jquery-->
+<script src="../js/jquery-3.4.1.min.js"></script>
+<!--使用jquery 加载navSideBar到相关的placeholder中-->
 <script>
-  $("#nav-placeholder").load("navSideBar.html");
+    $("#nav-placeholder").load("navSideBar.html");
 </script>
 
-<!--加载script文件填充navSideBar-->
-<script src="../js/user.js"></script>
-<script src="../js/counter.js"></script>
-<script src="../js/userMenu.js"></script>
-<script src="../js/navSideBar.js"></script>
+<!--初始化用户并加载user.js-->
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
+<script src="../js/initLeanCloud.js"></script>
+<script src="../js/handlebars.min.js"></script>
+<script src="../js/user.js"></script> <!--登录注册,登出,isCurrentUser-->
+
+<!--加载script文件填充数据-->
+<script src="../js/navSideBar.js"></script> <!--填充navSideBar的数据 以及其他function-->
 </body>
 </html>

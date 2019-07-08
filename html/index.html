@@ -8,11 +8,6 @@
 <link rel="stylesheet" href="../css/all.css">
 <link rel="stylesheet" href="../css/my-style.css">
 <link rel="icon" href="../img/logo.png"/>
-
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
-<script src="../js/initLeanCloud.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 </head>
 
 <!--countUp ->东汉年历，getCurrTime ->北京时间显示 setUpUserData ->userMenu的数据填充-->
@@ -35,20 +30,29 @@
     <img src="../img/404.jpg" alt="404" style="width:100%">
     <img src="../img/404.jpg" alt="404" style="width:100%">
   </div><!--end of 训练界面-->
+
 </div>
 
 <!--end of navSideBar-->
 
-<!--加载navSideBar和 userMenu-->
+<!--加载jquery-->
+<script src="../js/jquery-3.4.1.min.js"></script>
+<!--使用jquery 加载navSideBar和userMenu到相关的placeholder中-->
 <script>
   $("#nav-placeholder").load("navSideBar.html");
   $("#userMenu").load("userMenu.html");
 </script>
+<!--加载counter.js-->
+<script src="../js/counter.js"></script> <!--活动倒计时,东汉年历,当前时间-->
 
-<!--加载script文件填充navSideBar-->
-<script src="../js/user.js"></script>
-<script src="../js/counter.js"></script>
-<script src="../js/userMenu.js"></script>
-<script src="../js/navSideBar.js"></script>
+<!--初始化用户并加载user.js-->
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
+<script src="../js/initLeanCloud.js"></script>
+<script src="../js/handlebars.min.js"></script>
+<script src="../js/user.js"></script> <!--登录注册,登出,isCurrentUser-->
+
+<!--加载script文件填充数据-->
+<script src="../js/userMenu.js"></script> <!--填充userMenu的数据-->
+<script src="../js/navSideBar.js"></script> <!--填充navSideBar的数据 以及其他function-->
 </body>
 </html>

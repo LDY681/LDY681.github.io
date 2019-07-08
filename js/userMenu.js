@@ -1,11 +1,11 @@
 // populate userMenu的data，由templateXXX.html调用
 
-// handlebars userMenu
-var userMenu = {
-    userData: []
-};
-
 function setupUserData(){
+    // handlebars userMenu
+    var userMenu = {
+        userData: []
+    };
+
     var query = new AV.Query('_User');
     query.include('avatar');
     query.get(AV.User.current().id).then (function (userData){
