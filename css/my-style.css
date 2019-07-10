@@ -73,6 +73,21 @@ body {
     height: 0;
 }
 
+/*不带scrollbar的横向scrollbar(￣▽￣)""*/
+.coolScroll-x{
+    white-space: nowrap;
+    display:block!important;
+    overflow-x: scroll!important;
+    scrollbar-width: none!important; /* Firefox */
+    -ms-overflow-style: none!important;  /* IE 10+ */
+}
+.coolScroll-x::-webkit-scrollbar { /* WebKit */
+    width: 0!important;
+    height: 0!important;
+}
+
+
+
 /*image map responsiveness*/
 img[usemap] {
     border: none;
