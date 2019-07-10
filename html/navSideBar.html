@@ -1,3 +1,4 @@
+
 <body>
 <!--头像设置成功提示-->
 <div id="avatarNotifier" class="popupFadeout w3-display-topmiddle w3-third w3-round-xxlarge w3-yellow w3-card-4" style="z-index: 2; display: none; position: fixed;height: 50px;line-height: 45px;">
@@ -17,14 +18,6 @@
     <a class="w3-text-red w3-bar-item w3-padding-large w3-button" href="#"><i class="far fa-envelope"></i>&nbsp;国家任务(国家发布的佣兵任务):&nbsp;1条!<img style="width:32px;" src="../img/hot.gif"></a>
     <a class="w3-bar-item w3-padding-large w3-button" href="#"><i class="far fa-envelope"></i>&nbsp;活动事件(系统发布的特殊活动):&nbsp;0条!</a>
     <a class="w3-text-red w3-bar-item w3-padding-large w3-button" href="#"><i class="far fa-envelope"></i>&nbsp;战场动态(XX国家占领XX):&nbsp;3条!<img style="width:32px;" src="../img/hot.gif"></a>
-<!--    <div class="w3-dropdown-hover">
-      <a class="w3-padding-large w3-button" href="#">最新活动2!<i class="fa fa-caret-down"></i></a>
-      <div class="w3-dropdown-content w3-bar-block w3-card-4">
-        <a class="w3-bar-item w3-padding-large w3-button" href="#">最新活动3!</a>
-        <a class="w3-bar-item w3-padding-large w3-button" href="#">最新活动4!</a>
-        <a class="w3-bar-item w3-padding-large w3-button" href="#">最新活动5!</a>
-      </div>
-    </div>-->
     <br> <br> <br>
     <p class="w3-large w3-center w3-text-red">限时活动:</p>
     <a class="w3-bar-item w3-yellow w3-button w3-center w3-text-red w3-hover-light-green w3-hover-text-black" href="login.html">开服注册送宝马!</a>
@@ -65,22 +58,9 @@
 <div id="main" style="margin-left:54px">
   <div class="w3-block">
     <!--导航栏-->
-    <div id="topNav" class="w3-top" style="margin-left: 0;">
-      <div class="w3-bar w3-black w3-card">
-
-        <!--小屏幕下点击展开菜单的按钮-->
-        <div
-          class="w3-bar-item w3-dropdown-hover w3-green w3-button w3-padding-large w3-hide-large w3-right"
-          style="margin-right: 50px;" href="#" title="展开菜单"><i class="fa fa-bars"></i>
-
-          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-blue" style="right:0; top:46px;">
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">绑定手机</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">修改邮箱</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">修改密码</a>
-            <a href="login.html" onclick="logOut()" class="w3-bar-item w3-button w3-padding-large">登出</a>
-          </div>
-        </div>
-
+    <div id="topNav" class="w3-top">
+<!--      w3-bar的属性里防止了overflow,所以我们用style覆盖他的属性-->
+      <div class="w3-black w3-card w3-bar" style="overflow-x: scroll;white-space: nowrap; display:block;">
         <!--大屏幕:导航栏左侧网站logo-->
         <a href="index.html">
           <img src="../img/logo.png" title="回到主页" style="height: 46px"
@@ -88,7 +68,7 @@
         </a>
 
         <!--大屏幕:导航栏导航栏目-->
-        <div class="w3-dropdown-hover">
+        <div class="w3-dropdown-hover fn">
           <button id="home" class="w3-padding-large w3-button" title="家园">家园 <i class="fa fa-caret-down"></i></button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-yellow">
             <a href="work.html" class="w3-bar-item w3-button">工作</a>
@@ -96,7 +76,61 @@
             <a href="#" class="w3-bar-item w3-button">装备</a>
           </div>
         </div>
-        <div class="w3-dropdown-hover">
+        <div class="w3-dropdown-hover fn">
+          <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
+            <a href="#" class="w3-bar-item w3-button">物资买卖</a>
+            <a href="#" class="w3-bar-item w3-button">道具交易</a>
+            <a href="#" class="w3-bar-item w3-button">货币交易</a>
+            <a href="#" class="w3-bar-item w3-button">市场统计</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover fn">
+          <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
+            <a href="#" class="w3-bar-item w3-button">物资买卖</a>
+            <a href="#" class="w3-bar-item w3-button">道具交易</a>
+            <a href="#" class="w3-bar-item w3-button">货币交易</a>
+            <a href="#" class="w3-bar-item w3-button">市场统计</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover fn">
+          <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
+            <a href="#" class="w3-bar-item w3-button">物资买卖</a>
+            <a href="#" class="w3-bar-item w3-button">道具交易</a>
+            <a href="#" class="w3-bar-item w3-button">货币交易</a>
+            <a href="#" class="w3-bar-item w3-button">市场统计</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover fn">
+          <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
+            <a href="#" class="w3-bar-item w3-button">物资买卖</a>
+            <a href="#" class="w3-bar-item w3-button">道具交易</a>
+            <a href="#" class="w3-bar-item w3-button">货币交易</a>
+            <a href="#" class="w3-bar-item w3-button">市场统计</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover fn">
+          <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
+            <a href="#" class="w3-bar-item w3-button">物资买卖</a>
+            <a href="#" class="w3-bar-item w3-button">道具交易</a>
+            <a href="#" class="w3-bar-item w3-button">货币交易</a>
+            <a href="#" class="w3-bar-item w3-button">市场统计</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover fn">
+          <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
+            <a href="#" class="w3-bar-item w3-button">物资买卖</a>
+            <a href="#" class="w3-bar-item w3-button">道具交易</a>
+            <a href="#" class="w3-bar-item w3-button">货币交易</a>
+            <a href="#" class="w3-bar-item w3-button">市场统计</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover fn">
           <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
             <a href="#" class="w3-bar-item w3-button">物资买卖</a>
@@ -107,7 +141,7 @@
         </div>
 
 
-        <div class="w3-dropdown-hover">
+        <div class="w3-dropdown-hover fn">
           <button class="w3-padding-large w3-button" title="国家">国家<i class="fa fa-caret-down"></i></button>
           <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-pink">
             <a href="map.html" class="w3-bar-item w3-button w3-padding-large">地图</a>

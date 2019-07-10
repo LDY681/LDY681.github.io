@@ -62,13 +62,13 @@ body {
     background: #f1f1f1;
 }
 
-/*不带scrollbar的scrollbar(￣▽￣)""*/
-.coolScroll {
+/*不带scrollbar的纵向scrollbar(￣▽￣)""*/
+.coolScroll-y{
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* IE 10+ */
 }
-.coolScroll::-webkit-scrollbar { /* WebKit */
+.coolScroll-y::-webkit-scrollbar { /* WebKit */
     width: 0;
     height: 0;
 }
@@ -135,6 +135,10 @@ img[usemap] {
 
 #customContent{
     transition: margin-left .5s;
+}
+
+.fn{
+    float: none!important;
 }
 
 
