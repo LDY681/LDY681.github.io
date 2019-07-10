@@ -97,7 +97,7 @@ img[usemap] {
 }
 
 /*fadeout提醒*/
-.popupFadeout{animation:fading 1.5s forwards; animation-timing-function: ease-in;}@keyframes fading{0%{opacity:1}50%{opacity:1}60%{opacity:0.5}75%{opacity:0.3}90%{opacity:0.1}100%{opacity:0}}
+.popupFadeout{animation:fading 1s forwards; animation-timing-function: ease-in;}@keyframes fading{0%{opacity:1}75%{opacity:1}95%{opacity:0.3}97%{opacity:0.2}99%{opacity:0.1}100%{opacity:0}}
 
 /*avatar大小设置*/
 .avatar{

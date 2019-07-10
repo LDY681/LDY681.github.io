@@ -17,6 +17,10 @@ $(function() {
     if(window.location.hash === '#needLogin')
     {
         $("#loginNotifier").show();
+
+        setTimeout(function () {
+            $("#loginNotifier").hide()
+           }, 1500);
     }
 });
 
