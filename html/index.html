@@ -54,12 +54,12 @@
 <script>
   $("#nav-placeholder").load("navSideBar.html", function(){
       console.log("navSideBar加载完毕");
+
       $.getScript("../js/navSideBar.js", function(){
           console.log("setProfileData开始运行");
           setProfileData();
           displayRightOnLarge();
       });
-
   });
   $("#userMenu").load("userMenu.html", function(){
       console.log("userMenu加载完毕");

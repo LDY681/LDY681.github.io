@@ -15,9 +15,14 @@ function setOnScrollMargin() {
 function displayRightOnLarge(){
     console.log("开始运行");
     var largeScreen = window.matchMedia("(min-width: 600px)");
-    if (largeScreen.matches){
+    if (largeScreen.matches) {
         console.log("large screen");
-        $("#profileSetting").addClass("w3-right");
+        var profile1 = $("#profileSetting");
+        profile1.addClass("w3-right");
+        profile1.css("display", "inline-block");
+    }else{
+        var profile2 = $("#profileSetting");
+        profile2.css("display", "inline-block");
     }
 }
 //点击导航栏右侧头像
