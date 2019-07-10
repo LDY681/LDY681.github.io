@@ -60,7 +60,7 @@
     <div id="topNav" class="w3-top">
 <!--      w3-bar的属性里防止了overflow,所以我们用style覆盖他的属性-->
 
-      <div class="w3-black w3-card w3-bar coolScroll-x">
+      <div class="w3-black w3-card w3-bar coolScroll-x" id="horizontalScroll" onscroll="setOnScrollMargin();">
         <!--大屏幕:导航栏左侧网站logo-->
         <a href="index.html">
           <img src="../img/logo.png" title="回到主页" style="height: 46px"
@@ -70,97 +70,51 @@
         <!--大屏幕:导航栏导航栏目-->
         <div class="w3-dropdown-hover fn">
           <button id="home" class="w3-padding-large w3-button" title="家园">家园 <i class="fa fa-caret-down"></i></button>
-          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-yellow">
+          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-yellow onScrollMargin">
             <a href="work.html" class="w3-bar-item w3-button">工作</a>
             <a href="train.html" class="w3-bar-item w3-button">训练</a>
             <a href="#" class="w3-bar-item w3-button">装备</a>
+            <a href="#" class="w3-bar-item w3-button">邀请玩家</a>
           </div>
         </div>
         <div class="w3-dropdown-hover fn">
           <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
-          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
+          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple onScrollMargin">
             <a href="#" class="w3-bar-item w3-button">物资买卖</a>
             <a href="#" class="w3-bar-item w3-button">道具交易</a>
-            <a href="#" class="w3-bar-item w3-button">货币交易</a>
-            <a href="#" class="w3-bar-item w3-button">市场统计</a>
-          </div>
-        </div>
-        <div class="w3-dropdown-hover fn">
-          <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
-          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
-            <a href="#" class="w3-bar-item w3-button">物资买卖</a>
-            <a href="#" class="w3-bar-item w3-button">道具交易</a>
-            <a href="#" class="w3-bar-item w3-button">货币交易</a>
-            <a href="#" class="w3-bar-item w3-button">市场统计</a>
-          </div>
-        </div>
-        <div class="w3-dropdown-hover fn">
-          <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
-          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
-            <a href="#" class="w3-bar-item w3-button">物资买卖</a>
-            <a href="#" class="w3-bar-item w3-button">道具交易</a>
-            <a href="#" class="w3-bar-item w3-button">货币交易</a>
-            <a href="#" class="w3-bar-item w3-button">市场统计</a>
-          </div>
-        </div>
-        <div class="w3-dropdown-hover fn">
-          <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
-          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
-            <a href="#" class="w3-bar-item w3-button">物资买卖</a>
-            <a href="#" class="w3-bar-item w3-button">道具交易</a>
-            <a href="#" class="w3-bar-item w3-button">货币交易</a>
-            <a href="#" class="w3-bar-item w3-button">市场统计</a>
-          </div>
-        </div>
-        <div class="w3-dropdown-hover fn">
-          <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
-          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
-            <a href="#" class="w3-bar-item w3-button">物资买卖</a>
-            <a href="#" class="w3-bar-item w3-button">道具交易</a>
-            <a href="#" class="w3-bar-item w3-button">货币交易</a>
-            <a href="#" class="w3-bar-item w3-button">市场统计</a>
-          </div>
-        </div>
-        <div class="w3-dropdown-hover fn">
-          <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
-          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
-            <a href="#" class="w3-bar-item w3-button">物资买卖</a>
-            <a href="#" class="w3-bar-item w3-button">道具交易</a>
-            <a href="#" class="w3-bar-item w3-button">货币交易</a>
-            <a href="#" class="w3-bar-item w3-button">市场统计</a>
-          </div>
-        </div>
-        <div class="w3-dropdown-hover fn">
-          <button id="market" class="w3-padding-large w3-button" title="市场">市场 <i class="fa fa-caret-down"></i></button>
-          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-purple">
-            <a href="#" class="w3-bar-item w3-button">物资买卖</a>
-            <a href="#" class="w3-bar-item w3-button">道具交易</a>
-            <a href="#" class="w3-bar-item w3-button">货币交易</a>
-            <a href="#" class="w3-bar-item w3-button">市场统计</a>
+            <a href="#" class="w3-bar-item w3-button">货币市场</a>
+            <a href="#" class="w3-bar-item w3-button">交易数据</a>
           </div>
         </div>
 
+        <div class="w3-dropdown-hover fn">
+          <button class="w3-padding-large w3-button" title="国家">外交 <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-pink onScrollMargin">
+            <a href="map.html" class="w3-bar-item w3-button">战事地图</a>
+            <a href="map.html" class="w3-bar-item w3-button">战场列表</a>
+            <a href="#" class="w3-bar-item w3-button">资源统计</a>
+            <a href="#" class="w3-bar-item w3-button">外交动态</a>
+          </div>
+        </div>
 
         <div class="w3-dropdown-hover fn">
-          <button class="w3-padding-large w3-button" title="国家">国家<i class="fa fa-caret-down"></i></button>
-          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-pink">
-            <a href="map.html" class="w3-bar-item w3-button w3-padding-large">地图</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">天命之子</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">科举选拔</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">国家管理</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">政治动态</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">经济动态</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">法律动态</a>
+          <button class="w3-padding-large w3-button" title="内政">内政 <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-pink onScrollMargin">
+            <a href="#" class="w3-bar-item w3-button">天命之子</a>
+            <a href="#" class="w3-bar-item w3-button">科举选拔</a>
+            <a href="#" class="w3-bar-item w3-button">国家管理</a>
+            <a href="#" class="w3-bar-item w3-button">法律颁布</a>
+            <a href="#" class="w3-bar-item w3-button">经济实况</a>
           </div>
-          <span class="w3-right w3-padding w3-hide-small"><a target="_blank"
-                                               href="//shang.qq.com/wpa/qunwpa?idkey=3c4de04285c30fbbde0219589d984e461621f84cb937880221456d12aae39ebf"><img
-            border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="转世三国官方交流群" title="转世三国官方交流群"></a></span>
         </div>
         <!--end of 大屏幕导航栏导航栏目-->
 
+        <span class="w3-padding"><a target="_blank"
+                                             href="//shang.qq.com/wpa/qunwpa?idkey=3c4de04285c30fbbde0219589d984e461621f84cb937880221456d12aae39ebf"><img
+          border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="转世三国官方交流群" title="转世三国官方交流群"></a></span>
         <!--大屏幕:导航栏右侧的账户设置按钮-->
         <img id="profileSetting" src="../img/logo.png" onclick="showProfile();"
-               style="height: 46px; margin-right: 50px;" class="w3-image w3-button w3-green w3-hide-small w3-hide-medium w3-right"
+               style="height: 46px; margin-right: 50px;" class="w3-image w3-button w3-green"
                alt="用户头像"/>
 
         <!-- 账号设置modal-->
@@ -192,6 +146,5 @@
     </div>  <!-- end of 导航栏-->
   </div>
 </div> <!--end of 侧边栏右边区域-->
-
 </body>
 <!--</div>-->

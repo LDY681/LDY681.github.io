@@ -35,6 +35,7 @@
 
 <!--end of navSideBar-->
 
+<!--Script加载顺序!!!!!-->
 <!--加载jquery-->
 <script src="../js/jquery-3.4.1.min.js"></script>
 <script>console.log("Jquery加载完毕")</script>
@@ -56,6 +57,7 @@
       $.getScript("../js/navSideBar.js", function(){
           console.log("setProfileData开始运行");
           setProfileData();
+          displayRightOnLarge();
       });
 
   });
@@ -70,5 +72,7 @@
 
 <!--加载counter.js-->
 <script src="../js/counter.js"></script> <!--活动倒计时,东汉年历,当前时间-->
+
+
 </body>
 </html>

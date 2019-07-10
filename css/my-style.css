@@ -156,6 +156,9 @@ img[usemap] {
     float: none!important;
 }
 
+.onScrollMargin{
+    margin-left: 0;
+}
 
 
 

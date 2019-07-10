@@ -5,6 +5,21 @@
 // openNav是展开侧边栏按钮
 // topNav是顶层菜单栏
 
+// 如果导航栏被scroll,重新设定dropDown-content的margin
+function setOnScrollMargin() {
+    let left = $("#horizontalScroll").scrollLeft();
+    $(".onScrollMargin").css({"margin-left": -left})
+}
+
+// 在大屏幕下账号设置显示在右上角
+function displayRightOnLarge(){
+    console.log("开始运行");
+    var largeScreen = window.matchMedia("(min-width: 600px)");
+    if (largeScreen.matches){
+        console.log("large screen");
+        $("#profileSetting").addClass("w3-right");
+    }
+}
 //点击导航栏右侧头像
 function showProfile(){
     document.getElementById("profile").style.display = "block";
@@ -108,7 +123,6 @@ function setAvatar(){
 
 function w3_open() {
     var smallScreen = window.matchMedia("(max-width: 600px)");
-
     // 如果屏幕小于600px,sideBar全覆盖
     if (smallScreen.matches) {
         document.getElementById("mySidebar").style.width = "100vw";
