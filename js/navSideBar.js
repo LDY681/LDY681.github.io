@@ -107,21 +107,27 @@ function setAvatar(){
 }
 
 function w3_open() {
-    // 调整正文内容
-    var custom = document.getElementById("customContent");
-    if (custom) {
-        if (custom.className.indexOf("w3-animate-left") === -1) {
-            custom.className += " w3-animate-left";
-        }
-        custom.style.marginLeft = "196px";
-    }
+    var smallScreen = window.matchMedia("(max-width: 600px)");
 
-    //调整导航侧边栏
-    document.getElementById("main").style.marginLeft = "196px";
-    document.getElementById("mySidebar").style.width = "196px";
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("openNav").style.display = 'none';
-    document.getElementById("topNav").style.marginLeft = "";
+    // 如果屏幕小于600px,sideBar全覆盖
+    if (smallScreen.matches) {
+        document.getElementById("mySidebar").style.width = "100vw";
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("main").style.display = "none";
+    }else{      // 如果屏幕大于600px,sideBar为196px
+        document.getElementById("profileSetting").style.display="none";
+        // 调整正文内容
+        var custom = document.getElementById("customContent");
+        if (custom) {
+            custom.style.marginLeft = "196px";
+        }
+        //调整导航侧边栏
+        document.getElementById("main").style.marginLeft = "196px";
+        document.getElementById("mySidebar").style.width = "196px";
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("openNav").style.display = 'none';
+        document.getElementById("topNav").style.marginLeft = "0";
+    }
 
     let current = AV.User.current();
     console.log("当前用户为:");
@@ -135,21 +141,28 @@ function w3_open() {
 }
 
 function w3_close() {
-    //调整正文内容
-    var custom = document.getElementById("customContent");
-    if (custom) {
-        if (custom.className.indexOf("w3-animate-left") !== -1) {
-            custom.className = custom.className.replace(" w3-animate-left", "");
-        }
-        custom.style.marginLeft = "0";
-    }
 
-    //调整导航侧边栏
-    document.getElementById("main").style.marginLeft = "0";
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("openNav").style.display = "block";
-    document.getElementById("openNav").style.marginLeft = "0px";
-    document.getElementById("topNav").style.marginLeft = "54px";
+    var smallScreen = window.matchMedia("(max-width: 600px)");
+    // 如果屏幕小于600px,sideBar全覆盖
+    if (smallScreen.matches) {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("main").style.display = "block";
+    }else{
+        document.getElementById("profileSetting").style.display="block";
+        //调整正文内容
+        var custom = document.getElementById("customContent");
+        if (custom) {
+            custom.style.marginLeft = "0";
+        }
+
+        //调整导航侧边栏
+        document.getElementById("main").style.marginLeft = "0";
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("openNav").style.display = "block";
+        document.getElementById("openNav").style.marginLeft = "0px";
+        document.getElementById("topNav").style.marginLeft = "54px";
+    }
 }
 
 function setProfileData(){

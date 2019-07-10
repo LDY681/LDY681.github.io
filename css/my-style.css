@@ -133,5 +133,10 @@ img[usemap] {
     border-radius: 1px; box-shadow: 0px 0px 0px 20px rgba(0,0,0,0.3); background: #ddd; padding: 8px; margin-left: 50%; transform: translateX(-50%); width: 400px;
 }
 
+#customContent{
+    transition: margin-left .5s;
+}
+
+
 
 
