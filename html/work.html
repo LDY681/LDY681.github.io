@@ -11,7 +11,7 @@
 </head>
 
 <!--countUp ->东汉年历，getCurrTime ->北京时间显示 setUpUserData ->userMenu的数据填充-->
-<body onload="countUp('June 1, 2019 00:00:00');getCurrTime();setupUserData();setProfileData();">
+<body onload="countUp('June 1, 2019 00:00:00');getCurrTime()">
 <!--navSideBar placeholder-->
 <div style="position: relative" id="nav-placeholder"></div>
 
@@ -75,35 +75,53 @@
         <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
         <div class="workntrainButton">
           <p id="workNotifier" class="w3-large">您今天还未工作!</p>
-          <button class="w3-green w3-padding-large w3-round-xxlarge">点我快来工作!</button>
+          <button id="onWork" class="w3-green w3-padding-large w3-round-xxlarge">点我快来工作!</button>
         </div>
         <br><br>
       </div><br><br>
 
-      <div class="workStatsBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
-        <h1 class="w3-text-green w3-bold">详情</h1>
-        <div class="w3-panel" style="width: 50%; margin:auto;">
-          <table class="w3-table-all w3-card-4">
-            <tr>
-              <td>总工作次数</td>
-              <td>0 次</td>
-            </tr>
-            <tr>
-              <td>工作技能</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>工作技能增加</td>
-              <td>0%</td>
-            </tr>
-            <tr>
-              <td>获得经验</td>
-              <td>0%</td>
-            </tr>
-          </table>
-        </div>
-        <br><br>
-      </div><br><br>
+
+    <div class="workStatsBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+      <!--         TODO: implement产量加成-->
+      <h1 class="w3-text-green"> 工作效果</h1>
+      <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
+      <div class="w3-panel">
+        <table class="w3-table-all w3-card-4">
+          <tr>
+            <td>熟练度技能区间</td>
+            <td>增加熟练度</td>
+            <td>获得经验</td>
+          </tr>
+          <tr>
+            <td>0-10</td>
+            <td>1</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>11.01-15</td>
+            <td>0.5</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>15.01-20</td>
+            <td>0.2</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>20.01-30</td>
+            <td>0.1</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>30以上</td>
+            <td>0.05</td>
+            <td>1</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+    </div><br><br>
+
   </div><!--end of 右侧定制内容-->
 
 </div>
@@ -145,8 +163,8 @@
     });
 </script>
 
-<!--加载counter.js-->
+<!--加载counter.js和workTrain.js-->
 <script src="../js/counter.js"></script> <!--活动倒计时,东汉年历,当前时间-->
-
+<script src="../js/workTrain.js"></script> <!--工作训练-->
 </body>
 </html>

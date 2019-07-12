@@ -11,7 +11,7 @@
 </head>
 
 <!--countUp ->东汉年历，getCurrTime ->北京时间显示 setUpUserData ->userMenu的数据填充-->
-<body onload="countUp('June 1, 2019 00:00:00');getCurrTime();setupUserData();setProfileData();">
+<body onload="countUp('June 1, 2019 00:00:00');getCurrTime()">
 <!--navSideBar placeholder-->
 <div style="position: relative" id="nav-placeholder"></div>
 
@@ -70,7 +70,7 @@
       <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
       <div class="workntrainButton">
         <p id="workNotifier" class="w3-large">您今天还未训练!</p>
-        <button class="w3-green w3-padding-large w3-round-xxlarge">点我快来训练!</button>
+        <button id="onTrain" class="w3-green w3-padding-large w3-round-xxlarge">点我快来训练!</button>
       </div>
       <br><br>
     </div><br><br>
@@ -142,6 +142,6 @@
 
 <!--加载counter.js-->
 <script src="../js/counter.js"></script> <!--活动倒计时,东汉年历,当前时间-->
-
+<script src="../js/workTrain.js"></script> <!--活动倒计时,东汉年历,当前时间-->
 </body>
 </html>

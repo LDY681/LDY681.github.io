@@ -13,10 +13,8 @@ function setOnScrollMargin() {
 
 // 在大屏幕下账号设置显示在右上角
 function displayRightOnLarge(){
-    console.log("开始运行");
     var largeScreen = window.matchMedia("(min-width: 600px)");
     if (largeScreen.matches) {
-        console.log("large screen");
         var profile1 = $("#profileSetting");
         profile1.addClass("w3-right");
         profile1.css("display", "inline-block");
@@ -194,13 +192,14 @@ function setProfileData(){
     query.get(AV.User.current().id).then (function (userData){
         var username = userData.get("username");
         //TODO: get avatar
-        var avatar = userData.get("avatar").get("image");
-
+        var avatar = userData.get("avatar");
         var avatarUrl;
         if (avatar){
-            avatarUrl = avatar.get("url");
+            console.log("有avatar");
+            avatarUrl = avatar.get("image").get("url");
         }else{
-            avatarUrl = "../img/logo.png";
+            console.log("没有avatar");
+            avatarUrl = "http://lc-q48bubuw.cn-e1.lcfile.com/18b3144a7e4a7e11b264.png";
         }
 
         // handlebars navSideBar

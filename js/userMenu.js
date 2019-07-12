@@ -15,12 +15,14 @@ function setupUserData(){
         var rank = userData.get("rank");
         var dmg = userData.get("dmg");
         var str = userData.get("str");
-        var avatar = userData.get("avatar").get("image");
+        var avatar = userData.get("avatar");
         var avatarUrl;
         if (avatar){
-            avatarUrl = avatar.get("url");
+            console.log("有avatar");
+            avatarUrl = avatar.get("image").get("url");
         }else{
-            avatarUrl = "../img/logo.png";
+            console.log("没有avatar");
+            avatarUrl = "http://lc-q48bubuw.cn-e1.lcfile.com/18b3144a7e4a7e11b264.png";
         }
         // handlebars userMenu
         userMenu.userData.push({
