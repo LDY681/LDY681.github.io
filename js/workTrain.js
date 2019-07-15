@@ -115,3 +115,66 @@ function train(){
         alert("网络异常或您在多台机器同时点击!");
     });
 }
+
+function evalWork(){
+    var user = AV.Object.createWithoutData('_User', AV.User.current().id);
+    user.fetch().then(function(userData){
+        var workCount = userData.get("workCount");
+        var canWork = userData.get("canWork");
+
+        var workNotifier = $("#workNotifier");
+        var onWork = $("#onWork");
+
+        //工作机会还在冷却中
+        if (canWork === false && workCount !== 4){
+            workNotifier.html( "正在工作中,请下个双整点再来o(*^＠^*)o" );
+            workNotifier.addClass("w3-text-red");
+            onWork.html( "好嘞(●'◡'●)" );
+            onWork.attr("disabled", true);
+            onWork.removeClass("w3-green");
+            onWork.addClass("w3-grey");
+        }else if (workCount === 4){   //今天工作次数已满4次
+            workNotifier.html("今天已经工作满4次啦,请明日再来(ง •_•)ง");
+            workNotifier.addClass("w3-text-red");
+            onWork.html( "好嘞(●'◡'●)" );
+            onWork.attr("disabled", true);
+            onWork.removeClass("w3-green");
+            onWork.addClass("w3-grey");
+        }else{
+            $("#taskButtonWork").css("display","inline-block");
+        }
+        $(".workntrainButton").show();
+    });
+}
+
+
+function evalTrain(){
+    var user = AV.Object.createWithoutData('_User', AV.User.current().id);
+    user.fetch().then(function(userData){
+        var trainCount = userData.get("trainCount");
+        var canTrain = userData.get("canTrain");
+
+        var trainNotifier = $("#trainNotifier");
+        var onTrain = $("#onTrain");
+
+        //工作机会还在冷却中
+        if (canTrain === false && trainCount !== 4){
+            trainNotifier.html( "正在训练中,请下个双整点再来o(*^＠^*)o" );
+            trainNotifier.addClass("w3-text-red");
+            onTrain.html( "好嘞(●'◡'●)" );
+            onTrain.attr("disabled", true);
+            onTrain.removeClass("w3-green");
+            onTrain.addClass("w3-grey");
+        }else if (trainCount === 4){    //今天工作次数已满4次
+            trainNotifier.html("今天已经训练满4次啦,请明日再来(ง •_•)ง");
+            trainNotifier.addClass("w3-text-red");
+            onTrain.html( "好嘞(●'◡'●)" );
+            onTrain.attr("disabled", true);
+            onTrain.addClass("w3-grey");
+            onTrain.removeClass("w3-green");
+        }else{
+            $("#taskButtonTrain").css("display","inline-block");
+        }
+        $(".workntrainButton").show();
+    });
+}

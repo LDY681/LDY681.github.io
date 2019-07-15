@@ -30,66 +30,65 @@
   <!--TODO:右侧定制内容-->
   <div id="rightPanel" class="w3-rest w3-card-4 w3-round-xxlarge w3-margin-right w3-light-gray" style="margin-top:80px;"><br><br>
 
-      <div class="productionBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
-        <!--         TODO: implement产量加成-->
-        <h1 class="w3-text-green">当前产量加成</h1>
-        <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
-        <div class="w3-panel">
-          <table class="w3-table-all w3-card-4">
-            <tr>
-              <td>商品</td>
-              <td>魏国</td>
-              <td>蜀国</td>
-              <td>吴国</td>
-              <td>黄巾</td>
-            </tr>
-            <tr>
-              <td>大米</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-            </tr>
-            <tr>
-              <td>小麦</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-            </tr>
-            <tr>
-              <td>兵器</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-            </tr>
-            <tr>
-              <td>攻城车</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-              <td>0%</td>
-            </tr>
-          </table>
-        </div>
-        <br><br>
-      </div><br><br>
-
       <div class="workBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
-        <h1 class="w3-text-green">工作</h1><br><br>
+        <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">进行工作</span></h1><br><br>
         <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
-        <div class="workntrainButton">
-          <p id="workNotifier" class="w3-large">您今天还未工作!</p>
+        <div class="workntrainButton" style="display: none;">
+          <p id="workNotifier" class="w3-large">您当前还未工作!</p>
           <button id="onWork" class="w3-green w3-padding-large w3-round-xxlarge">点我快来工作!</button>
         </div>
         <br><br>
       </div><br><br>
 
+    <div class="productionBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+      <!--         TODO: implement产量加成-->
+      <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">当前产量加成</span></h1>
+      <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
+      <div class="w3-panel">
+        <table class="w3-table-all w3-card-4">
+          <tr>
+            <td>商品</td>
+            <td>魏国</td>
+            <td>蜀国</td>
+            <td>吴国</td>
+            <td>黄巾</td>
+          </tr>
+          <tr>
+            <td>大米</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+          </tr>
+          <tr>
+            <td>小麦</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+          </tr>
+          <tr>
+            <td>兵器</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+          </tr>
+          <tr>
+            <td>攻城车</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+          </tr>
+        </table>
+      </div>
+      <br><br>
+    </div><br><br>
 
     <div class="workStatsBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
       <!--         TODO: implement产量加成-->
-      <h1 class="w3-text-green"> 工作效果</h1>
+      <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">工作效果</span></h1>
       <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
       <div class="w3-panel">
         <table class="w3-table-all w3-card-4">
@@ -127,12 +126,17 @@
       </div>
       <br><br>
     </div><br><br>
-
   </div><!--end of 右侧定制内容-->
-
 </div>
 
-<!--end of navSideBar-->
+
+
+
+
+
+
+
+
 
 <!--Script加载顺序!!!!!-->
 <!--加载jquery-->
@@ -173,6 +177,10 @@
                     $.getScript("../js/translate.js", function(){
                         console.log("translate.js读取完毕,开始执行detectLang");
                         detectLang();
+                    });
+                    $.getScript("../js/workTrain.js", function(){
+                        evalTrain();
+                        evalWork();
                     });
                 });
             });

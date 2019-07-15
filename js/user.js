@@ -31,13 +31,27 @@ function signUp() {
     user.setUsername($('#signinUsername').val());
     user.setPassword($('#signinPassword').val());
     user.setEmail($('#signinEmail').val());
-    user.signUp().then(function (loginedUser) {
+    user.signUp().then(function (userData) {
         console.log("注册信息:");
-        console.log(loginedUser);
-        window.location.href = "../html/index.html";
+        console.log(userData);
+
+        //新建装备信息
+        var equip = new AV.Object('equip');
+        userData.set('equip', equip);
+        equip.set('owner',userData);
+        equip.save().then(function(){
+            fetchEquipInfo().then(function(res){
+                console.log(res);
+                window.location.href = "../html/index.html";
+            }, (function(error){alert(JSON.stringify(error));}));
+        }, (function(error){alert(JSON.stringify(error));}));
     }, (function (error) {
         alert(JSON.stringify(error));
     }));
+
+
+
+
 }
 
 function logIn() {
@@ -47,7 +61,10 @@ function logIn() {
     AV.User.logIn(username, password).then(function (loginedUser) {
         console.log("登录信息:");
         console.log(loginedUser);
-        window.location.href = "../html/index.html";
+        fetchEquipInfo().then(function(res){
+            console.log(res);
+            window.location.href = "../html/index.html";
+        }, (function(error){alert(JSON.stringify(error));}));
     }, function (error) {
         alert(JSON.stringify(error));
     });

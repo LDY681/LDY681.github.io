@@ -144,7 +144,6 @@ function zh_init() {
 }
 function detectLang(){
     console.log("detectLang运行中");
-    zh_init();
     let lang =(navigator.language || navigator.browserLanguage || navigator.language || "zh-cn").toLowerCase();
     if(lang.indexOf('zh-cn') === -1){console.log("当前语言为繁体");zh_tran('t');}else{console.log("当前语言为简体");}
 }
