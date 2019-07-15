@@ -8,6 +8,7 @@ $(function() {
     });
     $(".signupForm").on('submit', function(e) {
         e.preventDefault();
+        console.log("signUp");
         signUp();
     });
 
