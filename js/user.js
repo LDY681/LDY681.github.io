@@ -1,12 +1,12 @@
 // user登录，注册，登出，当前用户check，由login.html和templateXXX.html调用
 
 $(function() {
-    $("#log").on('click', function(e) {
+    $(".loginForm").on('submit', function(e) {
         e.preventDefault();
         console.log("login");
         logIn();
     });
-    $("#reg").on('click', function(e) {
+    $(".signupForm").on('submit', function(e) {
         e.preventDefault();
         console.log("signUp");
         signUp();
