@@ -24,6 +24,7 @@
 <script>
   counter('Jan 1, 2025 24:00:00');
   $(document).ready(function() {
+      document.getElementById("loader").style.display = "none";
     $('img[usemap]').rwdImageMaps();
     $(".shuguo").on("click", function(e){
       e.preventDefault();
@@ -38,20 +39,24 @@
       document.getElementById('wuIntro').style.display='block';
     });
   });
-  function loader(){
-    document.getElementById("loader").style.display = "none";
-  }
 
+
+  $.getScript("../js/translate.js", function(){
+      console.log("translate.js读取完毕,开始执行detectLang");
+      detectLang();
+  });
 </script>
 </head>
 
-<body onload="loader()">
+<body>
+
+<!--请先登录提示-->
 <div id="loginNotifier" class="popupFadeout w3-display-topmiddle w3-third w3-round-xxlarge w3-yellow w3-card-4" style="z-index: 2; display: none; position: fixed;height: 50px;line-height: 45px;">
-  <p style="color: Green; top: 50px; width: 125px; margin: auto; font-size: 25px;">请先登录！</p>
+  <div style="text-align: center;"><span style="color: Green; display: inline-block; vertical-align: middle; font-size: 25px;">请先登录！</span></div>
 </div>
 
-<div id="loader" style="z-index:1;display:block;" class="w3-display-middle w3-light-gray w3-round-xxlarge">
-  <img style="width:100%" src="../img/logo.png" class="ld ld-jump" alt="加载中"/><br  >
+<div id="loader" style="z-index:1;display:block;width: 15%;" class="w3-display-middle w3-light-gray w3-round-xxlarge">
+  <img style="width:100%" src="../img/logo.png" class="ld ld-jump" alt="加载中"/><br>
   <h1>加载中,很快哦O(∩_∩)O</h1>
 </div>
 

@@ -1,3 +1,4 @@
+<body>
 <!--      时间显示-->
   <div class="w3-panel w3-large">
     <span><i class="w3-left far fa-lightbulb w3-yellow w3-hover-light-green w3-dropdown-hover">
@@ -47,7 +48,7 @@
     <!-- 账号信息-->
     <div class="myHorizontalRule"></div>
     <div>
-      <img src={{{avatarUrl}}} class="avatar" alt="账号头像"><br>
+      <img onclick="showProfile()" src={{{avatarUrl}}} class="avatar" alt="账号头像"><br>
       <a class="profile-link" href="profile.html" id="userName">{{{username}}}</a>
 
       <div id="levelMission">
@@ -77,3 +78,5 @@
     {{/each}}
   </script>
 </div>
+
+</body>

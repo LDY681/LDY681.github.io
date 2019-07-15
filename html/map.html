@@ -293,23 +293,27 @@
 <script src="../js/user.js"></script> <!--登录注册,登出,isCurrentUser-->
 <script>console.log("User初始化完毕;")</script>
 
+<!--加载counter.js-->
+<script src="../js/counter.js"></script> <!--活动倒计时,东汉年历,当前时间-->
+
 <!--使用jquery 加载navSideBar和userMenu到相关的placeholder中-->
 <!--这个script执行完只是call了jquery.load,可能jquery.load要load的内容还没有加载完,此时后面加载的js,如果依赖于load的内容则可能会报错-->
 <!--解决办法  $("#nav-placeholder").load("navSideBar.html", function(){ $.getScript("../js/navSideBar.js");}-->
 <script>
     $("#nav-placeholder").load("navSideBar.html", function(){
         console.log("navSideBar加载完毕");
+
         $.getScript("../js/navSideBar.js", function(){
-            console.log("setProfileData开始运行");
+            console.log("navSideBar.js读取完毕,开始执行setProfileData&displayRightOnLarge");
             setProfileData();
             displayRightOnLarge();
+            $.getScript("../js/translate.js", function(){
+                console.log("translate.js读取完毕,开始执行detectLang");
+                detectLang();
+            });
         });
-
     });
 </script>
-
-<!--加载counter.js-->
-<script src="../js/counter.js"></script> <!--活动倒计时,东汉年历,当前时间-->
 
 </body>
 </html>

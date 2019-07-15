@@ -3,6 +3,7 @@
 $(function() {
     $(".loginForm").on('submit', function(e) {
         e.preventDefault();
+        console.log("login");
         logIn();
     });
     $(".signupForm").on('submit', function(e) {

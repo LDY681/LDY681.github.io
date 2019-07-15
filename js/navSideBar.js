@@ -34,7 +34,7 @@ function showPhoneModal(){
 //点击发送验证码
 function sendVerification(){
     let phoneNumber = $("#phoneNumber");
-    console.log(phoneNumber.val());
+    // console.log(phoneNumber.val());
     phoneNumber.attr("disabled", true);
 
     AV.Cloud.requestMobilePhoneVerify({
@@ -44,8 +44,8 @@ function sendVerification(){
         ttl: 10                     // 验证码有效时间为 10 分钟
     }).then(function(res) {
         //调用成功
-        console.log("请求验证码:");
-        console.log(res);
+        // console.log("请求验证码:");
+        // console.log(res);
     }, function(error){
         alert(JSON.stringify(error));
     });
@@ -58,15 +58,15 @@ function submitPhone(){
     let data = {
         mobilePhoneNumber: phoneNumber,
     };
-    console.log("验证码为 "+ smsCode + " 手机号为 "+ phoneNumber);
+    // console.log("验证码为 "+ smsCode + " 手机号为 "+ phoneNumber);
 
     AV.Cloud.verifySmsCode(smsCode, phoneNumber).then(function(){
         //验证成功
-        console.log("手机验证码验证成功");
+        // console.log("手机验证码验证成功");
         let current = AV.User.current();
         var query = new AV.Query('_User');
         query.get(current.id).then(function (user) {
-            console.log(user);
+            // console.log(user);
             user.set("mobilePhoneVerified", true);
             user.set("mobilePhoneNumber", phoneNumber);
             user.save().then(function(){
@@ -94,7 +94,7 @@ function setAvatar(){
     if (file.size > 524288){
         alert("请选择小于500KB的头像");
     }else{
-        console.log("通过文件大小检测");
+        // console.log("通过文件大小检测");
         //TODO 检测之前是否已经有avatar
         var name = file.name;
         var avFile = new AV.File(name, file);
@@ -107,17 +107,20 @@ function setAvatar(){
         avatar.set("owner", AV.User.current());
         avatar.set("image", avFile);
         avatar.save().then(function(avatarObj){
-            console.log("avatar上传成功,返回值:");
-            console.log(avatarObj);
+            // console.log("avatar上传成功,返回值:");
+            // console.log(avatarObj);
             //获取user对象，并更新avatar pointer
             var query = new AV.Query('_User');
             query.get(AV.User.current().id).then(function (user) {
-                console.log("get到了,值为:");
-                console.log(user);
+                // console.log("get到了,值为:");
+                // console.log(user);
                 user.set("avatar", avatar);
                 user.save();
             });
             $("#avatarNotifier").show();
+            setTimeout(function () {
+                $("#avatarNotifier").hide()
+            }, 1500);
         }, function(error) {
             alert(JSON.stringify(error));
         });
@@ -147,11 +150,11 @@ function w3_open() {
     }
 
     let current = AV.User.current();
-    console.log("当前用户为:");
-    console.log(current);
+    // console.log("当前用户为:");
+    // console.log(current);
     var mobileStatus = current.get('mobilePhoneVerified');
-    console.log("手机是否验证");
-    console.log(mobileStatus);
+    // console.log("手机是否验证");
+    // console.log(mobileStatus);
     if (mobileStatus === false){
         $("#phoneAlert").css("display","block");
     }
@@ -195,10 +198,10 @@ function setProfileData(){
         var avatar = userData.get("avatar");
         var avatarUrl;
         if (avatar){
-            console.log("有avatar");
+            // console.log("有avatar");
             avatarUrl = avatar.get("image").get("url");
         }else{
-            console.log("没有avatar");
+            // console.log("没有avatar");
             avatarUrl = "http://lc-q48bubuw.cn-e1.lcfile.com/18b3144a7e4a7e11b264.png";
         }
 
@@ -207,16 +210,16 @@ function setProfileData(){
             username,
             avatarUrl
         });
-        console.log("navSideBar.userData[0]信息");
-        console.log(navSideBar.userData[0]);
+        // console.log("navSideBar.userData[0]信息");
+        // console.log(navSideBar.userData[0]);
         // use handlebars to update html
         $(document).ready(function(){
-            console.log("开始编译navSideBar");
+            // console.log("开始编译navSideBar");
             var source = $("#profileData").html();
             var template = Handlebars.compile(source);
             var html = template(navSideBar);
             $(".profileDataContainer").html(html);
-            console.log("完成编译navSideBar");
+            // console.log("完成编译navSideBar");
         });
     }).catch(function(error) {
         alert(JSON.stringify(error));

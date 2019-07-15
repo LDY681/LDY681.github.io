@@ -21,7 +21,7 @@ function work(){
                 userData.increment('workCount', 1);
 
                 // 设置ecoSkill和exp增加
-                var eco = userData.ecoSkill;
+                var eco = userData.attributes.ecoSkill;
                 var ecoIncrement,expIncrement;
                 if (eco <= 10){
                     ecoIncrement = 1;
@@ -44,7 +44,12 @@ function work(){
 
                 // 保存的时候先fetch以下
                 userData.fetchWhenSave(true);
-                return userData.save();
+                return userData.save().then(function(){
+                    $(".successNotifier").show();
+                    setTimeout(function () {
+                        $(".successNotifier").hide()
+                    }, 1500);
+                });
             }else{
                 alert("每个双整点只能工作一次哦!");
             }
@@ -69,7 +74,7 @@ function train(){
                 userData.increment('trainCount', 1);
 
                 // 设置ecoSkill和exp增加
-                var str = userData.str;
+                var str = userData.attributes.str;
                 var strIncrement,expIncrement;
                 if (str <= 1000){
                     strIncrement = 100;
@@ -92,7 +97,12 @@ function train(){
 
                 // 保存的时候先fetch以下
                 userData.fetchWhenSave(true);
-                return userData.save();
+                return userData.save().then(function(){
+                    $(".successNotifier").show();
+                    setTimeout(function () {
+                        $(".successNotifier").hide()
+                    }, 1500);
+                });
             }else{
                 alert("每个双整点只能训练一次哦!");
             }
