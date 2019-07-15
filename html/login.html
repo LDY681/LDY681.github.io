@@ -23,6 +23,12 @@
 <!--image map js 脚本-->
 <script>
   counter('Jan 1, 2025 24:00:00');
+
+  $.getScript("../js/translate.js", function(){
+      console.log("translate.js读取完毕,开始执行detectLang");
+      detectLang();
+  });
+
   $(document).ready(function() {
     $('img[usemap]').rwdImageMaps();
     $(".shuguo").on("click", function(e){
@@ -44,7 +50,7 @@
 </script>
 </head>
 
-<body onload="unload()">
+<body onload="unload()" class="w3-animate-opacity">
 
 <!--请先登录提示-->
 <div id="loginNotifier" class="popupFadeout w3-display-topmiddle w3-third w3-round-xxlarge w3-yellow w3-card-4" style="z-index: 2; display: none; position: fixed;height: 50px;line-height: 45px;">
@@ -56,7 +62,7 @@
   <h1>加载中,很快哦O(∩_∩)O</h1>
 </div>
 
-<div id="afterLoading" class="w3-animate-opacity">
+<div id="afterLoading" >
   <!--顶部：登录&注册按钮,活动倒计时栏-->
   <div class="w3-row w3-round-xxlarge">
 
