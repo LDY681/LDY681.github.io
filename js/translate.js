@@ -16,6 +16,7 @@ String.prototype.t2s = function() {
 
 function s2t() {
     document.body.innerHTML = document.body.innerHTML.s2t();
+
 }
 
 function t2s() {
