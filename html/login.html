@@ -23,12 +23,6 @@
 <!--image map js 脚本-->
 <script>
   counter('Jan 1, 2025 24:00:00');
-
-  $.getScript("../js/translate.js", function(){
-      console.log("translate.js读取完毕,开始执行detectLang");
-      detectLang();
-  });
-
   $(document).ready(function() {
     $('img[usemap]').rwdImageMaps();
     $(".shuguo").on("click", function(e){
@@ -47,6 +41,10 @@
   function unload(){
       document.getElementById("loader").style.display = "none";
   }
+  $.getScript("../js/translate.js", function(){
+      console.log("translate.js读取完毕,开始执行detectLang");
+      detectLang();
+  });
 </script>
 </head>
 
@@ -91,7 +89,7 @@
     <!--国家特色(带image map)-->
     <button onclick="accordionOn('map');accordionOff('season');accordionOff('yellowTurban');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">国家特色(点击地图查看)</button>
     <button onclick="accordionOn('map');accordionOff('season');accordionOff('yellowTurban');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">国家特色(点击地图查看)</button>
-    <div id="map" class="w3-show w3-animate-left">
+    <div id="map" class="w3-show w3-animate-opacity">
       <img class= "w3-section" alt="三国地图" src="../img/map-brief.png" width="1049" height="742" usemap="#sanguo">
       <map name="sanguo">
         <area alt="" class="shuguo" title="蜀国" coords="99,738,97,723,86,709,74,702,81,685,98,686,105,670,112,663,123,668,135,675,152,673,167,674,182,668,185,647,202,633,214,613,217,567,208,549,195,522,221,494,229,461,246,412,234,393,258,348,239,315,249,266,222,254,173,270,191,216,209,214,159,186,112,138,90,124,74,62,107,41,139,30,163,26,192,22,215,57,217,99,194,117,202,136,220,142,251,125,261,150,277,154,287,189,306,185,326,205,336,240,348,242,362,278,390,277,414,288,430,321,486,321,508,357,523,394,546,407,576,406,591,401,609,424,609,446,616,465,626,481,624,505,600,523,582,528,581,556,586,591,609,610,623,636,610,663,602,695,589,719,552,723,531,712,512,735,465,707,427,730,382,723,369,729,339,741" shape="poly">
@@ -103,21 +101,21 @@
     <!-- 第0赛季-->
     <button onclick="accordionOn('season');accordionOff('yellowTurban');accordionOff('map');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">第0赛季(点我展开)</button>
     <button onclick="accordionOn('season');accordionOff('yellowTurban');accordionOff('map');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">第0赛季(点我展开)</button>
-    <section id="season" class="w3-panel w3-hide w3-animate-left">
+    <section id="season" class="w3-panel w3-hide w3-animate-opacity">
       <p class="w3-xlarge">目前游戏在内测阶段（第0赛季）。每个赛季后，游戏数据（地图，部分玩家数据）会重置。系统会根据玩家在当季的表现发放绝版奖励到下一赛季。所有参与第0赛季的内测玩家，将会在游戏正式发布后（第1赛季）获得绝版坐骑。</p>
     </section>
 
     <!-- 特殊势力:黄巾-->
     <button onclick="accordionOn('yellowTurban');accordionOff('map');accordionOff('season');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">特殊势力:黄巾(点我展开)</button>
     <button onclick="accordionOn('yellowTurban');accordionOff('map');accordionOff('season');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">特殊势力:黄巾(点我展开)</button>
-    <section id="yellowTurban" class="w3-panel w3-hide w3-animate-left">
+    <section id="yellowTurban" class="w3-panel w3-hide w3-animate-opacity">
       <p class="w3-xlarge">在本游戏中，玩家可以选择加入黄巾军。黄巾军初始状态下没有城池。因游戏机制（城池越多产量越高，城池越少战力越高），黄巾军是最适合好战玩家的势力。</p>
     </section>
 
     <!-- 游戏机制-->
     <button onclick="accordionOn('other');accordionOff('season');accordionOff('yellowTurban');accordionOff('map');" class="w3-card-4 w3-block w3-margin-bottom w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">游戏机制(点我展开)</button>
     <button onclick="accordionOn('other');accordionOff('season');accordionOff('yellowTurban');accordionOff('map');" class="w3-card-4 w3-block w3-margin-bottom w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">游戏机制(点我展开)</button>
-    <section id="other" class="w3-panel w3-hide w3-animate-left">
+    <section id="other" class="w3-panel w3-hide w3-animate-opacity">
       <p class="w3-xlarge">
         用地图替代战场列表<br>
         正在进行的战场在地图上用🔥表示<br>
