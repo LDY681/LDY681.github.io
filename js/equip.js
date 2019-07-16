@@ -314,6 +314,10 @@ function upgradeEquip(equip){
                 case "armor":
                 case "shoes":
                 case "offhand":
+                    if (user.get('equipUp') < consumables){
+                        alert("升级失败,道具数量不足!");
+                        break;
+                    }
                     user.increment('equipUp', -consumables);
                     user.get('equip').increment(Equip, 1);
                     user.save(null, {
@@ -329,6 +333,10 @@ function upgradeEquip(equip){
 
                 case "horse":
                 case "hidden":
+                    if (user.get('horseUp') < consumables){
+                        alert("升级失败,道具数量不足!");
+                        break;
+                    }
                     user.increment('horseUp', -consumables);
                     user.get('equip').increment(Equip, 1);
                     user.save(null, {
@@ -346,6 +354,10 @@ function upgradeEquip(equip){
                 case "spear":
                 case "sword":
                 case "bow":
+                    if (user.get('weaponUp') < consumables){
+                        alert("升级失败,道具数量不足!");
+                        break;
+                    }
                     user.increment('weaponUp', -consumables);
                     user.get('equip').increment(Equip, 1);
                     user.save(null, {
@@ -370,6 +382,10 @@ function upgradeEquip(equip){
                 case "armor":
                 case "shoes":
                 case "offhand":
+                    if (user.get('equipUp') < consumables){
+                        alert("升级失败,道具数量不足!");
+                        break;
+                    }
                     user.increment('equipUp', -consumables);
                     user.save(null, {
                         query: new AV.Query('_User').greaterThanOrEqualTo('equipUp', consumables),
@@ -384,6 +400,10 @@ function upgradeEquip(equip){
 
                 case "horse":
                 case "hidden":
+                    if (user.get('horseUp') < consumables){
+                        alert("升级失败,道具数量不足!");
+                        break;
+                    }
                     user.increment('horseUp', -consumables);
                     user.save(null, {
                         query: new AV.Query('_User').greaterThanOrEqualTo('horseUp', consumables),
@@ -400,6 +420,10 @@ function upgradeEquip(equip){
                 case "spear":
                 case "sword":
                 case "bow":
+                    if (user.get('weaponUp') < consumables){
+                        alert("升级失败,道具数量不足!");
+                        break;
+                    }
                     user.increment('weaponUp', -consumables);
                     user.save(null, {
                         query: new AV.Query('_User').greaterThanOrEqualTo('weaponUp', consumables),
