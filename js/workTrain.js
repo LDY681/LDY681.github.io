@@ -134,6 +134,8 @@ function evalWork(){
             onWork.removeClass("w3-green");
             onWork.addClass("w3-grey");
         }else if (workCount === 4){   //今天工作次数已满4次
+            console.log("workCOunt为");
+            console.log(workCount);
             workNotifier.html("今天已经工作满4次啦,请明日再来(ง •_•)ง");
             workNotifier.addClass("w3-text-red");
             onWork.html( "好嘞(●'◡'●)" );

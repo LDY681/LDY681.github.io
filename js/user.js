@@ -48,12 +48,9 @@ function signUp() {
     }, (function (error) {
         alert(JSON.stringify(error));
     }));
-
-
-
-
 }
 
+//美此登录都会刷新AV.User.current
 function logIn() {
     var username = $('#loginUsername').val();
     var password = $('#loginPassword').val();
@@ -62,7 +59,6 @@ function logIn() {
         console.log("登录信息:");
         console.log(loginedUser);
         fetchEquipInfo().then(function(res){
-            console.log(res);
             window.location.href = "../html/index.html";
         }, (function(error){alert(JSON.stringify(error));}));
     }, function (error) {
@@ -80,6 +76,7 @@ function isCurrentUser () {
         return true;
     }
     return false;
-};
+}
+
 
 
