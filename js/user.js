@@ -78,5 +78,24 @@ function isCurrentUser () {
     return false;
 }
 
+//获取url parameter,如果parameter不存在,则varaible的默认值等于 defaultvalue
+// 用法 var mytext = getUrlParam('text','Empty');
+function getUrlParam(parameter, defaultvalue){
+    var urlparameter = defaultvalue;
+    if(window.location.href.indexOf(parameter) > -1){
+        urlparameter = getUrlVars()[parameter];
+    }
+    return urlparameter;
+}
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+
 
 

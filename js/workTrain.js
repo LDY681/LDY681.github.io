@@ -45,7 +45,9 @@ function work(){
                 // 保存的时候先fetch以下
                 userData.fetchWhenSave(true);
                 return userData.save().then(function(){
+                    AV.User.current().fetch();
                     $(".successNotifier").show();
+                    evalWork();
                     setTimeout(function () {
                         $(".successNotifier").hide()
                     }, 1500);
@@ -98,7 +100,9 @@ function train(){
                 // 保存的时候先fetch以下
                 userData.fetchWhenSave(true);
                 return userData.save().then(function(){
+                    AV.User.current().fetch();
                     $(".successNotifier").show();
+                    evalTrain();
                     setTimeout(function () {
                         $(".successNotifier").hide()
                     }, 1500);
@@ -144,6 +148,9 @@ function evalWork(){
             onWork.addClass("w3-grey");
         }else{
             $("#taskButtonWork").css("display","inline-block");
+            workNotifier.html( "您当前还未工作!" );
+            onWork.html( "点我快来工作!" );
+            onWork.addClass("w3-green");
         }
         $(".workntrainButton").show();
     });
@@ -176,6 +183,9 @@ function evalTrain(){
             onTrain.removeClass("w3-green");
         }else{
             $("#taskButtonTrain").css("display","inline-block");
+            trainNotifier.html( "您当前还未训练!" );
+            onTrain.html( "点我快来训练!" );
+            onTrain.addClass("w3-green");
         }
         $(".workntrainButton").show();
     });

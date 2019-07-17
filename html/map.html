@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh">
-
 <head>
   <title>转世三国-模拟三国人生</title>
   <meta charset="UTF-8">
@@ -14,17 +13,16 @@
   <!--加载leaflet地图js-->
   <script src="../js/leaflet.js"></script>
   <script src="../js/leaflet.ChineseTmsProviders.js"></script>
-
 </head>
 
 <body class="w3-animate-opacity">
 <!--  载入的navSideBar-->
 <div style="position: relative" id="nav-placeholder"></div>
 
-<!-- 地图内容-->
+<!--正文内容-->
 <div id="customContent" style="margin-left:0;" class="w3-row">
 
-<!-- mapMenu 左侧地点栏-->
+<!-- mapMenu-->
   <ul class="w3-col w3-light-gray w3-card-4" style="width:250px;margin-top:80px;list-style-type:none;border-radius: 50px 0 0 50px;" id="mapMenu">
     <li class="w3-xxlarge">魏国</li>
     <li class="w3-xlarge">河北</li>
@@ -119,166 +117,11 @@
 
   </ul>
 
+  <!--地图contianer-->
   <div id="mapContainer" class="w3-rest w3-card-4" style="margin-top:80px">
-    <!--内容开始-->
     <div id="mapLayer"></div>
-
-    <script>
-        /*** 高德地图*/
-        var Gaode = L.tileLayer.chinaProvider('GaoDe.Normal.Map', {maxZoom: 18,minZoom: 5});
-        var Gaodimgem = L.tileLayer.chinaProvider('GaoDe.Satellite.Map', {maxZoom: 18,minZoom: 5});
-        var Gaodimga = L.tileLayer.chinaProvider('GaoDe.Satellite.Annotion', {maxZoom: 18,minZoom: 5});
-        var Gaodimage = L.layerGroup([Gaodimgem, Gaodimga]);
-
-        var map = L.map("mapLayer", {
-            center: [35.74874, 116.05408],
-            zoom: 5,
-            layers: [Gaode],
-            zoomControl: false
-        });
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://zssanguo.com">转世三国</a>'}).addTo(map);
-
-        // 和平状态蜀国城池图标
-        var shuCityIcon = L.icon({
-            iconUrl: 'https://zssanguo.com/img/shuCityIcon.png',
-            iconSize:     [48,48],    // size of the icon
-            // iconAnchor:   [30,30], // point of the icon which will correspond to marker's location
-            popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
-        });
-
-        // 和平状态魏国城池图标
-        var weiCityIcon = L.icon({
-            iconUrl: 'https://zssanguo.com/img/weiCityIcon.png',
-            iconSize:     [48,48],    // size of the icon
-            // iconAnchor:   [30,30], // point of the icon which will correspond to marker's location
-            popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
-        });
-
-        // 和平状态吴国城池图标
-        var wuCityIcon = L.icon({
-            iconUrl: 'https://zssanguo.com/img/wuCityIcon.png',
-            iconSize:     [48,48],    // size of the icon
-            popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
-        });
-
-        var warCityIcon = L.icon({
-            iconUrl: 'https://zssanguo.com/img/warCityIcon.png',
-            iconSize:     [48,48],    // size of the icon
-            popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
-        });
-
-        // 编号,城市名称,坐标,图片地址,描述内容,点击链接
-        var list = [
-            // 魏国城池 26座
-            [1,'襄平',[41.26955, 123.17596],'','<p>	所属州郡：幽州─辽东郡</p><p>现在地址：辽宁省辽阳市</p>','https://zssanguo.com'],
-            [2,'北平',[41.24271, 119.41589],'','<p>所属州郡：幽州─右北平郡</p><p>现在地址：辽宁省朝阳市凌源市</p>','https://zssanguo.com'],
-            [3,'蓟',[40.04864, 117.39716],'','<p>所属州郡：幽州─燕国蓟县</p><p>现在地址：天津蓟县，一说今『北京市』 西南</p>','https://zssanguo.com'],
-            [4,'南皮',[38.05674, 116.70502],'','<p>	所属州郡：冀州─渤海郡</p><p>现在地址：河北省沧州市南皮县 北</p>','https://zssanguo.com'],
-            [5,'中山',[38.51594, 115.00488],'','<p>所属州郡：冀州─中山郡</p><p>现在地址：河北省保定市定州市</p>','https://zssanguo.com'],
-            [6,'钜鹿',[37.63381, 114.93073],'','<p>所属州郡：冀州─巨鹿郡</p><p>现在地址：河北省邢台市宁晋县 西南</p>','https://zssanguo.com'],
-            [7,'甘陵',[36.84666, 115.71075],'','<p>所属州郡：冀州─清河郡</p><p>现在地址：山东省聊城市临清市 北</p>','https://zssanguo.com'],
-            [8,'邺',[36.59348, 114.49402],'','<p>所属州郡：冀州─魏郡</p><p>现在地址：河北省邯郸县临漳县 西南</p>','https://zssanguo.com'],
-            [9,'晋阳',[37.90737, 112.56317],'','<p>	所属州郡：并州─太原郡─州治</p><p>现在地址：山西省太原市</p>','https://zssanguo.com'],
-            [10,'上党',[36.22544, 113.1015],'','<p>所属州郡：并州─上党郡</p><p>现在地址：山西省长治市壶关县</p>','https://zssanguo.com'],
-            [11,'平原',[37.18439, 116.44135],'','<p>	所属州郡：冀州─平原郡</p><p>现在地址：山东省德州市平原县 南</p>','https://zssanguo.com'],
-            [12,'北海',[36.72788, 119.20029],'','<p>	所属州郡：青州─北海国</p><p>现在地址：山东省潍坊市 南</p>','https://zssanguo.com'],
-            [13,'琅琊',[35.06148, 118.32275],'','<p>所属州郡：徐州─琅琊国</p><p>现在地址：山东省临沂市 北</p>','https://zssanguo.com'],
-            [14,'下邳',[33.94336, 118.02612],'','<p>	所属州郡：徐州─州治</p><p>现在地址：江苏省徐州睢宁县 南</p>','https://zssanguo.com'],
-            [15,'广陵',[33.53224, 119.03687],'','<p>	所属州郡：徐州─广陵郡</p><p>	现在地址：江苏省淮安市 西南</p>','https://zssanguo.com'],
-            [16,'济北',[35.18279, 115.46631],'','<p>所属州郡：兖州─济北国</p><p>现在地址：山东省菏泽市定陶县 西北</p>','https://zssanguo.com'],
-            [17,'濮阳',[35.69299, 115.02686],'','<p>	所属州郡：兖州─东郡</p><p>现在地址：河南省濮阳市 南</p>','https://zssanguo.com'],
-            [18,'陈留',[34.67388, 114.53522],'','<p>	所属州郡：兖州─陈留国</p><p>现在地址：河南省开封县陈留镇 东南</p>','https://zssanguo.com'],
-            [19,'小沛',[34.7371, 116.95633],'','<p>所属州郡：豫州─沛国</p><p>现在地址：江苏省徐州沛县，即『小沛』</p>','https://zssanguo.com'],
-            [20,'谯',[33.85217, 115.77942],'','<p>所属州郡：豫州─谯郡</p><p>现在地址：安徽省亳州市</p>','https://zssanguo.com'],
-            [21,'许昌',[34.03104, 113.82797],'','<p>所属州郡：豫州─颖川郡</p><p>现在地址：河南省许昌市</p>','https://zssanguo.com'],
-            [22,'汝南',[33.27658, 114.26605],'','<p>	所属州郡：豫州─汝南郡─州治</p><p>现在地址：河南省驻马店市上蔡县</p>','https://zssanguo.com'],
-            [23,'宛',[32.98102, 112.54395],'','<p>所属州郡：豫州─南阳郡</p><p>现在地址：河南省南阳市</p>','https://zssanguo.com'],
-            [24,'河内',[35.10418, 113.41873],'','<p>所属州郡：司隶─河内郡</p><p>现在地址：河南省焦作市武陟县 西南</p>','https://zssanguo.com'],
-            [25,'洛阳',[34.6366, 112.46292],'','<p>所属州郡：司隶─河南尹</p><p>现在地址：河南省洛阳市</p>','https://zssanguo.com'],
-            [26,'弘农',[34.52466, 110.89874],'','<p>	所属州郡：司隶─弘农郡</p><p>现在地址：河南省三门峡市灵宝市 北</p>','https://zssanguo.com'],
-
-            // 蜀国城池  16座
-            [27,'长安',[34.34996, 108.94009],'','<p>所属州郡：雍州─京兆尹─州治</p><p>现在地址：陕西省西安市 西北</p>','https://zssanguo.com'],
-            [28,'安定',[35.33641, 107.36389],'','<p>所属州郡：雍州─安定郡</p><p>现在地址：甘肃省平凉市泾川县 北，即『安定』</p>','https://zssanguo.com'],
-            [29,'天水',[34.8634, 105.66101],'','<p>所属州郡：雍州─天水郡</p><p>现在地址：甘肃省天水市秦安县 东 陇城镇</p>','https://zssanguo.com'],
-            [30,'武威',[37.93662, 102.62466],'','<p>所属州郡：凉州─武威郡</p><p>现在地址：甘肃省武威市，姑臧 为匈奴用语。</p>','https://zssanguo.com'],
-            [31,'金城',[36.0491, 103.83179],'','<p>所属州郡：凉州─金城郡</p><p>现在地址：甘肃省兰州市 东</p>','https://zssanguo.com'],
-            [32,'武都',[33.74261, 105.76263],'','<p>所属州郡：益州─武都郡</p><p>现在地址：甘肃省陇南市成县 西北</p>','https://zssanguo.com'],
-            [33,'汉中',[33.07773, 107.02881],'','<p>	所属州郡：益州─汉中郡</p><p>现在地址：陕西省汉中市</p>','https://zssanguo.com'],
-            [34,'永安',[31.0191, 109.47464],'','<p>所属州郡：益州─巴东郡</p><p>现在地址：重庆市奉节县</p>','https://zssanguo.com'],
-            [35,'梓潼',[31.64403, 105.18311],'','<p>	所属州郡：益州─梓潼郡</p><p>现在地址：四川省绵阳市梓潼县</p>','https://zssanguo.com'],
-            [36,'成都',[30.57645, 104.07349],'','<p>所属州郡：益州─蜀郡─州治</p><p>现在地址：四川省成都市</p>','https://zssanguo.com'],
-            [37,'江州',[29.54957, 106.55365],'','<p>所属州郡：益州─巴郡</p><p>现在地址：重庆市 江北</p>','https://zssanguo.com'],
-            [38,'牂牁',[26.26633, 107.52869],'','<p>所属州郡：益州─徉柯郡</p><p>现在地址：贵州省黔南布依族苗族自治州都匀市 北</p>','https://zssanguo.com'],
-            [39,'越巂',[27.87975, 102.26761],'','<p>所属州郡：益州─越隽郡</p><p>现在地址：四川省凉山彝族自治州西昌市 东，『卭』读音穹</p>','https://zssanguo.com'],
-            [40,'建宁',[25.48543, 103.79883],'','<p>所属州郡：益州─建宁郡</p><p>现在地址：云南省曲靖市</p>','https://zssanguo.com'],
-            [41,'永昌',[25.10923, 99.16122],'','<p>所属州郡：益州─永昌郡</p><p>现在地址：云南省保山市 东北</p>','https://zssanguo.com'],
-            [42,'上庸',[32.23836, 110.2533],'','<p>所属州郡：益州─上庸郡</p><p>现在地址：湖北省十堰市竹山县 西北，襄樊战后，孟达降魏，改『新城郡』</p>','https://zssanguo.com'],
-            //吴国城池 18座
-
-            [43,'新野',[32.53176, 112.36679],'','<p>	所属州郡：荆州─南阳郡</p><p>现在地址：河南省南阳市新野县</p>','https://zssanguo.com'],
-            [44,'襄阳',[32.05464, 112.13882],'','<p>	所属州郡：荆州─襄阳郡</p><p>现在地址：湖北省襄阳市</p>','https://zssanguo.com'],
-            [45,'江夏',[31.02411, 113.75381],'','<p>	所属州郡：荆州─江夏郡</p><p>现在地址：湖北省孝感市云梦县</p>','https://zssanguo.com'],
-            [46,'江陵',[30.36103, 112.18964],'','<p>	所属州郡：荆州─南郡</p><p>现在地址：湖北省荆州区，即『南郡』</p>','https://zssanguo.com'],
-            [47,'长沙',[29.4683, 113.45581],'','<p>所属州郡：荆州─长沙郡</p><p>现在地址：湖南省岳阳县临湘市</p>','https://zssanguo.com'],
-            [48,'武陵',[29.02976, 111.6925],'','<p>所属州郡：荆州─武陵郡</p><p>现在地址：湖南省常德市</p>','https://zssanguo.com'],
-            [49,'武陵',[25.743, 112.73895],'','<p>	所属州郡：荆州─桂阳郡</p><p>现在地址：湖南省郴州市桂阳县</p>','https://zssanguo.com'],
-            [50,'零陵',[26.22445, 111.63208],'','<p>所属州郡：荆州─零陵郡</p><p>现在地址：湖南省永州市零陵区</p>','https://zssanguo.com'],
-            [51,'寿春',[32.58038, 116.79291],'','<p>	所属州郡：扬州─州治</p><p>现在地址：安徽省裕安区寿县</p>','https://zssanguo.com'],
-            [52,'庐江',[30.73593, 116.83685],'','<p>	所属州郡：扬州─庐江郡─州治</p><p>现在地址：安徽省安庆市怀宁县</p>','https://zssanguo.com'],
-            [53,'建业',[31.99876, 118.79517],'','<p>所属州郡：扬州─丹阳郡</p><p>现在地址：江苏省南京市</p>','https://zssanguo.com'],
-            [54,'吴',[31.29967, 120.62164],'','<p>所属州郡：扬州─吴郡</p><p>现在地址：江苏省苏州</p>','https://zssanguo.com'],
-            [55,'会稽',[29.99895, 120.58182],'','<p>所属州郡：扬州─会稽郡</p><p>现在地址：浙江省绍兴市</p>','https://zssanguo.com'],
-            [56,'豫章',[28.70022, 115.85083],'','<p>	所属州郡：扬州─豫章郡</p><p>现在地址：江西省南昌县</p>','https://zssanguo.com'],
-            [57,'建安',[27.02457, 118.30593],'','<p>	所属州郡：扬州─建安郡</p><p>现在地址：福建省南平市建瓯市 南</p>','https://zssanguo.com'],
-            [58,'南海',[22.93848, 113.38852],'','<p>	所属州郡：交州─南海郡</p><p>现在地址：广东省广州市番禺区</p>','https://zssanguo.com'],
-            [59,'合浦',[21.68295, 109.23157],'','<p>所属州郡：交州─合浦郡</p><p>现在地址：广西壮族自治区北海市合浦县 东北</p>','https://zssanguo.com'],
-            [60,'交趾',[21.01273, 105.82855],'','<p>所属州郡：交州─龙编</p><p>现在地址：还剑郡河内市 东</p>','https://zssanguo.com'],
-        ];
-
-        // 因为mapID是从1开始的,list index是从0开始的,所以记得要减一
-        for ($j=0;$j<=25;$j++)
-        {
-            L.marker([list[$j][2][0],list[$j][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
-        }
-        for ($j=26;$j<=41;$j++)
-        {
-            L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
-        }
-        for ($j=42;$j<=59;$j++)
-        {
-            L.marker([list[$j][2][0],list[$j][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a  href='"+ list[$j][5] + "' target=_blank>" +"进入战场"+"</a></div>");
-
-        }
-
-        function getMap(cityID) {
-            $j=cityID-1;
-
-            if ($j > 41){
-                L.marker([list[$j][2][0],list[$j][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a href='"+ list[$j][5] + "'  target=_blank>" +"进入战场"+"</a></div>").openPopup();
-            }else if ($j > 25){
-                L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a href='"+ list[$j][5] + "'  target=_blank>" +"进入战场"+"</a></div>").openPopup();
-            }else{
-                L.marker([list[$j][2][0],list[$j][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "<a href='"+ list[$j][5] + "'  target=_blank>" +"进入战场"+"</a></div>").openPopup();
-            }
-        }
-
-
-        /**/
-        var popup = new L.popup();
-        function onMapClick(e) {
-            popup.setLatLng(e.latlng).setContent("您当前的坐标为 " + e.latlng.toString()).openOn(map);
-        }
-        map.on('click', onMapClick);
-
-        if(top != self){
-            window.top.location.replace(self.location);
-        }
-    </script>
   </div>
 </div>
-
 
 <!--Script加载顺序!!!!!-->
 <!--加载jquery-->
@@ -313,6 +156,188 @@
             });
         });
     });
+</script>
+
+<script>
+    /*** 高德地图*/
+    var Gaode = L.tileLayer.chinaProvider('GaoDe.Normal.Map', {maxZoom: 18,minZoom: 5});
+    var Gaodimgem = L.tileLayer.chinaProvider('GaoDe.Satellite.Map', {maxZoom: 18,minZoom: 5});
+    var Gaodimga = L.tileLayer.chinaProvider('GaoDe.Satellite.Annotion', {maxZoom: 18,minZoom: 5});
+    var Gaodimage = L.layerGroup([Gaodimgem, Gaodimga]);
+
+    var map = L.map("mapLayer", {
+        center: [35.74874, 116.05408],
+        zoom: 5,
+        layers: [Gaode],
+        zoomControl: false
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://zssanguo.com">转世三国</a>'}).addTo(map);
+
+    // 和平状态蜀国城池图标
+    var shuCityIcon = L.icon({
+        iconUrl: 'https://zssanguo.com/img/shuCityIcon.png',
+        iconSize:     [48,48],    // size of the icon
+        // iconAnchor:   [30,30], // point of the icon which will correspond to marker's location
+        popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
+    });
+
+    // 和平状态魏国城池图标
+    var weiCityIcon = L.icon({
+        iconUrl: 'https://zssanguo.com/img/weiCityIcon.png',
+        iconSize:     [48,48],    // size of the icon
+        // iconAnchor:   [30,30], // point of the icon which will correspond to marker's location
+        popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
+    });
+
+    // 和平状态吴国城池图标
+    var wuCityIcon = L.icon({
+        iconUrl: 'https://zssanguo.com/img/wuCityIcon.png',
+        iconSize:     [48,48],    // size of the icon
+        popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
+    });
+
+    var warCityIcon = L.icon({
+        iconUrl: 'https://zssanguo.com/img/warCityIcon.png',
+        iconSize:     [48,48],    // size of the icon
+        popupAnchor:  [-5, -40] // point from which the popup should open relative to the iconAnchor
+    });
+
+    // 编号,城市名称,坐标,图片地址,描述内容,点击链接
+    var list = [
+        // 魏国城池 26座
+        [1,'襄平',[41.26955, 123.17596],'','<p>	所属州郡：幽州─辽东郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [2,'北平',[41.24271, 119.41589],'','<p>所属州郡：幽州─右北平郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [3,'蓟',[40.04864, 117.39716],'','<p>所属州郡：幽州─燕国蓟县</p><span>所属国家：</span>','https://zssanguo.com'],
+        [4,'南皮',[38.05674, 116.70502],'','<p>	所属州郡：冀州─渤海郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [5,'中山',[38.51594, 115.00488],'','<p>所属州郡：冀州─中山郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [6,'钜鹿',[37.63381, 114.93073],'','<p>所属州郡：冀州─巨鹿郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [7,'甘陵',[36.84666, 115.71075],'','<p>所属州郡：冀州─清河郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [8,'邺',[36.59348, 114.49402],'','<p>所属州郡：冀州─魏郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [9,'晋阳',[37.90737, 112.56317],'','<p>	所属州郡：并州─太原郡─州治</p><span>所属国家：</span>','https://zssanguo.com'],
+        [10,'上党',[36.22544, 113.1015],'','<p>所属州郡：并州─上党郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [11,'平原',[37.18439, 116.44135],'','<p>	所属州郡：冀州─平原郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [12,'北海',[36.72788, 119.20029],'','<p>	所属州郡：青州─北海国</p><span>所属国家：</span>','https://zssanguo.com'],
+        [13,'琅琊',[35.06148, 118.32275],'','<p>所属州郡：徐州─琅琊国</p><span>所属国家：</span>','https://zssanguo.com'],
+        [14,'下邳',[33.94336, 118.02612],'','<p>	所属州郡：徐州─州治</p><span>所属国家：</span>','https://zssanguo.com'],
+        [15,'广陵',[33.53224, 119.03687],'','<p>	所属州郡：徐州─广陵郡</p><span>	所属国家：</span>','https://zssanguo.com'],
+        [16,'济北',[35.18279, 115.46631],'','<p>所属州郡：兖州─济北国</p><span>所属国家：</span>','https://zssanguo.com'],
+        [17,'濮阳',[35.69299, 115.02686],'','<p>	所属州郡：兖州─东郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [18,'陈留',[34.67388, 114.53522],'','<p>	所属州郡：兖州─陈留国</p><span>所属国家：</span>','https://zssanguo.com'],
+        [19,'小沛',[34.7371, 116.95633],'','<p>所属州郡：豫州─沛国</p><span>所属国家：</span>','https://zssanguo.com'],
+        [20,'谯',[33.85217, 115.77942],'','<p>所属州郡：豫州─谯郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [21,'许昌',[34.03104, 113.82797],'','<p>所属州郡：豫州─颖川郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [22,'汝南',[33.27658, 114.26605],'','<p>	所属州郡：豫州─汝南郡─州治</p><span>所属国家：</span>','https://zssanguo.com'],
+        [23,'宛',[32.98102, 112.54395],'','<p>所属州郡：豫州─南阳郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [24,'河内',[35.10418, 113.41873],'','<p>所属州郡：司隶─河内郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [25,'洛阳',[34.6366, 112.46292],'','<p>所属州郡：司隶─河南尹</p><span>所属国家：</span>','https://zssanguo.com'],
+        [26,'弘农',[34.52466, 110.89874],'','<p>	所属州郡：司隶─弘农郡</p><span>所属国家：</span>','https://zssanguo.com'],
+
+        // 蜀国城池  16座
+        [27,'长安',[34.34996, 108.94009],'','<p>所属州郡：雍州─京兆尹─州治</p><span>所属国家：</span>','https://zssanguo.com'],
+        [28,'安定',[35.33641, 107.36389],'','<p>所属州郡：雍州─安定郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [29,'天水',[34.8634, 105.66101],'','<p>所属州郡：雍州─天水郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [30,'武威',[37.93662, 102.62466],'','<p>所属州郡：凉州─武威郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [31,'金城',[36.0491, 103.83179],'','<p>所属州郡：凉州─金城郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [32,'武都',[33.74261, 105.76263],'','<p>所属州郡：益州─武都郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [33,'汉中',[33.07773, 107.02881],'','<p>	所属州郡：益州─汉中郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [34,'永安',[31.0191, 109.47464],'','<p>所属州郡：益州─巴东郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [35,'梓潼',[31.64403, 105.18311],'','<p>	所属州郡：益州─梓潼郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [36,'成都',[30.57645, 104.07349],'','<p>所属州郡：益州─蜀郡─州治</p><span>所属国家：</span>','https://zssanguo.com'],
+        [37,'江州',[29.54957, 106.55365],'','<p>所属州郡：益州─巴郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [38,'牂牁',[26.26633, 107.52869],'','<p>所属州郡：益州─徉柯郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [39,'越巂',[27.87975, 102.26761],'','<p>所属州郡：益州─越隽郡</p><span>所属国家： </span>','https://zssanguo.com'],
+        [40,'建宁',[25.48543, 103.79883],'','<p>所属州郡：益州─建宁郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [41,'永昌',[25.10923, 99.16122],'','<p>所属州郡：益州─永昌郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [42,'上庸',[32.23836, 110.2533],'','<p>所属州郡：益州─上庸郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        //吴国城池 18座
+
+        [43,'新野',[32.53176, 112.36679],'','<p>	所属州郡：荆州─南阳郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [44,'襄阳',[32.05464, 112.13882],'','<p>	所属州郡：荆州─襄阳郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [45,'江夏',[31.02411, 113.75381],'','<p>	所属州郡：荆州─江夏郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [46,'江陵',[30.36103, 112.18964],'','<p>	所属州郡：荆州─南郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [47,'长沙',[29.4683, 113.45581],'','<p>所属州郡：荆州─长沙郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [48,'武陵',[29.02976, 111.6925],'','<p>所属州郡：荆州─武陵郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [49,'桂阳',[25.743, 112.73895],'','<p>	所属州郡：荆州─桂阳郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [50,'零陵',[26.22445, 111.63208],'','<p>所属州郡：荆州─零陵郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [51,'寿春',[32.58038, 116.79291],'','<p>	所属州郡：扬州─州治</p><span>所属国家：</span>','https://zssanguo.com'],
+        [52,'庐江',[30.73593, 116.83685],'','<p>	所属州郡：扬州─庐江郡─州治</p><span>所属国家：</span>','https://zssanguo.com'],
+        [53,'建业',[31.99876, 118.79517],'','<p>所属州郡：扬州─丹阳郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [54,'吴',[31.29967, 120.62164],'','<p>所属州郡：扬州─吴郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [55,'会稽',[29.99895, 120.58182],'','<p>所属州郡：扬州─会稽郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [56,'豫章',[28.70022, 115.85083],'','<p>	所属州郡：扬州─豫章郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [57,'建安',[27.02457, 118.30593],'','<p>	所属州郡：扬州─建安郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [58,'南海',[22.93848, 113.38852],'','<p>	所属州郡：交州─南海郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [59,'合浦',[21.68295, 109.23157],'','<p>所属州郡：交州─合浦郡</p><span>所属国家：</span>','https://zssanguo.com'],
+        [60,'交趾',[21.01273, 105.82855],'','<p>所属州郡：交州─龙编</p><span>所属国家：</span>','https://zssanguo.com'],
+    ];
+
+    // 地图上显示城池
+    const battlehtml = "../html/city.html?id=";
+    // 因为mapID是从1开始的,list index是从0开始的,所以记得要减一
+    var query = new AV.Query('city');
+    query.include(['owner']);
+    query.find().then(function (cities) {
+        cities.forEach(function(city) {
+            if ( city.get("isAtWar") === false){
+                if (city.get('owner').get('name') === "weiguo"){
+                    $j = city.get('cityId');                                                                                                                       //编号+城市名+所属州郡+现在地址+战场链接
+                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+                }else if (city.get('owner').get('name') === "shuguo"){
+                    $j = city.get('cityId');
+                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+                }else if (city.get('owner').get('name') === "wuguo"){
+                    $j = city.get('cityId');
+                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+                }else{
+                    $j = city.get('cityId');
+                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: huangCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+                }
+            }else{
+                $j = city.get('cityId');
+                L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: warCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + "交战中!" + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+            }
+
+        });
+    });
+
+    //点击mapMenu显示popUp
+    function getMap(cityID) {
+        console.log("cityId是: "+ cityID);
+        var query = new AV.Query('city');
+        query.include(['owner']);
+        query.equalTo('cityId', cityID);
+        query.find().then(function(cities){
+            var city = cities[0];
+            console.log(city.get("name"));
+            $j=cityID-1;
+
+            if ( city.get("isAtWar") === false){
+                if (city.get('owner').get('name') === "weiguo"){
+                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+                }else if (city.get('owner').get('name') === "shuguo"){
+                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+                }else if (city.get('owner').get('name') === "wuguo"){
+                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+                }else{
+                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: huangCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+                }
+            }else{
+                L.marker([list[$j][2][0],list[$j][2][1]],{icon: warCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "交战中!" + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+            }
+        });
+    }
+
+    /**/
+    var popup = new L.popup();
+    function onMapClick(e) {
+        popup.setLatLng(e.latlng).setContent("您当前的坐标为 " + e.latlng.toString()).openOn(map);
+    }
+    map.on('click', onMapClick);
+
+    if(top != self){
+        window.top.location.replace(self.location);
+    }
 </script>
 
 </body>
