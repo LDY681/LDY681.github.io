@@ -38,66 +38,78 @@
       <!--         TODO: implement产量加成-->
       <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">城池信息</span></h1>
       <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
-      <div class="w3-panel">
+      <div class="w3-panel" style="width: 50%; margin:auto;">
         <table class="w3-table-all w3-card-4">
           <tr>
             <td>城池名称:</td>
-            <td></td>
+            <td id="name"></td>
           </tr>
           <tr>
-            <td>0-1000</td>
-            <td>100</td>
-            <td>10</td>
+            <td>所属国家:</td>
+            <td id="owner"></td>
           </tr>
           <tr>
-            <td>1001-1500</td>
-            <td>50</td>
-            <td>5</td>
+            <td>水稻加成:</td>
+            <td><span id="rice"></span>%</td>
           </tr>
           <tr>
-            <td>1501-2000</td>
-            <td>20</td>
-            <td>3</td>
+            <td>小麦加成:</td>
+            <td ><span id="wheat"></span>%</td>
           </tr>
           <tr>
-            <td>2000-3000</td>
-            <td>10</td>
-            <td>2</td>
+            <td>铁矿加成:</td>
+            <td><span id="iron"></span>%</td>
           </tr>
           <tr>
-            <td>3000以上</td>
-            <td>5</td>
-            <td>1</td>
+            <td>木材加成:</td>
+            <td ><span id="wood"></span>%</td>
           </tr>
         </table>
       </div>
       <br><br>
     </div><br><br>
 
-    <div class="trainStatsBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
-      <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">训练详情</span></h1>
-      <div class="w3-panel" style="width: 50%; margin:auto;">
-        <table class="w3-table-all w3-card-4">
-          <tr>
-            <td>总训练次数</td>
-            <td>0 次</td>
-          </tr>
-          <tr>
-            <td>力量</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>力量增加</td>
-            <td>0%</td>
-          </tr>
-          <tr>
-            <td>获得经验</td>
-            <td>0%</td>
-          </tr>
-        </table>
-      </div>
-      <br><br>
+    <div class="adjacentDataContainer trainStatsBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center" style="text-align:center; position:relative;">
+        <script id="adjacentPanelData" type="text/x-handlebars-template">
+          <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">临近城市</span></h1><br><br>
+          {{#each cityData}}
+          <!-- 城池信息-->
+          <div id="adjacentCityInfo" class="w3-card-4 w3-light-gray w3-margin" style="position:relative;display:inline-block;">
+            <table class="w3-table-all w3-card-4">
+              <tr style="text-align:center;">
+                <td style="display: inline-block;font-weight:800;">{{{destCityName}}}</td>
+              </tr>
+              <tr style="text-align:center;">
+                <td style="display: inline-block">冶铁矿:</td>
+                <td style="display: inline-block">{{{destIron}}}<span>%</span></td>
+              </tr>
+              <tr style="text-align:center;">
+                <td style="display: inline-block">小麦地:</td>
+                <td style="display: inline-block">{{{destWheat}}}<span>%</span></td>
+              </tr>
+              <tr style="text-align:center;">
+                <td style="display: inline-block">水稻田:</td>
+                <td style="display: inline-block">{{{destRice}}}<span>%</span></td>
+              </tr>
+              <tr style="text-align:center;">
+                <td style="display: inline-block">伐木场:</td>
+                <td style="display: inline-block">{{{destWood}}}<span>%</span></td>
+              </tr>
+              <tr style="text-align:center;">
+                <td style="display: inline-block">所属国家:</td>
+                <td style="display: inline-block">{{{destOwner}}}</td>
+              </tr>
+              <tr style="text-align:center;">
+                <td style="display: inline-block">{{{destIsAtWar}}}</td>
+              </tr>
+            </table>
+            <a href="{{{destUrl}}}" style="text-decoration: none"><button class="w3-green w3-button w3-block">点我进入</button></a>
+          </div><!--end of 城池信息-->
+          {{/each}}
+        </script>
     </div><br><br>
+
+
   </div><!--end of 右侧定制内容-->
 </div>
 

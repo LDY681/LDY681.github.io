@@ -11,6 +11,9 @@ body {
     }
     #mapContainer {border-radius: 0 50px 50px 0;}
     #userMenuDropDown {width:250px;}
+    #adjacentCityInfo{
+        width: 25%;
+    }
 }
 /*中小屏幕*/
 @media (max-width:1365px){
@@ -23,6 +26,9 @@ body {
     }
     #mapContainer {border-radius: 50px;}
     #userMenuDropDown {width:150px;}
+    #adjacentCityInfo{
+        width: 45%;
+    }
 }
 /*小屏幕*/
 @media (max-width:1023px){
@@ -31,6 +37,9 @@ body {
     }
     #rightPanel {
         margin-left: 16px;
+    }
+    #adjacentCityInfo{
+        width: 80%;
     }
 }
 
