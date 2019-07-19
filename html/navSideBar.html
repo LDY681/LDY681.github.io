@@ -19,8 +19,10 @@
     <a class="w3-bar-item w3-padding-large w3-button" href="#"><i class="far fa-envelope"></i>&nbsp;活动事件(系统发布的特殊活动):&nbsp;0条!</a>
     <a class="w3-text-red w3-bar-item w3-padding-large w3-button" href="#"><i class="far fa-envelope"></i>&nbsp;战场动态(XX国家占领XX):&nbsp;3条!<img style="width:32px;" src="../img/hot.gif"></a>
     <br> <br> <br>
-    <p class="w3-large w3-center w3-text-red">限时活动:</p>
-    <a class="w3-bar-item w3-yellow w3-button w3-center w3-text-red w3-hover-light-green w3-hover-text-black" href="login.html">开服注册送宝马!</a>
+    <div id="countryAlert" style="display:none;">
+    <p class="w3-large w3-center w3-text-red">您还未加入国家:</p>
+    <a class="w3-bar-item w3-yellow w3-button w3-center w3-text-red w3-hover-light-green w3-hover-text-black" onclick="showCountryModal()" id="pickCountry">点我加入国家</a>
+    </div>
     <br> <br> <br>
     <div id="phoneAlert" style="display:none;">
       <p class="w3-center w3-text-red">您还未验证手机号:</p>
@@ -29,6 +31,32 @@
     </div>
   </div>
 </div>
+
+<!--选择国家modal-->
+<div id="CountryModal" class="w3-modal">
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+    <div class="countryDataContainer w3-center w3-text-black">
+      <script id="countryData" type="text/x-handlebars-template">
+        <span onclick="document.getElementById('CountryModal').style.display='none'" style="color:black;"
+              class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">x</span><br>
+
+        <form class="w3-container w3-form">
+          <p class="w3-xlarge">
+            <label for="country"></label><select id="country" onchange="countrySelected(event)">
+                <option disabled selected value> -- 选择国家 -- </option>
+                {{#each countryData}}
+                <option value="{{{countryId}}}">{{{countryName}}}</option>
+                {{/each}}
+              </select>
+          </p>
+          <a class="w3-xlarge" href="" style="display:none" target="_blank" id="selectedCountry"><p>国家详情?</p></a>
+        </form>
+        <button onclick="setupCountry()" id="countrySubmit" class="w3-gray w3-padding-large w3-round-xxlarge" disabled>就是它了!</button>
+
+      </script>
+    </div>
+  </div>
+</div> <!--end of选择国家modal-->
 
 <!-- 手机验证modal-->
 <div id="verifyPhoneModal" class="w3-modal">
@@ -103,7 +131,7 @@
           <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-pink onScrollMargin">
             <a href="#" class="w3-bar-item w3-button">天命之子</a>
             <a href="#" class="w3-bar-item w3-button">科举选拔</a>
-            <a href="#" class="w3-bar-item w3-button">国家管理</a>
+            <a href="countryManager.html" class="w3-bar-item w3-button">国家管理</a>
             <a href="#" class="w3-bar-item w3-button">法律颁布</a>
             <a href="#" class="w3-bar-item w3-button">经济实况</a>
           </div>

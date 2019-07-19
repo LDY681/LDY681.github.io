@@ -94,6 +94,7 @@ var x = setInterval(function() {
     var seconds = ('0' + currDate.getSeconds()).slice(-2) ;
 
     // Output the result in an element with id="currTime"
+    console.log();
     document.getElementById("currTime").innerHTML = hours + ":"+ minutes + ":" + seconds;
 
     // Find the distance between now and the count down date

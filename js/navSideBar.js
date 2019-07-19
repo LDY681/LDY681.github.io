@@ -31,6 +31,44 @@ function showProfile(){
 function showPhoneModal(){
     document.getElementById("verifyPhoneModal").style.display = "block";
 }
+
+function showCountryModal(){
+    document.getElementById("CountryModal").style.display = "block";
+
+    var countryPanel = {
+        countryData: []
+    };
+
+    var query = new AV.Query('country');
+    query.ascending('countryId');
+    query.find().then (function (countries){
+        var countryProcessed = 0;
+        countries.forEach(function (country, i, a) {
+            var countryName = country.get("cname");
+            var countryId = country.get("countryId");
+            // handlebars navSideBar
+            countryPanel.countryData.push({
+                countryName,
+                countryId
+            });
+                countryProcessed++;
+            });
+        if(countryProcessed === countries.length) {
+            compileCountryPanel(countryPanel);
+        }
+        });
+}
+
+function compileCountryPanel(countryPanel){
+    $(document).ready(function(){
+        var source = $("#countryData").html();
+        var template = Handlebars.compile(source);
+        var html = template(countryPanel);
+        $(".countryDataContainer").html(html);
+    });
+}
+
+
 //点击发送验证码
 function sendVerification(){
     let phoneNumber = $("#phoneNumber");
@@ -150,18 +188,19 @@ function w3_open() {
     }
 
     let current = AV.User.current();
-    // console.log("当前用户为:");
-    // console.log(current);
-    var mobileStatus = current.get('mobilePhoneVerified');
-    // console.log("手机是否验证");
-    // console.log(mobileStatus);
-    if (mobileStatus === false){
-        $("#phoneAlert").css("display","block");
-    }
+    current.fetch().then(function(user){
+        var mobileStatus = user.get('mobilePhoneVerified');
+        var country = user.get('country');
+        if (mobileStatus === false){
+            $("#phoneAlert").css("display","block");
+        }
+        if (country === undefined){
+            $("#countryAlert").css("display","block");
+        }
+    });
 }
 
 function w3_close() {
-
     var smallScreen = window.matchMedia("(max-width: 600px)");
     // 如果屏幕小于600px,sideBar全覆盖
     if (smallScreen.matches) {
@@ -224,4 +263,28 @@ function setProfileData(){
     }).catch(function(error) {
         alert(JSON.stringify(error));
     });
+}
+
+function countrySelected(event) {
+    document.getElementById("selectedCountry").style.display = "block";
+    document.getElementById("selectedCountry").href = "../html/country.html?id=" +　event.target.value;
+    document.getElementById("countrySubmit").disabled = false;
+    document.getElementById("countrySubmit").classList.remove("w3-gray");
+    document.getElementById("countrySubmit").classList.add("w3-green");
+}
+
+function setupCountry(){
+    //设置国家
+        console.log("开始设置国家");
+        var country;
+        var countryId = parseInt($("#country").val());
+        var query = new AV.Query("country");
+        query.equalTo("countryId", countryId);
+        query.find().then(function(countries){
+            country = countries[0];
+            console.log(country.get('cname'));
+            var user = AV.User.current();
+            user.set("country", country);
+            return user.save();
+        });
 }

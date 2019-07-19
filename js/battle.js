@@ -1,16 +1,42 @@
-$(function(){
-    $("#toBattle").on("click",function(e) {
-        e.preventDefault();
-        toBattle();
-    });
-});
+// 活动倒计时
+function battleCountDown(){
+// Set the date we're counting down to
+    var currDate = new Date();
+    var currHour = currDate.getHours();
+    var nextHour = currHour + 1;
+    currDate.setHours(nextHour);
+    currDate.setMinutes(55);
+    currDate.setSeconds(0);
 
-function toBattle(){
-    var id = getUrlParam('id','Empty');
-    window.location.href = "../html/battle.html?id=" + id;
+    var countDownDate = new Date(currDate).getTime();
+
+// Update the count down every 1 second
+    var x = setInterval(function() {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result in an element with id="demo"
+        document.getElementById("battleCountDown").innerHTML = minutes + "分 " + seconds + "秒 ";
+
+        // If the count down is over, write some text
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("battleCountDown").innerHTML = "活动已结束,敬请期待下期!";
+        }
+    }, 1000);
 }
 
-function evalCity(){
+function evalBattle(){
     var query = new AV.Query('city');
     var cityId = getUrlParam('id','1');
     query.equalTo("cityId", parseInt(cityId, 10));
@@ -68,7 +94,7 @@ function evalCity(){
         query.equalTo('src', city);
         query.include('dest');
         // 执行查询
-        var adjacentPanel = {cityData: []};
+        var battlePanel = {battleData: []};
         query.find().then(function (maps) {
             var cityProcessed = 0;
             maps.forEach(function (mapRow, i, a) {
@@ -91,7 +117,7 @@ function evalCity(){
                     }else{
                         destIsAtWar = "交战中🔥";
                     }
-                    adjacentPanel.cityData.push({
+                    battlePanel.battleData.push({
                         destCityName,
                         destIsAtWar,
                         destIron,
@@ -104,9 +130,9 @@ function evalCity(){
                     });
                     cityProcessed++;
                     if (cityProcessed === maps.length){
-                        compile(adjacentPanel);
+                        compile(battlePanel);
                     }
-                 });     //end of  destCity.fetch
+                });     //end of  destCity.fetch
             });     //end of destCities.forEach
         });//end of 修改相邻城池
     }, function(err){
@@ -117,21 +143,10 @@ function evalCity(){
 function compile(adjacentPanel){
     $(document).ready(function() {
         console.log("handlebars编译完成");
-        var source = $("#adjacentPanelData").html();
+        var source = $("#battlePanelData").html();
         var template = Handlebars.compile(source);
-        var html = template(adjacentPanel);
-        $(".adjacentDataContainer").html(html);
+        var html = template(battlePanel);
+        $(".battleDataContainer").html(html);
         console.log("handlebars编译完成");
     });
 }
-
-function cityToHref(cityId){
-    var cityhtml = "../html/city.html?id=";
-    var href = cityhtml + cityId;
-    return href;
-}
-
-
-
-
-
