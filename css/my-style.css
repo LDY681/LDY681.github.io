@@ -169,5 +169,13 @@ img[usemap] {
     margin-left: 0;
 }
 
-
+.country__card.hover-in {
+    transition: -webkit-transform .2s ease-out;
+    transition: transform .2s ease-out;
+    transition: transform .2s ease-out, -webkit-transform .2s ease-out; }
+.country__card.hover-out {
+    cursor: pointer;
+    transition: -webkit-transform .2s ease-in;
+    transition: transform .2s ease-in;
+    transition: transform .2s ease-in, -webkit-transform .2s ease-in; }
 

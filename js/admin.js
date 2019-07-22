@@ -8,6 +8,9 @@ $(function(){
     $("#resetAdjacent").on("click", function(){
         resetAdjacent();
     });
+    $("#resetRecentDamage").on("click", function(){
+        resetRecentDamage();
+    });
 });
 
 function resetAll(){
@@ -77,7 +80,25 @@ function resetWu(){
     });
 }
 
+function resetRecentDamage(){
+    var query = new AV.Query('city');
+    query.find().then(function (cities) {
+        var emptyDamage = [];
+        cities.forEach(function(city) {
+            city.set('invaderRecentDamage', emptyDamage);
+            city.set('defenderRecentDamage', emptyDamage);
+        });
+        return AV.Object.saveAll(cities);
+    }).then(function(todos) {
+        // 更新成功
+        alert("所有战场最新伤害重置成功");
+    }, function (error) {
+        // 异常处理
+        alert(JSON.stringify(error));
+        alert("战场最新伤害重置失败");
+    });
 
+}
 function resetAdjacent(){
     var query = new AV.Query('city');
     query.ascending("cityId");
@@ -1310,11 +1331,6 @@ function resetResource(){
         alert(JSON.stringify(error));
         alert("随机资源设置失败");
     });
-}
-
-function round(value, precision) {
-    var multiplier = Math.pow(10, precision || 0);
-    return Math.round(value * multiplier) / multiplier;
 }
 
 function random(){

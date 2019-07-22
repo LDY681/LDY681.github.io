@@ -96,6 +96,14 @@ function getUrlVars() {
     return vars;
 }
 
+function round(value, precision) {
+    var multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
+}
 
+function getRandomArbitrary(min, max){
+    var random = Math.random() * (max - min) + min;
+    return round(random,2);
+}
 
 

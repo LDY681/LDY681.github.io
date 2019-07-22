@@ -1,3 +1,9 @@
+$(document).ready(function(){
+    $(".sideInfo").hover3d({
+        selector: ".country__card"
+    });
+});
+
 // 活动倒计时
 function battleCountDown(){
 // Set the date we're counting down to
@@ -36,117 +42,211 @@ function battleCountDown(){
     }, 1000);
 }
 
-function evalBattle(){
+//刚进入页面时填充战场数据
+function evalBattle() {
     var query = new AV.Query('city');
-    var cityId = getUrlParam('id','1');
-    query.equalTo("cityId", parseInt(cityId, 10));
-    query.include(['owner']);
-    query.find().then(function(cities){
-        var city = cities[0];
+    var cityId = parseInt(getUrlParam('id', '1'), 10);
+    query.equalTo("cityId", cityId);
+    query.include(['owner', 'invader']);
 
+    query.find().then(function (cities) {
+        var city = cities[0];
         //获取城池信息
         var isAtWar = city.get("isAtWar");
-        var cityName = city.get("name");
-        var iron = city.get("iron");
-        var wheat = city.get("wheat");
-        var rice = city.get("rice");
-        var wood = city.get("wood");
-        var owner = city.get("owner").get("cname");
-
-        //修改战争状态框
-        var battleNotifier = $("#battleNotifier");
-        var toBattle = $("#toBattle");
-        if (isAtWar === false){
-            battleNotifier.html( cityName + "当前处于和平状态" );
-            battleNotifier.addClass("w3-text-green");
-            toBattle.html( "好嘞(●'◡'●)" );
-            toBattle.attr("disabled", true);
-            toBattle.removeClass("w3-green");
-            toBattle.addClass("w3-grey");
-        } else{
-            battleNotifier.html( cityName + "正在争夺中!" );
-            battleNotifier.addClass("w3-text-red");
-            toBattle.html( "快快进入战场!" );
-            toBattle.addClass("w3-red");
+        //如果当前战场和平,跳转到map.html
+        if (isAtWar === false) {
+            window.location.href = "../html/map.html";
+            return;
         }
-        $(".workntrainButton").show();
-        //end of 修改战争状态框
+        var cityName = city.get("name");
 
-        //修改城池信息框
-        var cityname = $("#name");
-        var cityowner = $("#owner");
-        var cityiron = $("#iron");
-        var cityrice = $("#rice");
-        var citywheat = $("#wheat");
-        var citywood = $("#wood");
-        cityname.html(cityName);
-        cityowner.html(owner);
-        cityiron.html(iron);
-        cityrice.html(rice);
-        citywheat.html(wheat);
-        citywood.html(wood);
-        //end of 城池信息框
+        var invader = city.get('invader');
+        var invaderName = invader.get('cname');
+        var invaderFigure = invader.get('countryFigure');
+        var offdmg = city.get('offdmg');
+        var invaderUrl = invaderFigure.get("url");
 
-        //修改相邻城池
-        // 构建 map 的查询
-        var query = new AV.Query('map');
-        // 查询所有src是city的数据
-        query.equalTo('src', city);
-        query.include('dest');
-        // 执行查询
+        var defender = city.get('owner');
+        var defenderFigure = defender.get('countryFigure');
+        var defenderName = defender.get('cname');
+        var defdmg = city.get('defdmg');
+        var defenderUrl = defenderFigure.get("url");
+
+        $("#invaderFigure").attr("src",invaderUrl);
+        $("#defenderFigure").attr("src",defenderUrl);
         var battlePanel = {battleData: []};
-        query.find().then(function (maps) {
-            var cityProcessed = 0;
-            maps.forEach(function (mapRow, i, a) {
-                var destObj = mapRow.get('dest');
-                destObj.fetch({ include: ['owner'] }).then(function (destObj) {
-                    var destCityName = destObj.get('name');
-                    var destIsAtWar = destObj.get("isAtWar");
-                    var destIron = destObj.get("iron");
-                    var destCityId = destObj.get("cityId");
-                    var destWheat = destObj.get("wheat");
-                    var destRice = destObj.get("rice");
-                    var destWood = destObj.get("wood");
-                    var destOwner = destObj.get("owner").get("cname");
-                    var destUrl = cityToHref(destCityId);
-                    console.log("adjacent city: " +destCityName +" "+ destIsAtWar +" "+ destIron+" "+ destWheat+" " + destRice +" "+ destWood+" "+destOwner);
-                    // handlebars adjacentPanel
+        battlePanel.battleData.push({
+            cityName,
+            defdmg,
+            offdmg,
+            defenderName,
+            invaderName
+        });
 
-                    if (destIsAtWar === false){
-                        destIsAtWar = "风平浪静💖";
-                    }else{
-                        destIsAtWar = "交战中🔥";
-                    }
-                    battlePanel.battleData.push({
-                        destCityName,
-                        destIsAtWar,
-                        destIron,
-                        destWheat,
-                        destRice,
-                        destWood,
-                        destOwner,
-                        destCityId,
-                        destUrl
-                    });
-                    cityProcessed++;
-                    if (cityProcessed === maps.length){
-                        compile(battlePanel);
-                    }
-                });     //end of  destCity.fetch
-            });     //end of destCities.forEach
-        });//end of 修改相邻城池
-    }, function(err){
+        compileBattle(battlePanel);
+
+    }, function (err) {
         console.log(err);
     });
+
 }
 
-function compile(adjacentPanel){
+function compileBattle(battlePanel){
     $(document).ready(function() {
-        console.log("handlebars编译完成");
         var source = $("#battlePanelData").html();
         var template = Handlebars.compile(source);
         var html = template(battlePanel);
         $(".battleDataContainer").html(html);
-        console.log("handlebars编译完成");
     });
+}
+function compileRank(adjacentRankPanel){
+    console.log("这里了");
+    console.log(adjacentRankPanel);
+    $(document).ready(function() {
+        var source = $("#adjacentRankPanelData").html();
+        var template = Handlebars.compile(source);
+        var html = template(adjacentRankPanel);
+        $(".adjacentRankDataContainer").html(html);
+    });
+}
+function updateDamage(side, damage){
+    //更新city的offdmg
+    var query = new AV.Query('city');
+    var cityId = parseInt(getUrlParam('id', '1'), 10);
+    query.equalTo("cityId", cityId);
+    query.find().then(function (cities) {
+        var city = cities[0];
+        if(side === "invader"){
+            city.increment('offdmg', damage);
+        }else{
+            city.increment('defdmg', damage);
+        }
+        city.save(null, {
+            fetchWhenSave: true
+        });
+    });
+    //更新user的总伤害
+    var user = AV.User.current();
+    user.increment('totalDmg', damage);
+    user.save(null, {
+        fetchWhenSave: true
+    });
+    //更新战场总伤,防御方,和每日伤害排行榜
+    var battleId = "battle" + cityId;
+    var sideId;
+    if(side === "invader"){
+        sideId = "invader" + cityId;
+    }else{
+        sideId = "defender" + cityId;
+    }
+
+    var adjacentRankPanel = {rankData: []};
+    AV.Leaderboard.updateStatistics(AV.User.current(), {
+        [battleId]: damage,
+        [sideId]: damage,
+        dailyDamage: damage,
+    }).then(function(statistics) {
+        if (side === "invader"){
+            //更新伤害显示
+            $("#myInvaderDmg").html(statistics[1].value);
+            //更新排名显示
+            var leaderboard = AV.Leaderboard.createWithoutData(sideId);
+            leaderboard.getResultsAroundUser({
+                limit: 5,
+            }).then(function(users) {
+                users.forEach(function(user){
+                    var rank = user.rank + 1;
+                    var damage = user.value;
+                    adjacentRankPanel.rankData.push({
+                        rank,
+                        damage
+                    });
+                });
+            }).then(function(){
+                compileRank(adjacentRankPanel);
+            });
+        }else{
+            $("#myDefenderDmg").html(statistics[1].value);
+        }
+
+    }).catch(console.error);
+}
+
+function dealDamageInvaderSide(){
+
+    calculateDamage().then(function(damage){
+        //显示伤害
+        document.getElementById("damage").innerHTML = damage;
+        $(".damageNotifier").show();
+        setTimeout(function () {
+            $(".damageNotifier").hide();
+        }, 800);
+
+        //更新数据
+        updateDamage("invader", damage);
+    });
+}
+function dealDamageDefenderSide() {
+
+    calculateDamage().then(function(damage){
+        //显示伤害
+        document.getElementById("damage").innerHTML = damage;
+        $(".damageNotifier").show();
+        setTimeout(function () {
+            $(".damageNotifier").hide();
+        }, 800);
+
+        updateDamage("defender", damage);
+    });
+}
+
+async function calculateDamage(){
+    let promise = AV.User.current().fetch({include:'equip'}).then(function(res){
+        var user = res;
+        var equip = user.get('equip');
+        //力量
+        var str = user.get('str');
+        var shield = equip.get('shield');
+        var finalStr = str + shield * 100;
+        console.log("角色力量:"+str+"; 盾等级:"+shield+"; final力量:"+finalStr);
+        //伤害
+        var totalDmg = user.get('totalDmg');
+        var rank = Math.sqrt(totalDmg/10000);
+        var baseDmg = 1000 * (1 + 0.05 * rank);
+        var sword = equip.get('sword');
+        var finalDmg = baseDmg + sword * 100;
+        console.log("总伤害:"+totalDmg+", 军阶:"+rank+"; baseDmg:"+baseDmg+"; sword:"+sword+"; finalDmg:"+finalDmg);
+        //伤害区间
+        var minModifier = 0.8;
+        var maxModifier = 1.2;
+        var spear = equip.get('spear');
+        var bow = equip.get('bow');
+        minModifier = minModifier + (spear * 0.01);
+        maxModifier = (maxModifier + (spear * 0.01)) * (1 + bow * 0.02);
+        var randomModifier = getRandomArbitrary(minModifier, maxModifier);
+        console.log("枪等级:"+spear+", 弓等级:"+bow+"; 伤害区间:"+minModifier+"-"+maxModifier+"; 随机修正结果:"+randomModifier);
+        //暴击
+        var horseChance = equip.get('horse')*0.02;
+        var hiddenChance = equip.get('hidden')*0.01;
+        var horseRoll = Math.random();
+        var hiddenRoll = Math.random();
+        var criticalModifier =1;
+        document.getElementById("modifier").innerHTML ="";
+        if (horseRoll <= horseChance){
+            criticalModifier *= 2;
+            document.getElementById("modifier").innerHTML +="【骑】";
+        }
+        if (hiddenRoll <= hiddenChance){
+            criticalModifier *= 5;
+            document.getElementById("modifier").innerHTML +="【暗】";
+        }
+        console.log("horseChance:"+horseChance+", hiddenChance:"+hiddenChance+"; criticalModifier:"+criticalModifier);
+
+        var calculatedDmg = round(finalDmg * (finalStr/1000) * randomModifier * criticalModifier);
+        console.log("calculatedDmg: " + calculatedDmg);
+        return calculatedDmg;
+       },function(err){
+        console.log("获取用户信息失败");
+    });
+    return await promise;
 }
