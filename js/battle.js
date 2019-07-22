@@ -109,6 +109,17 @@ function compileRank(adjacentRankPanel){
         $(".adjacentRankDataContainer").html(html);
     });
 }
+function compileRankDef(adjacentRankPanelDef){
+    console.log("这里了");
+    console.log(adjacentRankPanelDef);
+    $(document).ready(function() {
+        var source = $("#adjacentRankPanelDataDef").html();
+        var template = Handlebars.compile(source);
+        var html = template(adjacentRankPanelDef);
+        $(".adjacentRankDataContainerDef").html(html);
+    });
+}
+
 function updateDamage(side, damage){
     //更新city的offdmg
     var query = new AV.Query('city');
@@ -141,6 +152,7 @@ function updateDamage(side, damage){
     }
 
     var adjacentRankPanel = {rankData: []};
+    var adjacentRankPanelDef = {rankDataDef: []};
     AV.Leaderboard.updateStatistics(AV.User.current(), {
         [battleId]: damage,
         [sideId]: damage,
@@ -167,8 +179,22 @@ function updateDamage(side, damage){
             });
         }else{
             $("#myDefenderDmg").html(statistics[1].value);
+            var leaderboardDef = AV.Leaderboard.createWithoutData(sideId);
+            leaderboardDef.getResultsAroundUser({
+                limit: 5,
+            }).then(function(users) {
+                users.forEach(function(user){
+                    var rankDef = user.rank + 1;
+                    var damageDef = user.value;
+                    adjacentRankPanelDef.rankDataDef.push({
+                        rankDef,
+                        damageDef
+                    });
+                });
+            }).then(function(){
+                compileRankDef(adjacentRankPanelDef);
+            });
         }
-
     }).catch(console.error);
 }
 

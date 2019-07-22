@@ -74,12 +74,16 @@
         <p>我的伤害</p>
         <p id="myInvaderDmg"></p>
         <p>我的排名</p>
-        <div id ="adjacentRankDataContainer">
+        <div class="adjacentRankDataContainer">
             <script id="adjacentRankPanelData" type="text/x-handlebars-template">
-              <table class="w3-table-all w3-card-4">
+              <table class="w3-table-all w3-card-4 w3-margin">
+                <tr>
+                  <th>排名</th>
+                  <th>伤害</th>
+                </tr>
               {{#each rankData}}
                 <tr>
-                  <td>{{{rank}}}</td>
+                  <td>第{{{rank}}}名</td>
                   <td>{{{damage}}}</td>
                 </tr>
               {{/each}}
@@ -92,14 +96,21 @@
         <p>我的伤害</p>
         <p id="myDefenderDmg"></p>
         <p>我的排名</p>
-        <div id ="">
-            <table class="w3-table-all w3-card-4">
+        <div class="adjacentRankDataContainerDef">
+          <script id="adjacentRankPanelDataDef" type="text/x-handlebars-template">
+            <table class="w3-table-all w3-card-4 w3-margin">
               <tr>
-                <td>123</td>
-                <td>456</td>
+                <th>排名</th>
+                <th>伤害</th>
               </tr>
+              {{#each rankDataDef}}
+              <tr>
+                <td>第{{{rankDef}}}名</td>
+                <td>{{{damageDef}}}</td>
+              </tr>
+              {{/each}}
             </table>
-
+          </script>
         </div>
       </div>
     </div>
@@ -110,12 +121,17 @@
         <img id="defenderFigure" src="" alt="防守方形象" style="width:80%; height:60vh;" onclick="dealDamageDefenderSide();">
       </div>
     </div>
-  </div><br><br><br><br><br><br>
+  </div>
+    <div class="myHorizontalRule"></div>
+    <div class="myHorizontalRule"></div>
+    <div class="myHorizontalRule"></div>
+
+
 
 
   </div><!--end of 右侧定制内容-->
 
-
+</div>
 <!--Script加载顺序!!!!!-->
 <!--加载jquery-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
