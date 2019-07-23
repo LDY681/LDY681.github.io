@@ -35,7 +35,7 @@ function declareWar(){
             if ( (warPending === undefined) && owner.get('name') !== invaderObj.get('name')){
                 city.set('warPending', invaderObj);
                 return city.save().then(function(res){
-                    alert("宣战成功!");
+                    alert("宣战成功!下个整点战场开启!");
                 }, function(err){
                     alert("宣战失败");
                 });
