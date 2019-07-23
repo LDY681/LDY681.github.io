@@ -40,7 +40,6 @@ function countUp(date){
 
 // Update the count down every 1 second
     var x = setInterval(function() {
-
         // Get today's date and time
         var now = new Date().getTime();
 

@@ -34,31 +34,54 @@
       <div style="text-align: center;" class="popUpText"><span id="modifier"></span><span>您造成了</span><span id="damage"></span><span>点伤害</span></div>
     </div>
 
-
-    <div class="battleDataContainer  w3-round-xxlarge w3-center" style="overflow: hidden;">
+    <div class="battleDataContainer">
       <script id="battlePanelData" type="text/x-handlebars-template">
         {{#each battleData}}
-        <h1><span class="w3-text-black w3-gray w3-padding-large w3-round-xxlarge">{{{cityName}}}争夺战</span></h1>
-        <p><span style="font-weight:800;" class="w3-large">离战场结束还有:</span><span style="font-weight:800;" class="w3-text-red" id="battleCountDown"></span></p>
+        <h1><span class="w3-gray w3-padding-large w3-round-xxlarge">{{{cityName}}}争夺战</span></h1><br>
+        <p class="workntrainButton"><span style="font-weight:800;" class="w3-large">离战场结束还有:</span><span style="font-weight:800;" class="w3-text-red" id="battleCountDown"></span></p><br>
         <!-- 进攻方-->
-        <div class="sideInfo w3-half w3-padding w3-center">
-          <h2>进攻方: {{{invaderName}}}</h2>
-          <p class="w3-red">总伤害: {{{offdmg}}}</p>
+        <div class="w3-red w3-round-xxlarge sideInfo w3-third w3-center">
+          <h3>进攻方: {{{invaderName}}}</h3>
         </div>
-        <div class="sideInfo w3-half w3-padding w3-center">
-          <h2>防守方: {{{defenderName}}}</h2>
-          <p class="w3-green">总伤害: {{{defdmg}}}</p>
+        <div class="sideInfo w3-third w3-padding w3-center"></div>
+        <div class="w3-green w3-round-xxlarge sideInfo w3-third w3-center">
+          <h3>防守方: {{{defenderName}}}</h3>
         </div>
         {{/each}}
       </script>
     </div>
+      <div class="sideInfo w3-half">
+      <p class="w3-red">总伤害: <span id="invaderTotalDmg"></span></p></div>
+      <div class="sideInfo w3-half">
+      <p class="w3-green">总伤害: <span id="defenderTotalDmg"></span></p></div>
+
 <!--      伤害动态-->
     <div class="w3-col w3-container">
       <div id="invaderRank" class="w3-half">
-        <p>进攻方伤害排行</p>
+        <h3>进攻方伤害排行</h3>
+          <table id="topRankData" class="w3-table-all w3-card-4" style="width: 50%; margin: auto">
+            <tr>
+              <th>排名</th>
+              <th>伤害</th>
+            </tr>
+            <tr v-for="rankData in rankDatas">
+              <td>第{{ rankData.rank }}名</td>
+              <td>{{ rankData.damage }}</td>
+            </tr>
+          </table>
       </div>
       <div id="defenderRank" class="w3-half">
-        <p>防守方伤害排行</p>
+        <h3>防守方伤害排行</h3>
+          <table id="topRankDataDef" class="w3-table-all w3-card-4" style="width: 50%; margin: auto">
+            <tr>
+              <th>排名</th>
+              <th>伤害</th>
+            </tr>
+            <tr v-for="rankData in rankDatas">
+              <td>第{{ rankData.rank }}名</td>
+              <td>{{ rankData.damage }}</td>
+            </tr>
+          </table>
       </div>
     </div>
 <!-- 攻击框-->
@@ -70,47 +93,40 @@
     </div>
 
     <div class="w3-third w3-center">
+
       <div class="w3-half">
-        <p>我的伤害</p>
+
+        <p style="margin-top: 50px;font-weight: bold">我的伤害</p>
         <p id="myInvaderDmg"></p>
-        <p>我的排名</p>
-        <div class="adjacentRankDataContainer">
-            <script id="adjacentRankPanelData" type="text/x-handlebars-template">
-              <table class="w3-table-all w3-card-4 w3-margin">
-                <tr>
-                  <th>排名</th>
-                  <th>伤害</th>
-                </tr>
-              {{#each rankData}}
-                <tr>
-                  <td>第{{{rank}}}名</td>
-                  <td>{{{damage}}}</td>
-                </tr>
-              {{/each}}
-              </table>
-            </script>
-          </div>
+        <p style="font-weight: bold">我的排名</p>
+          <table id="adjacentRankData" class="w3-table-all w3-card-4" style="width: 80%; margin: 0px auto">
+            <tr>
+              <th>排名</th>
+              <th>伤害</th>
+            </tr>
+            <tr v-for="rankData in rankDatas">
+              <td>第{{ rankData.rank }}名</td>
+              <td>{{ rankData.damage }}</td>
+            </tr>
+          </table>
       </div>
 
       <div class="w3-half">
-        <p>我的伤害</p>
+        <p style="margin-top: 50px;font-weight: bold">我的伤害</p>
         <p id="myDefenderDmg"></p>
-        <p>我的排名</p>
-        <div class="adjacentRankDataContainerDef">
-          <script id="adjacentRankPanelDataDef" type="text/x-handlebars-template">
-            <table class="w3-table-all w3-card-4 w3-margin">
-              <tr>
-                <th>排名</th>
-                <th>伤害</th>
-              </tr>
-              {{#each rankDataDef}}
-              <tr>
-                <td>第{{{rankDef}}}名</td>
-                <td>{{{damageDef}}}</td>
-              </tr>
-              {{/each}}
-            </table>
-          </script>
+        <p style="font-weight: bold">我的排名</p>
+
+        <div id="adjacentRankDataDef">
+          <table class="w3-table-all w3-card-4" style="width: 80%; margin: 0px auto">
+            <tr>
+              <th>排名</th>
+              <th>伤害</th>
+            </tr>
+            <tr v-for="rankData in rankDatas">
+              <td>第{{rankData.rank}}名</td>
+              <td>{{rankData.damage}}</td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
@@ -122,13 +138,6 @@
       </div>
     </div>
   </div>
-    <div class="myHorizontalRule"></div>
-    <div class="myHorizontalRule"></div>
-    <div class="myHorizontalRule"></div>
-
-
-
-
   </div><!--end of 右侧定制内容-->
 
 </div>
@@ -138,6 +147,7 @@
 <script src="../js/jquery.hover3d.js"></script>
 <script>console.log("Jquery加载完毕")</script>
 <script src="../js/handlebars.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>console.log("handlebars加载完毕")</script>
 
 <!--初始化用户并加载user.js-->
@@ -175,6 +185,7 @@
                     $.getScript("../js/battle.js", function(){
                         evalBattle();
                         battleCountDown();
+                        autoUpdate();
                     });
                 });
             });

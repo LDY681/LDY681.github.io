@@ -4,7 +4,7 @@ $(document).ready(function(){
     });
 });
 
-// 活动倒计时
+// 战场倒计时
 function battleCountDown(){
 // Set the date we're counting down to
     var currDate = new Date();
@@ -42,7 +42,7 @@ function battleCountDown(){
     }, 1000);
 }
 
-//刚进入页面时填充战场数据
+//刚进入页面时填充战场数据(城市名,防御&进攻国家名称&形象)
 function evalBattle() {
     var query = new AV.Query('city');
     var cityId = parseInt(getUrlParam('id', '1'), 10);
@@ -63,13 +63,11 @@ function evalBattle() {
         var invader = city.get('invader');
         var invaderName = invader.get('cname');
         var invaderFigure = invader.get('countryFigure');
-        var offdmg = city.get('offdmg');
         var invaderUrl = invaderFigure.get("url");
 
         var defender = city.get('owner');
         var defenderFigure = defender.get('countryFigure');
         var defenderName = defender.get('cname');
-        var defdmg = city.get('defdmg');
         var defenderUrl = defenderFigure.get("url");
 
         $("#invaderFigure").attr("src",invaderUrl);
@@ -77,49 +75,17 @@ function evalBattle() {
         var battlePanel = {battleData: []};
         battlePanel.battleData.push({
             cityName,
-            defdmg,
-            offdmg,
             defenderName,
             invaderName
         });
-
         compileBattle(battlePanel);
-
     }, function (err) {
         console.log(err);
     });
 
 }
 
-function compileBattle(battlePanel){
-    $(document).ready(function() {
-        var source = $("#battlePanelData").html();
-        var template = Handlebars.compile(source);
-        var html = template(battlePanel);
-        $(".battleDataContainer").html(html);
-    });
-}
-function compileRank(adjacentRankPanel){
-    console.log("这里了");
-    console.log(adjacentRankPanel);
-    $(document).ready(function() {
-        var source = $("#adjacentRankPanelData").html();
-        var template = Handlebars.compile(source);
-        var html = template(adjacentRankPanel);
-        $(".adjacentRankDataContainer").html(html);
-    });
-}
-function compileRankDef(adjacentRankPanelDef){
-    console.log("这里了");
-    console.log(adjacentRankPanelDef);
-    $(document).ready(function() {
-        var source = $("#adjacentRankPanelDataDef").html();
-        var template = Handlebars.compile(source);
-        var html = template(adjacentRankPanelDef);
-        $(".adjacentRankDataContainerDef").html(html);
-    });
-}
-
+//更新玩家伤害到数据库,顺便更新玩家伤害
 function updateDamage(side, damage){
     //更新city的offdmg
     var query = new AV.Query('city');
@@ -151,53 +117,143 @@ function updateDamage(side, damage){
         sideId = "defender" + cityId;
     }
 
-    var adjacentRankPanel = {rankData: []};
-    var adjacentRankPanelDef = {rankDataDef: []};
+    //更新排行榜数据
     AV.Leaderboard.updateStatistics(AV.User.current(), {
         [battleId]: damage,
         [sideId]: damage,
         dailyDamage: damage,
     }).then(function(statistics) {
         if (side === "invader"){
-            //更新伤害显示
+            //更新页面上的伤害显示
             $("#myInvaderDmg").html(statistics[1].value);
-            //更新排名显示
-            var leaderboard = AV.Leaderboard.createWithoutData(sideId);
-            leaderboard.getResultsAroundUser({
-                limit: 5,
-            }).then(function(users) {
-                users.forEach(function(user){
-                    var rank = user.rank + 1;
-                    var damage = user.value;
-                    adjacentRankPanel.rankData.push({
-                        rank,
-                        damage
-                    });
-                });
-            }).then(function(){
-                compileRank(adjacentRankPanel);
-            });
         }else{
             $("#myDefenderDmg").html(statistics[1].value);
-            var leaderboardDef = AV.Leaderboard.createWithoutData(sideId);
-            leaderboardDef.getResultsAroundUser({
-                limit: 5,
-            }).then(function(users) {
-                users.forEach(function(user){
-                    var rankDef = user.rank + 1;
-                    var damageDef = user.value;
-                    adjacentRankPanelDef.rankDataDef.push({
-                        rankDef,
-                        damageDef
-                    });
-                });
-            }).then(function(){
-                compileRankDef(adjacentRankPanelDef);
-            });
         }
     }).catch(console.error);
 }
 
+//每15秒刷新一次排行榜和伤害
+function autoUpdate(){
+    //刷新排行榜
+    updateLeaderBoard();
+    //刷新玩家伤害和双方总伤害
+    updateDamageStats();
+
+    setInterval(function(){
+        updateLeaderBoard();
+        updateDamageStats();
+    },15000);
+}
+
+function updateDamageStats(){
+    //更新用户伤害并显示出来
+    updateDamage("invader", 0);
+    updateDamage("defender", 0);
+
+    var query = new AV.Query('city');
+    var cityId = parseInt(getUrlParam('id', '1'), 10);
+    query.equalTo("cityId", cityId);
+    query.include(['owner', 'invader']);
+    query.find().then(function (cities) {
+        var city = cities[0];
+        var offdmg = city.get('offdmg');
+        var defdmg = city.get('defdmg');
+        $("#invaderTotalDmg").html(offdmg);
+        $("#defenderTotalDmg").html(defdmg);
+    });
+
+}
+var adjacentRankData = new Vue({
+    el: '#adjacentRankData',
+    data: {
+        rankDatas: []
+    }
+});
+
+var adjacentRankDataDef = new Vue({
+    el: '#adjacentRankDataDef',
+    data: {
+        rankDatas: []
+    }
+});
+
+var topRankData = new Vue({
+    el: '#topRankData',
+    data: {
+        rankDatas: []
+    }
+});
+
+var topRankDataDef = new Vue({
+    el: '#topRankDataDef',
+    data: {
+        rankDatas: []
+    }
+});
+function updateLeaderBoard(){
+    var cityId = parseInt(getUrlParam('id', '1'), 10);
+    var invaderId = "invader" + cityId;
+    var defenderId = "defender" + cityId;
+
+    //更新进攻方排行榜
+    var leaderboard = AV.Leaderboard.createWithoutData(invaderId);
+    //更新我的排名
+    leaderboard.getResultsAroundUser({
+        limit: 1,
+    }).then(function(users) {
+        adjacentRankData.rankDatas = [];
+        var itemsProcessed = 0;
+        users.forEach(function(user){
+            itemsProcessed++;
+            var rank = user.rank + 1;
+            var damage = user.value;
+            adjacentRankData.rankDatas.push({ rank: rank, damage: damage });
+        });
+    });
+    //更新Top排名
+    leaderboard.getResults({
+        limit: 10,
+    }).then(function(users) {
+        topRankData.rankDatas = [];
+        var itemsProcessed = 0;
+        users.forEach(function(user){
+            itemsProcessed++;
+            var rank = user.rank + 1;
+            var damage = user.value;
+            topRankData.rankDatas.push({ rank: rank, damage: damage });
+        });
+    });
+
+    //更新防御方排行榜
+    var leaderboardDef = AV.Leaderboard.createWithoutData(defenderId);
+    leaderboardDef.getResultsAroundUser({
+        limit: 1,
+    }).then(function(users) {
+        adjacentRankDataDef.rankDatas = [];
+        var itemsProcessed = 0;
+        users.forEach(function(user){
+            itemsProcessed++;
+            var rank = user.rank + 1;
+            var damage = user.value;
+            adjacentRankDataDef.rankDatas.push({ rank: rank, damage: damage });
+        });
+    });
+    //更新Top排名
+    leaderboardDef.getResults({
+        limit: 10,
+    }).then(function(users) {
+        topRankDataDef.rankDatas = [];
+        var itemsProcessed = 0;
+        users.forEach(function(user){
+            itemsProcessed++;
+            var rank = user.rank + 1;
+            var damage = user.value;
+            topRankDataDef.rankDatas.push({ rank: rank, damage: damage });
+        });
+    });
+}
+
+//进攻方和防御方点击进攻时触发
 function dealDamageInvaderSide(){
 
     calculateDamage().then(function(damage){
@@ -226,6 +282,7 @@ function dealDamageDefenderSide() {
     });
 }
 
+//伤害计算
 async function calculateDamage(){
     let promise = AV.User.current().fetch({include:'equip'}).then(function(res){
         var user = res;
@@ -275,4 +332,14 @@ async function calculateDamage(){
         console.log("获取用户信息失败");
     });
     return await promise;
+}
+
+//handlebars compile
+function compileBattle(battlePanel){
+    $(document).ready(function() {
+        var source = $("#battlePanelData").html();
+        var template = Handlebars.compile(source);
+        var html = template(battlePanel);
+        $(".battleDataContainer").html(html);
+    });
 }
