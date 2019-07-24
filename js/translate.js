@@ -142,6 +142,8 @@ function zh_init() {
         }
     }
 }
+
+//检测语言
 function detectLang(){
     console.log("detectLang运行中");
     let lang =(navigator.language || navigator.browserLanguage || navigator.language || "zh-cn").toLowerCase();

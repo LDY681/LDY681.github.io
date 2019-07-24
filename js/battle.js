@@ -4,7 +4,7 @@ $(document).ready(function(){
     });
 });
 
-// 战场倒计时
+// 战场倒计时(距离整点55分的时间)
 function battleCountDown(){
 // Set the date we're counting down to
     var currDate = new Date();
@@ -42,7 +42,7 @@ function battleCountDown(){
     }, 1000);
 }
 
-//刚进入页面时填充战场数据(城市名,防御&进攻国家名称&形象)
+//刚进入页面时填充战场数据(城市名,防御&进攻国家名称&形象),handlebars一次性编译
 function evalBattle() {
     var query = new AV.Query('city');
     var cityId = parseInt(getUrlParam('id', '1'), 10);
@@ -82,10 +82,9 @@ function evalBattle() {
     }, function (err) {
         console.log(err);
     });
-
 }
 
-//更新玩家伤害到数据库,顺便更新玩家伤害
+//玩家输出后,更新数据库[战场offdmg,defdmg;用户totaldmg];更新排行榜(battleId, invaderId, defenderId);更新战场页的伤害显示
 function updateDamage(side, damage){
     //更新city的offdmg
     var query = new AV.Query('city');
@@ -95,6 +94,7 @@ function updateDamage(side, damage){
         var city = cities[0];
         if(side === "invader"){
             city.increment('offdmg', damage);
+
         }else{
             city.increment('defdmg', damage);
         }
@@ -116,7 +116,6 @@ function updateDamage(side, damage){
     }else{
         sideId = "defender" + cityId;
     }
-
     //更新排行榜数据
     AV.Leaderboard.updateStatistics(AV.User.current(), {
         [battleId]: damage,
@@ -125,14 +124,20 @@ function updateDamage(side, damage){
     }).then(function(statistics) {
         if (side === "invader"){
             //更新页面上的伤害显示
-            $("#myInvaderDmg").html(statistics[1].value);
+            var myInvaderDmg = $("#myInvaderDmg");
+            myInvaderDmg.html(statistics[1].value);
+            myInvaderDmg.addClass("ld ld-tick");
+            setTimeout(function(){myInvaderDmg.removeClass("ld ld-tick")}, 500);
         }else{
-            $("#myDefenderDmg").html(statistics[1].value);
+            var myDefenderDmg = $("#myDefenderDmg");
+            myDefenderDmg.html(statistics[1].value);
+            myDefenderDmg.addClass("ld ld-tick");
+            setTimeout(function(){myDefenderDmg.removeClass("ld ld-tick")}, 500);
         }
     }).catch(console.error);
 }
 
-//每15秒刷新一次排行榜和伤害
+//每5分钟刷新一次排行榜,每15秒刷新一次伤害
 function autoUpdate(){
     //刷新排行榜
     updateLeaderBoard();
@@ -140,11 +145,16 @@ function autoUpdate(){
     updateDamageStats();
 
     setInterval(function(){
-        updateLeaderBoard();
         updateDamageStats();
     },15000);
+
+    setInterval(function(){
+        updateLeaderBoard();
+    },300000);
+
 }
 
+//更新玩家伤害,更新战场总伤
 function updateDamageStats(){
     //更新用户伤害并显示出来
     updateDamage("invader", 0);
@@ -158,38 +168,19 @@ function updateDamageStats(){
         var city = cities[0];
         var offdmg = city.get('offdmg');
         var defdmg = city.get('defdmg');
-        $("#invaderTotalDmg").html(offdmg);
-        $("#defenderTotalDmg").html(defdmg);
+        var invaderTotalDmg = $("#invaderTotalDmg");
+        var defenderTotalDmg = $("#defenderTotalDmg");
+        invaderTotalDmg.html(offdmg);
+        invaderTotalDmg.addClass("ld ld-tick");
+        setTimeout(function(){invaderTotalDmg.removeClass("ld ld-tick")}, 500);
+        defenderTotalDmg.html(defdmg);
+        defenderTotalDmg.addClass("ld ld-tick");
+        setTimeout(function(){defenderTotalDmg.removeClass("ld ld-tick")}, 500);
     });
 
 }
-var adjacentRankData = new Vue({
-    el: '#adjacentRankData',
-    data: {
-        rankDatas: []
-    }
-});
 
-var adjacentRankDataDef = new Vue({
-    el: '#adjacentRankDataDef',
-    data: {
-        rankDatas: []
-    }
-});
-
-var topRankData = new Vue({
-    el: '#topRankData',
-    data: {
-        rankDatas: []
-    }
-});
-
-var topRankDataDef = new Vue({
-    el: '#topRankDataDef',
-    data: {
-        rankDatas: []
-    }
-});
+//更新进攻方Top榜,我的排名;更新防守方Top榜,我的排名
 function updateLeaderBoard(){
     var cityId = parseInt(getUrlParam('id', '1'), 10);
     var invaderId = "invader" + cityId;
@@ -253,7 +244,7 @@ function updateLeaderBoard(){
     });
 }
 
-//进攻方和防御方点击进攻时触发
+//玩家点击进攻方输出后触发,显示伤害顶部提示,更新伤害
 function dealDamageInvaderSide(){
 
     calculateDamage().then(function(damage){
@@ -268,8 +259,9 @@ function dealDamageInvaderSide(){
         updateDamage("invader", damage);
     });
 }
-function dealDamageDefenderSide() {
 
+//玩家点击防御方输出后触发,显示伤害顶部提示,更新伤害
+function dealDamageDefenderSide() {
     calculateDamage().then(function(damage){
         //显示伤害
         document.getElementById("damage").innerHTML = damage;
@@ -277,12 +269,11 @@ function dealDamageDefenderSide() {
         setTimeout(function () {
             $(".damageNotifier").hide();
         }, 800);
-
         updateDamage("defender", damage);
     });
 }
 
-//伤害计算
+//根据玩家数据和装备计算伤害
 async function calculateDamage(){
     let promise = AV.User.current().fetch({include:'equip'}).then(function(res){
         var user = res;
@@ -334,7 +325,7 @@ async function calculateDamage(){
     return await promise;
 }
 
-//handlebars compile
+//handlebars compile battlePanel 一次性的战场信息(城市,战争方,防御方)
 function compileBattle(battlePanel){
     $(document).ready(function() {
         var source = $("#battlePanelData").html();
@@ -343,3 +334,29 @@ function compileBattle(battlePanel){
         $(".battleDataContainer").html(html);
     });
 }
+
+//vue 组件
+var adjacentRankData = new Vue({
+    el: '#adjacentRankData',
+    data: {
+        rankDatas: []
+    }
+});
+var adjacentRankDataDef = new Vue({
+    el: '#adjacentRankDataDef',
+    data: {
+        rankDatas: []
+    }
+});
+var topRankData = new Vue({
+    el: '#topRankData',
+    data: {
+        rankDatas: []
+    }
+});
+var topRankDataDef = new Vue({
+    el: '#topRankDataDef',
+    data: {
+        rankDatas: []
+    }
+});

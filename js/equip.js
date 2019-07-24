@@ -1,5 +1,16 @@
 // 第一个promise user.fetch也要return,不然promise是undefined
 
+//获取用户装备信息并填充
+function fetchAndPopulate(){
+    fetchEquipInfo().then(function(res){
+        populateEquipInfo().then((function(error){
+            alert(JSON.stringify(error));
+        }));
+    }, (function(error){
+        alert(JSON.stringify(error));
+    }));
+}
+
 function fetchEquipInfo(){
     var user = AV.User.current();
     return user.fetch({ include: ['equip'] }).then(function (user) {
@@ -213,17 +224,6 @@ function populateEquipInfo(){
 
     }
 }
-
-function fetchAndPopulate(){
-    fetchEquipInfo().then(function(res){
-        populateEquipInfo().then((function(error){
-            alert(JSON.stringify(error));
-        }));
-    }, (function(error){
-        alert(JSON.stringify(error));
-    }));
-}
-
 $(function(){
     $("#helmetUp").on("click", function(){
         upgradeEquip("helmet");
@@ -258,6 +258,7 @@ $(function(){
     });
 });
 
+//点击装备升级时触发
 function upgradeEquip(equip){
     var Equip = equip;
     fetchEquipInfo().then(function(res){
@@ -444,10 +445,12 @@ function upgradeEquip(equip){
     }));
 }
 
+//计算消耗升级道具数量
 function calculateConsumables(level){
     return Math.pow(2,level);
 }
 
+//提示装备升级成功
 function showSuccess(){
     $(".successNotifier").show();
 
@@ -457,6 +460,7 @@ function showSuccess(){
     
 }
 
+//提示装备升级失败
 function showFailure(){
     $(".failureNotifier").show();
 

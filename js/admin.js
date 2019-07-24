@@ -13,8 +13,9 @@ $(function(){
     });
 });
 
+//重置城池所属国家,战争状态
 function resetAll(){
-    //重置城池所属国家,战争状态
+
     resetWei();
     resetShu();
     resetWu();
@@ -80,6 +81,7 @@ function resetWu(){
     });
 }
 
+//已弃用,更新city的recentDamage数组
 function resetRecentDamage(){
     var query = new AV.Query('city');
     query.find().then(function (cities) {
@@ -99,6 +101,8 @@ function resetRecentDamage(){
     });
 
 }
+
+//重置相邻城市network
 function resetAdjacent(){
     var query = new AV.Query('city');
     query.ascending("cityId");
@@ -1277,6 +1281,7 @@ function setMap(dest,destCity,src,srcCity){
     return map;
 }
 
+//重置资源
 function resetResource(){
     var query = new AV.Query('city');
     query.include(['owner']);

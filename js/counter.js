@@ -1,6 +1,6 @@
 // 活动倒计时，东汉年历，当前时间显示
 
-// 活动倒计时
+// 活动倒计时, date=倒计时截至时间
 function counter(date){
 // Set the date we're counting down to
 var countDownDate = new Date(date).getTime();

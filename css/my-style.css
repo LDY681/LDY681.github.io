@@ -179,3 +179,14 @@ img[usemap] {
     transition: transform .2s ease-in;
     transition: transform .2s ease-in, -webkit-transform .2s ease-in; }
 
+/*leaderboard更新数据transition*/
+.update-enter-active {
+    transition: all .5s ease-in;
+}
+.update-enter, .update-leave-to {
+    opacity: .5;
+    background-color: red;
+    color: white;
+    font-weight: 800;
+    font-size: 24px;
+}

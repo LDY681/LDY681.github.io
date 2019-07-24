@@ -5,11 +5,13 @@ $(function(){
     });
 });
 
+//跳转到战场链接
 function toBattle(){
     var id = getUrlParam('id','Empty');
     window.location.href = "../html/battle.html?id=" + id;
 }
 
+//获取城池信息并填充
 function evalCity(){
     var query = new AV.Query('city');
     var cityId = getUrlParam('id','1');
@@ -125,6 +127,7 @@ function compile(adjacentPanel){
     });
 }
 
+//通过cityId生成city href
 function cityToHref(cityId){
     var cityhtml = "../html/city.html?id=";
     var href = cityhtml + cityId;

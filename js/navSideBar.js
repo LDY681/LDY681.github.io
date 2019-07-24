@@ -23,15 +23,18 @@ function displayRightOnLarge(){
         profile2.css("display", "inline-block");
     }
 }
+
 //点击导航栏右侧头像
 function showProfile(){
     document.getElementById("profile").style.display = "block";
 }
+
 //点击手机验证
 function showPhoneModal(){
     document.getElementById("verifyPhoneModal").style.display = "block";
 }
 
+//显示加入国家modal
 function showCountryModal(){
     document.getElementById("CountryModal").style.display = "block";
 
@@ -68,8 +71,7 @@ function compileCountryPanel(countryPanel){
     });
 }
 
-
-//点击发送验证码
+//点击发送短信验证码
 function sendVerification(){
     let phoneNumber = $("#phoneNumber");
     // console.log(phoneNumber.val());
@@ -89,7 +91,7 @@ function sendVerification(){
     });
 }
 
-//点击提交验证码
+//点击提交短信验证码
 function submitPhone(){
     let smsCode = $("#smsCode").val();
     let phoneNumber = $("#phoneNumber").val();
@@ -165,6 +167,7 @@ function setAvatar(){
     }
 }
 
+//折叠侧边栏
 function w3_open() {
     var smallScreen = window.matchMedia("(max-width: 600px)");
     // 如果屏幕小于600px,sideBar全覆盖
@@ -200,6 +203,7 @@ function w3_open() {
     });
 }
 
+//展开侧边栏
 function w3_close() {
     var smallScreen = window.matchMedia("(max-width: 600px)");
     // 如果屏幕小于600px,sideBar全覆盖
@@ -224,6 +228,7 @@ function w3_close() {
     }
 }
 
+//填充profile数据
 function setProfileData(){
     var navSideBar = {
         userData: []
@@ -273,8 +278,8 @@ function countrySelected(event) {
     document.getElementById("countrySubmit").classList.add("w3-green");
 }
 
+//选择国家
 function setupCountry(){
-    //设置国家
         console.log("开始设置国家");
         var country;
         var countryId = parseInt($("#country").val());

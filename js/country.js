@@ -6,10 +6,7 @@ $(function(){
     });
 });
 
-// 点击进攻 任何时间
-// 如果魏国玩家点击进攻某城市
-// 如果warpending为0,如果city Owner不为魏国
-// warpending设置为1
+// 宣战,下个整点55分钟开战
 function declareWar(){
     var select = document.getElementById("country");
     var invader = select.options[select.selectedIndex].value;

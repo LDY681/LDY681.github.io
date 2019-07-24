@@ -1,5 +1,6 @@
 // user登录，注册，登出，当前用户check，由login.html和templateXXX.html调用
 
+//user注册,登录,登出,是否currentUser
 $(function() {
     $(".loginForm").on('submit', function(e) {
         e.preventDefault();
@@ -78,10 +79,11 @@ function isCurrentUser () {
     return false;
 }
 
+//通用方法
 //获取url parameter,如果parameter不存在,则varaible的默认值等于 defaultvalue
-// 用法 var mytext = getUrlParam('text','Empty');
-function getUrlParam(parameter, defaultvalue){
-    var urlparameter = defaultvalue;
+// 用法 var mycity = getUrlParam('cityId','1');
+function getUrlParam(parameter, defaultValue){
+    var urlparameter = defaultValue;
     if(window.location.href.indexOf(parameter) > -1){
         urlparameter = getUrlVars()[parameter];
     }
@@ -96,11 +98,13 @@ function getUrlVars() {
     return vars;
 }
 
+//round value precision
 function round(value, precision) {
     var multiplier = Math.pow(10, precision || 0);
     return Math.round(value * multiplier) / multiplier;
 }
 
+//根绝min max区间随机取值
 function getRandomArbitrary(min, max){
     var random = Math.random() * (max - min) + min;
     return round(random,2);

@@ -9,7 +9,7 @@ $(function(){
     });
 });
 
-//工作
+//工作后按情况更新用户数据
 function work(){
     console.log("要work了,看下效果");
     var query = new AV.Query('_User');
@@ -65,6 +65,7 @@ function work(){
     });
 }
 
+//训练后按情况更新用户数据
 function train(){
     console.log("要train了,看下效果");
     var query = new AV.Query('_User');
@@ -120,6 +121,7 @@ function train(){
     });
 }
 
+//评估工作状态,决定是否可以工作
 function evalWork(){
     var user = AV.Object.createWithoutData('_User', AV.User.current().id);
     user.fetch().then(function(userData){
@@ -156,7 +158,7 @@ function evalWork(){
     });
 }
 
-
+//评估训练状态,决定是否可以训练
 function evalTrain(){
     var user = AV.Object.createWithoutData('_User', AV.User.current().id);
     user.fetch().then(function(userData){
