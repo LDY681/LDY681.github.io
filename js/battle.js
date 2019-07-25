@@ -150,7 +150,7 @@ function autoUpdate(){
 
     setInterval(function(){
         updateLeaderBoard();
-    },300000);
+    },15000);
 
 }
 

@@ -57,20 +57,9 @@
 
 <!--      伤害动态-->
     <div class="w3-col w3-container">
+<!--      进攻方伤害排行-->
       <div id="invaderRank" class="w3-half">
         <h3>进攻方伤害排行</h3>
-<!--          <table id="topRankData" class="w3-table-all w3-card-4" style="width: 50%; margin: auto">
-            <tr>
-              <th>排名</th>
-              <th>伤害</th>
-            </tr>
-            <tr v-for="rankData in rankDatas">
-              <td>第{{ rankData.rank }}名</td>
-              <td>{{ rankData.damage }}</td>
-            </tr>
-          </table>-->
-
-<!--TODO 测试一下这个排行榜有没有问题,配额用光了,明天再测-->
         <div id="topRankData">
           <table class="w3-table-all w3-card-4" style="width: 50%; margin: auto">
             <thead><tr><th>排名</th><th>伤害</th></tr></thead>
@@ -82,47 +71,48 @@
             </tbody>
           </table>
         </div>
-
-      </div>
+    </div>
       <div id="defenderRank" class="w3-half">
         <h3>防守方伤害排行</h3>
-          <table id="topRankDataDef" class="w3-table-all w3-card-4" style="width: 50%; margin: auto">
-            <tr>
-              <th>排名</th>
-              <th>伤害</th>
-            </tr>
+      <div id="topRankDataDef">
+          <table class="w3-table-all w3-card-4" style="width: 50%; margin: auto">
+            <thead><tr><th>排名</th><th>伤害</th></tr></thead>
+            <tbody>
             <tr v-for="rankData in rankDatas">
-              <td>第{{ rankData.rank }}名</td>
-              <td>{{ rankData.damage }}</td>
+              <td><transition name="update"><span :key="rankData.rank">{{rankData.rank}}</span></transition></td>
+              <td><transition name="update"><span :key="rankData.damage">{{rankData.damage}}</span></transition></td>
             </tr>
+            </tbody>
           </table>
-      </div>
+        </div>
     </div>
+    </div>
+
 <!-- 攻击框-->
   <div class="w3-col w3-container">
     <div class="sideInfo w3-third w3-center" >
       <div class="country__card">
         <img id="invaderFigure" src="" alt="进攻方形象" style="width:80%; height:60vh;" onclick="dealDamageInvaderSide();">
       </div>
-    </div>
+    </div><!--    end of 进攻方形象-->
 
     <div class="w3-third w3-center">
-
       <div class="w3-half">
-
         <p style="margin-top: 50px;font-weight: bold">我的伤害</p>
         <p id="myInvaderDmg"></p>
         <p style="font-weight: bold">我的排名</p>
-          <table id="adjacentRankData" class="w3-table-all w3-card-4" style="width: 80%; margin: 0px auto">
-            <tr>
-              <th>排名</th>
-              <th>伤害</th>
-            </tr>
+
+        <div id="adjacentRankData">
+          <table class="w3-table-all w3-card-4" style="width: 80%; margin: 0px auto">
+            <thead><tr><th>排名</th><th>伤害</th></tr></thead>
+            <tbody>
             <tr v-for="rankData in rankDatas">
-              <td>第{{ rankData.rank }}名</td>
-              <td>{{ rankData.damage }}</td>
+              <td><transition name="update"><span :key="rankData.rank">{{rankData.rank}}</span></transition></td>
+              <td><transition name="update"><span :key="rankData.damage">{{rankData.damage}}</span></transition></td>
             </tr>
+            </tbody>
           </table>
+        </div>
       </div>
 
       <div class="w3-half">
@@ -130,27 +120,27 @@
         <p id="myDefenderDmg"></p>
         <p style="font-weight: bold">我的排名</p>
 
+
+        <!--TODO 测试一下这个排行榜有没有问题,配额用光了,明天再测-->
         <div id="adjacentRankDataDef">
           <table class="w3-table-all w3-card-4" style="width: 80%; margin: 0px auto">
-            <tr>
-              <th>排名</th>
-              <th>伤害</th>
-            </tr>
+            <thead><tr><th>排名</th><th>伤害</th></tr></thead>
+            <tbody>
             <tr v-for="rankData in rankDatas">
-              <td>第{{rankData.rank}}名</td>
-              <td>{{rankData.damage}}</td>
+              <td><transition name="update"><span :key="rankData.rank">{{rankData.rank}}</span></transition></td>
+              <td><transition name="update"><span :key="rankData.damage">{{rankData.damage}}</span></transition></td>
             </tr>
+            </tbody>
           </table>
         </div>
       </div>
-    </div>
-
+    </div><!--    end of 我的排行-->
 
     <div class="sideInfo w3-third w3-center" >
       <div class="country__card">
         <img id="defenderFigure" src="" alt="防守方形象" style="width:80%; height:60vh;" onclick="dealDamageDefenderSide();">
       </div>
-    </div>
+    </div><!--    end of 防守方排行-->
   </div>
   </div><!--end of 右侧定制内容-->
 
