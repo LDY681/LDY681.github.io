@@ -75,7 +75,9 @@ function populateEquipInfo(){
     $("#equipUpAmount").html(JSON.parse(equip).equipUp);
     $("#horseUpAmount").html(JSON.parse(equip).horseUp);
     $("#weaponUpAmount").html(JSON.parse(equip).weaponUp);
-
+    var equipUp = JSON.parse(equip).equipUp;
+    var horseUp = JSON.parse(equip).horseUp;
+    var weaponUp = JSON.parse(equip).weaponUp;
     //判断哪些装备是可以升级的
     var table = document.getElementById("eqTable");
     for (var i = 0, row; row = table.rows[i]; i++) {
@@ -95,6 +97,8 @@ function populateEquipInfo(){
                 var armor = $("#armorUp");
                 var shoes = $("#shoesUp");
                 var offhand = $("#offhandUp");
+                console.log("equipUp");
+                console.log(equipUp);
                 if (equipUp >= Consumables){    //如果道具数量大于等于预计消耗数量
                     switch (i){
                         case 1:

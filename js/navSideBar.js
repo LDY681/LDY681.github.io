@@ -148,10 +148,14 @@ function setAvatar(){
         avatar.set("image", avFile);
         avatar.save().then(function(avatarObj){
             //获取user对象，并更新avatar pointer
+            console.log("avatarObj"+ JSON.stringify(avatarObj));
+            var avatarUrl = avatarObj.get("image").get("url");
             var query = new AV.Query('_User');
             query.get(AV.User.current().id).then(function (user) {
                 user.set("avatar", avatar);
                 user.save();
+                localStorage.setItem('avatarUrl', JSON.stringify({
+                    avatarUrl}));
             });
             $("#avatarNotifier").show();
             setTimeout(function () {
