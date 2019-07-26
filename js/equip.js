@@ -11,6 +11,7 @@ function fetchAndPopulate(){
     }));
 }
 
+//将装备信息储存到本地存储
 function fetchEquipInfo(){
     var user = AV.User.current();
     return user.fetch({ include: ['equip'] }).then(function (user) {
@@ -25,6 +26,9 @@ function fetchEquipInfo(){
         var sword = equip.get('sword');
         var spear = equip.get('spear');
         var bow = equip.get('bow');
+        var equipUp = user.get("equipUp");
+        var horseUp = user.get("horseUp");
+        var weaponUp = user.get("weaponUp");
 
         localStorage.setItem('equip', JSON.stringify({
             helmet,
@@ -36,7 +40,10 @@ function fetchEquipInfo(){
             shield,
             sword,
             spear,
-            bow
+            bow,
+            equipUp,
+            horseUp,
+            weaponUp
         }));
         //使用方法
         // var user = JSON.parse(localStorage.getItem('user'));
@@ -51,8 +58,9 @@ function fetchEquipInfo(){
     });
 }
 
+//从localstorage获得装备信息
 function populateEquipInfo(){
-    //从localstorage获得装备信息
+
     var equip = localStorage.getItem("equip");
     $("#helmet").html(JSON.parse(equip).helmet);
     $("#armor").html(JSON.parse(equip).armor);
@@ -64,15 +72,10 @@ function populateEquipInfo(){
     $("#sword").html(JSON.parse(equip).sword);
     $("#spear").html(JSON.parse(equip).spear);
     $("#bow").html(JSON.parse(equip).bow);
+    $("#equipUpAmount").html(JSON.parse(equip).equipUp);
+    $("#horseUpAmount").html(JSON.parse(equip).horseUp);
+    $("#weaponUpAmount").html(JSON.parse(equip).weaponUp);
 
-    //获取升级道具信息
-    var currUser = AV.User.current();
-    var equipUp = currUser.get("equipUp");
-    var horseUp = currUser.get("horseUp");
-    var weaponUp = currUser.get("weaponUp");
-    $("#equipUpAmount").html(equipUp);
-    $("#horseUpAmount").html(horseUp);
-    $("#weaponUpAmount").html(weaponUp);
     //判断哪些装备是可以升级的
     var table = document.getElementById("eqTable");
     for (var i = 0, row; row = table.rows[i]; i++) {
@@ -224,6 +227,7 @@ function populateEquipInfo(){
 
     }
 }
+
 $(function(){
     $("#helmetUp").on("click", function(){
         upgradeEquip("helmet");
@@ -261,9 +265,7 @@ $(function(){
 //点击装备升级时触发
 function upgradeEquip(equip){
     var Equip = equip;
-    fetchEquipInfo().then(function(res){
         var localEQ = localStorage.getItem("equip");
-
         //获取等级
         var level = 0;
         switch (Equip) {
@@ -305,8 +307,7 @@ function upgradeEquip(equip){
         var random = Math.random();
         var consumables = calculateConsumables(level);
         var user = AV.User.current();
-        user.fetch({ include: ['equip'] });
-
+        user.fetch({ include: ['equip']});
         if (random <= chance){   //升级成功
             //判断升级的装备
             switch (Equip){
@@ -321,10 +322,7 @@ function upgradeEquip(equip){
                     }
                     user.increment('equipUp', -consumables);
                     user.get('equip').increment(Equip, 1);
-                    user.save(null, {
-                        query: new AV.Query('_User').greaterThanOrEqualTo('equipUp', consumables),
-                        fetchWhenSave: true,
-                    }).then(function(res){
+                    user.save().then(function(res){
                         fetchAndPopulate();
                         showSuccess();
                     }, (function(error){
@@ -340,10 +338,7 @@ function upgradeEquip(equip){
                     }
                     user.increment('horseUp', -consumables);
                     user.get('equip').increment(Equip, 1);
-                    user.save(null, {
-                        query: new AV.Query('_User').greaterThanOrEqualTo('horseUp', consumables),
-                        fetchWhenSave: true,
-                    }).then(function(res){
+                    user.save().then(function(res){
                         fetchAndPopulate();
                         showSuccess();
                     }, (function(error){
@@ -361,10 +356,7 @@ function upgradeEquip(equip){
                     }
                     user.increment('weaponUp', -consumables);
                     user.get('equip').increment(Equip, 1);
-                    user.save(null, {
-                        query: new AV.Query('_User').greaterThanOrEqualTo('weaponUp', consumables),
-                        fetchWhenSave: true,
-                    }).then(function(res){
+                    user.save().then(function(res){
                         fetchAndPopulate();
                         showSuccess();
                     }, (function(error){
@@ -388,10 +380,7 @@ function upgradeEquip(equip){
                         break;
                     }
                     user.increment('equipUp', -consumables);
-                    user.save(null, {
-                        query: new AV.Query('_User').greaterThanOrEqualTo('equipUp', consumables),
-                        fetchWhenSave: true,
-                    }).then(function(res){
+                    user.save().then(function(res){
                         fetchAndPopulate();
                         showFailure();
                     }, (function(error){
@@ -406,10 +395,7 @@ function upgradeEquip(equip){
                         break;
                     }
                     user.increment('horseUp', -consumables);
-                    user.save(null, {
-                        query: new AV.Query('_User').greaterThanOrEqualTo('horseUp', consumables),
-                        fetchWhenSave: true,
-                    }).then(function(res){
+                    user.save().then(function(res){
                         fetchAndPopulate();
                         showFailure();
                     }, (function(error){
@@ -426,10 +412,7 @@ function upgradeEquip(equip){
                         break;
                     }
                     user.increment('weaponUp', -consumables);
-                    user.save(null, {
-                        query: new AV.Query('_User').greaterThanOrEqualTo('weaponUp', consumables),
-                        fetchWhenSave: true,
-                    }).then(function(res){
+                    user.save().then(function(res){
                         fetchAndPopulate();
                         showFailure();
                     }, (function(error){
@@ -440,9 +423,6 @@ function upgradeEquip(equip){
                     break;
             }
         }
-    }, (function(error){
-        alert(JSON.stringify(error));
-    }));
 }
 
 //计算消耗升级道具数量

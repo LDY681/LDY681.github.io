@@ -63,8 +63,7 @@
        console.log("navSideBar加载完毕");
 
       $.getScript("../js/navSideBar.js", function(){
-          console.log("navSideBar.js读取完毕,开始执行setProfileData&displayRightOnLarge");
-          setProfileData();
+          console.log("navSideBar.js读取完毕,开始执行displayRightOnLarge");
           displayRightOnLarge();
 
           $("#userMenu").load("userMenu.html", function(){

@@ -41,10 +41,14 @@ function signUp() {
         userData.set('equip', equip);
         equip.set('owner',userData);
         equip.save().then(function(){
-            fetchEquipInfo().then(function(res){
-                console.log(res);
-                window.location.href = "../html/index.html";
-            }, (function(error){alert(JSON.stringify(error));}));
+            saveAvatarUrl().then(function(){
+                fetchEquipInfo().then(function(res){
+                    console.log("跳转到主页");
+                    window.location.href = "../html/index.html";
+                }, (function(error){alert(JSON.stringify(error));}));
+            }, function (error) {
+                alert(JSON.stringify(error));
+            });
         }, (function(error){alert(JSON.stringify(error));}));
     }, (function (error) {
         alert(JSON.stringify(error));
@@ -57,11 +61,20 @@ function logIn() {
     var password = $('#loginPassword').val();
 
     AV.User.logIn(username, password).then(function (loginedUser) {
-        console.log("登录信息:");
+        console.log("登录成功:");
         console.log(loginedUser);
-        fetchEquipInfo().then(function(res){
-            window.location.href = "../html/index.html";
-        }, (function(error){alert(JSON.stringify(error));}));
+        saveAvatarUrl().then(function(){
+            console.log("avatar设置完毕");
+            fetchEquipInfo().then(function(res){
+                console.log("跳转到主页");
+                window.location.href = "../html/index.html";
+            }, (function(error){
+                console.log(error);
+                alert(JSON.stringify(error));
+            }));
+        }, function (error) {
+            alert(JSON.stringify(error));
+        });
     }, function (error) {
         alert(JSON.stringify(error));
     });
@@ -77,6 +90,34 @@ function isCurrentUser () {
         return true;
     }
     return false;
+}
+
+function saveAvatarUrl(){
+    var query = new AV.Query('_User');
+    query.include('avatar');
+    return query.get(AV.User.current().id).then (function (userData){
+        var avatar = userData.get("avatar");
+        var avatarUrl;
+        if (avatar != null){
+            // console.log("有avatar");
+            avatarUrl = avatar.get("image").get("url");
+        }else{
+            // console.log("没有avatar");
+            avatarUrl = "http://lc-q48bubuw.cn-e1.lcfile.com/18b3144a7e4a7e11b264.png";
+        }
+
+        localStorage.setItem('avatarUrl', JSON.stringify({
+            avatarUrl
+        }));
+
+        return new Promise(function(resolve, reject) {
+            if (JSON.parse(localStorage.getItem('avatarUrl')) === undefined){
+                reject(new Error("avatarUrl didn't set successfully"));
+            }else{
+                resolve();
+            }
+        });
+    });
 }
 
 //通用方法

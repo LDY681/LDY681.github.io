@@ -12,8 +12,7 @@ $(function(){
 //工作后按情况更新用户数据
 function work(){
     console.log("要work了,看下效果");
-    var query = new AV.Query('_User');
-    query.get(AV.User.current().id).then (function (userData){
+    var userData = AV.User.current();
         if (userData.attributes.workCount !== 4){  //如果当日工作次数未满
             if (userData.attributes.canWork === true){ //如果没有工作冷却
                 // 设置canwork,workcount
@@ -42,10 +41,8 @@ function work(){
                 userData.increment('ecoSkill', ecoIncrement);
                 userData.increment('exp', expIncrement);
 
-                // 保存的时候先fetch以下
-                userData.fetchWhenSave(true);
+                // 保存
                 return userData.save().then(function(){
-                    AV.User.current().fetch();
                     $(".successNotifier").show();
                     evalWork();
                     setTimeout(function () {
@@ -58,18 +55,12 @@ function work(){
         }else{
             alert("棒棒哒!您今天工作已满4次,请明日再来!");
         }
-    }).then(function(){
-        console.log("工作状态保存成功!");
-    },function(){
-        alert("网络异常或您在多台机器同时点击!");
-    });
 }
 
 //训练后按情况更新用户数据
 function train(){
     console.log("要train了,看下效果");
-    var query = new AV.Query('_User');
-    query.get(AV.User.current().id).then (function (userData){
+    var userData = AV.User.current();
         if (userData.attributes.trainCount !== 4){
             if (userData.attributes.canTrain === true){
                 // 设置canTrain,traincount
@@ -99,9 +90,7 @@ function train(){
                 userData.increment('exp', expIncrement);
 
                 // 保存的时候先fetch以下
-                userData.fetchWhenSave(true);
                 return userData.save().then(function(){
-                    AV.User.current().fetch();
                     $(".successNotifier").show();
                     evalTrain();
                     setTimeout(function () {
@@ -114,16 +103,11 @@ function train(){
         }else{
             alert("棒棒哒!您今天训练已满4次,请明日再来!");
         }
-    }).then(function(){
-        console.log("训练状态保存成功!");
-    },function(){
-        alert("网络异常或您在多台机器同时点击!");
-    });
 }
 
 //评估工作状态,决定是否可以工作
 function evalWork(){
-    var user = AV.Object.createWithoutData('_User', AV.User.current().id);
+    var user = AV.User.current();
     user.fetch().then(function(userData){
         var workCount = userData.get("workCount");
         var canWork = userData.get("canWork");
@@ -160,7 +144,7 @@ function evalWork(){
 
 //评估训练状态,决定是否可以训练
 function evalTrain(){
-    var user = AV.Object.createWithoutData('_User', AV.User.current().id);
+    var user = AV.User.current();
     user.fetch().then(function(userData){
         var trainCount = userData.get("trainCount");
         var canTrain = userData.get("canTrain");

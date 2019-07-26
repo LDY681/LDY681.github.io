@@ -13,7 +13,7 @@ function setupUserData(){
         var level = userData.get("level");
         var exp = userData.get("exp");
         var rank = userData.get("rank");
-        var dmg = userData.get("dmg");
+        var dmg = userData.get("totalDmg");
         var str = userData.get("str");
         var avatar = userData.get("avatar");
         var avatarUrl;

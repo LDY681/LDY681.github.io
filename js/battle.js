@@ -137,7 +137,7 @@ function updateDamage(side, damage){
     }).catch(console.error);
 }
 
-//每5分钟刷新一次排行榜,每15秒刷新一次伤害
+//每1分钟刷新一次排行榜,每15秒刷新一次伤害
 function autoUpdate(){
     //刷新排行榜
     updateLeaderBoard();
@@ -150,7 +150,7 @@ function autoUpdate(){
 
     setInterval(function(){
         updateLeaderBoard();
-    },15000);
+    },60000);
 
 }
 

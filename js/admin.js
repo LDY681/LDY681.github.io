@@ -15,7 +15,6 @@ $(function(){
 
 //重置城池所属国家,战争状态
 function resetAll(){
-
     resetWei();
     resetShu();
     resetWu();
@@ -1347,3 +1346,34 @@ function randomBonus(){
     var random = (Math.random())*5;
     return round(random, 1);
 }
+
+
+/*假如我有一个伤害排行榜，默认值为0。
+我需要判断,如果表里没有该用户,新建一条包含伤害的数据。
+如果表里有该用户,更新伤害。
+那是不是这样
+var playerObj = AV.User.current();
+var query = new AV.query("leaderBoard");
+query.equalTo("user",playObj);  //假设表里的user是pointer
+query.find().then((playerData) => {
+    //获取到了那就更新
+    playerData.increment("damage", 100);
+    playerData.save();
+}, (error) => {
+    //没获取到就新建
+    var playerData = new AV.Object.extend("leaderBoard");
+    playerData.set("damage", 100);
+    playerData.set("user", playerObj);
+    playerData.save().then(() => {
+    });
+});
+
+另外有没有更好的解决办法?我听说如果set主键的话,就可以同时达到存在就获取,不存在就新建,不知道是不是真的
+比如这样
+var query = new AV.Query('leaderBoard');
+query.set('id', 'objectId')
+query.increment('damage',100)
+query.save();*/
+
+
+

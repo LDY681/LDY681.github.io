@@ -27,6 +27,7 @@ function displayRightOnLarge(){
 //点击导航栏右侧头像
 function showProfile(){
     document.getElementById("profile").style.display = "block";
+    setProfileData();
 }
 
 //点击手机验证
@@ -36,13 +37,14 @@ function showPhoneModal(){
 
 //显示加入国家modal
 function showCountryModal(){
+    console.log("showCountryModal触发");
     document.getElementById("CountryModal").style.display = "block";
 
     var countryPanel = {
         countryData: []
     };
 
-    var query = new AV.Query('country');
+   var query = new AV.Query('country');
     query.ascending('countryId');
     query.find().then (function (countries){
         var countryProcessed = 0;
@@ -134,8 +136,6 @@ function setAvatar(){
     if (file.size > 524288){
         alert("请选择小于500KB的头像");
     }else{
-        // console.log("通过文件大小检测");
-        //TODO 检测之前是否已经有avatar
         var name = file.name;
         var avFile = new AV.File(name, file);
 
@@ -147,13 +147,9 @@ function setAvatar(){
         avatar.set("owner", AV.User.current());
         avatar.set("image", avFile);
         avatar.save().then(function(avatarObj){
-            // console.log("avatar上传成功,返回值:");
-            // console.log(avatarObj);
             //获取user对象，并更新avatar pointer
             var query = new AV.Query('_User');
             query.get(AV.User.current().id).then(function (user) {
-                // console.log("get到了,值为:");
-                // console.log(user);
                 user.set("avatar", avatar);
                 user.save();
             });
@@ -190,17 +186,15 @@ function w3_open() {
         document.getElementById("topNav").style.marginLeft = "0";
     }
 
-    let current = AV.User.current();
-    current.fetch().then(function(user){
-        var mobileStatus = user.get('mobilePhoneVerified');
-        var country = user.get('country');
-        if (mobileStatus === false){
-            $("#phoneAlert").css("display","block");
-        }
-        if (country === undefined){
-            $("#countryAlert").css("display","block");
-        }
-    });
+    let user = AV.User.current();
+    var mobileStatus = user.get('mobilePhoneVerified');
+    var country = user.get('country');
+    if (mobileStatus === false){
+        $("#phoneAlert").css("display","block");
+    }
+    if (country === undefined){
+        $("#countryAlert").css("display","block");
+    }
 }
 
 //展开侧边栏
@@ -230,6 +224,7 @@ function w3_close() {
 
 //填充profile数据
 function setProfileData(){
+    console.log("setProfileData开始");
     var navSideBar = {
         userData: []
     };

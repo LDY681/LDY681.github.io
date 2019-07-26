@@ -62,8 +62,19 @@ function evalCity(){
         citywheat.html(wheat);
         citywood.html(wood);
         //end of 城池信息框
+    }, function(err){
+        console.log(err);
+    });
+}
 
-        //修改相邻城池
+function evalAdjacent(adjacentCityPanel){
+    //修改相邻城池
+    var query = new AV.Query('city');
+    var cityId = getUrlParam('id','1');
+    query.equalTo("cityId", parseInt(cityId, 10));
+    query.include(['owner']);
+    query.find().then(function(cities) {
+        var city = cities[0];
         // 构建 map 的查询
         var query = new AV.Query('map');
         // 查询所有src是city的数据
@@ -75,7 +86,7 @@ function evalCity(){
             var cityProcessed = 0;
             maps.forEach(function (mapRow, i, a) {
                 var destObj = mapRow.get('dest');
-                destObj.fetch({ include: ['owner'] }).then(function (destObj) {
+                destObj.fetch({include: ['owner']}).then(function (destObj) {
                     var destCityName = destObj.get('name');
                     var destIsAtWar = destObj.get("isAtWar");
                     var destIron = destObj.get("iron");
@@ -85,12 +96,12 @@ function evalCity(){
                     var destWood = destObj.get("wood");
                     var destOwner = destObj.get("owner").get("cname");
                     var destUrl = cityToHref(destCityId);
-                    console.log("adjacent city: " +destCityName +" "+ destIsAtWar +" "+ destIron+" "+ destWheat+" " + destRice +" "+ destWood+" "+destOwner);
+                    console.log("adjacent city: " + destCityName + " " + destIsAtWar + " " + destIron + " " + destWheat + " " + destRice + " " + destWood + " " + destOwner);
                     // handlebars adjacentPanel
 
-                    if (destIsAtWar === false){
+                    if (destIsAtWar === false) {
                         destIsAtWar = "风平浪静💖";
-                    }else{
+                    } else {
                         destIsAtWar = "交战中🔥";
                     }
                     adjacentPanel.cityData.push({
@@ -105,18 +116,15 @@ function evalCity(){
                         destUrl
                     });
                     cityProcessed++;
-                    if (cityProcessed === maps.length){
-                        compile(adjacentPanel);
+                    if (cityProcessed === maps.length) {
+                        compile(adjacentPanel,adjacentCityPanel);
                     }
-                 });     //end of  destCity.fetch
+                });     //end of  destCity.fetch
             });     //end of destCities.forEach
         });//end of 修改相邻城池
-    }, function(err){
-        console.log(err);
     });
 }
-
-function compile(adjacentPanel){
+function compile(adjacentPanel,adjacentCityPanel){
     $(document).ready(function() {
         console.log("handlebars编译完成");
         var source = $("#adjacentPanelData").html();
@@ -124,6 +132,12 @@ function compile(adjacentPanel){
         var html = template(adjacentPanel);
         $(".adjacentDataContainer").html(html);
         console.log("handlebars编译完成");
+        var x = document.getElementById(adjacentCityPanel);
+        if (x.className.indexOf("w3-hide") !== -1) {
+            x.className = x.className.replace("w3-hide", "w3-show");
+        }
+        var y = $(window).scrollTop();
+        $('html, body').animate({ scrollTop: y + 1000 })
     });
 }
 
