@@ -553,16 +553,13 @@ function loadSheet() {
     var updateAt = msgArray[0];
     // Find the distance between now and the count down date
     var distance = now - updateAt;
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))+1;
     console.log("距离多少分钟"+ minutes);
-    for (var i = 1; i < msgArray.length && i < minutes + 3; i++) {
-        console.log("i is: "+ i);
+    for (var i = 1; i < msgArray.length && i <= minutes + 1; i++) {
         var row = loadedTable.insertRow(0);
         var cell = row.insertCell(0);
         cell.innerHTML = msgArray[i];
-        console.log("END OF i is: " +i);
     }
-    console.log("每1秒刷新一次loadedTable");
     },1000);
 }
 loadSheet();
