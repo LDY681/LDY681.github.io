@@ -385,7 +385,11 @@ function dealDamageInvaderSide(){
     console.log(warCount);
     var warMessage = [];
     var totalDamage = 0;
-    warMessage.push(new Date().getTime());
+    var coeff = 1000 * 60;
+    var now = new Date().getTime();
+    var updateAt = Math.round( now / coeff) * coeff;
+    console.log(updateAt);
+    warMessage.push(updateAt);
     for (var i = 1; i <= warCount+1; i++){
         var damageInfo = calculateDamage();
         var performance = damageInfo.pop();
@@ -529,9 +533,13 @@ function loadSheet() {
         if (user.get("canWar") === false){
             $(".atWar").show();
             $("#warHistory").hide();
+            $("#refreshBox").show();
+            $("#messageContainer").css("height","30vh");
         }else{
+            $("#refreshBox").hide();
             $(".atWar").hide();
             $("#warHistory").show();
+            $("#messageContainer").css("height","40vh");
         }
     //var loadedData = JSON.parse(localStorage.getItem("tblArrayJson"));
     var loadedTable = document.getElementById("SpreadsheetTable");
@@ -542,13 +550,12 @@ function loadSheet() {
 
     // Get today's date and time
     var now = new Date().getTime();
-    var coeff = 1000 * 60;
-    var updateAt = Math.round(msgArray[0] / coeff) * coeff;
+    var updateAt = msgArray[0];
     // Find the distance between now and the count down date
     var distance = now - updateAt;
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     console.log("距离多少分钟"+ minutes);
-    for (var i = 1; i < msgArray.length && i < minutes + 2; i++) {
+    for (var i = 1; i < msgArray.length && i < minutes + 3; i++) {
         console.log("i is: "+ i);
         var row = loadedTable.insertRow(0);
         var cell = row.insertCell(0);
@@ -558,6 +565,4 @@ function loadSheet() {
     console.log("每1秒刷新一次loadedTable");
     },1000);
 }
-
-
 loadSheet();
