@@ -43,6 +43,7 @@ function work(){
 
                 // 保存
                 return userData.save().then(function(){
+                    $("#taskButtonWork").css("display","none");
                     $(".successNotifier").show();
                     evalWork();
                     setTimeout(function () {
@@ -91,6 +92,7 @@ function train(){
 
                 // 保存的时候先fetch以下
                 return userData.save().then(function(){
+                    $("#taskButtonTrain").css("display","none");
                     $(".successNotifier").show();
                     evalTrain();
                     setTimeout(function () {
@@ -133,7 +135,6 @@ function evalWork(){
             onWork.removeClass("w3-green");
             onWork.addClass("w3-grey");
         }else{
-            $("#taskButtonWork").css("display","inline-block");
             workNotifier.html( "您当前还未工作!" );
             onWork.html( "点我快来工作!" );
             onWork.addClass("w3-green");
@@ -168,7 +169,6 @@ function evalTrain(){
             onTrain.addClass("w3-grey");
             onTrain.removeClass("w3-green");
         }else{
-            $("#taskButtonTrain").css("display","inline-block");
             trainNotifier.html( "您当前还未训练!" );
             onTrain.html( "点我快来训练!" );
             onTrain.addClass("w3-green");

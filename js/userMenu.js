@@ -13,6 +13,26 @@ function setupUserData(){
         var rank = userData.get("rank");
         var dmg = userData.get("totalDmg");
         var str = userData.get("str");
+        var canWar = userData.get("canWar");
+        var canTrain = userData.get("canTrain");
+        var canWork = userData.get("canWork");
+        var taskCompleted = 3;
+        if (canWar === true){
+            $("#taskButtonFight").css("display","inline-block");
+            taskCompleted --;
+        }
+        if (canTrain === true){
+            $("#taskButtonTrain").css("display","inline-block");
+            taskCompleted --;
+        }
+        if (canWork === true){
+            $("#taskButtonWork").css("display","inline-block");
+            taskCompleted --;
+        }
+        if (taskCompleted === 3){
+            $("#taskAllCompleted").css("display","inline-block");
+        }
+        console.log("taskCompleted"+ taskCompleted);
         var avatarUrl = JSON.parse(localStorage.getItem("avatarUrl")).avatarUrl;
         console.log(avatarUrl);
         // handlebars userMenu

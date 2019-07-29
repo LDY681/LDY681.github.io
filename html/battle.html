@@ -34,6 +34,7 @@
       <div style="text-align: center;" class="popUpText"><span id="modifier"></span><span>您造成了</span><span id="damage"></span><span>点伤害</span></div>
     </div>
 
+<!--    战场名称,倒计时,进攻方,防守方-->
     <div class="battleDataContainer">
       <script id="battlePanelData" type="text/x-handlebars-template">
         {{#each battleData}}
@@ -52,16 +53,17 @@
     </div>
       <div class="sideInfo w3-half">
       <p class="w3-red">总伤害: <span id="invaderTotalDmg"></span></p></div>
+
       <div class="sideInfo w3-half">
       <p class="w3-green">总伤害: <span id="defenderTotalDmg"></span></p></div>
 
-<!--      伤害动态-->
+<!-- 排行榜-->
     <div class="w3-col w3-container">
 <!--      进攻方伤害排行-->
       <div id="invaderRank" class="w3-half">
-        <h3>进攻方伤害排行</h3>
-        <div id="topRankData">
-          <table class="w3-table-all w3-card-4" style="width: 50%; margin: auto">
+        <div id="topRankData" class="w3-half">
+          <h3>进攻方伤害排行</h3>
+          <table class="w3-table-all w3-card-4" style="width: 80%; margin: auto">
             <thead><tr><th>排名</th><th>伤害</th></tr></thead>
             <tbody>
             <tr v-for="rankData in rankDatas">
@@ -71,11 +73,9 @@
             </tbody>
           </table>
         </div>
-    </div>
-      <div id="defenderRank" class="w3-half">
-        <h3>防守方伤害排行</h3>
-      <div id="topRankDataDef">
-          <table class="w3-table-all w3-card-4" style="width: 50%; margin: auto">
+        <div id="adjacentRankData" class="w3-half">
+          <h3>预计排名</h3>
+          <table class="w3-table-all w3-card-4" style="width: 80%; margin: 0px auto">
             <thead><tr><th>排名</th><th>伤害</th></tr></thead>
             <tbody>
             <tr v-for="rankData in rankDatas">
@@ -83,68 +83,110 @@
               <td><transition name="update"><span :key="rankData.damage">{{rankData.damage}}</span></transition></td>
             </tr>
             </tbody>
-          </table>
+          </table><br>
+          <h3>预计伤害</h3>
+          <p class="w3-large" id="myInvaderDmg"></p>
         </div>
-    </div>
     </div>
 
-<!-- 攻击框-->
-  <div class="w3-col w3-container">
+      <div id="defenderRank" class="w3-half">
+
+      <div id="topRankDataDef" class="w3-half">
+        <h3>防守方伤害排行</h3>
+          <table class="w3-table-all w3-card-4" style="width: 80%; margin: auto">
+            <thead><tr><th>排名</th><th>伤害</th></tr></thead>
+            <tbody>
+            <tr v-for="rankData in rankDatas">
+              <td><transition name="update"><span :key="rankData.rank">{{rankData.rank}}</span></transition></td>
+              <td><transition name="update"><span :key="rankData.damage">{{rankData.damage}}</span></transition></td>
+            </tr>
+            </tbody>
+          </table>
+      </div>
+
+        <div id="adjacentRankDataDef" class="w3-half">
+          <h3>预计排名</h3>
+          <table class="w3-table-all w3-card-4" style="width: 80%; margin: 0px auto">
+            <thead><tr><th>排名</th><th>伤害</th></tr></thead>
+            <tbody>
+            <tr v-for="rankData in rankDatas">
+              <td><transition name="update"><span :key="rankData.rank">{{rankData.rank}}</span></transition></td>
+              <td><transition name="update"><span :key="rankData.damage">{{rankData.damage}}</span></transition></td>
+            </tr>
+            </tbody>
+          </table><br>
+        <h3>预计伤害</h3>
+        <p class="w3-large" id="myDefenderDmg"></p>
+    </div>
+      </div>
+    </div>
+
+<!-- 攻击形象+预计排名-->
+  <div class="w3-col w3-container" style="margin-top: 50px;">
     <div class="sideInfo w3-third w3-center" >
       <div class="country__card">
-        <img id="invaderFigure" src="" alt="进攻方形象" style="width:80%; height:60vh;" onclick="dealDamageInvaderSide();">
+        <img id="invaderFigure" src="" alt="进攻方形象" style="height: 60vh" onclick="openInvaderModal();">
       </div>
     </div><!--    end of 进攻方形象-->
 
-    <div class="w3-third w3-center">
-      <div class="w3-half">
-        <p style="margin-top: 50px;font-weight: bold">我的伤害</p>
-        <p id="myInvaderDmg"></p>
-        <p style="font-weight: bold">我的排名</p>
 
-        <div id="adjacentRankData">
-          <table class="w3-table-all w3-card-4" style="width: 80%; margin: 0px auto">
-            <thead><tr><th>排名</th><th>伤害</th></tr></thead>
-            <tbody>
-            <tr v-for="rankData in rankDatas">
-              <td><transition name="update"><span :key="rankData.rank">{{rankData.rank}}</span></transition></td>
-              <td><transition name="update"><span :key="rankData.damage">{{rankData.damage}}</span></transition></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
+    <div class="w3-third w3-center w3-panel w3-gray w3-round-large" id="messageBox" style="height: 60vh;position:relative">
+      <h3 class="atWar w3-red" style="display: none;">交战中!</h3>
+      <p>距离下次攻击还有:<span id="refreshCountDown"></span></p>
+      <h3 id="warHistory" style="display: none;">伤害历史</h3>
+      <img class="atWar" src="../img/gear.gif" style="display:none;width: 100px;" alt="战斗中gif">
+      <div id="messageContainer" style="overflow-y: scroll; height: 30vh; position: absolute;bottom: 50px;"><table id="SpreadsheetTable"><tbody id="tableBody"></tbody></table></div>
       </div>
 
-      <div class="w3-half">
-        <p style="margin-top: 50px;font-weight: bold">我的伤害</p>
-        <p id="myDefenderDmg"></p>
-        <p style="font-weight: bold">我的排名</p>
-
-
-        <!--TODO 测试一下这个排行榜有没有问题,配额用光了,明天再测-->
-        <div id="adjacentRankDataDef">
-          <table class="w3-table-all w3-card-4" style="width: 80%; margin: 0px auto">
-            <thead><tr><th>排名</th><th>伤害</th></tr></thead>
-            <tbody>
-            <tr v-for="rankData in rankDatas">
-              <td><transition name="update"><span :key="rankData.rank">{{rankData.rank}}</span></transition></td>
-              <td><transition name="update"><span :key="rankData.damage">{{rankData.damage}}</span></transition></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div><!--    end of 我的排行-->
 
     <div class="sideInfo w3-third w3-center" >
       <div class="country__card">
-        <img id="defenderFigure" src="" alt="防守方形象" style="width:80%; height:60vh;" onclick="dealDamageDefenderSide();">
+        <img id="defenderFigure" src="" alt="防守方形象" style="height: 60vh" onclick="openDefenderModal();">
       </div>
     </div><!--    end of 防守方排行-->
   </div>
-  </div><!--end of 右侧定制内容-->
 
-</div>
+<!--  攻击modal-->
+  <div id="invaderModal" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:800px">
+
+<!--      攻击按钮-->
+      <span onclick="document.getElementById('invaderModal').style.display='none'" style="color:black;"class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">x</span><br>
+        <div class="workntrainButton" style="display: none; margin-top: 50px;margin-bottom: 50px;">
+          <p class="w3-large warNotifier w3-text-red"></p>
+          <img class="alreadyAtWar" src="../img/gear.gif" style="display:none;width: 100px;" alt="战斗中gif">
+          <button class="w3-padding-large w3-round-xxlarge onWar" style="display:none" onclick="dealDamageInvaderSide()"></button>
+        </div>
+
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <button onclick="document.getElementById('invaderModal').style.display='none'" type="button" class="w3-button w3-red w3-left">关闭</button>
+      </div>
+
+      <div></div>
+    </div> <!--end of攻击modal-->
+  </div>
+    <!--  攻击modal-->
+    <div id="defenderModal" class="w3-modal">
+      <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:800px">
+        <!--      防御按钮-->
+        <span onclick="document.getElementById('defenderModal').style.display='none'" style="color:black;"class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">x</span><br>
+        <div class="workntrainButton" style="display: none; margin-top: 50px;margin-bottom: 50px;">
+          <p class="w3-large warNotifier w3-text-red"></p>
+          <img class="alreadyAtWar" src="../img/gear.gif" style="display:none;width: 100px;" alt="战斗中gif">
+          <button class="w3-padding-large w3-round-xxlarge onWar" style="display:none" onclick="dealDamageDefenderSide()"></button>
+        </div>
+        <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+          <button onclick="document.getElementById('defenderModal').style.display='none'" type="button" class="w3-button w3-red w3-left">关闭</button>
+        </div>
+      </div> <!--end of防守modal-->
+    </div>
+
+
+  </div><!--end of 右侧定制内容-->
+</div> <!--end of正文内容-->
+
+
+
 <!--Script加载顺序!!!!!-->
 <!--加载jquery-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
@@ -171,8 +213,7 @@
         console.log("navSideBar加载完毕");
 
         $.getScript("../js/navSideBar.js", function(){
-            console.log("navSideBar.js读取完毕,开始执行setProfileData&displayRightOnLarge");
-            setProfileData();
+            console.log("navSideBar.js读取完毕,开始执行&displayRightOnLarge");
             displayRightOnLarge();
 
             $("#userMenu").load("userMenu.html", function(){
@@ -189,12 +230,23 @@
                     $.getScript("../js/battle.js", function(){
                         evalBattle();
                         battleCountDown();
+                        refreshCountDown();
                         autoUpdate();
                     });
                 });
             });
         });
     });
+
+    function myFunction() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.getElementById("myBar").style.width = scrolled + "%";
+    }
+
+
+
 </script>
 
 

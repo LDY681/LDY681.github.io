@@ -132,6 +132,7 @@ function submitPhone(){
 //设置头像
 //Jquery.onSubmit是给form用的，因为setAvatar是个button,所以应该是button.onClick
 function setAvatar(){
+    console.log("setAvatar开始");
     var file = $('#inputFile')[0].files[0];
     if (file.size > 524288){
         alert("请选择小于500KB的头像");
