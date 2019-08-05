@@ -24,7 +24,7 @@ function evalCity(){
         var isAtWar = city.get("isAtWar");
         var cityName = city.get("name");
         var iron = city.get("iron");
-        var wheat = city.get("wheat");
+        var stone = city.get("stone");
         var rice = city.get("rice");
         var wood = city.get("wood");
         var owner = city.get("owner").get("cname");
@@ -53,13 +53,13 @@ function evalCity(){
         var cityowner = $("#owner");
         var cityiron = $("#iron");
         var cityrice = $("#rice");
-        var citywheat = $("#wheat");
+        var citystone = $("#stone");
         var citywood = $("#wood");
         cityname.html(cityName);
         cityowner.html(owner);
         cityiron.html(iron);
         cityrice.html(rice);
-        citywheat.html(wheat);
+        citystone.html(stone);
         citywood.html(wood);
         //end of 城池信息框
     }, function(err){
@@ -91,12 +91,12 @@ function evalAdjacent(adjacentCityPanel){
                     var destIsAtWar = destObj.get("isAtWar");
                     var destIron = destObj.get("iron");
                     var destCityId = destObj.get("cityId");
-                    var destWheat = destObj.get("wheat");
+                    var destStone = destObj.get("stone");
                     var destRice = destObj.get("rice");
                     var destWood = destObj.get("wood");
                     var destOwner = destObj.get("owner").get("cname");
                     var destUrl = cityToHref(destCityId);
-                    console.log("adjacent city: " + destCityName + " " + destIsAtWar + " " + destIron + " " + destWheat + " " + destRice + " " + destWood + " " + destOwner);
+                    console.log("adjacent city: " + destCityName + " " + destIsAtWar + " " + destIron + " " + destStone + " " + destRice + " " + destWood + " " + destOwner);
                     // handlebars adjacentPanel
 
                     if (destIsAtWar === false) {
@@ -108,7 +108,7 @@ function evalAdjacent(adjacentCityPanel){
                         destCityName,
                         destIsAtWar,
                         destIron,
-                        destWheat,
+                        destStone,
                         destRice,
                         destWood,
                         destOwner,

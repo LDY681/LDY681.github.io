@@ -34,7 +34,7 @@ var x = setInterval(function() {
 
 // 东汉年历,从220年开始计算,120天一年,30天一季度,10天一月
 function countUp(date){
-    console.log("countUp运行中");
+    // console.log("countUp运行中");
 // Set the date we're counting up from
     var countUpDate = new Date(date).getTime();
 
@@ -83,7 +83,7 @@ function countUp(date){
 
 //获取当前北京时间
 function getCurrTime(){
-    console.log("getCurrTime运行中");
+    // console.log("getCurrTime运行中");
 // Update the count down every 1 second
 var x = setInterval(function() {
     // Get today's date and time

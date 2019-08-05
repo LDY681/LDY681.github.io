@@ -45,79 +45,85 @@
             <th>装备</th>
             <th>属性</th>
             <th>等级</th>
-            <th style="text-align: center"><span>道具数量: </span> <span id="equipUpAmount"></span></th>
+            <th style="text-align: center"><span>装备碎片: </span> <span id="equipUpAmount"></span></th>
           </tr>
           <tr>
             <td>头盔</td>
-            <td>增加免体</td>
+            <td>+ 力量</td>
             <td id="helmet"></td>
             <td style="text-align: center"><button id="helmetUp" class="w3-green w3-button w3-small w3-round-large" disabled>道具不足</button></td>
           </tr>
           <tr>
             <td>铠甲</td>
-            <td>增加免体</td>
+            <td>+ 力量</td>
             <td id="armor"></td>
             <td style="text-align: center"><button id="armorUp" class="w3-green w3-button w3-small w3-round-large" disabled>道具不足</button></td>
           </tr>
           <tr>
             <td>军靴</td>
-            <td>增加免体</td>
+            <td>+ 力量</td>
             <td id="shoes"></td>
             <td style="text-align: center"><button id="shoesUp" class="w3-green w3-button w3-small w3-round-large" disabled>道具不足</button></td>
           </tr>
           <tr>
             <td>护手</td>
-            <td>减少失误</td>
+            <td>+ 力量</td>
             <td id="offhand"></td>
             <td style="text-align: center"><button id="offhandUp" class="w3-green w3-button w3-small w3-round-large" disabled>道具不足</button></td>
           </tr>
           <tr>
-            <th>坐骑</th>
-            <th></th>
-            <th></th>
-            <th style="text-align: center"><span>道具数量: </span> <span id="horseUpAmount"></span></th>
-          </tr>
-          <tr>
-            <td>坐骑</td>
-            <td>增加2倍暴击率</td>
-            <td id="horse"></td>
-            <td style="text-align: center"><button id="horseUp" class="w3-green w3-button w3-small w3-round-large" disabled>道具不足</button></td>
-          </tr>
-          <tr>
-            <td>暗器</td>
-            <td>增加5倍暴击率</td>
-            <td id="hidden"></td>
-            <td style="text-align: center"><button id="hiddenUp" class="w3-green w3-button w3-small w3-round-large" disabled>道具不足</button></td>
+            <td>护盾</td>
+            <td>- 失误</td>
+            <td id="shield"></td>
+            <td style="text-align: center"><button id="shieldUp" class="w3-green w3-button w3-small w3-round-large" disabled>道具不足</button></td>
           </tr>
           <tr>
             <th>武器</th>
             <th></th>
             <th></th>
-            <th style="text-align: center"><span>道具数量: </span> <span id="weaponUpAmount"></span></th>
-          </tr>
-          <tr>
-            <td>护盾</td>
-            <td>增加力量</td>
-            <td id="shield"></td>
-            <td style="text-align: center"><button id="shieldUp" class="w3-green w3-button w3-small w3-round-large" disabled>道具不足</button></td>
+            <th style="text-align: center"><span>武器碎片: </span> <span id="weaponUpAmount"></span></th>
           </tr>
           <tr>
             <td>宝剑</td>
-            <td>增加伤害点</td>
+            <td>+ 伤害点</td>
             <td id="sword"></td>
             <td style="text-align: center"><button id="swordUp" class="w3-green w3-button w3-small w3-round-large" disabled>道具不足</button></td>
           </tr>
           <tr>
             <td>长枪</td>
-            <td>增加左右伤害区间</td>
+            <td>+ 左右伤害区间</td>
             <td id="spear"></td>
             <td style="text-align: center"><button id="spearUp" class="w3-green w3-button w3-small w3-round-large" disabled>道具不足</button></td>
           </tr>
           <tr>
             <td>烈弓</td>
-            <td>增加最大伤害上限</td>
+            <td>+ 最大伤害上限</td>
             <td id="bow"></td>
             <td style="text-align: center"><button id="bowUp" class="w3-green w3-button w3-small w3-round-large" disabled>道具不足</button></td>
+          </tr>
+          <tr>
+            <th>坐骑</th>
+            <th></th>
+            <th></th>
+            <th style="text-align: center"></th>
+          </tr>
+          <tr>
+            <td>马盔</td>
+            <td>X 2倍暴击率</td>
+            <td id="horseHelmet"></td>
+            <td style="text-align: center"><span>马盔碎片: </span><span id="horseHelmetUpAmount"></span>&nbsp&nbsp<button id="horseHelmetUp" class="w3-green w3-button w3-small w3-round-large" disabled>道具不足</button></td>
+          </tr>
+          <tr>
+            <td>马鞍</td>
+            <td>X 5倍暴击率</td>
+            <td id="horseSaddle"></td>
+            <td style="text-align: center"><span>马鞍碎片: </span><span id="horseSaddleUpAmount"></span>&nbsp&nbsp<button id="horseSaddleUp" class="w3-green w3-button w3-small w3-round-large" disabled>道具不足</button></td>
+          </tr>
+          <tr>
+            <td>战马</td>
+            <td>X 连击</td>
+            <td id="horse"></td>
+            <td style="text-align: center"><span>战马碎片: </span><span id="horseUpAmount"></span>&nbsp&nbsp<button id="horseUp" class="w3-green w3-button w3-small w3-round-large" disabled>道具不足</button></td>
           </tr>
         </table>
       </div>
@@ -137,7 +143,7 @@
             <td>1</td>
           </tr>
           <tr>
-            <td>力量增加</td>
+            <td>力量+</td>
             <td>0%</td>
           </tr>
           <tr>

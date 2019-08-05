@@ -21,7 +21,8 @@ function fetchEquipInfo(){
         var shoes = equip.get('shoes');
         var offhand = equip.get('offhand');
         var horse = equip.get('horse');
-        var hidden = equip.get('hidden');
+        var horseHelmet = equip.get('horseHelmet');
+        var horseSaddle = equip.get('horseSaddle');
         var shield = equip.get('shield');
         var sword = equip.get('sword');
         var spear = equip.get('spear');
@@ -29,21 +30,25 @@ function fetchEquipInfo(){
         var equipUp = user.get("equipUp");
         var horseUp = user.get("horseUp");
         var weaponUp = user.get("weaponUp");
-
+        var horseSaddleUp = user.get('horseSaddleUp');
+        var horseHelmetUp = user.get('horseHelmetUp');
         localStorage.setItem('equip', JSON.stringify({
             helmet,
             armor,
             shoes,
             offhand,
             horse,
-            hidden,
+            horseHelmet,
+            horseSaddle,
             shield,
             sword,
             spear,
             bow,
             equipUp,
             horseUp,
-            weaponUp
+            weaponUp,
+            horseSaddleUp,
+            horseHelmetUp
         }));
         //使用方法
         // var user = JSON.parse(localStorage.getItem('user'));
@@ -67,13 +72,16 @@ function populateEquipInfo(){
     $("#shoes").html(JSON.parse(equip).shoes);
     $("#offhand").html(JSON.parse(equip).offhand);
     $("#horse").html(JSON.parse(equip).horse);
-    $("#hidden").html(JSON.parse(equip).hidden);
+    $("#horseSaddle").html(JSON.parse(equip).horseSaddle);
+    $("#horseHelmet").html(JSON.parse(equip).horseHelmet);
     $("#shield").html(JSON.parse(equip).shield);
     $("#sword").html(JSON.parse(equip).sword);
     $("#spear").html(JSON.parse(equip).spear);
     $("#bow").html(JSON.parse(equip).bow);
     $("#equipUpAmount").html(JSON.parse(equip).equipUp);
     $("#horseUpAmount").html(JSON.parse(equip).horseUp);
+    $("#horseHelmetUpAmount").html(JSON.parse(equip).horseHelmetUp);
+    $("#horseSaddleUpAmount").html(JSON.parse(equip).horseSaddleUp);
     $("#weaponUpAmount").html(JSON.parse(equip).weaponUp);
     var equipUp = JSON.parse(equip).equipUp;
     var horseUp = JSON.parse(equip).horseUp;
@@ -92,11 +100,12 @@ function populateEquipInfo(){
             var Consumables = calculateConsumables(level);
             console.log("当前i为:" + i );
 
-            if (i <= 4){     //如果是装备类型
+            if (i <= 5){     //如果是装备类型
                 var helmet = $("#helmetUp");
                 var armor = $("#armorUp");
                 var shoes = $("#shoesUp");
                 var offhand = $("#offhandUp");
+                var shield = $("#shieldUp");
                 console.log("equipUp");
                 console.log(equipUp);
                 if (equipUp >= Consumables){    //如果道具数量大于等于预计消耗数量
@@ -116,6 +125,10 @@ function populateEquipInfo(){
                         case 4:
                             offhand.removeAttr("disabled");
                             offhand.html("点我强化");
+                            break;
+                        case 5:
+                            shield.removeAttr("disabled");
+                            shield.html("点我强化");
                             break;
                         default:
                             offhand.removeAttr("disabled");
@@ -139,63 +152,32 @@ function populateEquipInfo(){
                             offhand.attr("disabled", true);
                             offhand.html("道具不足");
                             break;
+                        case 5:
+                            shield.attr("disabled", true);
+                            shield.html("道具不足");
+                            break;
                         default:
                             offhand.attr("disabled", true);
                             offhand.html("道具不足");
                     }
                 }
-            } else if (i <= 7){     //如果是坐骑类型
-                var horse = $("#horseUp");
-                var hidden = $("#hiddenUp");
-                if (horseUp >= Consumables){    //如果道具数量大于等于预计消耗数量
-                    switch (i){
-                        case 6:
-                            horse.removeAttr("disabled");
-                            horse.html("点我强化");
-                            break;
-                        case 7:
-                            hidden.removeAttr("disabled");
-                            hidden.html("点我强化");
-                            break;
-                        default:
-                            hidden.removeAttr("disabled");
-                            hidden.html("点我强化");
-                    }
-                }else{
-                    switch (i){
-                        case 6:
-                            horse.attr("disabled", true);
-                            horse.html("道具不足");
-                            break;
-                        case 7:
-                            hidden.attr("disabled", true);
-                            hidden.html("道具不足");
-                            break;
-                        default:
-                            hidden.attr("disabled", true);
-                            hidden.html("道具不足");
-                    }
-                }
-            }else{  //如果是武器类型
-                var shield = $("#shieldUp");
+            } else if (i <= 9){     //如果是武器类型
+
                 var sword = $("#swordUp");
                 var spear = $("#spearUp");
                 var bow = $("#bowUp");
                 if (weaponUp >= Consumables){    //如果道具数量大于等于预计消耗数量
                     switch (i){
-                        case 9:
-                            shield.removeAttr("disabled");
-                            shield.html("点我强化");
-                            break;
-                        case 10:
+
+                        case 7:
                             sword.removeAttr("disabled");
                             sword.html("点我强化");
                             break;
-                        case 11:
+                        case 8:
                             spear.removeAttr("disabled");
                             spear.html("点我强化");
                             break;
-                        case 12:
+                        case 9:
                             bow.removeAttr("disabled");
                             bow.html("点我强化");
                             break;
@@ -205,19 +187,15 @@ function populateEquipInfo(){
                     }
                 }else{
                     switch (i){
-                        case 9:
-                            shield.attr("disabled", true);
-                            shield.html("道具不足");
-                            break;
-                        case 10:
+                        case 7:
                             sword.attr("disabled", true);
                             sword.html("道具不足");
                             break;
-                        case 11:
+                        case 8:
                             spear.attr("disabled", true);
                             spear.html("道具不足");
                             break;
-                        case 12:
+                        case 9:
                             bow.attr("disabled", true);
                             bow.html("道具不足");
                             break;
@@ -226,6 +204,48 @@ function populateEquipInfo(){
                             bow.html("道具不足");
                     }
                 }
+            }else{  //如果是坐骑类型
+                var horseHelmet = $("#horseHelmetUp");
+                var horseSaddle = $("#horseSaddleUp");
+                var horse = $("#horseUp");
+                if (horseUp >= Consumables){    //如果道具数量大于等于预计消耗数量
+                    switch (i){
+                        case 11:
+                            horseHelmet.removeAttr("disabled");
+                            horseHelmet.html("点我强化");
+                            break;
+                        case 12:
+                            horseSaddle.removeAttr("disabled");
+                            horseSaddle.html("点我强化");
+                            break;
+                        case 13:
+                            horse.removeAttr("disabled");
+                            horse.html("点我强化");
+                            break;
+                        default:
+                            horse.removeAttr("disabled");
+                            horse.html("点我强化");
+                    }
+                }else{
+                    switch (i){
+                        case 11:
+                            horseHelmet.attr("disabled", true);
+                            horseHelmet.html("道具不足");
+                            break;
+                        case 12:
+                            horseSaddle.attr("disabled", true);
+                            horseSaddle.html("道具不足");
+                            break;
+                        case 13:
+                            horse.attr("disabled", true);
+                            horse.html("道具不足");
+                            break;
+                        default:
+                            horse.attr("disabled", true);
+                            horse.html("道具不足");
+                    }
+                }
+
             }   //end of else
         }   //end of 排除table header
 

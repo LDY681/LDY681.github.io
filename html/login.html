@@ -48,8 +48,8 @@
   <!--游戏介绍框-->
   <div class="w3-auto w3-section w3-light-gray w3-center w3-round-xxlarge w3-card-4">
     <!--国家特色(带image map)-->
-    <button onclick="accordionOn('map');accordionOff('season');accordionOff('yellowTurban');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">国家特色(点击地图查看)</button>
-    <button onclick="accordionOn('map');accordionOff('season');accordionOff('yellowTurban');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">国家特色(点击地图查看)</button>
+    <button onclick="accordionOn('map');accordionOff('season');accordionOff('yellowTurban');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">三国特色(点击地图查看)</button>
+    <button onclick="accordionOn('map');accordionOff('season');accordionOff('yellowTurban');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">三国特色(点击地图查看)</button>
     <div id="map" class="w3-show w3-animate-opacity">
       <img class= "w3-section" alt="三国地图" src="../img/map-brief.png" width="1049" height="742" usemap="#sanguo">
       <map name="sanguo">
@@ -59,23 +59,34 @@
       </map>
     </div>
 
+    <!-- 特殊势力:黄巾-->
+    <button onclick="accordionOn('yellowTurban');accordionOff('map');accordionOff('season');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">特殊势力:黄巾</button>
+    <button onclick="accordionOn('yellowTurban');accordionOff('map');accordionOff('season');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">特殊势力:黄巾</button>
+    <section id="yellowTurban" class="w3-panel w3-hide w3-animate-opacity">
+      <div class="w3-xlarge">
+        <h3>攻城拔寨</h3>
+        <p>东汉末年，朝廷腐败,国势疲弱。
+          又因全国大旱，颗粒不收而赋税不减，走投无路的农民在巨鹿人张角的号令下，纷纷揭竿而起。
+          他们烧毁官府、杀害吏士、四处劫掠，一个月内，全国七州二十八郡都发生战事。
+          黄巾军势如破竹，州郡失守、吏士逃亡，震动京都。
+        </p>
+        <p>
+          在转世三国中，黄巾的特色资源为石材。
+          座下城池的采石场场加成最高为5%。
+        </p>
+      </div>
+    </section>
+
     <!-- 第0赛季-->
-    <button onclick="accordionOn('season');accordionOff('yellowTurban');accordionOff('map');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">第0赛季(点我展开)</button>
-    <button onclick="accordionOn('season');accordionOff('yellowTurban');accordionOff('map');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">第0赛季(点我展开)</button>
+    <button onclick="accordionOn('season');accordionOff('yellowTurban');accordionOff('map');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">第0赛季</button>
+    <button onclick="accordionOn('season');accordionOff('yellowTurban');accordionOff('map');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">第0赛季</button>
     <section id="season" class="w3-panel w3-hide w3-animate-opacity">
       <p class="w3-xlarge">目前游戏在内测阶段（第0赛季）。每个赛季后，游戏数据（地图，部分玩家数据）会重置。系统会根据玩家在当季的表现发放绝版奖励到下一赛季。所有参与第0赛季的内测玩家，将会在游戏正式发布后（第1赛季）获得绝版坐骑。</p>
     </section>
 
-    <!-- 特殊势力:黄巾-->
-    <button onclick="accordionOn('yellowTurban');accordionOff('map');accordionOff('season');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">特殊势力:黄巾(点我展开)</button>
-    <button onclick="accordionOn('yellowTurban');accordionOff('map');accordionOff('season');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">特殊势力:黄巾(点我展开)</button>
-    <section id="yellowTurban" class="w3-panel w3-hide w3-animate-opacity">
-      <p class="w3-xlarge">在本游戏中，玩家可以选择加入黄巾军。黄巾军初始状态下没有城池。因游戏机制（城池越多产量越高，城池越少战力越高），黄巾军是最适合好战玩家的势力。</p>
-    </section>
-
     <!-- 游戏机制-->
-    <button onclick="accordionOn('other');accordionOff('season');accordionOff('yellowTurban');accordionOff('map');" class="w3-card-4 w3-block w3-margin-bottom w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">游戏机制(点我展开)</button>
-    <button onclick="accordionOn('other');accordionOff('season');accordionOff('yellowTurban');accordionOff('map');" class="w3-card-4 w3-block w3-margin-bottom w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">游戏机制(点我展开)</button>
+    <button onclick="accordionOn('other');accordionOff('season');accordionOff('yellowTurban');accordionOff('map');" class="w3-card-4 w3-block w3-margin-bottom w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">游戏机制</button>
+    <button onclick="accordionOn('other');accordionOff('season');accordionOff('yellowTurban');accordionOff('map');" class="w3-card-4 w3-block w3-margin-bottom w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">游戏机制</button>
     <section id="other" class="w3-panel w3-hide w3-animate-opacity">
       <p class="w3-xlarge">
         用地图替代战场列表<br>
@@ -168,10 +179,19 @@
       <div class="w3-center"><br>
         <span onclick="document.getElementById('shuIntro').style.display='none'"
               class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span><br>
-        <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"><br>
-        <p class="w3-panel">蜀国坐拥西北雍州，凉州；巴蜀益州。拥有初始城池16座，玩家可通过战争开疆扩土。<br><a href="map.html">点击查看当前疆域</a></p>
+        <div class="w3-panel">
+          <h3>盐铁官营</h3>
+          <p>刘备刚定益州，立即实行盐铁专卖。
+            蜀中素来富有井盐、铁矿资源。临邛的铁冶历史，更可追溯到汉代。蜀汉政权设司金中郎将，专门负责武器制造。
+            盐铁官营，不仅满足了国家的需要，而且增加了政府的财政收入。
+          </p>
+          <p>
+            在转世三国中，蜀国的特色资源为铁矿。座下城池的冶铁矿加成最高为5%。
+            蜀国坐拥西北雍州，凉州；巴蜀益州。拥有初始城池16座，玩家可通过战争开疆扩土。
+          </p>
+          <a href="map.html">点击查看当前疆域</a>
+        </div>
       </div>
-
       <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
         <button onclick="document.getElementById('shuIntro').style.display='none'" type="button" class="w3-button w3-red">
           取消
@@ -187,8 +207,22 @@
       <div class="w3-center"><br>
         <span onclick="document.getElementById('weiIntro').style.display='none'"
               class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span><br>
-        <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"><br>
-        <p class="w3-panel">魏国坐拥河北幽州，冀州，并州，青州；中原徐州，兖州，豫州，司隶。拥有初始城池26座，玩家可通过战争开疆扩土。<br><a href="map.html">点击查看当前疆域</a></p>
+        <div class="w3-panel">
+          <h3>屯田养民</h3>
+          <p>三国中以曹魏人口最多、垦田面积最广，这正是曹魏实力最强的原因。
+            曹魏推行屯田制，组织流民耕种官田，屯田地域，西北起河西，东南达淮南；东北自幽燕，西南至荆襄。
+            史言“州郡例置田官”，这使得社会秩序恢复，增强曹魏实力。
+          </p>
+          <p>
+            在转世三国中，魏国的特色经济为农业。 座下城池的农田加成最高为5%。
+            魏国坐拥河北幽州，冀州，并州，青州；中原徐州，兖州，豫州，司隶。拥有初始城池26座，玩家可通过战争开疆扩土。
+          </p>
+          <a href="map.html">点击查看当前疆域</a>
+        </div>
+
+
+
+
       </div>
 
       <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
@@ -206,8 +240,18 @@
       <div class="w3-center"><br>
         <span onclick="document.getElementById('wuIntro').style.display='none'"
               class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span><br>
-        <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"><br>
-        <p class="w3-panel">吴国坐拥荆楚荆州；吴越扬州，交州。拥有初始城池18座，玩家可通过战争开疆扩土。<br><a href="map.html">点击查看当前疆域</a></p>
+        <div class="w3-panel">
+          <h3>锦绣江南</h3>
+          <p>尽管东汉时期古人就已经重视对江南的开拓，但真正意义上第一个振兴江南经济的，毫无疑问是孙吴。
+            江南地区，森林繁茂、湖泊众多，食物来源比较丰富。
+            渔采与狩猎占据了重要的地位。 丰富的森林资源为吴国提供了充足的木材。
+          </p>
+          <p>
+          在转世三国中，吴国的特色资源为木材。 座下城池的伐木场加成最高为5%。
+          吴国坐拥荆楚荆州；吴越扬州，交州。拥有初始城池18座，玩家可通过战争开疆扩土。
+          </p>
+          <a href="map.html">点击查看当前疆域</a>
+        </div>
       </div>
 
       <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
@@ -218,6 +262,7 @@
 
     </div>
   </div>
+
 </div>
 
 
@@ -260,7 +305,7 @@
         document.getElementById("loader").style.display = "none";
     }
     $.getScript("../js/translate.js", function(){
-        console.log("translate.js读取完毕,开始执行detectLang");
+        // console.log("translate.js读取完毕,开始执行detectLang");
         detectLang();
     });
 </script>

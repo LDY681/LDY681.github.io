@@ -122,6 +122,7 @@ function zh_getLang() {
     setCookie('zh_choose', zh_choose, zh_expires);
     if (zh_choose == zh_default) return false;
     return true;
+
 }
 function zh_init() {
     zh_getLang();
@@ -145,9 +146,11 @@ function zh_init() {
 
 //检测语言
 function detectLang(){
-    console.log("detectLang运行中");
+    // console.log("detectLang运行中");
     let lang =(navigator.language || navigator.browserLanguage || navigator.language || "zh-cn").toLowerCase();
-    if(lang.indexOf('zh-cn') === -1){console.log("当前语言为繁体");zh_tran('t');}else{console.log("当前语言为简体");}
+    if(lang.indexOf('zh-cn') === -1){zh_tran('t');}else{}
+    // console.log("当前语言为繁体");
+    // console.log("当前语言为简体");
 }
 
 

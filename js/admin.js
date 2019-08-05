@@ -1287,40 +1287,40 @@ function resetResource(){
     query.find().then(function (cities) {
         cities.forEach(function(city) {
 
-            if (city.get('owner').get("name") === "weiguo"){    //如果是魏国城市(魏国城市wheat加成)
-                let rice = random();
-                let wheat = randomBonus();
+            if (city.get('owner').get("name") === "weiguo"){    //如果是魏国城市(魏国城市rice加成)
+                let rice = randomBonus();
+                let stone = random();
                 let iron = random();
                 let wood = random();
                 city.set("rice", rice);
-                city.set("wheat", wheat);
+                city.set("stone", stone);
                 city.set("iron", iron);
                 city.set("wood", wood);
             }else if (city.get('owner').get("name") === "shuguo"){  //如果是蜀国城市(蜀国城市iron加成)
                 let rice = random();
-                let wheat = random();
+                let stone = random();
                 let iron = randomBonus();
                 let wood = random();
                 city.set("rice", rice);
-                city.set("wheat", wheat);
+                city.set("stone", stone);
                 city.set("iron", iron);
                 city.set("wood", wood);
-            }else if (city.get('owner').get("name") === "wuguo"){   //如果是吴国城市(吴国城市rice加成)
-                let rice = randomBonus();
-                let wheat = random();
-                let iron = random();
-                let wood = random();
-                city.set("rice", rice);
-                city.set("wheat", wheat);
-                city.set("iron", iron);
-                city.set("wood", wood);
-            }else{  //如果是黄巾城市(黄巾城市wood加成)
+            }else if (city.get('owner').get("name") === "wuguo"){   //如果是吴国城市(吴国城市wood加成)
                 let rice = random();
-                let wheat = random();
+                let stone = random();
                 let iron = random();
                 let wood = randomBonus();
                 city.set("rice", rice);
-                city.set("wheat", wheat);
+                city.set("stone", stone);
+                city.set("iron", iron);
+                city.set("wood", wood);
+            }else{  //如果是黄巾城市(黄巾城市stone加成)
+                let rice = random();
+                let stone = randomBonus();
+                let iron = random();
+                let wood = random();
+                city.set("rice", rice);
+                city.set("stone", stone);
                 city.set("iron", iron);
                 city.set("wood", wood);
             }

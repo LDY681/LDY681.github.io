@@ -32,9 +32,9 @@ function setupUserData(){
         if (taskCompleted === 3){
             $("#taskAllCompleted").css("display","inline-block");
         }
-        console.log("taskCompleted"+ taskCompleted);
+        // console.log("taskCompleted"+ taskCompleted);
         var avatarUrl = JSON.parse(localStorage.getItem("avatarUrl")).avatarUrl;
-        console.log(avatarUrl);
+        // console.log(avatarUrl);
         // handlebars userMenu
         userMenu.userData.push({
             username,

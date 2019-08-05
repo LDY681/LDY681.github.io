@@ -130,12 +130,12 @@
     </div><!--    end of 进攻方形象-->
 
 
-    <div class="w3-third w3-center w3-panel w3-gray w3-round-large" id="messageBox" style="height:60vh; position:relative">
-      <h3 class="atWar w3-red" style="display: none;">交战中!</h3>
-      <p id="refreshBox" style="display: none;">距离下次攻击还有:<span id="refreshCountDown"></span></p>
-      <h3 id="warHistory" style="display: none;">伤害历史</h3>
-      <img class="atWar" src="../img/gear.gif" style="display:none;width: 100px;" alt="战斗中gif">
-      <div id="messageContainer" style="overflow-y: scroll; height: 30vh; position: absolute;bottom: 30px;"><table id="SpreadsheetTable"><tbody id="tableBody"></tbody></table></div>
+    <div class="w3-third w3-center w3-gray w3-round-large" id="messageBox" style="height:60vh; position:relative">
+      <h3 id="messageTitle"></h3>
+      <img id="messageGif" src="" style="width: 100px;">
+      <p id="refreshBox" style="z-index:1;display: none;margin-top: -60px;">距离下次攻击还有:<span id="refreshCountDown"></span></p>
+
+      <div class="w3-white w3-round-large" style="overflow-y: scroll; height: 40vh; position: absolute;bottom: 10px;margin-left: auto;margin-right: auto;left: 20px;right: 20px;"><table id="SpreadsheetTable" class="w3-table-all"><tbody id="tableBody"></tbody></table></div>
       </div>
 
 
@@ -200,7 +200,7 @@
 <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
 <script src="../js/initLeanCloud.js"></script>
 <script src="../js/user.js"></script> <!--登录注册,登出,isCurrentUser-->
-<script>console.log("User初始化完毕;")</script>
+<!--<script>console.log("User初始化完毕;")</script>-->
 
 <!--加载counter.js-->
 <script src="../js/counter.js"></script> <!--活动倒计时,东汉年历,当前时间-->
@@ -228,10 +228,13 @@
                         detectLang();
                     });
                     $.getScript("../js/battle.js", function(){
+                        evalCanWar();
                         evalBattle();
                         battleCountDown();
                         refreshCountDown();
                         autoUpdate();
+                        updateDamage("invader", 0);
+                        updateDamage("defender", 0);
                     });
                 });
             });
