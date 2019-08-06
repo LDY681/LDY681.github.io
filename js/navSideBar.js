@@ -160,7 +160,7 @@ function setAvatar(){
             });
             $("#avatarNotifier").show();
             setTimeout(function () {
-                $("#avatarNotifier").hide()
+                window.location.reload();
             }, 1500);
         }, function(error) {
             alert(JSON.stringify(error));
@@ -246,7 +246,7 @@ function setProfileData(){
             avatarUrl = avatar.get("image").get("url");
         }else{
             // console.log("没有avatar");
-            avatarUrl = "http://lc-q48bubuw.cn-e1.lcfile.com/18b3144a7e4a7e11b264.png";
+            avatarUrl = "http://lc-q48bubuw.cn-e1.lcfile.com/e52cdcfbb6952a296362/%E7%82%B9%E6%88%91%E8%AE%BE%E7%BD%AE%E5%A4%B4%E5%83%8F.jpg";
         }
 
         // handlebars navSideBar
@@ -290,6 +290,12 @@ function setupCountry(){
             console.log(country.get('cname'));
             var user = AV.User.current();
             user.set("country", country);
-            return user.save();
+            user.save().then(function(){
+                $("#countryNotifier").show();
+                document.getElementById("countrySubmit").disabled = true;
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1500);
+            });
         });
 }

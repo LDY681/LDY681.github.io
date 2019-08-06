@@ -190,3 +190,24 @@ img[usemap] {
     font-weight: 800;
     font-size: 24px;
 }
+
+/*市场和家产里的item*/
+.item {
+    margin: 5px;
+    border: 5px solid #f1f1f1;
+    float: left;
+}
+.item:hover {
+    border: 5px solid green;
+}
+
+.item img {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+}
+
+.amount {
+    padding: 10px;
+    text-align: center;
+}

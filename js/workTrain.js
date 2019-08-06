@@ -44,11 +44,8 @@ function work(){
                 // 保存
                 return userData.save().then(function(){
                     $("#taskButtonWork").css("display","none");
-                    $(".successNotifier").show();
                     evalWork();
-                    setTimeout(function () {
-                        $(".successNotifier").hide()
-                    }, 1500);
+                    $.notify("工作成功!",{position:"top-center", className: "success"});
                 });
             }else{
                 alert("每个双整点只能工作一次哦!");
@@ -93,11 +90,8 @@ function train(){
                 // 保存的时候先fetch以下
                 return userData.save().then(function(){
                     $("#taskButtonTrain").css("display","none");
-                    $(".successNotifier").show();
                     evalTrain();
-                    setTimeout(function () {
-                        $(".successNotifier").hide()
-                    }, 1500);
+                    $.notify("训练成功!",{position:"top-center", className: "success"});
                 });
             }else{
                 alert("每个双整点只能训练一次哦!");

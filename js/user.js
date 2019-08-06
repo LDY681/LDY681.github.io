@@ -19,11 +19,7 @@ $(function() {
 
     if(window.location.hash === '#needLogin')
     {
-        $("#loginNotifier").show();
-
-        setTimeout(function () {
-            $("#loginNotifier").hide()
-           }, 1500);
+        $.notify("请先登录!",{position:"top-center", className: "error"});
     }
 });
 
@@ -55,7 +51,7 @@ function signUp() {
     }));
 }
 
-//美此登录都会刷新AV.User.current
+//每次登录都会刷新AV.User.current
 function logIn() {
     var username = $('#loginUsername').val();
     var password = $('#loginPassword').val();
@@ -99,11 +95,11 @@ function saveAvatarUrl(){
         var avatar = userData.get("avatar");
         var avatarUrl;
         if (avatar != null){
-            // console.log("有avatar");
+            console.log("有avatar");
             avatarUrl = avatar.get("image").get("url");
         }else{
-            // console.log("没有avatar");
-            avatarUrl = "http://lc-q48bubuw.cn-e1.lcfile.com/18b3144a7e4a7e11b264.png";
+            console.log("没有avatar");
+            avatarUrl = "http://lc-q48bubuw.cn-e1.lcfile.com/e52cdcfbb6952a296362/%E7%82%B9%E6%88%91%E8%AE%BE%E7%BD%AE%E5%A4%B4%E5%83%8F.jpg";
         }
 
         localStorage.setItem('avatarUrl', JSON.stringify({

@@ -13,16 +13,6 @@
 <!--countUp ->东汉年历，getCurrTime ->北京时间显示 setUpUserData ->userMenu的数据填充-->
 <body class="w3-animate-opacity" onload="fetchAndPopulate();">
 
-<!--升级成功提示-->
-
-<div class="successNotifier popupFadeout w3-display-topmiddle w3-third w3-round-xxlarge w3-green w3-card-4" style="z-index: 2; display: none; position: fixed; height: 50px;line-height: 45px;">
-  <div style="text-align: center;"><span style="color: Green; display: inline-block; vertical-align: middle; font-size: 25px;">恭喜您,升级成功!</span></div>
-</div>
-
-<div class="failureNotifier popupFadeout w3-display-topmiddle w3-third w3-round-xxlarge w3-yellow w3-card-4" style="z-index: 2; display: none; position: absolute; height: 50px;line-height: 45px;">
-  <div style="text-align: center;"><span style="color: Green; display: inline-block; vertical-align: middle; font-size: 25px;">升级失败,你好菜啊!</span></div>
-</div>
-
 <!--navSideBar placeholder-->
 <div style="position: relative" id="nav-placeholder"></div>
 
@@ -169,7 +159,7 @@
 <!--Script加载顺序!!!!!-->
 <!--加载jquery-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-<script>console.log("Jquery加载完毕")</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
 <script src="../js/handlebars.min.js"></script>
 <script>console.log("handlebars加载完毕")</script>
 

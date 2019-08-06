@@ -484,7 +484,7 @@ function calculateDamage(){
             var horseHelmetChance = horseHelmet * 0.05;
             var horseSaddleChance = horseSaddle * 0.05;
             var criticalModifier =1;
-            document.getElementById("modifier").innerHTML ="";
+            // document.getElementById("modifier").innerHTML = "";
 
             if (horseHelmetRoll <= horseHelmetChance){
                 criticalModifier *= 2;
@@ -518,13 +518,13 @@ function calculateDamage(){
                 hitAgain = true;
             }
 
-            performance += "您" + performance +"造成"+currDamage+"点伤害。";
+            performance = "您" + performance +"造成"+currDamage+"点伤害。";
             totalPerformance +=performance;
         }while(hitAgain === true);
 
-        console.log(performance + damage);
+        console.log(totalPerformance + damage);
         damageInfo.push(damage);
-        damageInfo.push(performance);
+        damageInfo.push(totalPerformance);
         return damageInfo;
 }
 

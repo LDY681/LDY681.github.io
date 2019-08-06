@@ -50,8 +50,6 @@ function fetchEquipInfo(){
             horseSaddleUp,
             horseHelmetUp
         }));
-        //使用方法
-        // var user = JSON.parse(localStorage.getItem('user'));
 
         return new Promise(function(resolve, reject) {
             if (JSON.parse(localStorage.getItem('equip')) === undefined){
@@ -85,13 +83,15 @@ function populateEquipInfo(){
     $("#weaponUpAmount").html(JSON.parse(equip).weaponUp);
     var equipUp = JSON.parse(equip).equipUp;
     var horseUp = JSON.parse(equip).horseUp;
+    var horseHelmetUp = JSON.parse(equip).horseHelmetUp;
+    var horseSaddleUp = JSON.parse(equip).horseSaddleUp;
     var weaponUp = JSON.parse(equip).weaponUp;
     //判断哪些装备是可以升级的
     var table = document.getElementById("eqTable");
     for (var i = 0, row; row = table.rows[i]; i++) {
 
         //排除table header
-        if (i !== 0 && i !== 5 && i !== 8){
+        if (i !== 0 && i !== 6 && i !== 10){
             console.log("当前装备为: " + row.cells[0].innerHTML);
             //获取当前装备等级
             var level = row.cells[2].innerHTML;
@@ -204,51 +204,35 @@ function populateEquipInfo(){
                             bow.html("道具不足");
                     }
                 }
-            }else{  //如果是坐骑类型
+            }else if (i === 11){  //如果是马盔
                 var horseHelmet = $("#horseHelmetUp");
+                if (horseHelmetUp >= Consumables){    //如果道具数量大于等于预计消耗数量
+                    horseHelmet.removeAttr("disabled");
+                    horseHelmet.html("点我强化");
+                }else{
+                    horseHelmet.attr("disabled", true);
+                    horseHelmet.html("道具不足");
+                }
+            }else if (i === 12){  //如果是马鞍
                 var horseSaddle = $("#horseSaddleUp");
+                if (horseSaddleUp >= Consumables){    //如果道具数量大于等于预计消耗数量
+                    horseSaddle.removeAttr("disabled");
+                    horseSaddle.html("点我强化");
+                }else{
+                    horseSaddle.attr("disabled", true);
+                    horseSaddle.html("道具不足");
+                }
+            }else if (i === 13){  //如果是战马
                 var horse = $("#horseUp");
                 if (horseUp >= Consumables){    //如果道具数量大于等于预计消耗数量
-                    switch (i){
-                        case 11:
-                            horseHelmet.removeAttr("disabled");
-                            horseHelmet.html("点我强化");
-                            break;
-                        case 12:
-                            horseSaddle.removeAttr("disabled");
-                            horseSaddle.html("点我强化");
-                            break;
-                        case 13:
-                            horse.removeAttr("disabled");
-                            horse.html("点我强化");
-                            break;
-                        default:
-                            horse.removeAttr("disabled");
-                            horse.html("点我强化");
-                    }
+                    horse.removeAttr("disabled");
+                    horse.html("点我强化");
                 }else{
-                    switch (i){
-                        case 11:
-                            horseHelmet.attr("disabled", true);
-                            horseHelmet.html("道具不足");
-                            break;
-                        case 12:
-                            horseSaddle.attr("disabled", true);
-                            horseSaddle.html("道具不足");
-                            break;
-                        case 13:
-                            horse.attr("disabled", true);
-                            horse.html("道具不足");
-                            break;
-                        default:
-                            horse.attr("disabled", true);
-                            horse.html("道具不足");
-                    }
+                    horse.attr("disabled", true);
+                    horse.html("道具不足");
                 }
-
-            }   //end of else
+            }//end of else
         }   //end of 排除table header
-
     }
 }
 
@@ -269,8 +253,11 @@ $(function(){
     $("#horseUp").on("click", function(){
         upgradeEquip("horse");
     });
-    $("#hiddenUp").on("click", function(){
-        upgradeEquip("hidden");
+    $("#horseHelmetUp").on("click", function(){
+        upgradeEquip("horseHelmet");
+    });
+    $("#horseSaddleUp").on("click", function(){
+        upgradeEquip("horseSaddle");
     });
     $("#shieldUp").on("click", function(){
         upgradeEquip("shield");
@@ -289,49 +276,52 @@ $(function(){
 //点击装备升级时触发
 function upgradeEquip(equip){
     var Equip = equip;
-        var localEQ = localStorage.getItem("equip");
-        //获取等级
-        var level = 0;
-        switch (Equip) {
-            case "helmet":
-                level = JSON.parse(localEQ).helmet;
-                break;
-            case "armor":
-                level = JSON.parse(localEQ).armor;
-                break;
-            case "shoes":
-                level = JSON.parse(localEQ).shoes;
-                break;
-            case "offhand":
-                level = JSON.parse(localEQ).offhand;
-                break;
-            case "horse":
-                level = JSON.parse(localEQ).horse;
-                break;
-            case "hidden":
-                level = JSON.parse(localEQ).hidden;
-                break;
-            case "shield":
-                level = JSON.parse(localEQ).shield;
-                break;
-            case "spear":
-                level = JSON.parse(localEQ).spear;
-                break;
-            case "sword":
-                level = JSON.parse(localEQ).sword;
-                break;
-            case "bow":
-                level = JSON.parse(localEQ).bow;
-                break;
-            default:
-                level = JSON.parse(localEQ).helmet;
-                break;
-        }
-        var chance = 1 - level * 0.1;
-        var random = Math.random();
-        var consumables = calculateConsumables(level);
-        var user = AV.User.current();
-        user.fetch({ include: ['equip']});
+    var localEQ = localStorage.getItem("equip");
+    //获取等级
+    var level = 0;
+    switch (Equip) {
+        case "helmet":
+            level = JSON.parse(localEQ).helmet;
+            break;
+        case "armor":
+            level = JSON.parse(localEQ).armor;
+            break;
+        case "shoes":
+            level = JSON.parse(localEQ).shoes;
+            break;
+        case "offhand":
+            level = JSON.parse(localEQ).offhand;
+            break;
+        case "horse":
+            level = JSON.parse(localEQ).horse;
+            break;
+        case "horseHelmet":
+            level = JSON.parse(localEQ).horseHelmet;
+            break;
+        case "horseSaddle":
+            level = JSON.parse(localEQ).horseSaddle;
+            break;
+        case "shield":
+            level = JSON.parse(localEQ).shield;
+            break;
+        case "spear":
+            level = JSON.parse(localEQ).spear;
+            break;
+        case "sword":
+            level = JSON.parse(localEQ).sword;
+            break;
+        case "bow":
+            level = JSON.parse(localEQ).bow;
+            break;
+        default:
+            level = JSON.parse(localEQ).helmet;
+            break;
+    }
+    var chance = 1 - level * 0.1;
+    var random = Math.random();
+    var consumables = calculateConsumables(level);
+    var user = AV.User.current();
+    user.fetch({ include: ['equip']}).then(function(user){
         if (random <= chance){   //升级成功
             //判断升级的装备
             switch (Equip){
@@ -340,6 +330,7 @@ function upgradeEquip(equip){
                 case "armor":
                 case "shoes":
                 case "offhand":
+                case "shield":
                     if (user.get('equipUp') < consumables){
                         alert("升级失败,道具数量不足!");
                         break;
@@ -354,8 +345,24 @@ function upgradeEquip(equip){
                     }));
                     break;
 
+                case "spear":
+                case "sword":
+                case "bow":
+                    if (user.get('weaponUp') < consumables){
+                        alert("升级失败,道具数量不足!");
+                        break;
+                    }
+                    user.increment('weaponUp', -consumables);
+                    user.get('equip').increment(Equip, 1);
+                    user.save().then(function(res){
+                        fetchAndPopulate();
+                        showSuccess();
+                    }, (function(error){
+                        alert("运气好,但升级失败,道具数量不足!");
+                    }));
+                    break;
+
                 case "horse":
-                case "hidden":
                     if (user.get('horseUp') < consumables){
                         alert("升级失败,道具数量不足!");
                         break;
@@ -369,16 +376,26 @@ function upgradeEquip(equip){
                         alert("运气好,但升级失败,道具数量不足!");
                     }));
                     break;
-
-                case "shield":
-                case "spear":
-                case "sword":
-                case "bow":
-                    if (user.get('weaponUp') < consumables){
+                case "horseHelmet":
+                    if (user.get('horseHelmetUp') < consumables){
                         alert("升级失败,道具数量不足!");
                         break;
                     }
-                    user.increment('weaponUp', -consumables);
+                    user.increment('horseHelmetUp', -consumables);
+                    user.get('equip').increment(Equip, 1);
+                    user.save().then(function(res){
+                        fetchAndPopulate();
+                        showSuccess();
+                    }, (function(error){
+                        alert("运气好,但升级失败,道具数量不足!");
+                    }));
+                    break;
+                case "horseSaddle":
+                    if (user.get('horseSaddleUp') < consumables){
+                        alert("升级失败,道具数量不足!");
+                        break;
+                    }
+                    user.increment('horseSaddleUp', -consumables);
                     user.get('equip').increment(Equip, 1);
                     user.save().then(function(res){
                         fetchAndPopulate();
@@ -399,6 +416,7 @@ function upgradeEquip(equip){
                 case "armor":
                 case "shoes":
                 case "offhand":
+                case "shield":
                     if (user.get('equipUp') < consumables){
                         alert("升级失败,道具数量不足!");
                         break;
@@ -412,22 +430,6 @@ function upgradeEquip(equip){
                     }));
                     break;
 
-                case "horse":
-                case "hidden":
-                    if (user.get('horseUp') < consumables){
-                        alert("升级失败,道具数量不足!");
-                        break;
-                    }
-                    user.increment('horseUp', -consumables);
-                    user.save().then(function(res){
-                        fetchAndPopulate();
-                        showFailure();
-                    }, (function(error){
-                        alert("运气差,消耗失败,道具数量不足!");
-                    }));
-                    break;
-
-                case "shield":
                 case "spear":
                 case "sword":
                 case "bow":
@@ -443,10 +445,53 @@ function upgradeEquip(equip){
                         alert("运气差,消耗失败,道具数量不足!");
                     }));
                     break;
+
+                case "horseHelmet":
+                    if (user.get('horseHelmetUp') < consumables){
+                        alert("升级失败,道具数量不足!");
+                        break;
+                    }
+                    user.increment('horseHelmetUp', -consumables);
+                    user.save().then(function(res){
+                        fetchAndPopulate();
+                        showFailure();
+                    }, (function(error){
+                        alert("运气差,消耗失败,道具数量不足!");
+                    }));
+                    break;
+
+                case "horseSaddle":
+                    if (user.get('horseSaddleUp') < consumables){
+                        alert("升级失败,道具数量不足!");
+                        break;
+                    }
+                    user.increment('horseSaddleUp', -consumables);
+                    user.save().then(function(res){
+                        fetchAndPopulate();
+                        showFailure();
+                    }, (function(error){
+                        alert("运气差,消耗失败,道具数量不足!");
+                    }));
+                    break;
+
+                case "horse":
+                    if (user.get('horseUp') < consumables){
+                        alert("升级失败,道具数量不足!");
+                        break;
+                    }
+                    user.increment('horseUp', -consumables);
+                    user.save().then(function(res){
+                        fetchAndPopulate();
+                        showFailure();
+                    }, (function(error){
+                        alert("运气差,消耗失败,道具数量不足!");
+                    }));
+                    break;
                 default:
                     break;
             }
         }
+    });
 }
 
 //计算消耗升级道具数量
@@ -456,20 +501,12 @@ function calculateConsumables(level){
 
 //提示装备升级成功
 function showSuccess(){
-    $(".successNotifier").show();
-
-    setTimeout(function () {
-        $(".successNotifier").hide()
-    }, 800);
-    
+    console.log('这里了');
+    $.notify("恭喜您,升级成功!",{position:"top-center", className: "success"});
 }
 
 //提示装备升级失败
 function showFailure(){
-    $(".failureNotifier").show();
-
-    setTimeout(function () {
-        $(".failureNotifier").hide()
-    }, 800);
+    $.notify("好可惜,升级失败!",{position:"top-center", className: "error"});
 }
 

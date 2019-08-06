@@ -32,10 +32,7 @@ function setupUserData(){
         if (taskCompleted === 3){
             $("#taskAllCompleted").css("display","inline-block");
         }
-        // console.log("taskCompleted"+ taskCompleted);
         var avatarUrl = JSON.parse(localStorage.getItem("avatarUrl")).avatarUrl;
-        // console.log(avatarUrl);
-        // handlebars userMenu
         userMenu.userData.push({
             username,
             level,
@@ -45,8 +42,6 @@ function setupUserData(){
             str,
             avatarUrl
         });
-        // console.log("userMenu.userData[0]信息");
-        // console.log(userMenu.userData[0]);
 
         $(document).ready(function() {
             // console.log("开始编译userMenu");
@@ -54,7 +49,6 @@ function setupUserData(){
             var template = Handlebars.compile(source);
             var html = template(userMenu);
             $(".userMenuDataContainer").html(html);
-            // console.log("完成编译userMenu");
         });
 
 };
