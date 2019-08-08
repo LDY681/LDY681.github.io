@@ -68,7 +68,6 @@ function evalCity(){
 }
 
 function evalAdjacent(adjacentCityPanel){
-    //修改相邻城池
     var query = new AV.Query('city');
     var cityId = getUrlParam('id','1');
     query.equalTo("cityId", parseInt(cityId, 10));
@@ -96,8 +95,6 @@ function evalAdjacent(adjacentCityPanel){
                     var destWood = destObj.get("wood");
                     var destOwner = destObj.get("owner").get("cname");
                     var destUrl = cityToHref(destCityId);
-                    console.log("adjacent city: " + destCityName + " " + destIsAtWar + " " + destIron + " " + destStone + " " + destRice + " " + destWood + " " + destOwner);
-                    // handlebars adjacentPanel
 
                     if (destIsAtWar === false) {
                         destIsAtWar = "风平浪静💖";

@@ -13,9 +13,11 @@
 
 <body onload="unload();counter('Jan 1, 2025 24:00:00');" class="w3-animate-opacity">
 <!--加载中动画-->
-<div id="loader" style="z-index:1;display:block;width: 15%;" class="w3-display-middle w3-light-gray w3-round-xxlarge">
+<div id="loader" style="z-index:1;display:block;width: 15%;" class="w3-display-middle w3-light-gray w3-round-xxlarge w3-center">
   <img style="width:100%" src="../img/logo.png" class="ld ld-jump" alt="加载中"/><br>
-  <h1>加载中,很快哦O(∩_∩)O</h1>
+  <h1 class="w3-hide-medium w3-hide-small">加载中,很快哦O(∩_∩)O</h1>
+  <h2 class="w3-hide-large w3-hide-small">加载中,很快哦O(∩_∩)O</h2>
+  <h3 class="w3-hide-medium w3-hide-large">加载中,很快哦O(∩_∩)O</h3>
 </div>
 <!--TODO:正文内容-->
 <div id="afterLoading" >
@@ -274,7 +276,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
 <!--  Leancloud-->
 <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
-<script>AV.init({appId: 'Q48Bubuw4qRahc1XEU6TeTYu-9Nh9j0Va', appKey: '2oTfqHRvabH89qAX4eDLIWqP'});</script>
+<script src="../js/initLeanCloud.js"></script>
 <script src="../js/user.js"></script>
 <script src="../js/equip.js"></script>
 <script src="../js/rwdImageMaps.min.js"></script>

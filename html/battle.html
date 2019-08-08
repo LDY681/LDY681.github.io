@@ -124,16 +124,15 @@
       </div>
     </div><!--    end of 进攻方形象-->
 
-
+    <!-- 伤害历史-->
     <div class="w3-third w3-center w3-gray w3-round-large" id="messageBox" style="height:60vh; position:relative">
       <h3 id="messageTitle"></h3>
       <img id="messageGif" src="" style="width: 100px;">
       <p id="refreshBox" style="z-index:1;display: none;margin-top: -60px;">距离下次攻击还有:<span id="refreshCountDown"></span></p>
-
       <div class="w3-white w3-round-large" style="overflow-y: scroll; height: 40vh; position: absolute;bottom: 10px;margin-left: auto;margin-right: auto;left: 20px;right: 20px;"><table id="SpreadsheetTable" class="w3-table-all"><tbody id="tableBody"></tbody></table></div>
       </div>
 
-
+    <!-- 防守形象+预计排名-->
     <div class="sideInfo w3-third w3-center" >
       <div class="country__card">
         <img id="defenderFigure" src="" alt="防守方形象" style="width: 80%" onclick="openDefenderModal();">
@@ -150,7 +149,7 @@
         <div class="workntrainButton" style="display: none; margin-top: 50px;margin-bottom: 50px;">
           <p class="w3-large warNotifier w3-text-red"></p>
           <img class="alreadyAtWar" src="../img/gear.gif" style="display:none;width: 100px;" alt="战斗中gif">
-          <button class="w3-padding-large w3-round-xxlarge onWar" style="display:none" onclick="dealDamageInvaderSide()"></button>
+          <button class="w3-padding-large w3-round-xxlarge onWar" style="display:none" onclick="dealDamage('invader')"></button>
         </div>
 
       <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
@@ -168,7 +167,7 @@
         <div class="workntrainButton" style="display: none; margin-top: 50px;margin-bottom: 50px;">
           <p class="w3-large warNotifier w3-text-red"></p>
           <img class="alreadyAtWar" src="../img/gear.gif" style="display:none;width: 100px;" alt="战斗中gif">
-          <button class="w3-padding-large w3-round-xxlarge onWar" style="display:none" onclick="dealDamageDefenderSide()"></button>
+          <button class="w3-padding-large w3-round-xxlarge onWar" style="display:none" onclick="dealDamage('defender')"></button>
         </div>
         <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
           <button onclick="document.getElementById('defenderModal').style.display='none'" type="button" class="w3-button w3-red w3-left">关闭</button>
@@ -235,16 +234,6 @@
             });
         });
     });
-
-    function myFunction() {
-        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        var scrolled = (winScroll / height) * 100;
-        document.getElementById("myBar").style.width = scrolled + "%";
-    }
-
-
-
 </script>
 
 

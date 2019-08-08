@@ -6,7 +6,6 @@ $(function(){
     });
 });
 
-// 宣战,下个整点55分钟开战
 function declareWar(){
     var select = document.getElementById("country");
     var invader = select.options[select.selectedIndex].value;

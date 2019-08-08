@@ -2,8 +2,10 @@ $(document).ready(function(){
     $(".sideInfo").hover3d({
         selector: ".country__card"
     });
+    loadSheet();
 });
 
+//TODO 时间类
 //战场倒计时(距离11:55和23:55的时间)
 function battleCountDown(){
 // Set the date we're counting down to
@@ -106,7 +108,8 @@ function calculateWarCount(){
     return warCount;
 }
 
-//刚进入页面时填充战场数据(城市名,防御&进攻国家名称&形象)
+//TODO eval类
+//刚进入页面时填充战场数据,和compileBattle搭配使用
 function evalBattle() {
     console.log("evalBattle运行");
     var query = new AV.Query('city');
@@ -153,8 +156,220 @@ function evalBattle() {
         console.log(err);
     });
 }
+function compileBattle(battlePanel){
+    $(document).ready(function() {
+        var source = $("#battlePanelData").html();
+        var template = Handlebars.compile(source);
+        var html = template(battlePanel);
+        $(".battleDataContainer").html(html);
+    });
+}
 
-//,玩家输出后,更新数据库[战场offdmg,defdmg;用户totaldmg];更新排行榜(battleId, invaderId, defenderId);更新战场页的伤害显示
+//读取伤害历史并显示
+function loadSheet() {
+    var x = setInterval(function() {
+        var user = AV.User.current();
+        //var loadedData = JSON.parse(localStorage.getItem("tblArrayJson"));
+        var loadedTable = document.getElementById("SpreadsheetTable");
+        $("#tableBody").empty();
+        var warMessageContainer = localStorage.getItem("warMessage");
+        var warMessage = JSON.parse(warMessageContainer);
+        var msgArray = warMessage.warMessage;
+
+        // Get today's date and time
+        var now = new Date().getTime();
+        var updateAt = msgArray[0];
+        // Find the distance between now and the count down date
+        var distance = now - updateAt;
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = days * 24 * 60 + hours * 60 + Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        // console.log("距离上次攻击多少分钟：" + minutes);
+        var isAtWar = true;
+        for (var i = 1; i < msgArray.length && i <= minutes + 1; i++) {
+            var row = loadedTable.insertRow(0);
+            var cell = row.insertCell(0);
+            cell.innerHTML = msgArray[i];
+
+            //如果i == msgArray.length-1 如果战斗完了，那么交战中变成战斗历史
+            if (i === msgArray.length -1){
+                console.log("整个数组读完了");
+                isAtWar = false;
+                $("#refreshBox").hide();
+                $("#messageTitle").removeClass("w3-red").html("伤害历史");
+                $("#messageGif").attr("src","../img/snore.png").addClass("ld ld-breath");
+            }
+        }
+
+        if (user.get("canWar") === false && isAtWar === true){ //如果交战中
+            $("#refreshBox").show();
+            $("#messageTitle").removeClass("w3-black").addClass("w3-red").html("交战中");
+            $("#messageGif").attr("src","../img/gear.gif").removeClass("ld ld-breath");
+
+        }else{  //如果不在交战中
+            $("#refreshBox").hide();
+            $("#messageTitle").removeClass("w3-red").html("伤害历史");
+            $("#messageGif").attr("src","../img/snore.png").addClass("ld ld-breath");
+        }
+
+    },1000);
+}
+
+//刚进入战场时加载，判断是否可以战斗，并把warMessage更新到本地
+function evalCanWar(){
+    console.log("evalCanWar 运行");
+    var user = AV.User.current();
+
+    user.fetch().then(function(user){
+        var canWar = user.get("canWar");
+        console.log(canWar);
+        var warNotifier = $(".warNotifier");
+        var onWar = $(".onWar");
+        var warMessage = user.get("warMessage");
+
+        if (canWar === false ){
+            warNotifier.html( "已投入战斗!" );
+            onWar.hide();
+            $(".alreadyAtWar").show();
+        }else {
+            warNotifier.html( "快快加入战争!" );
+            onWar.show();
+            onWar.html( "点我投入战斗!" );
+            onWar.addClass("w3-red");
+            $(".alreadyAtWar").hide();
+        }
+        $(".workntrainButton").show();
+        localStorage.setItem('warMessage', JSON.stringify({warMessage}));
+    });
+}
+
+//TODO 战斗类
+//玩家点击战斗后触发,生成本地伤害历史,总伤害,并调用updateDamage (更新到云端)
+function dealDamage(side){
+    var currBattle = localStorage.getItem("currBattle");
+    var cityName = JSON.parse(currBattle).cityName;
+    var invaderName = JSON.parse(currBattle).invaderName;
+    var defenderName = JSON.parse(currBattle).defenderName;
+    var fightingSide = (side === "invader")?invaderName: defenderName;
+    localStorage.setItem('battleParticipated', JSON.stringify({
+        cityName,
+        fightingSide
+    }));
+    //计算距离双整点的时间,判断可以攻击几次
+    var warCount = calculateWarCount();
+    var warMessage = [];
+    var totalDamage = 0;
+    var coeff = 1000 * 60;
+    var now = new Date().getTime();
+    var updateAt = Math.floor( now / coeff) * coeff;
+    warMessage.push(updateAt);
+    for (var i = 1; i <= warCount+1; i++){
+        var damageInfo = calculateDamage();
+        var performance = damageInfo.pop();
+        var damage = damageInfo.pop();
+        totalDamage +=damage;
+        var battleName = (side === "invader")?"攻城战中,": "守城战中,";
+        warMessage.push( nextNMinutes(i-1) + " " + "在" +cityName+ battleName + performance);
+    }
+    localStorage.setItem('warMessage', JSON.stringify({warMessage}));
+    //更新数据
+    updateDamage(side, totalDamage, warMessage).then(function(){
+        document.location.reload();
+    });
+}
+
+//单次攻击伤害 (根据玩家数据和装备)
+function calculateDamage(){
+    console.log("calculateDamage 运行");
+    var user = AV.User.current();
+    var equip = localStorage.getItem("equip");
+    //力量
+    var str = user.get('str');
+    var helmet = JSON.parse(equip).helmet;
+    var armor = JSON.parse(equip).armor;
+    var shoes = JSON.parse(equip).shoes;
+    var offhand = JSON.parse(equip).offhand;
+    var shield = JSON.parse(equip).shield;
+    var sword = JSON.parse(equip).sword;
+    var spear = JSON.parse(equip).spear;
+    var bow = JSON.parse(equip).bow;
+    var horseHelmet = JSON.parse(equip).horseHelmet;
+    var horseSaddle = JSON.parse(equip).horseSaddle;
+    var horse = JSON.parse(equip).horse;
+    var finalStr = str + (helmet + armor + shoes + offhand) * 100;
+
+    //连击
+    var damage = 0;
+    var hitAgain = false;
+    var damageInfo =[];
+    var totalPerformance = "";
+    do{
+        var performance = "";
+        //伤害
+        var totalDmg = user.get('totalDmg');
+        var rank = Math.sqrt(totalDmg/10000);
+        var baseDmg = 1000 * (1 + 0.05 * rank);
+        var finalDmg = baseDmg + sword * 100;
+
+        //伤害区间
+        var minModifier = 0.8;
+        var maxModifier = 1.2;
+        minModifier = minModifier + (spear * 0.01);
+        maxModifier = (maxModifier + (spear * 0.01)) * (1 + bow * 0.02);
+        var randomModifier = getRandomArbitrary(minModifier, maxModifier);
+
+        //暴击
+        var horseHelmetRoll = Math.random();
+        var horseSaddleRoll = Math.random();
+        var horseHelmetChance = horseHelmet * 0.05;
+        var horseSaddleChance = horseSaddle * 0.05;
+        var criticalModifier =1;
+        // document.getElementById("modifier").innerHTML = "";
+
+        if (horseHelmetRoll <= horseHelmetChance){
+            criticalModifier *= 2;
+            performance += "冲锋陷阵，";
+        }
+        if (horseSaddleRoll <= horseSaddleChance){
+            criticalModifier *= 5;
+            performance += "一骑当千，";
+        }
+        if (criticalModifier === 1){
+            performance += "表现平平，";
+        }
+
+        //失误
+        var missModifier =1;
+        var shieldRoll = Math.random();
+        var shieldRollChance = 0.1 -shield * 0.01;
+        if (shieldRoll <= shieldRollChance){
+            missModifier = 0;
+            performance = "摔下城墙，";
+        }
+
+        //连击
+        hitAgain = false;
+        var horseRoll = Math.random();
+        var horseRollChance = horse * 0.05;
+        var currDamage = round(finalDmg * (finalStr / 1000) * randomModifier * criticalModifier) * missModifier;
+        damage += currDamage;
+        if (horseRoll <= horseRollChance){
+            performance += "血战不息，";
+            hitAgain = true;
+        }
+
+        performance = "您" + performance +"造成"+currDamage+"点伤害。";
+        totalPerformance +=performance;
+    }while(hitAgain === true);
+
+    console.log(totalPerformance + damage);
+    damageInfo.push(damage);
+    damageInfo.push(totalPerformance);
+    return damageInfo;
+}
+
+//TODO 更新类
+//玩家输出后,更新数据库[战场offdmg,defdmg;用户totaldmg];更新排行榜(battleId, invaderId, defenderId);更新战场页的伤害显示
 function updateDamage(side, damage, warMessage){
     console.log("updateDamage运行");
     var messagePassed = warMessage || null;
@@ -335,6 +550,7 @@ function updateLeaderBoard(){
     });
 }
 
+//TODO 其他类
 //点开InvaderModal
 function openInvaderModal(){
     console.log("openInvaderModal运行");
@@ -347,198 +563,7 @@ function openDefenderModal(){
     $("#defenderModal").show();
 }
 
-//刚进入战场时加载，判断是否可以战斗，并把warMessage更新到本地
-function evalCanWar(){
-    console.log("evalCanWar 运行");
-    var user = AV.User.current();
-
-    user.fetch().then(function(user){
-        var canWar = user.get("canWar");
-        console.log(canWar);
-        var warNotifier = $(".warNotifier");
-        var onWar = $(".onWar");
-        var warMessage = user.get("warMessage");
-
-        if (canWar === false ){
-            warNotifier.html( "已投入战斗!" );
-            onWar.hide();
-            $(".alreadyAtWar").show();
-        }else {
-            warNotifier.html( "快快加入战争!" );
-            onWar.show();
-            onWar.html( "点我投入战斗!" );
-            onWar.addClass("w3-red");
-            $(".alreadyAtWar").hide();
-        }
-        $(".workntrainButton").show();
-        localStorage.setItem('warMessage', JSON.stringify({warMessage}));
-    });
-}
-//TODO 玩家点击进攻方输出后触发,显示伤害顶部提示,更新伤害
-function dealDamageInvaderSide(){
-    console.log("dealDamageInvaderSide 运行");
-    var currBattle = localStorage.getItem("currBattle");
-    var cityName = JSON.parse(currBattle).cityName;
-    var invaderName = JSON.parse(currBattle).invaderName;
-
-    localStorage.setItem('battleParticipated', JSON.stringify({
-        cityName,
-        invaderName
-    }));
-    //计算距离双整点的时间,判断可以攻击几次
-    var warCount = calculateWarCount();
-    console.log(warCount);
-    var warMessage = [];
-    var totalDamage = 0;
-    var coeff = 1000 * 60;
-    var now = new Date().getTime();
-    var updateAt = Math.floor( now / coeff) * coeff;
-    console.log(updateAt);
-    warMessage.push(updateAt);
-    for (var i = 1; i <= warCount+1; i++){
-        var damageInfo = calculateDamage();
-        var performance = damageInfo.pop();
-        var damage = damageInfo.pop();
-        totalDamage +=damage;
-        warMessage.push( nextNMinutes(i-1) + " " + "在" +cityName+"攻城战中，" + performance);
-    }
-    localStorage.setItem('warMessage', JSON.stringify({warMessage}));
-    //更新数据
-    updateDamage("invader", totalDamage, warMessage).then(function(){
-        document.location.reload();
-    });
-}
-
-//TODO 玩家点击防御方输出后触发,显示伤害顶部提示,更新伤害
-function dealDamageDefenderSide() {
-    console.log("dealDamageDefenderSide 运行");
-    var currBattle = localStorage.getItem("currBattle");
-    var cityName = JSON.parse(currBattle).cityName;
-    var defenderName = JSON.parse(currBattle).defenderName;
-
-    localStorage.setItem('battleParticipated', JSON.stringify({
-        cityName,
-        defenderName
-    }));
-    //计算距离双整点的时间,判断可以攻击几次
-    var warCount = calculateWarCount();
-    var warMessage = [];
-    var totalDamage = 0;
-    warMessage.push(new Date());
-    for (var i = 1; i <= warCount+1; i++){
-        var damage = calculateDamage();
-        totalDamage +=damage;
-        warMessage.push( nextNMinutes(i-1) + " " + "在" +cityName+"争夺战中,为"+defenderName+"输出"+damage+"点伤害");
-    }
-    localStorage.setItem('warMessage', JSON.stringify({warMessage}));
-
-    //更新数据
-    updateDamage("defender", totalDamage).then(function(){
-        document.location.reload();
-    });
-}
-
-//TODO 根据玩家数据和装备计算伤害
-function calculateDamage(){
-    console.log("calculateDamage 运行");
-        var user = AV.User.current();
-        var equip = localStorage.getItem("equip");
-        //力量
-        var str = user.get('str');
-        var helmet = JSON.parse(equip).helmet;
-        var armor = JSON.parse(equip).armor;
-        var shoes = JSON.parse(equip).shoes;
-        var offhand = JSON.parse(equip).offhand;
-        var shield = JSON.parse(equip).shield;
-        var sword = JSON.parse(equip).sword;
-        var spear = JSON.parse(equip).spear;
-        var bow = JSON.parse(equip).bow;
-        var horseHelmet = JSON.parse(equip).horseHelmet;
-        var horseSaddle = JSON.parse(equip).horseSaddle;
-        var horse = JSON.parse(equip).horse;
-        var finalStr = str + (helmet + armor + shoes + offhand) * 100;
-
-        //连击
-        var damage = 0;
-        var hitAgain = false;
-        var damageInfo =[];
-        var totalPerformance = "";
-        do{
-            var performance = "";
-            //伤害
-            var totalDmg = user.get('totalDmg');
-            var rank = Math.sqrt(totalDmg/10000);
-            var baseDmg = 1000 * (1 + 0.05 * rank);
-            var finalDmg = baseDmg + sword * 100;
-
-            //伤害区间
-            var minModifier = 0.8;
-            var maxModifier = 1.2;
-            minModifier = minModifier + (spear * 0.01);
-            maxModifier = (maxModifier + (spear * 0.01)) * (1 + bow * 0.02);
-            var randomModifier = getRandomArbitrary(minModifier, maxModifier);
-
-            //暴击
-            var horseHelmetRoll = Math.random();
-            var horseSaddleRoll = Math.random();
-            var horseHelmetChance = horseHelmet * 0.05;
-            var horseSaddleChance = horseSaddle * 0.05;
-            var criticalModifier =1;
-            // document.getElementById("modifier").innerHTML = "";
-
-            if (horseHelmetRoll <= horseHelmetChance){
-                criticalModifier *= 2;
-                performance += "冲锋陷阵，";
-            }
-            if (horseSaddleRoll <= horseSaddleChance){
-                criticalModifier *= 5;
-                performance += "一骑当千，";
-            }
-            if (criticalModifier === 1){
-                performance += "表现平平，";
-            }
-
-            //失误
-            var missModifier =1;
-            var shieldRoll = Math.random();
-            var shieldRollChance = 0.1 -shield * 0.01;
-            if (shieldRoll <= shieldRollChance){
-                missModifier = 0;
-                performance = "摔下城墙，";
-            }
-
-            //连击
-            hitAgain = false;
-            var horseRoll = Math.random();
-            var horseRollChance = horse * 0.05;
-            var currDamage = round(finalDmg * (finalStr / 1000) * randomModifier * criticalModifier) * missModifier;
-            damage += currDamage;
-            if (horseRoll <= horseRollChance){
-                performance += "血战不息，";
-                hitAgain = true;
-            }
-
-            performance = "您" + performance +"造成"+currDamage+"点伤害。";
-            totalPerformance +=performance;
-        }while(hitAgain === true);
-
-        console.log(totalPerformance + damage);
-        damageInfo.push(damage);
-        damageInfo.push(totalPerformance);
-        return damageInfo;
-}
-
-//TODO handlebars compile battlePanel 一次性的战场信息(城市,战争方,防御方)
-function compileBattle(battlePanel){
-    $(document).ready(function() {
-        var source = $("#battlePanelData").html();
-        var template = Handlebars.compile(source);
-        var html = template(battlePanel);
-        $(".battleDataContainer").html(html);
-    });
-}
-
-//vue 组件
+//TODO vue 组件
 var adjacentRankData = new Vue({
     el: '#adjacentRankData',
     data: {
@@ -565,53 +590,3 @@ var topRankDataDef = new Vue({
 });
 
 
-function loadSheet() {
-    console.log("loadSheet 运行");
-    var x = setInterval(function() {
-    var user = AV.User.current();
-    //var loadedData = JSON.parse(localStorage.getItem("tblArrayJson"));
-    var loadedTable = document.getElementById("SpreadsheetTable");
-    $("#tableBody").empty();
-    var warMessageContainer = localStorage.getItem("warMessage");
-    var warMessage = JSON.parse(warMessageContainer);
-    var msgArray = warMessage.warMessage;
-
-    // Get today's date and time
-    var now = new Date().getTime();
-    var updateAt = msgArray[0];
-    // Find the distance between now and the count down date
-    var distance = now - updateAt;
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = days * 24 * 60 + hours * 60 + Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    // console.log("距离上次攻击多少分钟：" + minutes);
-    var isAtWar = true;
-    for (var i = 1; i < msgArray.length && i <= minutes + 1; i++) {
-        var row = loadedTable.insertRow(0);
-        var cell = row.insertCell(0);
-        cell.innerHTML = msgArray[i];
-
-        //如果i == msgArray.length-1 如果战斗完了，那么交战中变成战斗历史
-        if (i === msgArray.length -1){
-            console.log("整个数组读完了");
-            isAtWar = false;
-            $("#refreshBox").hide();
-            $("#messageTitle").removeClass("w3-red").html("伤害历史");
-            $("#messageGif").attr("src","../img/snore.png").addClass("ld ld-breath");
-        }
-    }
-
-        if (user.get("canWar") === false && isAtWar === true){ //如果交战中
-            $("#refreshBox").show();
-            $("#messageTitle").removeClass("w3-black").addClass("w3-red").html("交战中");
-            $("#messageGif").attr("src","../img/gear.gif").removeClass("ld ld-breath");
-
-        }else{  //如果不在交战中
-            $("#refreshBox").hide();
-            $("#messageTitle").removeClass("w3-red").html("伤害历史");
-            $("#messageGif").attr("src","../img/snore.png").addClass("ld ld-breath");
-        }
-
-    },1000);
-}
-loadSheet();

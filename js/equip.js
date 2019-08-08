@@ -1,5 +1,3 @@
-// 第一个promise user.fetch也要return,不然promise是undefined
-
 //获取用户装备信息并填充
 function fetchAndPopulate(){
     fetchEquipInfo().then(function(res){

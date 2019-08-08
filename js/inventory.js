@@ -31,14 +31,13 @@ function evalInventory(){
         itemList['wuMoney'] = user.get("wuMoney");
         itemList['huangMoney'] = user.get("huangMoney");
 
-        console.log(itemList);
         for (var item in itemList) {
             console.log(item);
             var itemAmount = parseInt(itemList[item]);
             console.log(itemAmount);
             if (itemAmount !== 0){
+                console.log("itemAmount is : " + itemAmount);
                 var itemUrl = getItemUrl(item);
-                console.log(itemUrl);
                 itemPanel.itemData.push({
                     itemAmount,
                     itemUrl
@@ -60,11 +59,11 @@ function compile(itemPanel){
 function getItemUrl(item){
     var url = "";
     switch (item){
-        case "iron":
-            url = "https://cdn.e-sim.org//img/productIcons/Iron.png";
-            break;
         case "rice":
             url ='https://cdn.e-sim.org//img/productIcons/Grain.png';
+            break;
+        case "iron":
+            url = "https://cdn.e-sim.org//img/productIcons/Iron.png";
             break;
         case "stone":
             url ="https://cdn.e-sim.org//img/productIcons/Stone.png";

@@ -197,7 +197,7 @@ img[usemap] {
     border: 5px solid #f1f1f1;
     float: left;
 }
-.item:hover {
+.item:hover, .item:focus{
     border: 5px solid green;
 }
 

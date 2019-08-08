@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../css/all.css">
   <link rel="stylesheet" href="../css/my-style.css">
   <link rel="icon" href="../img/logo.png"/>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="../js/market.js"></script>
 </head>
 
 <body class="w3-animate-opacity">
@@ -20,13 +22,119 @@
 
   <!--TODO:右侧定制内容-->
   <div id="rightPanel" class="w3-rest w3-card-4 w3-round-xxlarge w3-margin-right w3-light-gray" style="margin-top:80px;">
-    2131wdfsdsaiyfudwayfudahfu
+
+<!--    我的报单,点击按钮,显示报单modal-->
+    <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+      <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">我的报单</span></h1><br><br>
+      <div class="workntrainButton">
+        <p class="w3-large">发布新单/撤回旧单</p>
+        <button class="w3-padding-large w3-round-xxlarge w3-green">点我进入</button>
+      </div>
+      <br><br>
+    </div><br><br>
+
+
+    <!--    查询订单-->
+    <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center" style="overflow:hidden">
+      <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">查询报单</span></h1>
+      <!--    选择商品-->
+      <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center" style="overflow:hidden">
+        <!--物品信息-->
+        <h2><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">选择商品</span></h2>
+        <div id="rice" class="item w3-round-xlarge w3-gray" tabindex="1">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('rice');">
+        </div>
+        <div id="iron" class="item w3-round-xlarge w3-gray" tabindex="1">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('iron');">
+        </div>
+        <div id="wood" class="item w3-round-xlarge w3-gray" tabindex="1">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('wood');">
+        </div>
+        <div id="stone" class="item w3-round-xlarge w3-gray" tabindex="1">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('stone');">
+        </div>
+        <div id="food" class="item w3-round-xlarge w3-gray" tabindex="1">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('food');">
+        </div>
+        <div id="weapon" class="item w3-round-xlarge w3-gray" tabindex="1">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('weapon');">
+        </div>
+        <div id="ladder" class="item w3-round-xlarge w3-gray" tabindex="1">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('ladder');">
+        </div>
+        <div id="rollingWood" class="item w3-round-xlarge w3-gray" tabindex="1">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('rollingWood');">
+        </div>
+        <div id="fallingStone" class="item w3-round-xlarge w3-gray" tabindex="1">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('fallingStone');">
+        </div>
+        <div id="catapult" class="item w3-round-xlarge w3-gray" tabindex="1">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('catapult');">
+        </div>
+        <div id="weaponUp" class="item w3-round-xlarge w3-gray" tabindex="1">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('weaponUp');">
+        </div>
+        <div id="equipUp" class="item w3-round-xlarge w3-gray" tabindex="1">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('equipUp');">
+        </div>
+        <div id="horseHelmetUp" class="item w3-round-xlarge w3-gray" tabindex="1">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('horseHelmetUp');">
+        </div>
+        <div id="horseSaddleUp" class="item w3-round-xlarge w3-gray" tabindex="1">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('horseSaddleUp');">
+        </div>
+        <div id="horseUp" class="item w3-round-xlarge w3-gray" tabindex="1">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('horseUp');">
+        </div>
+      </div><br>
+
+      <!--选择国家,选择买还是卖(点击查询,发布新单)-->
+      <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center" style="overflow:hidden">
+        <div class="w3-third w3-panel">
+          <select id="countrySelected" class="w3-select" name="option">
+            <option value="" disabled selected>选择国家</option>
+            <option value="weiguo">魏国</option>
+            <option value="shuguo">蜀国</option>
+            <option value="wuguo">吴国</option>
+            <option value="huangjin">黄巾</option>
+          </select>
+        </div>
+        <div id="typeSelected" class="w3-third w3-panel">
+          <select class="w3-select" name="option">
+            <option value="" disabled selected>选择买卖</option>
+            <option value="sell">我要买</option>
+            <option value="buy">我要卖</option>
+          </select>
+        </div>
+        <div class="w3-third w3-panel">
+          <button onclick="showOffer()" class="w3-button w3-green w3-round-xxlarge">点击查询</button>
+        </div>
+      </div><br>
+
+      <!--查询列表-->
+      <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+          <h3>商品列表(只显示前20条)</h3>
+          <div class="w3-white w3-round-large" style="overflow-y: scroll; height: 40vh;">
+            <table id="productTable" class="w3-table-all">
+              <thead>
+                <tr>
+                  <th>卖家</th>
+                  <th>库存</th>
+                  <th>价格</th>
+                  <th>买卖数量</th>
+                  <th>交易</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+      </div><br>
+    </div><br><br>
   </div>
 </div>
 
 <!--Script加载顺序!!!!!-->
-<!--加载jquery-->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
 <script src="../js/handlebars.min.js"></script>
 <!--初始化用户并加载user.js-->
 <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
@@ -34,7 +142,6 @@
 <script src="../js/user.js"></script> <!--登录注册,登出,isCurrentUser-->
 <!--加载counter.js-->
 <script src="../js/counter.js"></script> <!--活动倒计时,东汉年历,当前时间-->
-
 <script>
     $("#nav-placeholder").load("navSideBar.html", function(){
         $.getScript("../js/navSideBar.js", function(){
@@ -45,9 +152,6 @@
                     countUp('June 1, 2019 00:00:00');
                     getCurrTime();
                     $.getScript("../js/translate.js", function(){
-                        detectLang();
-                    });
-                    $.getScript("../js/market.js", function(){
                         detectLang();
                     });
                 });

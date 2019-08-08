@@ -246,7 +246,7 @@ function setProfileData(){
             avatarUrl = avatar.get("image").get("url");
         }else{
             // console.log("没有avatar");
-            avatarUrl = "http://lc-q48bubuw.cn-e1.lcfile.com/e52cdcfbb6952a296362/%E7%82%B9%E6%88%91%E8%AE%BE%E7%BD%AE%E5%A4%B4%E5%83%8F.jpg";
+            avatarUrl = "../img/点我设置头像.jpg";
         }
 
         // handlebars navSideBar
