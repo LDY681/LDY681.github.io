@@ -16,16 +16,18 @@ function setupUserData(){
         var canWar = userData.get("canWar");
         var canTrain = userData.get("canTrain");
         var canWork = userData.get("canWork");
+        var trainCount = userData.get("trainCount");
+        var workCount = userData.get("workCount");
         var taskCompleted = 3;
         if (canWar === true){
             $("#taskButtonFight").css("display","inline-block");
             taskCompleted --;
         }
-        if (canTrain === true){
+        if (canTrain === true &&  trainCount !== 4){
             $("#taskButtonTrain").css("display","inline-block");
             taskCompleted --;
         }
-        if (canWork === true){
+        if (canWork === true &&  workCount !== 4){
             $("#taskButtonWork").css("display","inline-block");
             taskCompleted --;
         }

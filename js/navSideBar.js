@@ -78,18 +78,14 @@ function sendVerification(){
     let phoneNumber = $("#phoneNumber");
     // console.log(phoneNumber.val());
     phoneNumber.attr("disabled", true);
-
-    AV.Cloud.requestMobilePhoneVerify({
-        mobilePhoneNumber: phoneNumber.val(),
-        name: '转世三国',
-        op: '手机验证',
-        ttl: 10                     // 验证码有效时间为 10 分钟
-    }).then(function(res) {
-        //调用成功
-        // console.log("请求验证码:");
-        // console.log(res);
-    }, function(error){
-        alert(JSON.stringify(error));
+    var user = AV.User.current();
+    user.setMobilePhoneNumber(phoneNumber.val());
+    user.save().then(function(){
+        AV.User.requestMobilePhoneVerify(phoneNumber.val()).then(function(res) {
+            alert("验证码已发送!");
+        }, function(error){
+            alert(JSON.stringify(error));
+        });
     });
 }
 
@@ -102,30 +98,13 @@ function submitPhone(){
     };
     // console.log("验证码为 "+ smsCode + " 手机号为 "+ phoneNumber);
 
-    AV.Cloud.verifySmsCode(smsCode, phoneNumber).then(function(){
-        //验证成功
-        // console.log("手机验证码验证成功");
-        let current = AV.User.current();
-        var query = new AV.Query('_User');
-        query.get(current.id).then(function (user) {
-            // console.log(user);
-            user.set("mobilePhoneVerified", true);
-            user.set("mobilePhoneNumber", phoneNumber);
-            user.save().then(function(){
-
-            },function(error){
-                alert(JSON.stringify(error));
-            });
-            alert("验证成功!准备刷新页面!");
-            // window.location.reload();
-
-        }, function(err){
-            //验证失败
-            alert(JSON.stringify(err));
-        })
-    }, function(err){
-        //验证失败
-        alert(JSON.stringify(err));
+    AV.User.verifyMobilePhone(smsCode).then(function() {
+        alert("验证成功!准备刷新页面!");
+        setTimeout(function(){
+            window.location.reload();
+        },2000);
+    },function () {
+        alert("验证失败!");
     });
 }
 

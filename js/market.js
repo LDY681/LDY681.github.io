@@ -64,82 +64,196 @@ $(function(){
 });
 
 //根据商品类型,价格,数量,和类型,挂buyOffer or sellOffer
-function postOffer(product, price, amount, type, country){   //type=sell/buy
-    var offer = AV.Object.extend('market');
-    offer.set("product", product).set("type",type).set("price", price).set("amount", amount).set("country", country);
-    offer.save().then(function(){
-        $.notify("您的报单已提交!",{position:"top-center", className: "success"});
+function postOffer(){
+    var country = $("#countrySelected :selected").val();
+    var type = $("#typeSelected :selected").val();
+    var amount = parseInt($("#amount").val());
+    var price = parseInt($("#price").val());
+    var product = selectedProduct;
+    var market = AV.Object.extend('market');
+    var offer = new market();
+    console.log(type + " " + amount + " " + product + " at " +  price + " in " + country);
+    checkAvailability(type, price,amount,country,product).then(function(avail){
+        console.log("avail is " + avail);
+        if (avail === true){
+            offer.set("product", product).set("type",type).set("price", price).set("amount", amount).set("country", country).set("ownerName",AV.User.current().get("username")).set("owner",AV.User.current());
+            offer.save().then(function(res){
+                if (type === "buy"){    //如果挂的买单,查询钱够不够
+                    return takeMoney(price, amount, country);
+                }else{
+                    return takeProduct(product, amount);
+                }
+            }).then(function(){
+                $.notify("您的报单已提交!",{position:"top-center", className: "success"});
+                setTimeout(function(){
+                    window.location.reload();
+                },2000)
+            }).catch(function(){
+                $.notify("报单提交失败！!",{position:"top-center", className: "error"});
+            });
+        }else{
+            $.notify("请确保商品,国家,买卖类型,数量,价格均填入！!",{position:"top-center", className: "error"});
+        }
     });
 }
 
-//根据订单编号取消订单
-function withdrawOffer(objectId){
-    var offer = AV.Object.createWithoutData('market', objectId);
-    offer.destroy();
+//如果购买，检测钱够不够;如果出售，检测货够不够
+function checkAvailability(type, price,amount,country,product){
+    var availability = true;
+    var user = AV.User.current();
+    return user.fetch().then(function(){
+        if (type === "buy"){    //如果挂的买单,查询钱够不够
+            var payment = price * amount;
+            var moneyType = getMoneyType(country);
+            var money = user.get(moneyType);
+            if (payment > money){
+                $.notify("钱不够!",{position:"top-center", className: "error"});
+                availability = false;
+            }
+        }else{
+            var storage = user.get(product);
+            if (amount > storage){
+                $.notify("货不够!",{position:"top-center", className: "error"});
+                availability = false;
+            }
+        }
+        if (product === "" || type === "" || isNaN(amount) || isNaN(price) || country === ""){
+            availability = false;
+        }
+        return new Promise(function(resolve){
+            resolve(availability);
+        });
+    }).catch(function(){
+        return new Promise(function(reject){
+            reject(false);
+        });
+    });
 }
 
-//根据商品类型,价格,数量,和类型,直接购买或卖出
-function trade(product, price, type, offerId, amount){   // product, price, type, offerId, amount
-    var offer = AV.Object.extend('market');
-    market.set("product", product);
-    market.set("");
+function takeMoney(price, amount, country){
+    var user = AV.User.current();
+    var payment = price * amount;
+    var moneyType = getMoneyType(country);
+    console.log(moneyType + " " + -payment);
+    user.increment(moneyType, -payment);
+    return user.save();
+}
+function takeProduct(product, amount){
+    var user = AV.User.current();
+    console.log(product + " " + -amount);
+    user.increment(product, -amount);
+    return user.save();
+}
+
+//根据订单编号取消订单
+function withdrawOffer(offerId){
+    alert("即将撤销订单号: "+ offerId);
+    var offer = AV.Object.createWithoutData('market', offerId);
+    offer.destroy().then(function(){
+        window.location.reload();
+    });
+}
+
+function giveMoney(){}
+function giveProduct(){}
+
+//显示我的报单
+function showMyOffer(){
+    var query = new AV.Query('market');
+    // equalTo("country", country)
+    query.equalTo("owner", AV.User.current());
+    query.find().then(function(offers) {
+        console.log(offers);
+        offers.forEach(function (offer, i, a) {
+            //获取商品信息,ownerName,价格, 数量
+            var type = offer.get('type');
+            var product = offer.get("product");
+            var amount = offer.get("amount");
+            var price = offer.get("price");
+            var offerId = offer.get("objectId");
+            var country = offer.get("country");
+            var tableBody = document.getElementById("tableBody");
+            var row = tableBody.insertRow(-1);
+            var cell0 = row.insertCell(-1);
+            cell0.innerHTML = offerId;
+            var cell1 = row.insertCell(-1);
+            cell1.innerHTML = translator(type);
+            var cell2 = row.insertCell(-1);
+            cell2.innerHTML = translator(product);
+            var cell3 = row.insertCell(-1);
+            cell3.innerHTML = amount;
+            var cell4 = row.insertCell(-1);
+            cell4.innerHTML = price;
+            var cell5 = row.insertCell(-1);
+            cell5.innerHTML = translator(country);
+            var cell6 = row.insertCell(-1);
+            // product, price, type,offerId, amount
+            cell6.innerHTML = "<button type='button' class='w3-green w3-button w3-round-xlarge' onclick='withdrawOffer(\""+offerId+"\")'>取消</button>";
+        });
+    });
 }
 
 //TODO 根据商品类型和交易类型,展示buyOffer or sellOffer
 function showOffer(){  //type=sell/buy product=rice/iron/wood/stone/food/weapon/ladder/rollingWood/fallingStone/catapult
     $("#tableBody").empty();
-    console.log("empty");
     var country = $("#countrySelected :selected").val();
     var type = $("#typeSelected :selected").val();
-    console.log("country is; " + country + "type is: " + type);
-    var query = new AV.Query('market');
-    // equalTo("country", country)
-    query.equalTo("type", type).equalTo("product",selectedProduct);
-    if (type === "buy"){
-        query.ascending("price");
+    if (country === "" || type === "" || selectedProduct === ""){
+        $.notify("请填写商品,国家和买卖类型!",{position:"top-center", className: "error"});
     }else{
-        query.ascending("price");
-    }
-    query.limit(20);
-    query.find().then(function(offers) {
-        offers.forEach(function (offer, i, a) {
-            console.log(offer);
-            //获取商品信息,ownerName,价格, 数量
-            var ownerName = offer.get('ownerName');
-            var product = offer.get("product");
-            var amount = offer.get("amount");
-            var price = offer.get("price");
-            var offerId = offer.get("objectId");
-            var tableBody = document.getElementById("tableBody");
-            var row = tableBody.insertRow(-1);
-            var cell1 = row.insertCell(-1);
-            cell1.innerHTML = ownerName;
-            var cell2 = row.insertCell(-1);
-            cell2.innerHTML = amount;
-            var cell3 = row.insertCell(-1);
-            cell3.innerHTML = price;
-            var cell4 = row.insertCell(-1);
-            cell4.innerHTML = "<input type='number'>";
-            var cell5 = row.insertCell(-1);
-            // product, price, type, offerId, amount
-            var tradeParams = [];
-            tradeParams.push(product);
-            tradeParams.push(price);
-            tradeParams.push(type);
-            tradeParams.push(offerId);
-            cell5.innerHTML = "<button type='button' onclick='preTrade(" + tradeParams + ")'>点击购买</button>";
+        var query = new AV.Query('market');
+        // equalTo("country", country)
+        query.equalTo("type", type).equalTo("product",selectedProduct);
+        if (type === "buy"){
+            query.ascending("price");
+        }else{
+            query.ascending("price");
+        }
+        query.limit(20);
+        query.find().then(function(offers) {
+            offers.forEach(function (offer, i, a) {
+                //获取商品信息,ownerName,价格, 数量
+                var ownerName = offer.get('ownerName');
+                var product = offer.get("product");
+                var amount = offer.get("amount");
+                var price = offer.get("price");
+                var offerId = offer.get("objectId");
+                var tableBody = document.getElementById("tableBody");
+                var row = tableBody.insertRow(-1);
+                var cell0 = row.insertCell(-1);
+                cell0.innerHTML = offerId;
+                var cell1 = row.insertCell(-1);
+                cell1.innerHTML = ownerName;
+                var cell2 = row.insertCell(-1);
+                cell2.innerHTML = amount;
+                var cell3 = row.insertCell(-1);
+                cell3.innerHTML = price;
+                var cell4 = row.insertCell(-1);
+                cell4.innerHTML = "<input type='number' id='myInput'>";
+                var cell5 = row.insertCell(-1);
+                var buttonText = (type==="buy")?"出售":"购买";
+                cell5.innerHTML = "<button class='w3-green w3-round-xlarge w3-button' type='button' onclick='preTrade.call(this)'>" + buttonText + "</button>";
+            });
         });
+    }
+}
+function preTrade(){
+    // product, price, type,offerId, amount
+    console.log($(this).closest('tr').find('td').first().html());
+    $(this).closest('tr').find('td').each(function(){
+        console.log(this.innerHTML);
     });
+
+    console.log($(this).closest('tr').find('td #myInput').val());
+}
+//根据商品类型,价格,数量,和类型,直接购买或卖出
+function trade(tradeParams){   // product, price, type, offerId, amount
+    return;
+    var offer = AV.Object.createWithoutData('market', offerId);
+    market.set("product", product);
+    market.set("");
 }
 
-function preTrade(tradeParams){
-    var amount = 0;
-    $(this).closest('tr').find("input").each(function() {
-        amount = this.value;
-    });
-    tradeParams.push(amount);
-    trade(tradeParams);
-}
 function getItemUrl(item){
     var url = "";
     switch (item){
@@ -209,4 +323,61 @@ function getItemUrl(item){
     }
     return url;
 }
+
+function getMoneyType(country){
+    var money = "";
+    switch (country){
+        case "weiguo":
+            money = "weiMoney";
+            break;
+        case "shuguo":
+            money = "shuMoney";
+            break;
+        case "wuguo":
+            money = "wuMoney";
+            break;
+        case "huangjin":
+            money = "huangMoney";
+            break;
+        default:
+            money = "gold";
+    }
+    return money;
+}
+
+function translator(english){
+    switch(english){
+        case "rice":
+            return "谷物";
+        case "iron":
+            return "生铁";
+        case "wood":
+            return "原木";
+        case "stone":
+            return "粗石";
+        case "food":
+            return "军粮";
+        case "weapon":
+            return "兵器";
+        case "ladder":
+            return "云梯";
+        case "rollingWood":
+            return "滚木";
+        case "fallingStone":
+            return "落石";
+        case "catapult":
+            return "投石车";
+        case "buy":
+            return "买单";
+        case "weiguo":
+            return "魏国";
+        case "shuguo":
+            return "蜀国";
+        case "wuguo":
+            return "吴国";
+        case "huangjin":
+            return "黄巾";
+    }
+}
+
 
