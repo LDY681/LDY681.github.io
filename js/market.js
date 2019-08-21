@@ -87,7 +87,7 @@ function postOffer(){
                 $.notify("您的报单已提交!",{position:"top-center", className: "success"});
                 setTimeout(function(){
                     window.location.reload();
-                },2000)
+                },500)
             }).catch(function(){
                 $.notify("报单提交失败！!",{position:"top-center", className: "error"});
             });
@@ -147,9 +147,9 @@ function takeProduct(product, amount){
 
 //根据订单编号取消订单
 function withdrawOffer(offerId){
-    alert("即将撤销订单号: "+ offerId);
     var offer = AV.Object.createWithoutData('market', offerId);
     offer.destroy().then(function(){
+        alert("成功取消报单: "+ offerId);
         window.location.reload();
     });
 }
@@ -203,14 +203,17 @@ function showOffer(){  //type=sell/buy product=rice/iron/wood/stone/food/weapon/
     }else{
         var query = new AV.Query('market');
         // equalTo("country", country)
-        query.equalTo("type", type).equalTo("product",selectedProduct);
+        query.equalTo("type", type).equalTo("product",selectedProduct).equalTo("country", country);
         if (type === "buy"){
-            query.ascending("price");
+            query.ascending("price")    ;
         }else{
-            query.ascending("price");
+            query.descending("price");
         }
         query.limit(20);
         query.find().then(function(offers) {
+            if (offers.length === 0){
+                $.notify("市场空空如也/(ㄒoㄒ)/~~",{position:"top-center", className: "error"});
+            }
             offers.forEach(function (offer, i, a) {
                 //获取商品信息,ownerName,价格, 数量
                 var ownerName = offer.get('ownerName');
@@ -239,19 +242,50 @@ function showOffer(){  //type=sell/buy product=rice/iron/wood/stone/food/weapon/
 }
 function preTrade(){
     // product, price, type,offerId, amount
-    console.log($(this).closest('tr').find('td').first().html());
+    var offerId = "";
+    var price = 0;
+    var product = selectedProduct;
+    var action = ($("#typeSelected :selected").val() === "buy")?"sell":"buy";
+    var amount;
+    var i = 0;
     $(this).closest('tr').find('td').each(function(){
-        console.log(this.innerHTML);
+        switch (i){
+            case 0:
+                offerId = this.innerHTML;
+                i++;
+                break;
+            case 1:
+            case 2:
+                i++;
+                break;
+            case 3:
+                price = this.innerHTML;
+                i++;
+                break;
+            default:
+                i++;
+                break;
+        }
     });
+    amount = $(this).closest('tr').find('td #myInput').val();
 
-    console.log($(this).closest('tr').find('td #myInput').val());
-}
-//根据商品类型,价格,数量,和类型,直接购买或卖出
-function trade(tradeParams){   // product, price, type, offerId, amount
-    return;
-    var offer = AV.Object.createWithoutData('market', offerId);
-    market.set("product", product);
-    market.set("");
+   var paramsJson = {
+        product: product,
+        price: price,
+        action: action,
+        offerId: offerId,
+        amount: amount
+    };
+
+   console.log("paramsJson");
+   console.log(paramsJson);
+   AV.Cloud.run('trade', paramsJson).then(function () {
+       alert("交易成功!");
+       window.location.reload();
+   }).catch(function(){
+       alert("交易失败!");
+       window.location.reload();
+   });
 }
 
 function getItemUrl(item){
@@ -369,6 +403,8 @@ function translator(english){
             return "投石车";
         case "buy":
             return "买单";
+        case "sell":
+            return "卖单";
         case "weiguo":
             return "魏国";
         case "shuguo":
