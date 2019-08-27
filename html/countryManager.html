@@ -33,18 +33,27 @@
         <form class="w3-container w3-form">
           <p>
             <label>进攻国家:
-              <select name="country" id="country">
-                <option value="weiguo" selected="selected">魏国</option>
+              <select name="country" id="country" onchange="countrySelected(event)">
+                <option disabled selected value> -选择国家- </option>
+                <option value="weiguo">魏国</option>
                 <option value="shuguo">蜀国</option>
                 <option value="wuguo" >吴国</option>
                 <option value="huangjin">黄巾</option>
               </select>
             </label>
           <p>
-            <label>宣战城池ID</label>
-            <input class="w3-input" type="number" id="cityId"></p>
+          <label for="city">宣战城池:</label>
+          <select class="cityDataContainer" name="city" id="city" onchange="citySelected(event)">
+            <script id="cityData" type="text/x-handlebars-template">
+              <option disabled selected value> -选择城池- </option>
+              {{#each cityData}}
+                <option value="{{{cityName}}}">{{{cityName}}}</option>
+              {{/each}}
+            </script>
+          </select>
         </form>
-        <button id="declareWar" class="w3-green w3-padding-large w3-round-xxlarge">点击宣战</button>
+        <p style="display:none" id="warReminder"></p>
+        <button id="declareWar" class="w3-gray w3-padding-large w3-round-xxlarge" disabled>点击宣战</button>
       </div>
       <br><br>
     </div><br><br>

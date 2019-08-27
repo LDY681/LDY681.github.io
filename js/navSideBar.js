@@ -100,9 +100,9 @@ function submitPhone(){
 
     AV.User.verifyMobilePhone(smsCode).then(function() {
         alert("验证成功!准备刷新页面!");
-        setTimeout(function(){
+        AV.User.current().fetch().then(function(){
             window.location.reload();
-        },2000);
+        });
     },function () {
         alert("验证失败!");
     });

@@ -106,7 +106,7 @@ function resetAdjacent(){
     var query = new AV.Query('city');
     query.ascending("cityId");
     query.find().then(function (cities) {
-        var map = new Array(206);
+        var map = new Array(207);
 
         var xiangping = cities[0];
         var beiping = cities[1];
@@ -944,14 +944,6 @@ function resetAdjacent(){
         map[107].set('srcCity' , "金城");
         map[107].set('dest', anding);
         map[107].set('destCity' , "安定");
-        // 107安定
-        map[205] = new AV.Object('map');
-        map[205].set('src', jincheng);
-        map[205].set('srcCity' , "金城");
-        map[205].set('dest', wuwei);
-        map[205].set('destCity' , "武威");
-
-
 
         //108武都-天水
         map[108] = new AV.Object('map');
@@ -1253,6 +1245,19 @@ function resetAdjacent(){
         // 204合浦
         map[204] = setMap( hepu,"合浦",jiaozhi,"交趾");
 
+        //后来添加
+        // 205金城-武威
+        map[205] = new AV.Object('map');
+        map[205].set('src', jincheng);
+        map[205].set('srcCity' , "金城");
+        map[205].set('dest', wuwei);
+        map[205].set('destCity' , "武威");
+        // 206南皮-巨鹿
+        map[206] = new AV.Object('map');
+        map[206].set('src', nanpi);
+        map[206].set('srcCity' , "南皮");
+        map[206].set('dest', julu);
+        map[206].set('destCity' , "钜鹿");
         return AV.Object.saveAll(map);
     }).then(function(todos) {
     // 更新成功

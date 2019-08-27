@@ -24,8 +24,7 @@
 
 <!-- mapMenu-->
   <ul class="w3-col w3-light-gray w3-card-4" style="width:250px;margin-top:80px;list-style-type:none;border-radius: 50px 0 0 50px;" id="mapMenu">
-    <li class="w3-xxlarge">魏国</li>
-    <li class="w3-xlarge">河北</li>
+    <li class="w3-xxlarge">河北</li>
     <li class="w3-large">幽州</li>
     <li onclick="getMap(1);"><a href="#">襄平  幽州─辽东郡</a></li>
     <li onclick="getMap(2);"><a href="#">北平  幽州—右北平郡</a></li>
@@ -43,7 +42,7 @@
     <li onclick="getMap(11);"><a href="#">平原  青州─平原郡</a></li>
     <li onclick="getMap(12);"><a href="#">北海  青州─北海国</a></li>
 
-    <li class="w3-xlarge">中原</li>
+    <li class="w3-xxlarge">中原</li>
     <li class="w3-large">徐州</li>
     <li onclick="getMap(13);"><a href="#">琅琊  徐州─琅琊国</a></li>
     <li onclick="getMap(14);"><a href="#">下邳  徐州─州治</a></li>
@@ -63,9 +62,7 @@
     <li onclick="getMap(25);"><a href="#">洛阳  司隶─河南尹</a></li>
     <li onclick="getMap(26);"><a href="#">弘农  司隶─弘农郡</a></li>
 
-
-    <li class="w3-xxlarge">蜀国</li>
-    <li class="w3-xlarge">西北</li>
+    <li class="w3-xxlarge">西北</li>
     <li class="w3-large">雍州</li>
     <li onclick="getMap(27);"><a href="#">长安  雍州─京兆尹</a></li>
     <li onclick="getMap(28);"><a href="#">安定  雍州─安定郡</a></li>
@@ -74,7 +71,7 @@
     <li onclick="getMap(30);"><a href="#">武威  凉州─武威郡</a></li>
     <li onclick="getMap(31);"><a href="#">金城  凉州─金城郡</a></li>
 
-    <li class="w3-xlarge">巴蜀</li>
+    <li class="w3-xxlarge">巴蜀</li>
     <li class="w3-large">益州</li>
     <li onclick="getMap(32);"><a href="#">武都  益州─武都郡</a></li>
     <li onclick="getMap(33);"><a href="#">汉中  益州─汉中郡</a></li>
@@ -88,9 +85,7 @@
     <li onclick="getMap(41);"><a href="#">永昌  益州─永昌郡</a></li>
     <li onclick="getMap(42);"><a href="#">上庸  益州─上庸郡</a></li>
 
-
-    <li class="w3-xxlarge">吴国</li>
-    <li class="w3-xlarge">荆楚</li>
+    <li class="w3-xxlarge">荆楚</li>
     <li class="w3-large">荆州</li>
     <li onclick="getMap(43);"><a href="#">新野  荆州─南阳郡</a></li>
     <li onclick="getMap(44);"><a href="#">襄阳  荆州─襄阳郡</a></li>
@@ -101,7 +96,7 @@
     <li onclick="getMap(49);"><a href="#">桂阳  荆州─桂阳郡</a></li>
     <li onclick="getMap(50);"><a href="#">零陵  荆州─零陵郡</a></li>
 
-    <li class="w3-xlarge">吴越</li>
+    <li class="w3-xxlarge">吴越</li>
     <li class="w3-large">扬州</li>
     <li onclick="getMap(51);"><a href="#">寿春  扬州─州治</a></li>
     <li onclick="getMap(52);"><a href="#">庐江  扬州─庐江郡</a></li>
@@ -642,9 +637,6 @@
     addPath(jincheng, tianshui);
     // 107安定
     addPath(jincheng, anding);
-    // 205安定
-    addPath(jincheng, wuwei);
-
 
     //108武都-天水
     addPath(wudu, tianshui);
@@ -881,6 +873,10 @@
     // 204合浦
     addPath( hepu,"合浦",jiaozhi,"交趾");
 
+    // 205金城-武威
+    addPath(jincheng, wuwei);
+    //206南皮-巨鹿
+    addPath(nanpi, julu);
     function addPath(city1, city2, city3, city4){
         if (arguments.length === 2){
             var x1 = list[city1][2][0];
