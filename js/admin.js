@@ -106,8 +106,7 @@ function resetAdjacent(){
     var query = new AV.Query('city');
     query.ascending("cityId");
     query.find().then(function (cities) {
-        var map = new Array(205);
-
+        var map = new Array(206);
 
         var xiangping = cities[0];
         var beiping = cities[1];
@@ -170,20 +169,12 @@ function resetAdjacent(){
         var hepu = cities[58];
         var jiaozhi = cities[59];
 
-
-
-
-
         // 0 襄平 - 北平
         map[0] = new AV.Object('map');
         map[0].set('src', xiangping);
         map[0].set('srcCity' , "襄平");
         map[0].set('dest', beiping);
         map[0].set('destCity' , "北平");
-
-
-
-
 
         // 1 北平 - 襄平
         map[1] = new AV.Object('map');
@@ -203,10 +194,6 @@ function resetAdjacent(){
         map[3].set('srcCity' , "北平");
         map[3].set('dest', nanpi);
         map[3].set('destCity' , "南皮");
-
-
-
-
 
         // 4 蓟 - 中山
         map[4] = new AV.Object('map');
@@ -957,6 +944,12 @@ function resetAdjacent(){
         map[107].set('srcCity' , "金城");
         map[107].set('dest', anding);
         map[107].set('destCity' , "安定");
+        // 107安定
+        map[205] = new AV.Object('map');
+        map[205].set('src', jincheng);
+        map[205].set('srcCity' , "金城");
+        map[205].set('dest', wuwei);
+        map[205].set('destCity' , "武威");
 
 
 
