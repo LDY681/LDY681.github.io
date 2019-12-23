@@ -22,23 +22,13 @@
 <!--TODO:正文内容-->
 <div id="afterLoading" >
   <!--顶部：登录&注册按钮,活动倒计时栏-->
-  <div class="w3-row w3-round-xxlarge">
+  <div style="position: sticky; top: 0;" class="w3-row w3-round-xxlarge">
     <!--  不同界面下不同大小的登陆注册按钮-->
     <span class="w3-hide-small w3-hide-medium w3-padding w3-round-xxlarge  w3-light-gray w3-xlarge w3-text-red w3-center w3-display-topmiddle">距离上线还有: <span id="counter"></span></span>
-    <button onclick="document.getElementById('login').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-xxlarge w3-green w3-large w3-right w3-hide-medium w3-hide-small">
+    <button onclick="document.getElementById('login').style.display='block'" style="margin-top: 0;" class="regLogin w3-button w3-blue w3-right">
       点击图标进行登录
     </button>
-    <button onclick="document.getElementById('register').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-xxlarge w3-green w3-left w3-hide-medium w3-hide-small">
-      点击图标进行注册
-    </button>
-    <button onclick="document.getElementById('login').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-xlarge w3-hide-large w3-hide-small w3-green w3-right">点击图标进行登录
-    </button>
-    <button onclick="document.getElementById('register').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-xlarge w3-hide-large w3-hide-small w3-green w3-left">
-      点击图标进行注册
-    </button>
-    <button onclick="document.getElementById('login').style.display='block'" style="margin-top: 0;" class="w3-button w3-round-xxlarge w3-large w3-hide-large w3-hide-medium w3-green w3-right">点击图标进行登录
-    </button>
-    <button onclick="document.getElementById('register').style.display='block'" class="w3-button w3-round-xxlarge w3-large w3-hide-large w3-hide-medium w3-green w3-left">
+    <button onclick="document.getElementById('register').style.display='block'"style="margin-top: 0;" class="regLogin w3-button w3-blue w3-left">
       点击图标进行注册
     </button>
   </div>
@@ -48,7 +38,7 @@
     <!--国家特色(带image map)-->
     <button onclick="accordionOn('map');accordionOff('season');accordionOff('yellowTurban');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-hide-small w3-hide-medium w3-xxlarge w3-round-xxlarge">三国特色(点击地图查看)</button>
     <button onclick="accordionOn('map');accordionOff('season');accordionOff('yellowTurban');accordionOff('other');" class="w3-card-4 w3-block w3-green w3-padding-large w3-large w3-hide-large w3-round-xxlarge">三国特色(点击地图查看)</button>
-    <div id="map" class="w3-show w3-animate-opacity">
+    <div id="map" class="w3-show w3-animate-opacity" style="cursor: pointer;">
       <img class= "w3-section" alt="三国地图" src="../img/map-brief.png" width="1049" height="742" usemap="#sanguo">
       <map name="sanguo">
         <area alt="" class="shuguo" title="蜀国" coords="99,738,97,723,86,709,74,702,81,685,98,686,105,670,112,663,123,668,135,675,152,673,167,674,182,668,185,647,202,633,214,613,217,567,208,549,195,522,221,494,229,461,246,412,234,393,258,348,239,315,249,266,222,254,173,270,191,216,209,214,159,186,112,138,90,124,74,62,107,41,139,30,163,26,192,22,215,57,217,99,194,117,202,136,220,142,251,125,261,150,277,154,287,189,306,185,326,205,336,240,348,242,362,278,390,277,414,288,430,321,486,321,508,357,523,394,546,407,576,406,591,401,609,424,609,446,616,465,626,481,624,505,600,523,582,528,581,556,586,591,609,610,623,636,610,663,602,695,589,719,552,723,531,712,512,735,465,707,427,730,382,723,369,729,339,741" shape="poly">

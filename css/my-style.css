@@ -14,9 +14,13 @@ body {
     #adjacentCityInfo{
         width: 25%;
     }
+    .regLogin{
+        border-radius:4px!important;
+        font-size:40px!important;
+    }
 }
 /*中小屏幕*/
-@media (max-width:1365px){
+@media (min-width:1024px) and (max-width:1364px){
     /*rightPanel里userMenu和customContent的样式*/
     #userMenu {width:200px;}
     #mapMenu {display: none!important;}
@@ -29,6 +33,10 @@ body {
     #adjacentCityInfo{
         width: 45%;
     }
+    .regLogin{
+        border-radius:8px!important;
+        font-size:30px!important;
+    }
 }
 /*小屏幕*/
 @media (max-width:1023px){
@@ -40,6 +48,10 @@ body {
     }
     #adjacentCityInfo{
         width: 80%;
+    }
+    .regLogin{
+        border-radius:16px!important;
+        font-size:20px!important;
     }
 }
 
