@@ -113,7 +113,9 @@ function submitPhone(){
 function setAvatar(){
     console.log("setAvatar开始");
     var file = $('#inputFile')[0].files[0];
-    if (file.size > 524288){
+    if (!['image/gif', 'image/jpeg', 'image/png'].includes(file['type'])){
+        alert("请选择JPG,PNG,GIF格式的头像");
+    }else if(file.size > 524288){
         alert("请选择小于500KB的头像");
     }else{
         var name = file.name;

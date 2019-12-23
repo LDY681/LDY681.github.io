@@ -12,109 +12,96 @@
 
 <body class="w3-animate-opacity">
 
-<!--训练成功提示-->
+<!--训练成功提示
 <div class="successNotifier popupFadeout w3-display-topmiddle w3-third w3-round-xxlarge w3-yellow w3-card-4" style="z-index: 2; display: none; position: fixed; height: 50px;line-height: 45px;">
   <div style="text-align: center;"><span style="color: Green; display: inline-block; vertical-align: middle; font-size: 25px;">训练成功!</span></div>
-</div>
+</div>-->
 
 <!--navSideBar placeholder-->
 <div style="position: relative" id="nav-placeholder"></div>
 
-<!-- 正文内容-->
-<div id="customContent" style="margin-left:0" class="w3-row">
+  <div id="customContent" style="margin-left:0" class="w3-row">
+    <!-- 用户菜单 placeholder-->
+    <div id="userMenu" class="coolScroll-y w3-col w3-light-gray w3-card-4 w3-center w3-round-xxlarge w3-margin-left w3-margin-right" style="margin-top: 60px; height: 90vh; position:fixed"></div>
+    <div id="rightPanel" class="w3-rest w3-card-4 w3-round-xxlarge w3-margin-right w3-light-gray" style="margin-top:60px; margin-bottom:20px;">
 
-  <!-- 用户菜单 placeholder-->
-  <div id="userMenu" class="coolScroll-y w3-col w3-light-gray w3-card-4 w3-center w3-round-xxlarge w3-margin-left w3-margin-right" style="margin-top: 80px; height: 90vh; position:fixed"></div>
+        <div class="trainBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+          <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">进行训练</span></h1><br><br>
+          <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
+          <div class="workntrainButton" style="display: none;">
+            <p id="trainNotifier" class="w3-large"></p>
+            <button id="onTrain" class="w3-padding-large w3-round-xxlarge"></button>
+          </div>
+          <br><br>
+        </div><br><br>
 
-  <!--TODO:右侧定制内容-->
-  <div id="rightPanel" class="w3-rest w3-card-4 w3-round-xxlarge w3-margin-right w3-light-gray" style="margin-top:80px;"><br><br>
+        <div class="trainEffectBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+          <!--         TODO: implement产量加成-->
+          <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">训练效果</span></h1>
+          <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
+          <div class="w3-panel">
+            <table class="w3-table-all w3-card-4">
+              <tr>
+                <td>力量区间</td>
+                <td>增加力量</td>
+                <td>获得经验</td>
+              </tr>
+              <tr>
+                <td>0-1000</td>
+                <td>100</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>1001-1500</td>
+                <td>50</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>1501-2000</td>
+                <td>20</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>2000-3000</td>
+                <td>10</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>3000以上</td>
+                <td>5</td>
+                <td>1</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+        </div><br><br>
 
-    <div class="trainBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
-      <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">进行训练</span></h1><br><br>
-      <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
-      <div class="workntrainButton" style="display: none;">
-        <p id="trainNotifier" class="w3-large"></p>
-        <button id="onTrain" class="w3-padding-large w3-round-xxlarge"></button>
-      </div>
-      <br><br>
-    </div><br><br>
-
-    <div class="trainEffectBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
-      <!--         TODO: implement产量加成-->
-      <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">训练效果</span></h1>
-      <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
-      <div class="w3-panel">
-        <table class="w3-table-all w3-card-4">
-          <tr>
-            <td>力量区间</td>
-            <td>增加力量</td>
-            <td>获得经验</td>
-          </tr>
-          <tr>
-            <td>0-1000</td>
-            <td>100</td>
-            <td>10</td>
-          </tr>
-          <tr>
-            <td>1001-1500</td>
-            <td>50</td>
-            <td>5</td>
-          </tr>
-          <tr>
-            <td>1501-2000</td>
-            <td>20</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>2000-3000</td>
-            <td>10</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>3000以上</td>
-            <td>5</td>
-            <td>1</td>
-          </tr>
-        </table>
-      </div>
-      <br><br>
-    </div><br><br>
-
-    <div class="trainStatsBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
-      <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">训练详情</span></h1>
-      <div class="w3-panel" style="width: 50%; margin:auto;">
-        <table class="w3-table-all w3-card-4">
-          <tr>
-            <td>总训练次数</td>
-            <td>0 次</td>
-          </tr>
-          <tr>
-            <td>力量</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>力量增加</td>
-            <td>0%</td>
-          </tr>
-          <tr>
-            <td>获得经验</td>
-            <td>0%</td>
-          </tr>
-        </table>
-      </div>
-      <br><br>
-    </div><br><br>
-  </div><!--end of 右侧定制内容-->
-</div>
-
-
-
-
-
-
-
-
-
+        <div class="trainStatsBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+          <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">训练详情</span></h1>
+          <div class="w3-panel" style="width: 50%; margin:auto;">
+            <table class="w3-table-all w3-card-4">
+              <tr>
+                <td>总训练次数</td>
+                <td>0 次</td>
+              </tr>
+              <tr>
+                <td>力量</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>力量增加</td>
+                <td>0%</td>
+              </tr>
+              <tr>
+                <td>获得经验</td>
+                <td>0%</td>
+              </tr>
+            </table>
+          </div>
+          <br><br>
+        </div><br><br>
+      </div><!--end of 右侧定制内容-->
+  </div>
 
 <!--Script加载顺序!!!!!-->
 <!--加载jquery-->
@@ -162,7 +149,5 @@
         });
     });
 </script>
-
-
 </body>
 </html>

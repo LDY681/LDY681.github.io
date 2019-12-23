@@ -1,7 +1,6 @@
 var cityDataString = $("#cityData").html();
 
 $(function(){
-
     $("#declareWar").on("click", function(){
         declareWar();
     });
@@ -86,7 +85,6 @@ function declareWar(){
                     }else{
                         alert("宣战成功!战场将在24点开启!");
                     }
-
                 }, function(err){
                     alert("宣战失败");
                 });

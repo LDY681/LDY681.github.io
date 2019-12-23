@@ -1,1 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>vue.js测试</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
 
+<body>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!'
+            }
+        })
+    </script>
+    <div id="app">
+        {{ message }}
+    </div>
+</body>

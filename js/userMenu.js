@@ -13,6 +13,7 @@ function setupUserData(){
         var rank = userData.get("rank");
         var dmg = userData.get("totalDmg");
         var str = userData.get("str");
+        var eco = userData.get("ecoSkill");
         var canWar = userData.get("canWar");
         var canTrain = userData.get("canTrain");
         var canWork = userData.get("canWork");
@@ -42,7 +43,8 @@ function setupUserData(){
             rank,
             dmg,
             str,
-            avatarUrl
+            avatarUrl,
+            eco
         });
 
         $(document).ready(function() {

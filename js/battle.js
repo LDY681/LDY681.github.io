@@ -382,79 +382,80 @@ function updateDamage(side, damage, warMessage){
         var user = AV.User.current();
         var canWar = user.get('canWar');
 
-        //如果伤害不为0,正常输出
-        if (damage !== 0){
-            //如果canWar=false
-            if (canWar === false){
-                alert("您已投入战斗!");
-            }else{  //如果可以战斗
-                user.set('canWar',false);
-                var city = cities[0];
-                if(side === "invader"){
-                    city.increment('offdmg', damage);
-                }else{
-                    city.increment('defdmg', damage);
+        //如果canWar=false
+        if (canWar === false){
+            alert("您已投入战斗!");
+        }else{  //如果可以战斗
+            user.set('canWar',false);
+            var city = cities[0];
+            if(side === "invader"){
+                city.increment('offdmg', damage);
+            }else{
+                city.increment('defdmg', damage);
+            }
+            return city.save(null, {
+                fetchWhenSave: true
+            }).then(function(){
+                //正常增加totalDamage
+                console.log("城池伤害更新完毕");
+                user.increment('totalDmg', damage);
+                if (messagePassed != null){
+                    user.set("warMessage", warMessage);
                 }
-                return city.save(null, {
+                return user.save(null, {
                     fetchWhenSave: true
                 }).then(function(){
-                    //正常增加totalDamage
-                    user.increment('totalDmg', damage);
-                    if (messagePassed != null){
-                        user.set("warMessage", warMessage);
+                    //更新战场总伤,防御方,和每日伤害排行榜
+                    console.log("玩家伤害更新完毕");
+                    var battleId = "battle" + cityId;
+                    var sideId;
+                    if(side === "invader"){
+                        sideId = "invader" + cityId;
+                    }else{
+                        sideId = "defender" + cityId;
                     }
-                    return user.save(null, {
-                        fetchWhenSave: true
-                    }).then(function(){
-                        return new Promise(function(resolve, reject) {
-                            if (JSON.parse(localStorage.getItem('equip')) === undefined){
-                                reject(new Error("Equip doesn't exist"));
-                            }else{
-                                resolve();
-                            }
-                        });
+                    //更新排行榜数据
+                    return AV.Leaderboard.updateStatistics(AV.User.current(), {
+                        [battleId]: damage,
+                        [sideId]: damage,
+                        dailyDamage: damage,
+                    }).then(function(statistics) {
+                        if (side === "invader"){
+                            //更新页面上的伤害显示
+                            var myInvaderDmg = $("#myInvaderDmg");
+                            myInvaderDmg.html(statistics[1].value);
+                            myInvaderDmg.addClass("ld ld-tick");
+                            setTimeout(function(){myInvaderDmg.removeClass("ld ld-tick")}, 500);
+                        }else{
+                            var myDefenderDmg = $("#myDefenderDmg");
+                            myDefenderDmg.html(statistics[1].value);
+                            myDefenderDmg.addClass("ld ld-tick");
+                            setTimeout(function(){myDefenderDmg.removeClass("ld ld-tick")}, 500);
+                        }
+                        console.log("排行榜更新完毕");
+                    }, function(err){
+                        console.log("排行榜更新错误");
+                        console.log(err);
                     });
                 });
-
-            }
-        }   //end of if damage != 0
-
-        //更新战场总伤,防御方,和每日伤害排行榜
-        var battleId = "battle" + cityId;
-        var sideId;
-        if(side === "invader"){
-            sideId = "invader" + cityId;
-        }else{
-            sideId = "defender" + cityId;
+            });
         }
-        //更新排行榜数据
-        return AV.Leaderboard.updateStatistics(AV.User.current(), {
-            [battleId]: damage,
-            [sideId]: damage,
-            dailyDamage: damage,
-        }).then(function(statistics) {
-            if (side === "invader"){
-                //更新页面上的伤害显示
-                var myInvaderDmg = $("#myInvaderDmg");
-                myInvaderDmg.html(statistics[1].value);
-                myInvaderDmg.addClass("ld ld-tick");
-                setTimeout(function(){myInvaderDmg.removeClass("ld ld-tick")}, 500);
-            }else{
-                var myDefenderDmg = $("#myDefenderDmg");
-                myDefenderDmg.html(statistics[1].value);
-                myDefenderDmg.addClass("ld ld-tick");
-                setTimeout(function(){myDefenderDmg.removeClass("ld ld-tick")}, 500);
-            }
-        }, function(err){
-            console.log("排行榜更新错误");
-            console.log(err);
-        });
+
+
     });
 }
 
 //自动刷新 首次进入战场时加载，并之后每5分钟刷新排行榜和双方总伤
 function autoUpdate(){
     console.log("autoUpdate运行");
+
+    fetch('http://localhost:3000/').then(function(response) {
+            return response.json();
+        })
+        .then(function(myJson) {
+            console.log(JSON.stringify(myJson));
+        });
+
     updateLeaderBoard();
     updateDamageStats();
     setInterval(function(){
@@ -500,6 +501,7 @@ function updateLeaderBoard(){
     }).then(function(users) {
         adjacentRankData.rankDatas = [];
         var itemsProcessed = 0;
+        console.log(users);
         users.forEach(function(user){
             itemsProcessed++;
             var rank = user.rank + 1;
@@ -532,6 +534,10 @@ function updateLeaderBoard(){
             itemsProcessed++;
             var rank = user.rank + 1;
             var damage = user.value;
+            if (damage === 0){
+                damage = "0";
+                rank = "999";
+            }
             adjacentRankDataDef.rankDatas.push({ rank: rank, damage: damage });
         });
     });
