@@ -246,6 +246,10 @@ function evalCanWar(){
 //TODO 战斗类
 //玩家点击战斗后触发,生成本地伤害历史,总伤害,并调用updateDamage (更新到云端)
 function dealDamage(side){
+    //disable onWar button after click
+    var onWar = $(".onWar");
+    onWar.prop('disabled', true);
+    onWar.addClass("w3-grey");
     var currBattle = localStorage.getItem("currBattle");
     var cityName = JSON.parse(currBattle).cityName;
     var invaderName = JSON.parse(currBattle).invaderName;

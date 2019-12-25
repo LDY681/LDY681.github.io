@@ -283,20 +283,20 @@
             if ( city.get("isAtWar") === false){
                 if (city.get('owner').get('name') === "weiguo"){
                     $j = city.get('cityId');                                                                                                                       //编号+城市名+所属州郡+现在地址+战场链接
-                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "</div>" + "<br>" + "<a  href='"+ battlehtml + [$j] + "' style='text-decoration:none;'>" +"进入城市"+"</a>");
                 }else if (city.get('owner').get('name') === "shuguo"){
                     $j = city.get('cityId');
-                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "</div>" + "<br>" + "<a  href='"+ battlehtml + [$j] + "' style='text-decoration:none;'>" +"进入城市"+"</a>");
                 }else if (city.get('owner').get('name') === "wuguo"){
                     $j = city.get('cityId');
-                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "</div>" + "<br>" + "<a  href='"+ battlehtml + [$j] + "' style='text-decoration:none;'>" +"进入城市"+"</a>");
                 }else{
                     $j = city.get('cityId');
-                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: huangCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+                    L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: huangCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + city.get('owner').get('cname') + "</div>" + "<br>" + "<a  href='"+ battlehtml + [$j] + "' style='text-decoration:none;'>" +"进入城市"+"</a>");
                 }
             }else{
                 $j = city.get('cityId');
-                L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: warCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + "交战中!" + "<br><br>" + "<a  href='"+ battlehtml + [$j] + "' target=_blank>" +"进入城市"+"</a></div>");
+                L.marker([list[$j-1][2][0],list[$j-1][2][1]],{icon: warCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j-1][0] + ". " + list[$j-1][1] + "</font></h3>"+ list[$j-1][4]  + "交战中!" + "</div>" + "<br>" + "<a  href='"+ battlehtml + [$j] + "' style='text-decoration:none;'>" +"进入城市"+"</a>");
             }
 
         });
@@ -315,16 +315,16 @@
 
             if ( city.get("isAtWar") === false){
                 if (city.get('owner').get('name') === "weiguo"){
-                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: weiCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "</div>"+"<br>" + "<a  href='"+ battlehtml + [$j+1] + "' style='text-decoration:none;'>" +"进入城市"+"</a>").openPopup();
                 }else if (city.get('owner').get('name') === "shuguo"){
-                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: shuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "</div>"+"<br>" + "<a  href='"+ battlehtml + [$j+1] + "' style='text-decoration:none;'>" +"进入城市"+"</a>").openPopup();
                 }else if (city.get('owner').get('name') === "wuguo"){
-                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: wuCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "</div>"+"<br>" + "<a  href='"+ battlehtml + [$j+1] + "' style='text-decoration:none;'>" +"进入城市"+"</a>").openPopup();
                 }else{
-                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: huangCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+                    L.marker([list[$j][2][0],list[$j][2][1]],{icon: huangCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + city.get('owner').get('cname') + "</div>" + "<br>" + "<a  href='"+ battlehtml + [$j+1] + "' style='text-decoration:none;'>" +"进入城市"+"</a>").openPopup();
                 }
             }else{
-                L.marker([list[$j][2][0],list[$j][2][1]],{icon: warCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "交战中!" + "<br><br>" + "<a  href='"+ battlehtml + [$j+1] + "' target=_blank>" +"进入城市"+"</a></div>").openPopup();
+                L.marker([list[$j][2][0],list[$j][2][1]],{icon: warCityIcon}).addTo(map).bindPopup("<div class='popupInfo'><h3><font color='#00a6ac'>" +list[$j][0] + ". " + list[$j][1] + "</font></h3>"+ list[$j][4]  + "交战中!" + "</div>"+"<br>" + "<a  href='"+ battlehtml + [$j+1] + "' style='text-decoration:none;'>" +"进入城市"+"</a>" ).openPopup();
             }
         });
     }
@@ -332,7 +332,7 @@
     //弹窗
     var popup = new L.popup();
     function onMapClick(e) {
-        popup.setLatLng(e.latlng).setContent(e.latlng.toString()).openOn(map);
+        popup.openOn(map);
     }
     map.on('click', onMapClick);
 

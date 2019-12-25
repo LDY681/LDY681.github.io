@@ -40,6 +40,7 @@ body {
 }
 /*小屏幕*/
 @media (max-width:1023px){
+    #mapMenu {display: none!important;}
     #userMenu {
         display: none;
     }
@@ -209,8 +210,14 @@ img[usemap] {
     border: 5px solid #f1f1f1;
     float: left;
 }
-.item:hover, .item:focus{
+.item:hover{
     border: 5px solid green;
+    transition: all 0.5s ease;
+}
+
+.itemMouseClick{
+    border: 5px solid darkgreen;
+    transition: all 0.3s ease;
 }
 
 .item img {

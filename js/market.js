@@ -1,65 +1,13 @@
 var selectedProduct = "";
 //查询 选择商品
 $(function(){
-    $("#rice").click(function(){
-        selectedProduct = "rice";
-        $.notify("新鲜的大米哟!",{position:"top-center", className: "success"});
-    });
-    $("#iron").click(function(){
-        selectedProduct = "iron";
-        $.notify("上等的生铁哟!",{position:"top-center", className: "success"});
-    });
-    $("#wood").click(function(){
-        selectedProduct = "wood";
-        $.notify("上等的原木哟!",{position:"top-center", className: "success"});
-    });
-    $("#stone").click(function(){
-        selectedProduct = "stone";
-        $.notify("高质的粗石哟!",{position:"top-center", className: "success"});
-    });
-    $("#food").click(function(){
-        selectedProduct = "food";
-        $.notify("新鲜的军粮哟!",{position:"top-center", className: "success"});
-    });
-    $("#weapon").click(function(){
-        selectedProduct = "weapon";
-        $.notify("上好的兵器哟!",{position:"top-center", className: "success"});
-    });
-    $("#rollingWood").click(function(){
-        selectedProduct = "rollingWood";
-        $.notify("上好的滚木哟!",{position:"top-center", className: "success"});
-    });
-    $("#ladder").click(function(){
-        selectedProduct = "ladder";
-        $.notify("上好的云梯哟!",{position:"top-center", className: "success"});
-    });
-    $("#fallingStone").click(function(){
-        selectedProduct = "fallingStone";
-        $.notify("上好的落石哟!",{position:"top-center", className: "success"});
-    });
-    $("#catapult").click(function(){
-        selectedProduct = "catapult";
-        $.notify("上好的投石车哟!",{position:"top-center", className: "success"});
-    });
-    $("#weaponUp").click(function(){
-        selectedProduct = "weaponUp";
-        $.notify("稀缺的武器碎片哟!",{position:"top-center", className: "success"});
-    });
-    $("#equipUp").click(function(){
-        selectedProduct = "equipUp";
-        $.notify("稀缺的装备碎片哟!",{position:"top-center", className: "success"});
-    });
-    $("#horseHelmetUp").click(function(){
-        selectedProduct = "horseHelmetUp";
-        $.notify("稀缺的马盔碎片哟!",{position:"top-center", className: "success"});
-    });
-    $("#horseSaddleUp").click(function(){
-        selectedProduct = "horseSaddleUp";
-        $.notify("稀缺的马鞍碎片哟!",{position:"top-center", className: "success"});
-    });
-    $("#horseUp").click(function(){
-        selectedProduct = "horseUp";
-        $.notify("稀缺的战马碎片哟!",{position:"top-center", className: "success"});
+    var item = $(".item");
+
+    item.click(function(event){
+        selectedProduct = event.target.id !== ""?event.target.id : event.target.parentNode.id;
+        console.log("selectedProduct is :" + selectedProduct + "\n");
+        $(".item").removeClass('itemMouseClick');
+        $(this).addClass('itemMouseClick');
     });
 });
 
@@ -72,29 +20,32 @@ function postOffer(){
     var product = selectedProduct;
     var market = AV.Object.extend('market');
     var offer = new market();
-    console.log(type + " " + amount + " " + product + " at " +  price + " in " + country);
+    if (type ==="" || isNaN(amount)|| product ===""|| isNaN(price)|| country ===""){
+        $.notify("请选择类型,数量,产品,价格, 国家!", {position: "top-center", className: "error"});
+        return;
+    }
     checkAvailability(type, price,amount,country,product).then(function(avail){
-        console.log("avail is " + avail);
-        if (avail === true){
-            offer.set("product", product).set("type",type).set("price", price).set("amount", amount).set("country", country).set("ownerName",AV.User.current().get("username")).set("owner",AV.User.current());
-            offer.save().then(function(res){
-                if (type === "buy"){    //如果挂的买单,查询钱够不够
-                    return takeMoney(price, amount, country);
-                }else{
-                    return takeProduct(product, amount);
-                }
-            }).then(function(){
-                $.notify("您的报单已提交!",{position:"top-center", className: "success"});
-                setTimeout(function(){
-                    window.location.reload();
-                },500)
-            }).catch(function(){
-                $.notify("报单提交失败！!",{position:"top-center", className: "error"});
-            });
-        }else{
-            $.notify("请确保商品,国家,买卖类型,数量,价格均填入！!",{position:"top-center", className: "error"});
-        }
-    });
+        console.log("钱/货是否足够:" + avail + "\n");
+        if (avail === false) return;
+
+        //钱货足够且订单信息齐全,开始上报
+        console.log(type + " " + amount + " " + product + " at $" +  price + " in " + country);
+        offer.set("product", product).set("type", type).set("price", price).set("amount", amount).set("country", country).set("ownerName", AV.User.current().get("username")).set("owner", AV.User.current());
+        offer.save().then(function (res) {
+            if (type === "buy") {    //如果挂的买单,查询钱够不够
+                return takeMoney(price, amount, country);
+            } else {
+                return takeProduct(product, amount);
+            }
+        }).then(function () {
+            $.notify("您的报单已提交!", {position: "top-center", className: "success"});
+            setTimeout(function () {
+                window.location.reload();
+            }, 500)
+        }).catch(function () {
+            $.notify("报单提交失败！!", {position: "top-center", className: "error"});
+        });
+});
 }
 
 //如果购买，检测钱够不够;如果出售，检测货够不够
@@ -235,12 +186,14 @@ function showOffer(){  //type=sell/buy product=rice/iron/wood/stone/food/weapon/
                 cell4.innerHTML = "<input type='number' id='myInput'>";
                 var cell5 = row.insertCell(-1);
                 var buttonText = (type==="buy")?"出售":"购买";
-                cell5.innerHTML = "<button class='w3-green w3-round-xlarge w3-button' type='button' onclick='preTrade.call(this)'>" + buttonText + "</button>";
+                cell5.innerHTML = "<button class='w3-green w3-round-xlarge w3-button' type='button' onclick='trade.call(this)'>" + buttonText + "</button>";
             });
         });
     }
 }
-function preTrade(){
+
+//trade 收集提交信息,并且调用后端的trade函数
+function trade(){
     // product, price, type,offerId, amount
     var offerId = "";
     var price = 0;
