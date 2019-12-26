@@ -24,6 +24,10 @@ function postOffer(){
         $.notify("请选择类型,数量,产品,价格, 国家!", {position: "top-center", className: "error"});
         return;
     }
+    if (price <= 0){
+        $.notify("价格不能低于0!", {position: "top-center", className: "error"});
+        return;
+    }
     checkAvailability(type, price,amount,country,product).then(function(avail){
         console.log("钱/货是否足够:" + avail + "\n");
         if (avail === false) return;
@@ -98,15 +102,39 @@ function takeProduct(product, amount){
 
 //根据订单编号取消订单
 function withdrawOffer(offerId){
-    var offer = AV.Object.createWithoutData('market', offerId);
-    offer.destroy().then(function(){
-        alert("成功取消报单: "+ offerId);
-        window.location.reload();
+    var query = new AV.Query('market');
+    query.get(offerId).then(function (offer) {
+        let type = offer.get("type");
+        let product = offer.get("product");
+        let price = parseInt(offer.get("price"));
+        let amount = parseInt(offer.get("amount"));
+        let country = offer.get("country");
+        let currency = getMoneyType(country);
+        console.log("正在取消报单: "+ offerId + type + product + price + amount + country + currency);
+        if (type === "buy"){    //买单,returnMoney
+            console.log("买单:返还" + amount * price + " " + currency);
+            returnMoney(currency, amount * price);
+        }else{  //卖单,returnProduct
+            console.log("卖单:返还" + amount + " " + product);
+            returnProduct(product, amount);
+        }
+        offer.destroy().then(function(){
+            alert("成功取消报单: "+ offerId);
+            window.location.reload();
+        });
     });
 }
 
-function giveMoney(){}
-function giveProduct(){}
+function returnMoney(currency, money){
+    var user = AV.User.current();
+    user.increment(currency, money);
+    return user.save();
+}
+function returnProduct(product, amount){
+    var user = AV.User.current();
+    user.increment(product, amount);
+    return user.save();
+}
 
 //显示我的报单
 function showMyOffer(){
@@ -230,13 +258,14 @@ function trade(){
         amount: amount
     };
 
-   console.log("paramsJson");
+   console.log("交易信息为:");
    console.log(paramsJson);
    AV.Cloud.run('trade', paramsJson).then(function () {
        alert("交易成功!");
        window.location.reload();
-   }).catch(function(){
-       alert("交易失败!");
+   }).catch(function(err){
+       let errorMsg = err.toString().split("[");
+       alert(errorMsg[0]);
        window.location.reload();
    });
 }

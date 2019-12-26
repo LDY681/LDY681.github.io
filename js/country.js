@@ -89,7 +89,7 @@ function declareWar(){
                     alert("宣战失败");
                 });
             }else if (warPending !== undefined){
-                alert("当前城池已被其他势力宣战!");
+                alert("当前城池已被宣战!");
             }else {
                 alert("当前城池已属于您的势力!");
             }
