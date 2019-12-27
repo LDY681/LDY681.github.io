@@ -141,6 +141,12 @@ img[usemap] {
     background-position: center;
 }
 
+.welcomeImage {
+    background-image: url('http://pic.51yuansu.com/pic/cover/00/03/05/5715851be77b0_610.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
 .workStatsBox {
     background-image: url('https://www.worldsteel.org/zh/dam/jcr:8ed7c106-f49e-4631-83e5-9c87a32e2e50/Statistics-section.jpg');
     background-size: cover;
@@ -168,6 +174,10 @@ img[usemap] {
 
 .workntrainButton {
     border-radius: 1px; box-shadow: 0px 0px 0px 20px rgba(0,0,0,0.3); background: #ddd; padding: 8px; margin-left: 50%; transform: translateX(-50%); width: 400px;
+}
+
+.welcomeBox {
+    border-radius: 1px; box-shadow: 0px 0px 0px 20px rgba(0,0,0,0.3); background: #ddd; padding: 8px; margin-left: 50%; transform: translateX(-50%); width: 60%;
 }
 
 #customContent{
