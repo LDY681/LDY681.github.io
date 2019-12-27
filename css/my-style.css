@@ -147,6 +147,14 @@ img[usemap] {
     background-position: center;
 }
 
+.wikiFrame{
+    -ms-overflow-style: none;
+}
+
+.wikiFrame::-webkit-scrollbar{
+    display: none;
+}
+
 .workStatsBox {
     background-image: url('https://www.worldsteel.org/zh/dam/jcr:8ed7c106-f49e-4631-83e5-9c87a32e2e50/Statistics-section.jpg');
     background-size: cover;
