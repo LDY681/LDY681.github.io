@@ -25,14 +25,41 @@
           arr = [];
           document.getElementById("output").style.display = "inline";
           let str = document.getElementById("input").value;
-          let pool = str.split("");
-          pool.forEach(function(card) {
-              if (card !== ''){
-                  arr.push((card <= 13) ? parseInt(card): toValue(card));
-              }
-          });
+          if (str.includes(" ")){
+              let pool = str.split(" ");
+              pool.forEach(function(card) {
+                  if (card !== ''){
+                      arr.push((card <= 13) ? parseInt(card): toValue(card));
+                  }
+              });
+          }else if (str.includes("，")){
+              let pool = str.split("，");
+              pool.forEach(function(card) {
+                  if (card !== ''){
+                      arr.push((card <= 13) ? parseInt(card): toValue(card));
+                  }
+              });
+          }else if (str.includes(",")){
+              let pool = str.split(",");
+              pool.forEach(function(card) {
+                  if (card !== ''){
+                      arr.push((card <= 13) ? parseInt(card): toValue(card));
+                  }
+              });
+          }else{
+              let pool = str.split("");
+              pool.forEach(function(card) {
+                  if (card === "0"){
+                      arr[arr.length-1] = 10;
+                  }else if (card !== ''){
+                      arr.push((card <= 13) ? parseInt(card): toValue(card));
+                  }
+              });
+          }
+          console.log(arr);
           findCombos(arr);
       }
+      //poker card letter to integer
       function toValue(card){
           switch (card){
               case "j":
@@ -51,36 +78,60 @@
                   return alert(card + "不是正常卡牌数字");
           }
       }
+
+      // Prints all combinations of size r in arr[] of size n. This function mainly uses combinationUtil()
       function printCombination(arr, n, r){
+          // A temporary array to store all combination one by one
           var data = [];
+
+          // Print all combination using temporary array 'data'
           combinationUtil(arr, n, r, 0, data, 0);
       }
 
+      /* arr[]  ---> Input Array
+         n      ---> Size of input array
+         r      ---> Size of a combination to be printed
+         index  ---> Current index in data[]
+         data[] ---> Temporary array to store current combination
+         i      ---> index of current element in arr[]     */
       function combinationUtil(arr, n, r, index, data, i) {
+          // Current combination is ready, print it
           if (index === r) {
+              //make combo array local and insert sum
               let insertable = [];
               for (let i = 0; i < data.length; i++){
                   insertable.push(data[i]);
               }
+              //console.log(insertable);
               combos.push(insertable);
               return;
           }
+
+          // When no more elements are there to put in data[]
           if (i >= n){
               return;
           }
+
+          // current is included, put next at next location
           data[index] = arr[i];
 
           combinationUtil(arr, n, r, index + 1, data, i + 1);
 
+          // current is excluded, replace it with next
+          // (Note that i+1 is passed, but index is not
+          // changed)
           combinationUtil(arr, n, r, index, data, i + 1);
       }
 
-
+      //Called after getting the array from textarea
       function findCombos(arr) {
           let i;
           for ( i = arr.length-1; i > 0; i--){
+              //console.log("长度为"+i+"的combo有：");
               printCombination(arr, arr.length, i);
           }
+          /*          console.log("开始findPairs，现在combos长这样");
+                    console.log(combos);*/
           findPairs();
       }
 
@@ -89,8 +140,13 @@
           for (let i = 0; i < combos.length; i++){
               for (let j = i+1; j < combos.length; j++){
                   if (sum(combos[i]) === sum(combos[j])){
+                      //console.log("找到和相同的combo了，他们分别是");
+                      //console.log(combos[i]);
+                      //console.log(combos[j]);
+                      //eliminate duplicates
                       let pair1 = combos[i];
                       let pair2 = combos[j];
+                      //console.log(pair1,pair2);
                       let concat = pair1.concat(pair2).sort();
                       let origin = arr.sort();
                       let is_same = concat.length === origin.length && concat.every(function(element, index) {
@@ -98,34 +154,43 @@
                       });
 
                       let b = 0, c = 0, cIndex = 0, is_subarray = false;
+                      // Traverse both arrays simultaneously
+                      /*              console.log("concat array长这样");
+                                    console.log(concat);
+                                    console.log("origin array长这样");
+                                    console.log(origin);*/
                       while (b < origin.length && c < concat.length) {
+                          // If element matches, increment both pointers
                           if (origin[b] === concat[c]) {
                               b++;
                               c++;
                               cIndex++;
-
+                              // If concat array is completely traversed
                               if (c === concat.length){
+                                  // console.log("is_subarray set to true");
                                   is_subarray = true;
                               }
                           } else {
-                              if(origin[b] !== concat[cIndex]){
+                              if(origin[b] !== concat[cIndex]){  //fix when having duplicates of same value
                                   b++;
                               }
                               c = cIndex;
                           }
                       }
+                      //console.log("is_subarrray?: " + is_subarray);
                       if (is_same || is_subarray){
                           pairs.push("第一组:" + toLetter(combos[i]) + "\n第二组:" + toLetter(combos[j]) + "\n");
                       }
                   }
               }
           }
+          //经社区大佬提醒，根据combo length优先排列最大化的情况
           var sortedPairs = pairs.sort(function(a, b) {
-              return b.length - a.length;
+              return b.length - a.length;    // sort by length
           });
-
+          //将第一组数据复制
           navigator.clipboard.writeText(sortedPairs[0]);
-
+          //将sortedPairs显示到output
           document.getElementById("output").value = sortedPairs.join("============\n");
       }
 
@@ -152,7 +217,7 @@
                   return alert(num  + "不是正常卡牌数字");
           }
       }
-
+      //find sum of a subarray
       function sum(arr){
           let sum = 0;
           let i;
@@ -165,26 +230,26 @@
 </head>
 <body>
 <div id="inputArea">
-  <p>钟妈算牌器</p>
-  <p style="font-size: small">作者 LDY681 &trade;</p>
-  <p style="font-size: x-large">牌号不用隔开，自动复制结果</p>
-  <p style="font-size: medium">快捷键：` 重置输入框<br>ENTER计算</p>
+  <p style="font-size: large">钟妈算牌器 LDY681 &trade;</p>
+  <p style="font-size: small">使用方法1：牌号不用隔开，11,12,13请用JQK</p>
+  <p style="font-size: small">使用方法2：牌号用空格/逗号隔开，数字字母双支持</p>
+  <p style="font-size: medium">快捷键：` 重置输入框 / ENTER计算<br>第一个结果会自动复制</p>
   <textarea id="input" rows="2" cols="50"></textarea><br>
   <button id="jisuan" style="height: 40px;width: 60px" onclick="calculate()">计算</button><br>
   <textarea id="output" rows="20" cols="50" style="display:none;"></textarea><br>
 </div>
 <script>
-
+    //加入快捷键
     var input = document.getElementById("input");
     input.onkeypress = function(e) {
         e = e || window.event;
-        if (e.keyCode === 13){
+        if (e.keyCode === 13){  //key enter
             e.preventDefault();
             document.getElementById("jisuan").click();
         }};
     document.onkeypress = function(e) {
         e = e || window.event;
-        if (e.keyCode === 96){
+        if (e.keyCode === 96){  //key enter
             e.preventDefault();
             var input = document.getElementById('input');
             input.value = '';
