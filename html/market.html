@@ -113,8 +113,8 @@
 
       <!--查询列表-->
       <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
-          <h3>商品列表(只显示前20条)</h3>
-          <div class="w3-white w3-round-large" style="overflow: scroll; height: 40vh;">
+          <h3>商品列表</h3>
+          <div id="productContainer" class="w3-white w3-round-large" style="overflow: scroll; height: 40vh;">
             <table id="productTable" class="w3-table-all">
               <thead>
                 <tr>
@@ -139,6 +139,7 @@
 <script src="../js/handlebars.min.js"></script>
 <!--初始化用户并加载user.js-->
 <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-realtime@5.0.0-beta.3/dist/realtime-browser.min.js"></script>
 <script src="../js/initLeanCloud.js"></script>
 <script src="../js/user.js"></script> <!--登录注册,登出,isCurrentUser-->
 <!--加载counter.js-->
@@ -158,6 +159,9 @@
                 });
             });
         });
+      $.getScript("../js/chat.js", function () {
+        login();
+      });
     });
 </script>
 </body>

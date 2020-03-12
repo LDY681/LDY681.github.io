@@ -1,19 +1,19 @@
-// 请将 AppId 改为你自己的 AppId，否则无法本地测试
+// 请将 AppId 改为你我的 AppId，否则无法本地测试
 var appId = 'GWIBfipLqh868acSJVJFbl1q-MdYXbMMI';
 var appKey = 'pFE0XYlY4QlTDwlrbbL4IQIY';
-var server = 'https://jvchwdgn.lc-cn-n1-shared.com';
+//var server = 'https://aaaaaaaa.rtm.lncldglobal.com';
 
-// 请换成你自己的一个房间的 conversation id（这是服务器端生成的）
-var roomId = '5989569dda2f6000616cfb67';
+// 请换成你我的一个房间的 conversation id（这是服务器端生成的）
+var roomId = '5e6aa817718e8600081f582e';
 
 // 每个客户端自定义的 id
-var clientId = 'LeanCloud';
+var currUser = AV.User.current();
+var clientId = currUser.attributes.name;
 
 // 创建实时通信实例
 var realtime = new AV.Realtime({
     appId: appId,
     appKey: appKey,
-    server: server,
     plugins: AV.TypedMessagesPlugin,
 });
 var client;
@@ -49,19 +49,16 @@ bindEvent(document.body, 'keydown', function(e) {
 });
 
 function login() {
-    showLog('正在登录');
+    //showLog('正在登录');
     if (!firstFlag) {
         client.close();
         showLog('登录失败!');
     }
 
     // 创建聊天客户端
-    return AV.User.logIn("test123", "test123")
-        .then(function(user) {
-            return realtime.createIMClient(user);
-        })
-        .then(function(c) {
-            showLog('连接成功');
+    var currUser = AV.User.current();
+            realtime.createIMClient(currUser).then(function(c) {
+            //showLog('连接成功');
             firstFlag = false;
             client = c;
             client.on('disconnect', function() {
@@ -121,8 +118,10 @@ function login() {
             room = conversation;
             messageIterator = conversation.createMessagesIterator();
             getLog(function() {
-                printWall.scrollTop = printWall.scrollHeight;
-                showLog('已经加入，可以开始聊天。');
+                showLog('已加入聊天频道');
+                setTimeout(function(){
+                    printWall.scrollTop = printWall.scrollHeight;
+                },500);
             });
             // 房间接受消息
             conversation.on('message', function(message) {
@@ -148,7 +147,7 @@ function sendMsg() {
             .replace(/^\s+/, '')
             .replace(/\s+$/, '')
     ) {
-        alert('请输入点文字！');
+        alert('消息不能为空');
     }
 
     // 向这个房间发送消息，这段代码是兼容多终端格式的，包括 iOS、Android、Window Phone
@@ -156,42 +155,11 @@ function sendMsg() {
         // 发送成功之后的回调
         inputSend.value = '';
         showLog(
-            '（' + formatTime(message.timestamp) + '）  自己： ',
+            '(' + formatTime(message.timestamp) + ')我:',
             encodeHTML(message.text)
         );
         printWall.scrollTop = printWall.scrollHeight;
     });
-}
-
-// 发送多媒体消息示例
-function sendMsgAsFile() {
-    var val = inputSend.value;
-
-    // 不让发送空字符
-    if (
-        !String(val)
-            .replace(/^\s+/, '')
-            .replace(/\s+$/, '')
-    ) {
-        alert('请输入点文字！');
-    }
-    new AV.File('message.txt', {
-        base64: b64EncodeUnicode(val),
-    })
-        .save()
-        .then(function(file) {
-            return room.send(new AV.FileMessage(file));
-        })
-        .then(function(message) {
-            // 发送成功之后的回调
-            inputSend.value = '';
-            showLog(
-                '（' + formatTime(message.timestamp) + '）  自己： ',
-                createLink(message.getFile().url())
-            );
-            printWall.scrollTop = printWall.scrollHeight;
-        })
-        .catch(console.warn);
 }
 
 function b64EncodeUnicode(str) {
@@ -231,11 +199,7 @@ function showMsg(message, isBefore) {
     var text = message.text;
     AV.Promise.resolve()
         .then(function() {
-            if (message.from === clientId) {
-                return '自己';
-            } else {
                 return Usernames.get(message.from);
-            }
         })
         .then(function(from) {
             if (message instanceof AV.TextMessage) {
@@ -245,11 +209,11 @@ function showMsg(message, isBefore) {
                         .replace(/\s+$/, '')
                 ) {
                     showLog(
-                        '（' +
+                        '(' +
                         formatTime(message.timestamp) +
-                        '）  ' +
+                        ')' +
                         encodeHTML(from) +
-                        '： ',
+                        ':',
                         encodeHTML(message.text),
                         isBefore
                     );
@@ -317,6 +281,7 @@ function showLog(msg, data, isBefore) {
     }
     var p = document.createElement('p');
     p.innerHTML = msg;
+    p.style.fontSize="12px";
     if (isBefore) {
         printWall.insertBefore(p, printWall.childNodes[0]);
     } else {
@@ -345,17 +310,9 @@ function formatTime(time) {
     var mm = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
     var ss = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
     return (
-        date.getFullYear() +
-        '-' +
-        month +
-        '-' +
-        currentDate +
-        ' ' +
         hh +
         ':' +
-        mm +
-        ':' +
-        ss
+        mm
     );
 }
 
