@@ -48,6 +48,7 @@
 
 <!--初始化用户并加载user.js-->
 <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-realtime@5.0.0-beta.3/dist/realtime-browser.min.js"></script>
 <script src="../js/initLeanCloud.js"></script>
 <script src="../js/user.js"></script> <!--登录注册,登出,isCurrentUser-->
 
@@ -56,26 +57,30 @@
 
 <!--使用jquery 加载navSideBar和userMenu到相关的placeholder中-->
 <script>
-  $("#nav-placeholder").load("navSideBar.html", function(){
-       // console.log("navSideBar加载完毕");
-      $.getScript("../js/navSideBar.js", function(){
-          // console.log("navSideBar.js读取完毕,开始执行displayRightOnLarge");
-          displayRightOnLarge();
+  $("#nav-placeholder").load("navSideBar.html", function() {
+    // console.log("navSideBar加载完毕");
+    $.getScript("../js/navSideBar.js", function () {
+      // console.log("navSideBar.js读取完毕,开始执行displayRightOnLarge");
+      displayRightOnLarge();
 
-          $("#userMenu").load("userMenu.html", function(){
-              // console.log("userMenu加载完毕");
-              $.getScript("../js/userMenu.js", function(){
-                  // console.log("userMenu.js读取完毕,开始执行setupUserData,CountUp,getCurrTime");
-                  setupUserData();
-                  countUp('June 1, 2019 00:00:00');
-                  getCurrTime();
-                  $.getScript("../js/translate.js", function(){
-                      detectLang();
-                  });
-              });
+      $("#userMenu").load("userMenu.html", function () {
+        // console.log("userMenu加载完毕");
+        $.getScript("../js/userMenu.js", function () {
+          // console.log("userMenu.js读取完毕,开始执行setupUserData,CountUp,getCurrTime");
+          setupUserData();
+          countUp('June 1, 2019 00:00:00');
+          getCurrTime();
+          $.getScript("../js/translate.js", function () {
+            detectLang();
           });
+        });
       });
+    });
+    $.getScript("../js/chat.js", function () {
+      login();
+    });
   });
 </script>
+
 </body>
 </html>

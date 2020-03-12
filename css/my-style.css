@@ -248,3 +248,18 @@ img[usemap] {
     padding: 10px;
     text-align: center;
 }
+
+.print-wall {
+    overflow: auto;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #888;
+    height: 300px;
+    max-width: 800px;
+    width: 88%;
+    text-align: left;
+}
+.print-wall p {
+    margin: 10px 0px;
+    word-wrap: break-word;
+}
