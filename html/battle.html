@@ -81,7 +81,7 @@
         <div id="adjacentRankData" class="w3-half">
           <h3>我的排名</h3>
           <table class="w3-table-all w3-card-4" style="width: 80%; margin: 0px auto">
-            <thead><tr><th>排名</th><th>预计伤害</th></tr></thead>
+            <thead><tr><th>排名</th><th>当前伤害</th></tr></thead>
             <tbody>
             <tr v-for="rankData in rankDatas">
               <td><transition name="update"><span :key="rankData.rank">{{rankData.rank}}</span></transition></td>

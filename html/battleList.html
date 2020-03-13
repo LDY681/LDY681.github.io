@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>转世三国-模拟三国人生</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/w3.css">
+    <link rel="stylesheet" href="../css/all.css">
+    <link rel="stylesheet" href="../css/my-style.css">
+    <link rel="icon" href="../img/logo.png"/>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script src="../js/market.js"></script>
+</head>
+
+<body class="w3-animate-opacity" onload="showMyOffer()">
+<!--navSideBar placeholder-->
+<div style="position: relative" id="nav-placeholder"></div>
+<!-- 正文内容-->
+<div id="customContent" style="margin-left:0" class="w3-row">
+    <!-- 用户菜单 placeholder-->
+    <div id="userMenu" class="coolScroll-y w3-col w3-light-gray w3-card-4 w3-center w3-round-xxlarge w3-margin-left w3-margin-right" style="margin-top: 60px; height: 90vh; position:fixed"></div>
+
+    <!--TODO:右侧定制内容-->
+    <div id="rightPanel" class="w3-rest w3-card-4 w3-round-xxlarge w3-margin-right w3-light-gray" style="margin-top:60px; margin-bottom:20px;">
+
+        <!--提交报单-->
+        <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center" style="overflow:hidden">
+            <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">战斗列表</span></h1>
+
+            <!--查询列表-->
+            <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+                <h3 id="battleType"></h3>
+                <div class="w3-white w3-round-large" style="overflow: scroll; height: 40vh;">
+                    <table id="battleTable" class="w3-table-all">
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </div><br>
+        </div><br><br>
+</div><br><br>
+    </div>
+</div>
+
+<!--Script加载顺序!!!!!-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+<script src="../js/handlebars.min.js"></script>
+<!--初始化用户并加载user.js-->
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-realtime@5.0.0-beta.3/dist/realtime-browser.min.js"></script>
+<script src="../js/initLeanCloud.js"></script>
+<script src="../js/user.js"></script> <!--登录注册,登出,isCurrentUser-->
+<!--加载counter.js-->
+<script src="../js/counter.js"></script> <!--活动倒计时,东汉年历,当前时间-->
+<script>
+    $("#nav-placeholder").load("navSideBar.html", function(){
+        $.getScript("../js/navSideBar.js", function(){
+            displayRightOnLarge();
+            $("#userMenu").load("userMenu.html", function(){
+                $.getScript("../js/userMenu.js", function(){
+                    setupUserData();
+                    countUp('June 1, 2019 00:00:00');
+                    getCurrTime();
+                    $.getScript("../js/translate.js", function(){
+                        detectLang();
+                    });
+                });
+            });
+        });
+        $.getScript("../js/chat.js", function () {
+            login();
+        });
+    });
+    var battleType = getUrlParam('type');
+    if (battleType === "current"){
+        document.getElementById("battleType").style.display = "block";
+        document.getElementById("battleType").innerHTML = "正在战斗";
+        document.getElementById("battleType").classList.add("w3-red");
+        var battleTable = document.getElementById("battleTable");
+        var header = battleTable.createTHead();
+        var row = header.insertRow(0);
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "争夺城池";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "结束时间";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "进攻国家";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "进攻伤害";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "防守国家";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "防守伤害";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "进入战场";
+    }else if (battleType === "past"){
+        document.getElementById("battleType").style.display = "block";
+        document.getElementById("battleType").innerHTML = "往期战场";
+        document.getElementById("battleType").classList.add("w3-dark-grey");
+        var battleTable = document.getElementById("battleTable");
+        var header = battleTable.createTHead();
+        var row = header.insertRow(0);
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "争夺城池";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "结束时间";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "进攻国家";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "进攻伤害";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "防守国家";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "防守伤害";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "获胜国家";
+    }else if (battleType === "pending"){
+        document.getElementById("battleType").style.display = "block";
+        document.getElementById("battleType").innerHTML = "即将开战";
+        document.getElementById("battleType").classList.add("w3-purple");
+        var battleTable = document.getElementById("battleTable");
+        var header = battleTable.createTHead();
+        var row = header.insertRow(0);
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "争夺城池";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "开始时间";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "进攻国家";
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "防守国家"
+    }
+</script>
+
+
+</body>
+</html>

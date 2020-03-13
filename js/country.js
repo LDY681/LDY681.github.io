@@ -45,6 +45,29 @@ function compileCityPanel(cityPanel){
 
 //当城市选好后,enable宣战按钮
 function citySelected(event) {
+    var emperorQuery = new AV.Query(AV.Role);
+    // 查询当前用户拥有的角色
+    emperorQuery.equalTo('name', "emperor");
+    emperorQuery.equalTo('users', AV.User.current());
+
+    var cabinetQuery = new AV.Query(AV.Role);
+    // 查询当前用户拥有的角色
+    cabinetQuery.equalTo('name', "cabinet");
+    cabinetQuery.equalTo('users', AV.User.current());
+
+    var roleQuery = AV.Query.or(emperorQuery, cabinetQuery);
+    var canDeclareWar = true;
+    roleQuery.find().then(function(roles) {
+        if (roles.length === 0) {
+            alert("只有皇帝,大臣才可以宣战!");
+            canDeclareWar = false;
+            return;
+        }
+    }, function (error) {
+        alert("加载失败,请刷新!");
+        return;
+    });
+    if (canDeclareWar === false){return;}
     document.getElementById("warReminder").style.display = "block";
     document.getElementById("warReminder").innerHTML = "宣战费用为500本国货币";
     document.getElementById("declareWar").disabled = false;
@@ -85,6 +108,9 @@ function declareWar(){
                     }else{
                         alert("宣战成功!战场将在24点开启!");
                     }
+                    document.getElementById("declareWar").disabled = true;
+                    document.getElementById("declareWar").classList.remove("w3-green");
+                    document.getElementById("declareWar").classList.add("w3-gray");
                 }, function(err){
                     alert("宣战失败");
                 });
