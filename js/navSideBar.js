@@ -26,8 +26,11 @@ function displayRightOnLarge(){
 
 //点击导航栏右侧头像
 function showProfile(){
-    document.getElementById("profile").style.display = "block";
-    setProfileData();
+    var whichUser = getUrlParam("profile",-1);
+    if (whichUser === -1 || whichUser === currUser.get("username")) {
+        document.getElementById("profile").style.display = "block";
+        setProfileData();
+    }
 }
 
 //点击手机验证

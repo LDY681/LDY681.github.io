@@ -27,7 +27,8 @@ var firstFlag = true;
 
 // 用来标记历史消息获取状态
 var logFlag = false;
-
+var firstNav = true;
+var openNav = document.getElementById('openNav');
 var sendBtn = document.getElementById('send-btn');
 var inputSend = document.getElementById('input-send');
 var printWall = document.getElementById('print-wall');
@@ -38,13 +39,20 @@ var msgTime;
 
 bindEvent(sendBtn, 'click', sendMsg);
 
-bindEvent(document.body, 'keydown', function(e) {
+bindEvent(inputSend, 'keydown', function(e) {
     if (e.keyCode === 13) {
         if (firstFlag) {
             login();
         } else {
             sendMsg();
         }
+    }
+});
+
+bindEvent(openNav, 'click', function(e) {
+    if (firstNav === true){
+        login();
+        firstNav = false;
     }
 });
 
@@ -119,6 +127,7 @@ function login() {
             messageIterator = conversation.createMessagesIterator();
             getLog(function() {
                 showLog('已加入聊天频道');
+                console.log('已加入聊天频道');
                 setTimeout(function(){
                     printWall.scrollTop = printWall.scrollHeight;
                 },500);
