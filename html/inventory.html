@@ -24,15 +24,28 @@
     <!--物资栏-->
     <div class="itemDataContainer w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center" style="overflow:hidden">
       <script id="itemPanel" type="text/x-handlebars-template">
-        <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">产品信息</span></h1><br><br>
+        <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">产品列表</span></h1><br><br>
           {{#each itemData}}
             <!--物品信息-->
             <div class="item w3-round-xlarge w3-gray">
               <img src="{{{itemUrl}}}" alt="物品图片">
-              <div class="amount">数量:{{{itemAmount}}}</div>
+              <div class="amount">{{{citem}}}:{{{itemAmount}}}</div>
             </div>
           {{/each}}
       </script>
+    </div><br><br><br>
+
+    <div class="moneyDataContainer w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center" style="overflow:hidden">
+    <script id="moneyPanel" type="text/x-handlebars-template">
+      <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">货币列表</span></h1><br><br>
+      {{#each moneyData}}
+        <!--物品信息-->
+        <div class="item w3-round-xlarge w3-gray">
+          <img src="{{{moneyUrl}}}" alt="货币图片">
+          <div class="amount">{{{cmoney}}}:{{{moneyAmount}}}</div>
+        </div>
+      {{/each}}
+    </script>
     </div>
   </div>
 </div>

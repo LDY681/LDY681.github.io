@@ -449,41 +449,4 @@ function getMoneyType(country){
     return money;
 }
 
-function translator(english){
-    switch(english){
-        case "rice":
-            return "谷物";
-        case "iron":
-            return "生铁";
-        case "wood":
-            return "原木";
-        case "stone":
-            return "粗石";
-        case "food":
-            return "军粮";
-        case "weapon":
-            return "兵器";
-        case "ladder":
-            return "云梯";
-        case "rollingWood":
-            return "滚木";
-        case "fallingStone":
-            return "落石";
-        case "catapult":
-            return "投石车";
-        case "buy":
-            return "买单";
-        case "sell":
-            return "卖单";
-        case "weiguo":
-            return "魏国";
-        case "shuguo":
-            return "蜀国";
-        case "wuguo":
-            return "吴国";
-        case "huangjin":
-            return "黄巾";
-    }
-}
-
 

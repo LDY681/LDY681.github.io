@@ -2,7 +2,9 @@ function evalInventory(){
     //修改相邻城池
     var user = AV.User.current();
     var itemPanel = {itemData: []};
+    var moneyPanel = {moneyData: []};
     var itemList = {};
+    var moneyList = {};
     user.fetch().then(function (user) {
         //product
         itemList['rice'] = user.get("rice");
@@ -25,11 +27,11 @@ function evalInventory(){
         itemList['horseUp'] = user.get("horseUp");
 
         //money
-        itemList['gold'] = user.get("gold");
-        itemList['weiMoney'] = user.get("weiMoney");
-        itemList['shuMoney'] = user.get("shuMoney");
-        itemList['wuMoney'] = user.get("wuMoney");
-        itemList['huangMoney'] = user.get("huangMoney");
+        moneyList['gold'] = user.get("gold");
+        moneyList['weiMoney'] = user.get("weiMoney");
+        moneyList['shuMoney'] = user.get("shuMoney");
+        moneyList['wuMoney'] = user.get("wuMoney");
+        moneyList['huangMoney'] = user.get("huangMoney");
 
         for (var item in itemList) {
             console.log(item);
@@ -38,21 +40,47 @@ function evalInventory(){
             if (itemAmount !== 0){
                 console.log("itemAmount is : " + itemAmount);
                 var itemUrl = getItemUrl(item);
+                var citem = translator(item);
                 itemPanel.itemData.push({
+                    citem,
                     itemAmount,
                     itemUrl
                 });
             }
         }
-        compile(itemPanel);
+        for (var money in moneyList) {
+            console.log(money);
+            var moneyAmount = parseInt(moneyList[money]);
+            console.log(moneyAmount);
+            if (moneyAmount !== 0){
+                console.log("moneyAmount is : " + moneyAmount);
+                var moneyUrl = getItemUrl(money);
+                var cmoney = translator(money);
+                moneyPanel.moneyData.push({
+                    cmoney,
+                    moneyAmount,
+                    moneyUrl
+                });
+            }
+        }
+        compile(itemPanel,"item");
+        compile(moneyPanel, "money");
     });
 }
-function compile(itemPanel){
+function compile(itemPanel, itemOrMoney){
     $(document).ready(function() {
-        var source = $("#itemPanel").html();
-        var template = Handlebars.compile(source);
-        var html = template(itemPanel);
-        $(".itemDataContainer").html(html);
+        if (itemOrMoney === "item"){
+            var source = $("#itemPanel").html();
+            var template = Handlebars.compile(source);
+            var html = template(itemPanel);
+            $(".itemDataContainer").html(html);
+        }else{
+            var source = $("#moneyPanel").html();
+            var template = Handlebars.compile(source);
+            var html = template(itemPanel);
+            $(".moneyDataContainer").html(html);
+        }
+
     });
 }
 
