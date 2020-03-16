@@ -2,7 +2,28 @@
 <html>
 	<head>
 <!--		用来重定向到html目录下的真index.html-->
-  	<meta http-equiv="refresh" content="0; url=https://LDY681.github.io/html/login.html">
+
+	<script>
+		function getUrlParam(parameter, defaultValue){
+			var urlparameter = defaultValue;
+			if(window.location.href.indexOf(parameter) > -1){
+				urlparameter = "?inviter=" + getUrlVars()[parameter];
+			}
+			return urlparameter;
+		}
+		function getUrlVars() {
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+				vars[key] = value;
+			});
+			return vars;
+		}
+		var url = "https://LDY681.github.io/html/login.html";
+		if (getUrlParam("inv",-1) !== -1){
+			url += getUrlParam("inv",-1);
+		}
+		document.write('<meta http-equiv="refresh" content="0; url='+url + '"/>');
+	</script>
 	</head>   
 </html>
 

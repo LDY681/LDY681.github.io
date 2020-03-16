@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>转世三国-模拟三国人生</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/w3.css">
+    <link rel="stylesheet" href="../css/all.css">
+    <link rel="stylesheet" href="../css/my-style.css">
+    <link rel="icon" href="../img/logo.png"/>
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        .coupon {
+            border: 5px dotted #bbb;
+            width: 80%;
+            border-radius: 15px;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        .container {
+            padding: 2px 16px;
+            background-color: #f1f1f1;
+        }
+
+        .promo {
+            background: #ccc;
+            padding: 3px;
+        }
+
+        .expire {
+            color: red;
+        }
+    </style>
+</head>
+
+<!--countUp ->东汉年历，getCurrTime ->北京时间显示 setUpUserData ->userMenu的数据填充-->
+<body class="w3-animate-opacity">
+<!--navSideBar placeholder-->
+<div style="position: relative" id="nav-placeholder"></div>
+<!-- 正文内容-->
+<div id="customContent" style="margin-left:0" class="w3-row">
+    <!-- 用户菜单 placeholder-->
+    <div id="userMenu" class="coolScroll-y w3-col w3-light-gray w3-card-4 w3-center w3-round-xxlarge w3-margin-left w3-margin-right" style="margin-top: 60px; height: 90vh; position:fixed"></div>
+
+    <!--TODO:右侧定制内容-->
+    <div id="rightPanel" class="w3-rest w3-card-4 w3-round-xxlarge w3-margin-right w3-light-gray" style="margin-top:60px; margin-bottom:20px;"><br><br>
+        <div class="coupon w3-panel">
+            <div class="container">
+                <h3>邀请好友奖励多多!</h3>
+            </div>
+            <img src="../img/pre-alpha.jpg" alt="Avatar" style="width:100%;">
+            <div class="container" style="background-color:grey">
+                <h2><b>邀请好友您将收到额外奖励!</b></h2>
+                <p>立即邀请好友<br>
+                    获得奖励吧!</p>
+            </div>
+            <div class="container">
+                <p><input style="width: 65%" class="promo" id="invite" type="text" placeholder=""/>
+                    <button style="display: inline-block; width: 30%" class="w3-button w3-green" onclick="invCopy()">复制</button>
+                </p>
+
+                <p class="expire">截止日期: 2021年1月1日 </p>
+            </div>
+        </div><br><br>
+
+    </div>
+</div>
+
+<!--Script加载顺序!!!!!-->
+<!--加载jquery-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@4.0.5/dist/handlebars.min.js"></script>
+
+<!--初始化用户并加载user.js-->
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-realtime@5.0.0-beta.3/dist/realtime-browser.min.js"></script>
+<script src="../js/user.js"></script> <!--登录注册,登出,isCurrentUser-->
+
+<!--使用jquery 加载navSideBar和userMenu到相关的placeholder中-->
+<script>
+    $("#nav-placeholder").load("navSideBar.html", function() {
+        $.getScript("../js/navSideBar.js", function () {
+            $("#userMenu").load("userMenu.html", function () {
+                displayRightOnLarge();
+                setupUserData();
+            });
+        });
+    });
+    var currUser = AV.User.current();
+    var name = currUser.get("username");
+    document.getElementById("invite").value = "zssanguo.com/?inv=" + name;
+function invCopy(){
+    navigator.clipboard.writeText(document.getElementById("invite").value);
+}
+</script>
+
+</body>
+</html>
+
