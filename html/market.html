@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="../css/my-style.css">
   <link rel="icon" href="../img/logo.png"/>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-  <script src="../js/market.js"></script>
+  <script src="../js/list.js"></script>
 </head>
 
-<body class="w3-animate-opacity">
+<body class="w3-animate-opacity" onload="paintItem()">
 <!--navSideBar placeholder-->
 <div style="position: relative" id="nav-placeholder"></div>
 <!-- 正文内容-->
@@ -36,55 +36,55 @@
 
     <!--    查询订单-->
     <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center" style="overflow:hidden">
-      <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">查询报单</span></h1>
+      <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">查询集市</span></h1>
       <!--    选择商品-->
       <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center" style="overflow:hidden">
         <!--物品信息-->
         <h2><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">选择商品</span></h2>
         <div id="rice" class="item w3-round-xlarge w3-gray" tabindex="1">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('rice');">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
         <div id="iron" class="item w3-round-xlarge w3-gray" tabindex="1">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('iron');">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
         <div id="wood" class="item w3-round-xlarge w3-gray" tabindex="1">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('wood');">`
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
         <div id="stone" class="item w3-round-xlarge w3-gray" tabindex="1">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('stone');">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
         <div id="food" class="item w3-round-xlarge w3-gray" tabindex="1">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('food');">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
         <div id="weapon" class="item w3-round-xlarge w3-gray" tabindex="1">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('weapon');">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
         <div id="ladder" class="item w3-round-xlarge w3-gray" tabindex="1">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('ladder');">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
         <div id="rollingWood" class="item w3-round-xlarge w3-gray" tabindex="1">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('rollingWood');">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
         <div id="fallingStone" class="item w3-round-xlarge w3-gray" tabindex="1">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('fallingStone');">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
         <div id="catapult" class="item w3-round-xlarge w3-gray" tabindex="1">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('catapult');">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
         <div id="weaponUp" class="item w3-round-xlarge w3-gray" tabindex="1">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('weaponUp');">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
         <div id="equipUp" class="item w3-round-xlarge w3-gray" tabindex="1">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('equipUp');">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
         <div id="horseHelmetUp" class="item w3-round-xlarge w3-gray" tabindex="1">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('horseHelmetUp');">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
         <div id="horseSaddleUp" class="item w3-round-xlarge w3-gray" tabindex="1">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('horseSaddleUp');">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
         <div id="horseUp" class="item w3-round-xlarge w3-gray" tabindex="1">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getItemUrl('horseUp');">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
       </div><br>
 
@@ -136,29 +136,22 @@
 
 <!--Script加载顺序!!!!!-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
-<script src="../js/handlebars.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@4.0.5/dist/handlebars.min.js"></script>
 <!--初始化用户并加载user.js-->
 <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/leancloud-realtime@5.0.0-beta.3/dist/realtime-browser.min.js"></script>
 <script src="../js/user.js"></script> <!--登录注册,登出,isCurrentUser-->
 <!--加载counter.js-->
-<script src="../js/counter.js"></script> <!--活动倒计时,东汉年历,当前时间-->
+
 <script>
-    $("#nav-placeholder").load("navSideBar.html", function(){
-        $.getScript("../js/navSideBar.js", function(){
-            displayRightOnLarge();
-            $("#userMenu").load("userMenu.html", function(){
-                $.getScript("../js/userMenu.js", function(){
-                    setupUserData();
-                    countUp('June 1, 2019 00:00:00');
-                    getCurrTime();
-                    $.getScript("../js/translate.js", function(){
-                        detectLang();
-                    });
-                });
-            });
-        });
+  $("#nav-placeholder").load("navSideBar.html", function() {
+    $.getScript("../js/navSideBar.js", function () {
+      $("#userMenu").load("userMenu.html", function () {
+        displayRightOnLarge();
+        setupUserData();
+      });
     });
+  });
 </script>
 </body>
 </html>

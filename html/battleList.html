@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../css/my-style.css">
     <link rel="icon" href="../img/logo.png"/>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-    <script src="../js/market.js"></script>
+    <script src="../js/list.js"></script>
 </head>
 
 <body class="w3-animate-opacity" onload="showBattleList(getUrlParam('type',-1))">
@@ -43,29 +43,24 @@
 
 <!--Script加载顺序!!!!!-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
-<script src="../js/handlebars.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@4.0.5/dist/handlebars.min.js"></script>
 <!--初始化用户并加载user.js-->
 <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/leancloud-realtime@5.0.0-beta.3/dist/realtime-browser.min.js"></script>
 <script src="../js/user.js"></script> <!--登录注册,登出,isCurrentUser-->
 <!--加载counter.js-->
-<script src="../js/counter.js"></script> <!--活动倒计时,东汉年历,当前时间-->
+
 <script>
-    $("#nav-placeholder").load("navSideBar.html", function(){
-        $.getScript("../js/navSideBar.js", function(){
-            displayRightOnLarge();
-            $("#userMenu").load("userMenu.html", function(){
-                $.getScript("../js/userMenu.js", function(){
-                    setupUserData();
-                    countUp('June 1, 2019 00:00:00');
-                    getCurrTime();
-                    $.getScript("../js/translate.js", function(){
-                        detectLang();
-                    });
-                });
+
+    $("#nav-placeholder").load("navSideBar.html", function() {
+        $.getScript("../js/navSideBar.js", function () {
+            $("#userMenu").load("userMenu.html", function () {
+                displayRightOnLarge();
+                setupUserData();
             });
         });
     });
+
     var battleType = getUrlParam('type');
     if (battleType === "current"){
         document.getElementById("battleType").style.display = "block";

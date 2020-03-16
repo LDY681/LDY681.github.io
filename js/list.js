@@ -379,4 +379,29 @@ function getMoneyType(country){
     return money;
 }
 
+function paintItem(){
+    document.getElementById("rice").getElementsByTagName("img")[0].src = getItemUrl('rice');
+    document.getElementById("iron").getElementsByTagName("img")[0].src = getItemUrl('iron');
+    document.getElementById("wood").getElementsByTagName("img")[0].src = getItemUrl('wood');
+    document.getElementById("stone").getElementsByTagName("img")[0].src = getItemUrl('stone');
+    document.getElementById("food").getElementsByTagName("img")[0].src = getItemUrl('food');
+    document.getElementById("weapon").getElementsByTagName("img")[0].src = getItemUrl('weapon');
+    document.getElementById("ladder").getElementsByTagName("img")[0].src = getItemUrl('ladder');
+    document.getElementById("rollingWood").getElementsByTagName("img")[0].src = getItemUrl('rollingWood');
+    document.getElementById("fallingStone").getElementsByTagName("img")[0].src = getItemUrl('fallingStone');
+    document.getElementById("catapult").getElementsByTagName("img")[0].src = getItemUrl('catapult');
+    document.getElementById("weaponUp").getElementsByTagName("img")[0].src = getItemUrl('weaponUp');
+    document.getElementById("equipUp").getElementsByTagName("img")[0].src = getItemUrl('equipUp');
+    document.getElementById("horseHelmetUp").getElementsByTagName("img")[0].src = getItemUrl('horseHelmetUp');
+    document.getElementById("horseSaddleUp").getElementsByTagName("img")[0].src = getItemUrl('horseSaddleUp');
+    document.getElementById("horseUp").getElementsByTagName("img")[0].src = getItemUrl('horseUp');
+}
+
+function paintMoney(){
+    document.getElementById("gold").getElementsByTagName("img")[0].src = getItemUrl('gold');
+    document.getElementById("weiMoney").getElementsByTagName("img")[0].src = getItemUrl('weiMoney');
+    document.getElementById("shuMoney").getElementsByTagName("img")[0].src = getItemUrl('shuMoney');
+    document.getElementById("wuMoney").getElementsByTagName("img")[0].src = getItemUrl('wuMoney');
+    document.getElementById("huangMoney").getElementsByTagName("img")[0].src = getItemUrl('huangMoney');
+}
 

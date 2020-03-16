@@ -1,3 +1,6 @@
+$(function() {
+    evalInventory();
+});
 function evalInventory(){
     //修改相邻城池
     var user = AV.User.current();

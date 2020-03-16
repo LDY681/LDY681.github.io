@@ -15,7 +15,6 @@
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-  <script src="../js/jquery.hover3d.js"></script>
 
   <!--初始化用户并加载user.js-->
   <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
@@ -192,12 +191,12 @@
 
 <!--Script加载顺序!!!!!-->
 <!--加载jquery-->
-<script src="../js/handlebars.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@4.0.5/dist/handlebars.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>console.log("handlebars加载完毕")</script>
 
 <!--加载counter.js-->
-<script src="../js/counter.js"></script> <!--活动倒计时,东汉年历,当前时间-->
+
 
 <!--使用jquery 加载navSideBar和userMenu到相关的placeholder中-->
 <!--这个script执行完只是call了jquery.load,可能jquery.load要load的内容还没有加载完,此时后面加载的js,如果依赖于load的内容则可能会报错-->

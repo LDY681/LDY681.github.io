@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>转世三国-模拟三国人生</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/w3.css">
+    <link rel="stylesheet" href="../css/all.css">
+    <link rel="stylesheet" href="../css/my-style.css">
+    <link rel="icon" href="../img/logo.png"/>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script src="../js/list.js"></script>
+</head>
+
+<body class="w3-animate-opacity" onload="showMyOffer(); paintMoney()">
+<!--navSideBar placeholder-->
+<div style="position: relative" id="nav-placeholder"></div>
+<!-- 正文内容-->
+<div id="customContent" style="margin-left:0" class="w3-row">
+    <!-- 用户菜单 placeholder-->
+    <div id="userMenu" class="coolScroll-y w3-col w3-light-gray w3-card-4 w3-center w3-round-xxlarge w3-margin-left w3-margin-right" style="margin-top: 60px; height: 90vh; position:fixed"></div>
+
+    <!--TODO:右侧定制内容-->
+    <div id="rightPanel" class="w3-rest w3-card-4 w3-round-xxlarge w3-margin-right w3-light-gray" style="margin-top:60px; margin-bottom:20px;">
+
+        <!--提交报单-->
+        <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center" style="overflow:hidden">
+            <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">提交汇单</span></h1>
+            <!--    选择商品-->
+            <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center" style="overflow:hidden">
+                <!--物品信息-->
+                <h2><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">选择货币</span></h2>
+                <div id="gold" class="item w3-round-xlarge w3-gray" tabindex="1">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                </div>
+                <div id="weiMoney" class="item w3-round-xlarge w3-gray" tabindex="1">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                </div>
+                <div id="shuMoney" class="item w3-round-xlarge w3-gray" tabindex="1">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                </div>
+                <div id="wuMoney" class="item w3-round-xlarge w3-gray" tabindex="1">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                </div>
+                <div id="huangMoney" class="item w3-round-xlarge w3-gray" tabindex="1">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                </div>
+            </div><br>
+
+            <!--选择国家,选择买还是卖(点击查询,发布新单)-->
+            <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center" style="overflow:hidden">
+                <div class="w3-quarter w3-panel">
+                    <select id="countrySelected" class="w3-select" name="option">
+                        <option value="" disabled selected>目标货币</option>
+                        <option value="gold">黄金</option>
+                        <option value="weiguo">魏钱</option>
+                        <option value="shuguo">蜀钱</option>
+                        <option value="wuguo">吴钱</option>
+                        <option value="huangjin">黄钱</option>
+                    </select>
+                </div>
+                <div id="typeSelected" class="w3-quarter w3-panel">
+                    <select class="w3-select" name="option">
+                        <option value="" disabled selected>选择买卖</option>
+                        <option value="buy">我要买</option>
+                        <option value="sell">我要卖</option>
+                    </select>
+                </div>
+                <div class="w3-quarter w3-panel">
+                    <label for="amount">数量：</label><input type='number' name="数量" id="amount"><br>
+                    <label for="price">价格：</label><input type='number' name="价格" id="price">
+                </div>
+                <div class="w3-quarter w3-panel">
+                    <button onclick="postOffer()" class="w3-button w3-green w3-round-xxlarge">提交报单</button>
+                </div>
+            </div><br>
+
+            <!--查询列表-->
+            <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+                <h3>历史报单</h3>
+                <div class="w3-white w3-round-large" style="overflow: scroll; height: 40vh;">
+                    <table id="productTable" class="w3-table-all">
+                        <thead>
+                        <tr>
+                            <th>单号</th>
+                            <th>买/卖</th>
+                            <th>商品</th>
+                            <th>数量</th>
+                            <th>价格</th>
+                            <th>国家</th>
+                            <th>取消报单</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </div><br>
+        </div><br><br>
+    </div>
+</div>
+
+<!--Script加载顺序!!!!!-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@4.0.5/dist/handlebars.min.js"></script>
+<!--初始化用户并加载user.js-->
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-realtime@5.0.0-beta.3/dist/realtime-browser.min.js"></script>
+<script src="../js/user.js"></script> <!--登录注册,登出,isCurrentUser-->
+<!--加载counter.js-->
+
+<script>
+    $("#nav-placeholder").load("navSideBar.html", function() {
+        $.getScript("../js/navSideBar.js", function () {
+            $("#userMenu").load("userMenu.html", function () {
+                displayRightOnLarge();
+                setupUserData();
+            });
+        });
+    });
+</script>
+</body>
+</html>

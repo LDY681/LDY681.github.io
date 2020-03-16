@@ -1,4 +1,6 @@
 $(function(){
+    evalWork();
+    evalTrain();
     $("#onWork").on("click",function(e) {
         e.preventDefault();
         work();
