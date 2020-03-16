@@ -47,7 +47,6 @@
 <!--初始化用户并加载user.js-->
 <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/leancloud-realtime@5.0.0-beta.3/dist/realtime-browser.min.js"></script>
-<script src="../js/initLeanCloud.js"></script>
 <script src="../js/user.js"></script> <!--登录注册,登出,isCurrentUser-->
 <!--加载counter.js-->
 <script src="../js/counter.js"></script> <!--活动倒计时,东汉年历,当前时间-->
@@ -65,8 +64,6 @@
                     });
                 });
             });
-        });
-        $.getScript("../js/chat.js", function () {
         });
     });
     var battleType = getUrlParam('type');

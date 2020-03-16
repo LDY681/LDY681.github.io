@@ -1,6 +1,21 @@
 // user登录，注册，登出，当前用户check，由login.html和templateXXX.html调用
 
 //user注册,登录,登出,是否currentUser
+
+// 每跳转一个单页都要initialize一下，由templateXXX.html调用，嵌入的html不能调用，不然会报错
+
+var { Query, User } = AV;
+var { Realtime, TextMessage } = AV;
+var APP_ID = 'GWIBfipLqh868acSJVJFbl1q-MdYXbMMI';
+var APP_KEY = 'pFE0XYlY4QlTDwlrbbL4IQIY'
+var server = 'https://jvchwdgn.lc-cn-n1-shared.com';
+
+AV.init({
+    appId: APP_ID,
+    appKey: APP_KEY,
+    serverUrls: server
+});
+
 $(function() {
     $(".loginForm").on('submit', function(e) {
         e.preventDefault();
@@ -79,6 +94,25 @@ function logIn() {
 function logOut(){
     AV.User.logOut();
 }
+
+
+//目前由login.html调用
+// 确保调用accordionOn和Off的所有element都有initialize w3-hide 或 w3-show
+// 展开accordion;用法:accordionOn(element id)
+function accordionOn(id) {
+    var x = document.getElementById(id)
+    if (x.className.indexOf("w3-hide") !== -1) {
+        x.className = x.className.replace("w3-hide", "w3-show");
+    }
+}
+// 关闭accordion;用法:accordionOff(element id)
+function accordionOff(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") !== -1) {
+        x.className = x.className.replace("w3-show", "w3-hide");
+    }
+}
+
 
 function isCurrentUser () {
     var currentUser = AV.User.current();
@@ -182,15 +216,15 @@ function translator(english){
         case "huangjin":
             return "黄巾";
         case "weaponUp":
-            return "武器升级";
+            return "武器碎片";
         case "equipUp":
-            return "装备升级";
+            return "装备碎片";
         case "horseHelmetUp":
-            return "马盔升级";
+            return "马盔碎片";
         case "horseSaddleUp":
-            return "马具升级";
+            return "马鞍碎片";
         case "horseUp":
-            return "马匹升级";
+            return "战马碎片";
         case "gold":
             return "黄金";
         case "weiMoney":
@@ -206,3 +240,73 @@ function translator(english){
     }
 }
 
+
+function getItemUrl(item){
+    var url = "";
+    switch (item){
+        case "rice":
+            url ='https://cdn.e-sim.org//img/productIcons/Grain.png';
+            break;
+        case "iron":
+            url = "https://cdn.e-sim.org//img/productIcons/Iron.png";
+            break;
+        case "stone":
+            url ="https://cdn.e-sim.org//img/productIcons/Stone.png";
+            break;
+        case "wood":
+            url = "https://cdn.e-sim.org//img/productIcons/Wood.png";
+            break;
+        case "food":
+            url = "https://cdn.e-sim.org//img/productIcons/Food.png";
+            break;
+        case "weapon":
+            url = "../img/sword.png";
+            break;
+        case "ladder":
+            url = "../img/ladder.png";
+            break;
+        case "rollingWood":
+            url = "../img/rollingWood.png";
+            break;
+        case "fallingStone":
+            url = "../img/fallingStone.png";
+            break;
+        case "catapult":
+            url = "../img/catapult.png";
+            break;
+        case "weaponUp":
+            url = "../img/weaponUp.png";
+            break;
+        case "equipUp":
+            url = "../img/equipUp.png";
+            break;
+        case "horseUp":
+            url = "../img/horse.png";
+            break;
+        case "horseSaddleUp":
+            url = "../img/horseSaddle.png";
+            break;
+        case "horseHelmetUp":
+            url = "../img/horseHelmet.png";
+            break;
+        case "gold":
+            url = "../img/gold.png";
+            break;
+        case "weiMoney":
+            url = "../img/魏.png";
+            break;
+        case "shuMoney":
+            url = "../img/蜀.png";
+            break;
+        case "wuMoney":
+            url = "../img/吴.png";
+            break;
+        case "huangMoney":
+            url = "../img/黄.png";
+            break;
+        default:
+            url = "../img/catapult.png";
+            break;
+    }
+    return url;
+}
