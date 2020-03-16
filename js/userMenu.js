@@ -12,7 +12,7 @@ function setupUserData(){
             };
             AV.Cloud.run('findUser', paramsJson).then(function (user) {
                 console.log("找到user");
-                console.log(user);
+                //console.log(user);
                 populateUserData(user, true);
             }).catch(function(err){
                 let errorMsg = err.toString().split("[");
@@ -36,14 +36,15 @@ function populateUserData(UserData, isOtherUser){
     var level = isOtherUser? userData.level:userData.get("level");
     var exp = isOtherUser? userData.exp: userData.get("exp");
     var rank = isOtherUser? userData.rank: userData.get("rank");
-    var dmg = isOtherUser? userData.dmg: userData.get("totalDmg");
+    var dmg = isOtherUser? userData.totalDmg: userData.get("totalDmg");
     var str = isOtherUser? userData.str: userData.get("str");
-    var eco = isOtherUser? userData.eco: userData.get("ecoSkill");
+    var eco = (isOtherUser? userData.ecoSkill: userData.get("ecoSkill")).toFixed(2);
     var canWar = isOtherUser? userData.canWar: userData.get("canWar");
     var canTrain = isOtherUser? userData.canTrain: userData.get("canTrain");
     var canWork = isOtherUser? userData.canWork: userData.get("canWork");
     var trainCount = isOtherUser? userData.trainCount: userData.get("trainCount");
     var workCount = isOtherUser? userData.workCount: userData.get("workCount");
+    var objectId = isOtherUser? userData.objectId: userData.get("objectId");
     var taskCompleted = 3;
 
     if (!isOtherUser){

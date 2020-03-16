@@ -11,14 +11,14 @@ $(function(){
     });
 
     // 拉取更多报单
-    var productTable = document.getElementById('productContainer');
-    bindEvent(productTable, 'scroll', function(e) {
-
-        if( productTable.scrollHeight - productTable.scrollTop - productTable.clientHeight < 0)
-        {
-            showOffer(false);
-        }
-    });
+    // var productTable = document.getElementById('productContainer');
+    // bindEvent(productTable, 'scroll', function(e) {
+    //
+    //     if( productTable.scrollHeight - productTable.scrollTop - productTable.clientHeight < 0)
+    //     {
+    //         showOffer(false);
+    //     }
+    // });
 });
 
 //根据商品类型,价格,数量,和类型,挂buyOffer or sellOffer
@@ -182,6 +182,68 @@ function showMyOffer(){
     });
 }
 
+function showBattleList(status){
+    var query = new AV.Query('city');
+    query.include('owner');
+    query.include('invader');
+    query.include('warPending');
+    switch (status){
+        case "pending":
+            query.equalTo("isWarPending", true);
+            break;
+        case "current":
+            query.equalTo("isAtWar", true);
+            break;
+        case "past":
+            break;
+    }
+
+    query.find().then(function(cities) {
+        console.log(cities);
+        cities.forEach(function (city, i, a) {
+            //获取商品信息,ownerName,价格, 数量
+            var name = city.get('name');
+            console.log(name);
+            var owner = city.get("owner").get("cname");
+            console.log(owner);
+            var invader = status === "current"? city.get("invader").get("cname"): city.get("warPending").get("cname");
+            console.log(invader);
+            var offdmg = city.get('offdmg');
+            var defdmg = city.get('defdmg');
+            var cityId = city.get('cityId');
+            var currDate = new Date();
+            var currDay = currDate.getDate();
+            var currHour = currDate.getHours();
+            if (currHour < 12){
+                currHour = 12;
+            }else{
+                currHour = 24;
+            }
+            var time = currDay + "日" + currHour + "时";
+            console.log(time);
+            var tableBody = document.getElementById("tableBody");
+            var row = tableBody.insertRow(-1);
+            var cell0 = row.insertCell(-1);
+            cell0.innerHTML = name;
+            var cell1 = row.insertCell(-1);
+            cell1.innerHTML = time;
+            var cell2 = row.insertCell(-1);
+            cell2.innerHTML = invader;
+            if (status === "current"){
+                var cell3 = row.insertCell(-1);
+                cell3.innerHTML = offdmg;
+            }
+            var cell4 = row.insertCell(-1);
+            cell4.innerHTML = owner;
+            if (status === "current"){
+                var cell3 = row.insertCell(-1);
+                cell3.innerHTML = defdmg;
+            }
+            var cell6 = row.insertCell(-1);
+            cell6.innerHTML = "<button type='button' class='w3-green w3-button w3-round-xlarge'><a href='city.html?id="+cityId+"'>进入</a></button>";
+        });
+    });
+}
 function bindEvent(dom, eventName, fun) {
     if (window.addEventListener) {
         dom.addEventListener(eventName, fun);
@@ -209,9 +271,9 @@ function showOffer(empty =true){  //type=sell/buy product=rice/iron/wood/stone/f
         }else{
             query.descending("price");
         }
-        query.limit(20);
-        query.skip(document.getElementById("tableBody").rows.length);
-        console.log(document.getElementById("tableBody").rows.length);
+        //query.limit(20);
+        //query.skip(document.getElementById("tableBody").rows.length);
+        //console.log(document.getElementById("tableBody").rows.length);
         query.find().then(function(offers) {
             if (offers.length === 0){
                 if (empty === true){

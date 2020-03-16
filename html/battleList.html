@@ -12,7 +12,7 @@
     <script src="../js/market.js"></script>
 </head>
 
-<body class="w3-animate-opacity" onload="showMyOffer()">
+<body class="w3-animate-opacity" onload="showBattleList(getUrlParam('type',-1))">
 <!--navSideBar placeholder-->
 <div style="position: relative" id="nav-placeholder"></div>
 <!-- 正文内容-->
@@ -127,6 +127,8 @@
         cell.innerHTML = "进攻国家";
         var cell = row.insertCell(-1);
         cell.innerHTML = "防守国家"
+        var cell = row.insertCell(-1);
+        cell.innerHTML = "进入城市";
     }
 </script>
 
