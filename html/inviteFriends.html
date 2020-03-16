@@ -54,16 +54,16 @@
             </div>
             <img src="../img/pre-alpha.jpg" alt="Avatar" style="width:100%;">
             <div class="container" style="background-color:grey">
-                <h2><b>邀请好友您将收到额外奖励!</b></h2>
-                <p>立即邀请好友<br>
-                    获得奖励吧!</p>
+                <h2><b>好友注册后您将获得奖励!</b></h2>
+                <p>
+                    👇👇👇复制专属于您的邀请链接👇👇👇</p>
             </div>
             <div class="container">
                 <p><input style="width: 65%" class="promo" id="invite" type="text" placeholder=""/>
                     <button style="display: inline-block; width: 30%" class="w3-button w3-green" onclick="invCopy()">复制</button>
                 </p>
 
-                <p class="expire">截止日期: 2021年1月1日 </p>
+                <p id="afterCopy" class="expire"></p>
             </div>
         </div><br><br>
 
@@ -95,6 +95,7 @@
     document.getElementById("invite").value = "zssanguo.com/?inv=" + name;
 function invCopy(){
     navigator.clipboard.writeText(document.getElementById("invite").value);
+    document.getElementById("afterCopy").innerHTML = "复制成功!"
 }
 </script>
 
