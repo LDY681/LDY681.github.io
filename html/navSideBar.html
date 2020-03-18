@@ -75,13 +75,15 @@
   <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
     <div class="w3-center">
       <span onclick="document.getElementById('verifyPhoneModal').style.display='none'" style="color:black;" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">x</span><br><br>
-      <label><b>请输入手机号：</b></label><br>
-      <button id="sendVerification" onclick="sendVerification()" class="w3-button w3-margin-top w3-green w3-padding w3-round-xxlarge w3-third">获取验证码</button>
-      <form class="w3-form w3-padding-large">
-        <input class="w3-round-xxlarge w3-input w3-border w3-margin-bottom w3-twothird"  type="tel" placeholder="请输入手机号" id="phoneNumber" required><br><br><br>
+      <label><b>请输入手机号：</b></label>
+      <div>
+        <input class="w3-round-xxlarge w3-input w3-twothird"  type="tel" placeholder="非大陆请加区号 例:+1 8888888" id="phoneNumber" required>
+        <button id="sendVerification" onclick="sendVerification()" class="w3-button w3-green w3-round-xxlarge w3-third">获取验证码</button>
+      </div>
+        <br><br><br><br>
         <label><b>请输入验证码：</b></label>
         <input class="w3-round-xxlarge w3-input w3-border" type="text" placeholder="请输入验证码" id="smsCode" required>
-      </form>
+
       <button class="w3-button w3-green w3-padding-large w3-margin w3-round-xxlarge" onclick="submitPhone()" id="submitPhone">提交验证</button>
     </div>
     <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">

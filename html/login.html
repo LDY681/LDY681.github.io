@@ -141,8 +141,8 @@
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="请输入账号" id="signinUsername" required autofocus>
           <label><b>密码：</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="password" placeholder="请输入密码" id="signinPassword" required>
-          <label><b>邮箱：</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="email" placeholder="请输入邮箱" id="signinEmail" required>
+          <label><b>QQ邮箱：</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" placeholder="请输入QQ邮箱" id="signinEmail" pattern="^.+?@qq.com" title="请输入QQ邮箱" oninvalid="setCustomValidity('为防止小号,仅限QQ邮箱注册')" required>
           <label><b>师父(选填)：</b></label> <a href="index.html" target="_blank">需要大佬带?点我寻找!</a>
           <input class="w3-input w3-border" type="text" placeholder="额外赠送新手礼包!" id="signinInviter">
           <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">注册</button>

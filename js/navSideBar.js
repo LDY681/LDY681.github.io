@@ -78,8 +78,10 @@ function compileCountryPanel(countryPanel){
 //点击发送短信验证码
 function sendVerification(){
     let phoneNumber = $("#phoneNumber");
+    let sendVerification = $("#sendVerification");
     // console.log(phoneNumber.val());
     phoneNumber.attr("disabled", true);
+    sendVerification.attr("disabled", true);
     var user = AV.User.current();
     user.setMobilePhoneNumber(phoneNumber.val());
     user.save().then(function(){
