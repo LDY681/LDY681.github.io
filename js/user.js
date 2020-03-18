@@ -17,6 +17,7 @@ AV.init({
 });
 
 $(function() {
+    console.log("%c千山万水总是情,别黑我们行不行\n破坏游戏公平性的行为=封号/屏蔽IP", "color: blue; font-family: sans-serif; font-size: 2.5em; font-weight: bolder; text-shadow: #000 1px 1px;");
     countUp('June 1, 2019 00:00:00');
     detectLang();
     getCurrTime();
