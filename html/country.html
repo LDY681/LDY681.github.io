@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>转世三国-模拟三国人生</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/w3.css">
+    <link rel="stylesheet" href="../css/all.css">
+    <link rel="stylesheet" href="../css/my-style.css">
+    <link rel="icon" href="../img/logo.png"/>
+</head>
+
+<body class="w3-animate-opacity">
+
+<!--navSideBar placeholder-->
+<div style="position: relative" id="nav-placeholder"></div>
+
+<!-- 正文内容-->
+<div id="customContent" style="margin-left:0" class="w3-row">
+
+    <!-- 用户菜单 placeholder-->
+    <div id="userMenu" class="coolScroll-y w3-col w3-light-gray w3-card-4 w3-center w3-round-xxlarge w3-margin-left w3-margin-right" style="margin-top: 60px; height: 90vh; position:fixed"></div>
+
+    <!--TODO:右侧定制内容-->
+    <div id="rightPanel" class="w3-rest w3-card-4 w3-round-xxlarge w3-margin-right w3-light-gray" style="margin-top:60px; margin-bottom:20px;">
+
+        <div class="trainBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+            <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">选择国家</span></h1><br><br>
+            <div class="workntrainButton">
+                <label>选择国家:
+                    <select name="country" id="country" onchange="countrySelected(event)">
+                        <option disabled selected value> -选择国家- </option>
+                        <option value="1">魏国</option>
+                        <option value="2">蜀国</option>
+                        <option value="3" >吴国</option>
+                        <option value="4">黄巾</option>
+                    </select>
+                </label><br><br>
+                <button class="w3-green w3-button w3-padding-large w3-round-xxlarge" onclick="location.href='country.html'+'?id='+document.getElementById('country').value">查看</button>
+            </div>
+            <br><br>
+        </div><br><br>
+
+        <div class="trainEffectBox w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
+            <!--         TODO: implement产量加成-->
+            <h1><span class="w3-text-black w3-light-gray w3-padding-small w3-round-xxlarge">国家信息</span></h1>
+            <!--        还未工作则workNotifier填充您今天还未工作!,已工作则填充以工作,然后disable底下的button-->
+            <div class="w3-panel" style="width: 50%; margin:auto;">
+                <table class="w3-table-all w3-card-4">
+                    <tr>
+                        <td>国家:</td>
+                        <td id="name"></td>
+                    </tr>
+                    <tr>
+                        <td>人口:</td>
+                        <td><span id="citizenCount"></span>人</td>
+                    </tr>
+                    <tr>
+                        <td>城池:</td>
+                        <td id="cityCount"></td>
+                    </tr>
+                    <tr>
+                        <td id="cityList"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>战斗加成:</td>
+                        <td><span id="battleModifier"></span>%</td>
+                    </tr>
+                    <tr>
+                        <td>水稻加成:</td>
+                        <td><span id="rice"></span>%</td>
+                    </tr>
+                    <tr>
+                        <td>石材加成:</td>
+                        <td ><span id="stone"></span>%</td>
+                    </tr>
+                    <tr>
+                        <td>铁矿加成:</td>
+                        <td><span id="iron"></span>%</td>
+                    </tr>
+                    <tr>
+                        <td>木材加成:</td>
+                        <td ><span id="wood"></span>%</td>
+                    </tr>
+                </table>
+            </div>
+            <br><br>
+        </div><br><br>
+
+    </div><!--end of 右侧定制内容-->
+</div>
+
+<!--Script加载顺序!!!!!-->
+<!--加载jquery-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>console.log("Jquery加载完毕")</script>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@4.0.5/dist/handlebars.min.js"></script>
+<script>console.log("handlebars加载完毕")</script>
+
+<!--初始化用户并加载user.js-->
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.0/dist/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-realtime@5.0.0-beta.3/dist/realtime-browser.min.js"></script>
+<script src="../js/user.js"></script> <!--登录注册,登出,isCurrentUser-->
+<script>console.log("User初始化完毕;")</script>
+
+<!--加载counter.js-->
+
+
+<!--使用jquery 加载navSideBar和userMenu到相关的placeholder中-->
+<!--这个script执行完只是call了jquery.load,可能jquery.load要load的内容还没有加载完,此时后面加载的js,如果依赖于load的内容则可能会报错-->
+<!--解决办法  $("#nav-placeholder").load("navSideBar.html", function(){ $.getScript("../js/navSideBar.js");}-->
+
+<!--使用jquery 加载navSideBar和userMenu到相关的placeholder中-->
+<script>
+    $("#nav-placeholder").load("navSideBar.html", function() {
+        $.getScript("../js/navSideBar.js", function () {
+            $("#userMenu").load("userMenu.html", function () {
+                displayRightOnLarge();
+                setupUserData();
+            });
+        });
+    });
+</script>
+<script src="../js/country.js"></script> <!--登录注册,登出,isCurrentUser-->
+
+
+</body>
+</html>

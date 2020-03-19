@@ -1,6 +1,7 @@
 var cityDataString = $("#cityData").html();
 
 $(function(){
+    evalCountry();
     $("#declareWar").on("click", function(){
         declareWar();
     });
@@ -120,5 +121,38 @@ function declareWar(){
                 alert("当前城池已属于您的势力!");
             }
         });
+    });
+}
+
+function evalCountry(){
+    var query = new AV.Query('country');
+    var countryId = getUrlParam('id','1');
+    query.equalTo("countryId", parseInt(countryId, 10));
+    query.find().then(function(countries){
+        var country = countries[0];
+
+        //获取城池信息
+        var countryName = country.get("cname");
+        var iron = country.get("iron");
+        var stone = country.get("stone");
+        var rice = country.get("rice");
+        var wood = country.get("wood");
+        var occupied = country.get("occupied");
+        var cityCount = country.get("cityCount");
+        var citizenCount = country.get("citizenCount");
+        var battleModifier = ((country.get("battleModifier")-1)*100).toFixed(1  );
+        //修改城池信息框
+        $("#name").html(countryName);
+        $("#citizenCount").html(citizenCount);
+        $("#cityCount").html(cityCount + "城");
+        $("#cityList").html(occupied.join(" "));
+        $("#iron").html(iron);
+        $("#stone").html(stone);
+        $("#rice").html(rice);
+        $("#wood").html(wood);
+        $("#battleModifier").html(battleModifier);
+        //end of 城池信息框
+    }, function(err){
+        console.log(err);
     });
 }

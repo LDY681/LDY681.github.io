@@ -259,6 +259,13 @@ function dealDamage(side){
         cityName,
         fightingSide
     }));
+    var battleModifier = 1;
+    var countryQuery = new AV.Query('country');
+    countryQuery.equalTo("cname", fightingSide);
+    countryQuery.find().then(function (countries) {
+        var country = countries[0];
+        battleModifier = country.get("battleModifier");
+    });
     //计算距离双整点的时间,判断可以攻击几次
     var warCount = calculateWarCount();
     var warMessage = [];
@@ -268,7 +275,7 @@ function dealDamage(side){
     var updateAt = Math.floor( now / coeff) * coeff;
     warMessage.push(updateAt);
     for (var i = 1; i <= warCount+1; i++){
-        var damageInfo = calculateDamage();
+        var damageInfo = calculateDamage(battleModifier);
         var performance = damageInfo.pop();
         var damage = damageInfo.pop();
         totalDamage +=damage;
@@ -283,7 +290,7 @@ function dealDamage(side){
 }
 
 //单次攻击伤害 (根据玩家数据和装备)
-function calculateDamage(){
+function calculateDamage(battleModifier){
     console.log("calculateDamage 运行");
     var user = AV.User.current();
     var equip = localStorage.getItem("equip");
@@ -355,7 +362,7 @@ function calculateDamage(){
         hitAgain = false;
         var horseRoll = Math.random();
         var horseRollChance = horse * 0.05;
-        var currDamage = round(finalDmg * (finalStr / 1000) * randomModifier * criticalModifier) * missModifier;
+        var currDamage = round(finalDmg * (finalStr / 1000) * randomModifier * criticalModifier * battleModifier) * missModifier;
         damage += currDamage;
         if (horseRoll <= horseRollChance){
             performance += "血战不息，";

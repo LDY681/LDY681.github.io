@@ -1,4 +1,5 @@
 $(function(){
+    evalCity();
     $("#toBattle").on("click",function(e) {
         e.preventDefault();
         toBattle();

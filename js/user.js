@@ -182,7 +182,7 @@ function round(value, precision) {
 //根绝min max区间随机取值
 function getRandomArbitrary(min, max){
     var random = Math.random() * (max - min) + min;
-    return round(random,2);
+    return round(random,3);
 }
 
 function translator(english){
