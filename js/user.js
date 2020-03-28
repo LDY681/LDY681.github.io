@@ -37,7 +37,7 @@ $(function() {
                 window.location.href = "../html/login.html#needLogin";
             } else {
                 $("#nav-placeholder").hide();
-                $.notify("您未登录,已隐藏导航栏!",{position:"top-center", className: "error"});
+                $("#showWhenNotLogin").show();
             }
         }
 
