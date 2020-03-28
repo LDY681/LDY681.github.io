@@ -3,6 +3,7 @@ body {
     background: url(../img/background.jpeg) no-repeat 0 0 fixed;
     background-size: cover;
 }
+
 /*大屏幕*/
 @media (min-width:1365px){
     #userMenu {width:300px;}
@@ -15,8 +16,15 @@ body {
         width: 25%;
     }
     .regLogin{
-        border-radius:4px!important;
+        border-radius:8px!important;
         font-size:40px!important;
+        border-radius: 1px;
+        box-shadow: 0px 0px 0px 20px rgba(0,0,0,0.3);
+        padding: 8px;
+        background-color: lightgrey;
+        margin-top: 20px;
+        transform: translateX(-10%);
+        width: 200px;
     }
 }
 /*中小屏幕*/
@@ -28,14 +36,21 @@ body {
     #rightPanel {
         margin-left: 236px;
     }
-    #mapContainer {border-radius: 50px;}
     #userMenuDropDown {width:150px;}
     #adjacentCityInfo{
         width: 45%;
     }
     .regLogin{
-        border-radius:8px!important;
+        border-radius:16px!important;
         font-size:30px!important;
+        border-radius: 1px;
+        box-shadow: 0px 0px 0px 20px rgba(0,0,0,0.3);
+        padding: 8px;
+        background-color: lightgrey;
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+        width: 200px;
     }
 }
 /*小屏幕*/
@@ -51,8 +66,15 @@ body {
         width: 80%;
     }
     .regLogin{
-        border-radius:16px!important;
+        width: 95%;
+        border-radius:32px!important;
         font-size:20px!important;
+        border-radius: 1px;
+        box-shadow: 0px 0px 0px 10px rgba(0,0,0,0.3);
+        padding: 4px;
+        background-color: lightgrey;
+        margin-top: 10px;
+        margin-right: 10px;
     }
 }
 

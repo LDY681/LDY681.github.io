@@ -25,12 +25,10 @@
   <div style="position: sticky; top: 0;" class="w3-row w3-round-xxlarge">
     <!--  不同界面下不同大小的登陆注册按钮-->
     <span class="w3-hide-small w3-hide-medium w3-padding w3-round-xxlarge  w3-light-gray w3-xlarge w3-text-red w3-center w3-display-topmiddle">距离上线还有: <span id="loginCounter"></span></span>
-    <button onclick="document.getElementById('login').style.display='block'" style="margin-top: 0;" class="regLogin w3-button w3-blue w3-right">
-      点击图标进行登录
+    <button onclick="document.getElementById('register').style.display='block'; $('#signinInviter').val(getUrlParam('inviter')); $('#signinInviter').html(getUrlParam('inviter'));" class="regLogin w3-button w3-right">
+      开始人生
     </button>
-    <button onclick="document.getElementById('register').style.display='block'; $('#signinInviter').val(getUrlParam('inviter')); $('#signinInviter').html(getUrlParam('inviter'));" style="margin-top: 0;" class="regLogin w3-button w3-blue w3-left">
-      点击图标进行注册
-    </button>
+
   </div>
 
   <!--游戏介绍框-->
@@ -103,8 +101,10 @@
     <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
       <div class="w3-center"><br>
+        <span onclick="document.getElementById('register').style.display='block';document.getElementById('login').style.display='none'"
+              class="w3-button w3-xlarge w3-grey w3-display-topleft" title="注册">🔀切换注册</span>
         <span onclick="document.getElementById('login').style.display='none'"
-              class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span><br>
+              class="w3-button w3-xlarge  w3-light-gray w3-display-topright" title="关闭窗口">×</span><br>
         <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
       </div>
 
@@ -131,8 +131,10 @@
     <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
       <div class="w3-center"><br>
+        <span onclick="document.getElementById('login').style.display='block';document.getElementById('register').style.display='none'"
+              class="w3-button w3-xlarge w3-grey w3-display-topleft" title="登录">🔀切换登录</span>
         <span onclick="document.getElementById('register').style.display='none'"
-              class="w3-button w3-xlarge w3-transparent w3-display-topright" title="关闭窗口">×</span>
+              class="w3-button w3-xlarge w3-light-grey w3-display-topright" title="关闭窗口">×</span>
         <img src="../img/logo.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
       </div>
 

@@ -32,9 +32,15 @@ $(function() {
         signUp();
     });
 
-    if (!isCurrentUser() && window.location.href.indexOf("login") === -1) {
-        window.location.href = "../html/login.html#needLogin";
-    }
+        if (!isCurrentUser() && window.location.href.indexOf("login") === -1) {
+            if (window.location.pathname !== '/html/map.html') {
+                window.location.href = "../html/login.html#needLogin";
+            } else {
+                $("#nav-placeholder").hide();
+                $.notify("您未登录,已隐藏导航栏!",{position:"top-center", className: "error"});
+            }
+        }
+
 
     if(window.location.hash === '#needLogin')
     {
