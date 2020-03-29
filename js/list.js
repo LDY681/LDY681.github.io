@@ -244,6 +244,49 @@ function showBattleList(status){
         });
     });
 }
+
+function showNewsList(status){
+    var query = new AV.Query('news');
+    switch (status){
+        case "latest":
+            query.descending('createdAt');
+            break;
+        case "top":
+            break;
+        case "past":
+            break;
+    }
+
+    query.find().then(function(News) {
+        console.log(News);
+        News.forEach(function (city, i, a) {
+            //获取商品信息,ownerName,价格, 数量
+            var title = city.get('title');
+            var editor = city.get("editorName");
+            var newsId = city.get("newsId");
+            var price = city.get("price");
+            var category = city.get("category");
+            var publishTime = city.get("createdAt");
+            var currDay = publishTime.getDate();
+            var currHour = publishTime.getHours();
+            var currMinute = publishTime.getMinutes();
+            var time = currDay + "日" + currHour + "时" + currMinute + "分";
+            var tableBody = document.getElementById("tableBody");
+            var row = tableBody.insertRow(-1);
+            var cell0 = row.insertCell(-1);
+            cell0.innerHTML = "<a href='news.html?edit=false&id="+newsId+"'>"+title+"</a>";
+            var cell1 = row.insertCell(-1);
+            cell1.innerHTML = "<a href='index.html?profile="+editor+"'>"+editor+"</a>";
+            var cell2 = row.insertCell(-1);
+            cell2.innerHTML = time;
+            var cell3 = row.insertCell(-1);
+            cell3.innerHTML = category;
+            var cell4 = row.insertCell(-1);
+            cell4.innerHTML = price;
+        });
+    });
+}
+
 function bindEvent(dom, eventName, fun) {
     if (window.addEventListener) {
         dom.addEventListener(eventName, fun);

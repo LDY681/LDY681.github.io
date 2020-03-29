@@ -35,8 +35,12 @@
     <div id="rightPanel" class="w3-rest w3-center w3-card-4 w3-round-xxlarge w3-margin-right w3-light-gray" style="margin-top:60px; margin-bottom:20px;">
 
         <div class="w3-auto w3-card-4 w3-light-gray w3-round-xxlarge w3-center">
-        <h1 id="blockTitle">撰写诗文</h1>
-        <h3 id="author"></h3>
+        <div>
+            <h1 id="blockTitle"></h1>
+            <h3 id="author"></h3>
+            <i onclick="vote(this)" class="hoverIcon showIfView fa fa-thumbs-up">投票&nbsp&nbsp</i>
+            <i onclick="donate(this)" class="hoverIcon showIfView fas fa-coins">打赏</i>
+        </div>
         <div id="hideIfView">
             <input type="text" id="title" name="title" style="width: 50%;padding: 12px 20px;margin: 8px 0;box-sizing: border-box;" placeholder="请输入标题">
             <label for="category">文章分类:</label>
@@ -96,8 +100,10 @@
     if (getUrlParam('edit') === 'false'){
         editor.$textElem.attr('contenteditable', false);
         $("#hideIfView").hide();
-        $("#div1").hide();
+        $(".toolbar").hide();
         $("#submitNews").hide();
+    }else{
+        $(".showIfView").hide();
     }
 
     if (getUrlParam('id',-1) !== -1){
@@ -107,12 +113,23 @@
            var post = posts[0];
            var title = post.get('title');
            var editorName = post.get('editorName');
+           console.log(editorName);
+           if (editorName !== AV.User.current().getUsername()){
+               editor.$textElem.attr('contenteditable', false);
+               $("#hideIfView").hide();
+               $(".toolbar").hide();
+               $("#submitNews").hide();
+           }else{
+               $(".showIfView").hide();
+           }
            var content = post.get('content');
            console.log(title,editorName,content);
            $("#blockTitle").text(title);
            $("#author").text("作者:"+editorName);
            editor.txt.html(content);
         });
+    }else{
+        $("#blockTitle").text('撰写诗文');
     }
 
 
