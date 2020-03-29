@@ -355,7 +355,8 @@ function populateUserData(UserData, isOtherUser){
         $(".hideWhenSearch").hide();
     }
 
-    var avatarUrl = JSON.parse(localStorage.getItem("avatarUrl")).avatarUrl;
+    var avatarUrl = isOtherUser? userData.avatar.image.url : JSON.parse(localStorage.getItem("avatarUrl")).avatarUrl;
+    console.log("avatarUrl: "+avatarUrl);
     userMenu.userData.push({
         username,
         level,
