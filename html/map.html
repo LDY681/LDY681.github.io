@@ -161,8 +161,8 @@
     var satellite = L.layerGroup([satelliteMap, satelliteAnnotion]);
 
     /***天地形地图*/
-    var terrainMap = L.tileLayer.chinaProvider('TianDiTu.Terrain.Map', {key: 'dccd57cfe5c046d1484e5ab873bd8e75', maxZoom: 18,minZoom: 5});
-    var terrainAnnotion = L.tileLayer.chinaProvider('TianDiTu.Terrain.Annotion', {key: 'dccd57cfe5c046d1484e5ab873bd8e75', maxZoom: 18,minZoom: 5});
+    var terrainMap = L.tileLayer.chinaProvider('TianDiTu.Terrain.Map', {maxZoom: 18,minZoom: 5});
+    var terrainAnnotion = L.tileLayer.chinaProvider('TianDiTu.Terrain.Annotion', {maxZoom: 18,minZoom: 5});
     var terrain = L.layerGroup([terrainMap, terrainAnnotion]);
 
     var baseLayers = {
