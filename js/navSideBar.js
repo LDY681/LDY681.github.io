@@ -37,6 +37,10 @@ function showPhoneModal(){
     document.getElementById("verifyPhoneModal").style.display = "block";
 }
 
+function showDaShangModal(){
+    document.getElementById("dashangModal").style.display = "block";
+}
+
 //显示加入国家modal
 function showCountryModal(){
     console.log("showCountryModal触发");

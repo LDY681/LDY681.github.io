@@ -597,7 +597,3 @@ function getCurrTime(){
     }, 1000);
 }
 
-
-
-
-
