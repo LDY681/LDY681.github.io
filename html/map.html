@@ -154,20 +154,39 @@
 </script>
 
 <script>
-    /*** 高德地图*/
-    var Gaode = L.tileLayer.chinaProvider('GaoDe.Normal.Map', {maxZoom: 18,minZoom: 5});
-    var Gaodimgem = L.tileLayer.chinaProvider('GaoDe.Satellite.Map', {maxZoom: 18,minZoom: 5});
-    var Gaodimga = L.tileLayer.chinaProvider('GaoDe.Satellite.Annotion', {maxZoom: 18,minZoom: 5});
-    var Gaodimage = L.layerGroup([Gaodimgem, Gaodimga]);
+    /***高德卫星地图*/
+    var normalMap = L.tileLayer.chinaProvider('GaoDe.Normal.Map', {maxZoom: 18,minZoom: 5});
+    var satelliteMap = L.tileLayer.chinaProvider('GaoDe.Satellite.Map', {maxZoom: 18,minZoom: 5});
+    var satelliteAnnotion = L.tileLayer.chinaProvider('GaoDe.Satellite.Annotion', {maxZoom: 18,minZoom: 5});
+    var satellite = L.layerGroup([satelliteMap, satelliteAnnotion]);
+
+    /***天地形地图*/
+    var terrainMap = L.tileLayer.chinaProvider('TianDiTu.Terrain.Map', {key: 'dccd57cfe5c046d1484e5ab873bd8e75', maxZoom: 18,minZoom: 5});
+    var terrainAnnotion = L.tileLayer.chinaProvider('TianDiTu.Terrain.Annotion', {key: 'dccd57cfe5c046d1484e5ab873bd8e75', maxZoom: 18,minZoom: 5});
+    var terrain = L.layerGroup([terrainMap, terrainAnnotion]);
+
+    var baseLayers = {
+      "地形": terrain,
+      "卫星": satellite,
+      "政治": normalMap
+    }
 
     var map = L.map("mapLayer", {
         center: [30.36103, 112.18964],
         zoom: 5,
-        layers: [Gaode],
+        layers: [terrain],
         zoomControl: false
     });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://zssanguo.com">转世三国</a>'}).addTo(map);
+
+    L.control.layers(baseLayers, null).addTo(map);
+    L.control.zoom({
+      zoomInTitle: '放大',
+      zoomOutTitle: '缩小'
+    }).addTo(map);
+    L.control.scale().addTo(map);
+
 
     // 和平状态蜀国城池图标
     var shuCityIcon = L.icon({
