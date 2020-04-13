@@ -111,10 +111,6 @@
                     setupUserData();
                     countUp('June 1, 2019 00:00:00');
                     getCurrTime();
-                    $.getScript("../js/translate.js", function(){
-                        console.log("translate.js读取完毕,开始执行detectLang");
-                        detectLang();
-                    });
                     $.getScript("../js/admin.js", function(){});
                 });
             });
