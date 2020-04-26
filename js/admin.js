@@ -1336,12 +1336,12 @@ function resetResource(){
 }
 
 function random(){
-    var random = (Math.random())*3;
+    var random = (Math.random())*1;
     return round(random, 1);
 }
 
 function randomBonus(){
-    var random = (Math.random())*5;
+    var random = (Math.random())*1.5;
     return round(random, 1);
 }
 

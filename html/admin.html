@@ -97,25 +97,18 @@
 <!--这个script执行完只是call了jquery.load,可能jquery.load要load的内容还没有加载完,此时后面加载的js,如果依赖于load的内容则可能会报错-->
 <!--解决办法  $("#nav-placeholder").load("navSideBar.html", function(){ $.getScript("../js/navSideBar.js");}-->
 <script>
-    $("#nav-placeholder").load("navSideBar.html", function(){
-        console.log("navSideBar加载完毕");
 
-        $.getScript("../js/navSideBar.js", function(){
-            console.log("navSideBar.js读取完毕,开始执行&displayRightOnLarge");
-            displayRightOnLarge();
-
-            $("#userMenu").load("userMenu.html", function(){
-                console.log("userMenu加载完毕");
-                $.getScript("../js/userMenu.js", function(){
-                    console.log("userMenu.js读取完毕,开始执行setupUserData,CountUp,getCurrTime");
-                    setupUserData();
-                    countUp('June 1, 2019 00:00:00');
-                    getCurrTime();
-                    $.getScript("../js/admin.js", function(){});
-                });
-            });
-        });
+  $("#nav-placeholder").load("navSideBar.html", function() {
+    $.getScript("../js/navSideBar.js", function () {
+      $("#userMenu").load("userMenu.html", function () {
+        displayRightOnLarge();
+        setupUserData();
+        countUp('June 1, 2019 00:00:00');
+        getCurrTime();
+        $.getScript("../js/admin.js", function(){});
+      });
     });
+  });
 </script>
 </body>
 </html>
